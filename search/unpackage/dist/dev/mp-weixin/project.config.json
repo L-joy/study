@@ -9,7 +9,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.7.0",
 	"appid": "touristappid",
-	"projectname": "modal",
+	"projectname": "search",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"condition": {
