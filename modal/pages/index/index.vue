@@ -2,7 +2,7 @@
 	<view class="content">
 		<button @click="openPopup">打开弹出层</button>
 		<uni-popup msg="" :show="true" type="bottom" ref="popup">
-			啦啦啦啦啦
+			啦啦啦啦啦啦啦啦
 			<button type="primary" @click="closePopup">关闭弹出层</button>
 		</uni-popup>
 	</view>
