@@ -172,6 +172,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
 {
   data: function data() {
     return {
@@ -184,8 +187,20 @@ __webpack_require__.r(__webpack_exports__);
       isShowKeywordList: false };
 
   },
-  onLoad: function onLoad() {
+  onLoad: function onLoad() {var _this = this;
     this.init();
+    uni.request({
+      url: 'http://unidemo.dcloud.net.cn/api/news',
+      method: 'GET',
+      data: {},
+      success: function success(res) {
+        _this.news = res.data;
+        uni.hideLoading(); //关闭加载
+
+      },
+      fail: function fail() {},
+      complete: function complete() {} });
+
   },
   components: {
     //引用mSearch组件，如不需要删除即可
@@ -204,25 +219,25 @@ __webpack_require__.r(__webpack_exports__);
     //加载默认搜索关键字
     loadDefaultKeyword: function loadDefaultKeyword() {
       //定义默认搜索关键字，可以自己实现ajax请求数据再赋值,用户未输入时，以水印方式显示在输入框，直接不输入内容搜索会搜索默认关键字
-      this.defaultKeyword = "默认关键字";
+      this.defaultKeyword = "商户|产品|场景|地址";
     },
     //加载历史搜索,自动读取本地Storage
-    loadOldKeyword: function loadOldKeyword() {var _this = this;
+    loadOldKeyword: function loadOldKeyword() {var _this2 = this;
       uni.getStorage({
         key: 'OldKeys',
         success: function success(res) {
           var OldKeys = JSON.parse(res.data);
-          _this.oldKeywordList = OldKeys;
+          _this2.oldKeywordList = OldKeys;
         } });
 
     },
     //加载热门搜索
     loadHotKeyword: function loadHotKeyword() {
       //定义热门搜索关键字，可以自己实现ajax请求数据再赋值
-      this.hotKeywordList = ['键盘', '鼠标', '显示器', '电脑主机', '蓝牙音箱', '笔记本电脑', '鼠标垫', 'USB', 'USB3.0'];
+      this.hotKeywordList = ['温泉山庄', '温泉山庄', '温泉山庄', '温泉山庄', '蓝牙音箱', '笔记本电脑', '鼠标垫', 'USB', 'USB3.0'];
     },
     //监听输入
-    inputChange: function inputChange(event) {var _this2 = this;
+    inputChange: function inputChange(event) {var _this3 = this;
       //兼容引入组件时传入参数情况
       var keyword = event.detail ? event.detail.value : event;
       if (!keyword) {
@@ -235,7 +250,7 @@ __webpack_require__.r(__webpack_exports__);
       uni.request({
         url: 'https://suggest.taobao.com/sug?code=utf-8&q=' + keyword, //仅为示例
         success: function success(res) {
-          _this2.keywordList = _this2.drawCorrelativeKeyword(res.data.result, keyword);
+          _this3.keywordList = _this3.drawCorrelativeKeyword(res.data.result, keyword);
         } });
 
     },
@@ -261,13 +276,13 @@ __webpack_require__.r(__webpack_exports__);
       this.keyword = data.keyword;
     },
     //清除历史搜索
-    oldDelete: function oldDelete() {var _this3 = this;
+    oldDelete: function oldDelete() {var _this4 = this;
       uni.showModal({
         content: '确定清除历史搜索记录？',
         success: function success(res) {
           if (res.confirm) {
             console.log('用户点击确定');
-            _this3.oldKeywordList = [];
+            _this4.oldKeywordList = [];
             uni.removeStorage({
               key: 'OldKeys' });
 
@@ -284,8 +299,10 @@ __webpack_require__.r(__webpack_exports__);
     //执行搜索
     doSearch: function doSearch(key) {
       key = key ? key : this.keyword ? this.keyword : this.defaultKeyword;
+      console.log(key);
       this.keyword = key;
       this.saveKeyword(key); //保存为历史 
+      //显示消息提示框
       uni.showToast({
         title: key,
         icon: 'none',
@@ -300,7 +317,7 @@ __webpack_require__.r(__webpack_exports__);
 
     },
     //保存关键字到历史记录
-    saveKeyword: function saveKeyword(keyword) {var _this4 = this;
+    saveKeyword: function saveKeyword(keyword) {var _this5 = this;
       uni.getStorage({
         key: 'OldKeys',
         success: function success(res) {
@@ -319,7 +336,7 @@ __webpack_require__.r(__webpack_exports__);
             key: 'OldKeys',
             data: JSON.stringify(OldKeys) });
 
-          _this4.oldKeywordList = OldKeys; //更新历史搜索
+          _this5.oldKeywordList = OldKeys; //更新历史搜索
         },
         fail: function fail(e) {
           var OldKeys = [keyword];
@@ -327,7 +344,7 @@ __webpack_require__.r(__webpack_exports__);
             key: 'OldKeys',
             data: JSON.stringify(OldKeys) });
 
-          _this4.oldKeywordList = OldKeys; //更新历史搜索
+          _this5.oldKeywordList = OldKeys; //更新历史搜索
         } });
 
     } } };exports.default = _default;

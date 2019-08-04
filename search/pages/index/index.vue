@@ -2,7 +2,10 @@
 	<view class="content">
 		<view class="search-box">
 			<!-- mSearch组件 如果使用原样式，删除组件元素-->
-			<mSearch class="mSearch-input-box" :mode="2" button="inside" :placeholder="defaultKeyword" @search="doSearch(false)" @input="inputChange" @confirm="doSearch(false)" v-model="keyword"></mSearch>
+			<!-- <mSearch class="mSearch-input-box" :mode="1" :placeholder="defaultKeyword" @search="doSearch(false)" @input="inputChange" @confirm="doSearch(false)" 
+			v-model="keyword"></mSearch> -->
+			<mSearch :show="false" radius="14" class="mSearch-input-box" :placeholder="defaultKeyword" @search="doSearch(false)" @input="inputChange" @confirm="doSearch(false)" 
+			v-model="keyword"></mSearch>
 			<!-- 原样式 如果使用原样式，恢复下方注销代码 -->
 			<!-- 			
 			<view class="input-box">
@@ -27,7 +30,7 @@
 			<scroll-view class="keyword-box" v-show="!isShowKeywordList" scroll-y>
 				<view class="keyword-block" v-if="oldKeywordList.length>0">
 					<view class="keyword-list-header">
-						<view>历史搜索</view>
+						<view>搜索历史</view>
 						<view>
 							<image @tap="oldDelete" src="/static/HM-search/delete.png"></image>
 						</view>
@@ -36,7 +39,7 @@
 						<view v-for="(keyword,index) in oldKeywordList" @tap="doSearch(keyword)" :key="index">{{keyword}}</view>
 					</view>
 				</view>
-				<view class="keyword-block">
+				<!-- <view class="keyword-block">
 					<view class="keyword-list-header">
 						<view>热门搜索</view>
 						<view>
@@ -49,7 +52,7 @@
 					<view class="hide-hot-tis" v-else>
 						<view>当前搜热门搜索已隐藏</view>
 					</view>
-				</view>
+				</view> -->
 			</scroll-view>
 		</view>
 	</view>
@@ -72,6 +75,18 @@
 		},
 		onLoad() {
 			this.init();
+			uni.request({
+				url: 'http://unidemo.dcloud.net.cn/api/news',
+				method: 'GET',
+				data: {},
+				success: res => {
+					this.news = res.data;
+					uni.hideLoading();//关闭加载
+					
+				},
+				fail: () => {},
+				complete: () => {}
+			});
 		},
 		components: {
 			//引用mSearch组件，如不需要删除即可
@@ -90,7 +105,7 @@
 			//加载默认搜索关键字
 			loadDefaultKeyword() {
 				//定义默认搜索关键字，可以自己实现ajax请求数据再赋值,用户未输入时，以水印方式显示在输入框，直接不输入内容搜索会搜索默认关键字
-				this.defaultKeyword = "默认关键字";
+				this.defaultKeyword = "商户|产品|场景|地址";
 			},
 			//加载历史搜索,自动读取本地Storage
 			loadOldKeyword() {
@@ -105,7 +120,7 @@
 			//加载热门搜索
 			loadHotKeyword() {
 				//定义热门搜索关键字，可以自己实现ajax请求数据再赋值
-				this.hotKeywordList = ['键盘', '鼠标', '显示器', '电脑主机', '蓝牙音箱', '笔记本电脑', '鼠标垫', 'USB', 'USB3.0'];
+				this.hotKeywordList = ['温泉山庄', '温泉山庄', '温泉山庄', '温泉山庄', '蓝牙音箱', '笔记本电脑', '鼠标垫', 'USB', 'USB3.0'];
 			}, 
 			//监听输入
 			inputChange(event) {
@@ -170,8 +185,10 @@
 			//执行搜索
 			doSearch(key) {
 				key = key ? key : this.keyword ? this.keyword : this.defaultKeyword;
+				console.log(key);
 				this.keyword = key;
 				this.saveKeyword(key); //保存为历史 
+				//显示消息提示框
 				uni.showToast({
 					title: key,
 					icon: 'none',
@@ -222,8 +239,8 @@
 </script>
 <style>
 	view{display:block;}
-	.search-box {width:95%;background-color:rgb(242,242,242);padding:15upx 2.5%;display:flex;justify-content:space-between;}
-	.search-box .mSearch-input-box{width: 100%;}
+	.search-box {width:100%;height: 88upx;    display:flex;justify-content:center; align-items: center;}
+	.search-box .mSearch-input-box{width: 92%; height: 56upx;display:flex;justify-content:center; align-items: center;}
 	.search-box .input-box {width:85%;flex-shrink:1;display:flex;justify-content:center;align-items:center;}
 	.search-box .search-btn {width:15%;margin:0 0 0 2%;display:flex;justify-content:center;align-items:center;flex-shrink:0;font-size:28upx;color:#fff;background:linear-gradient(to right,#ff9801,#ff570a);border-radius:60upx;}
 	.search-box .input-box>input {width:100%;height:60upx;font-size:32upx;border:0;border-radius:60upx;-webkit-appearance:none;-moz-appearance:none;appearance:none;padding:0 3%;margin:0;background-color:#ffffff;}
@@ -237,10 +254,11 @@
 	.keyword-entry .keyword-text {width:90%;}
 	.keyword-entry .keyword-img {width:10%;justify-content:center;}
 	.keyword-box {height:calc(100vh - 110upx);border-radius:20upx 20upx 0 0;background-color:#fff;}
-	.keyword-box .keyword-block {padding:10upx 0;}
-	.keyword-box .keyword-block .keyword-list-header {width:94%;padding:10upx 3%;font-size:27upx;color:#333;display:flex;justify-content:space-between;}
+	.keyword-box .keyword-block {padding:20upx 0;}
+	.keyword-box .keyword-block .keyword-list-header {width:87%;font-size:28upx;font-weight:400;margin-left: 52upx;
+color:rgba(51,51,51,1);display:flex;justify-content:space-between;}
 	.keyword-box .keyword-block .keyword-list-header image {width:40upx;height:40upx;}
-	.keyword-box .keyword-block .keyword {width:94%;padding:3px 3%;display:flex;flex-flow:wrap;justify-content:flex-start;}
+	.keyword-box .keyword-block .keyword {width:94%;padding-left: 32upx;  display:flex;flex-flow:wrap;justify-content:flex-start; }
 	.keyword-box .keyword-block .hide-hot-tis {display:flex;justify-content:center;font-size:28upx;color:#6b6b6b;}
-	.keyword-box .keyword-block .keyword>view {display:flex;justify-content:center;align-items:center;border-radius:60upx;padding:0 20upx;margin:10upx 20upx 10upx 0;height:60upx;font-size:28upx;background-color:rgb(242,242,242);color:#6b6b6b;}
+	.keyword-box .keyword-block .keyword>view {display:flex;justify-content:center;align-items:center;padding:0 20upx;margin:32upx 20upx 30upx 0;border-radius: 8upx;height:34upx;font-size:28upx;background-color:rgb(242,242,242);color:rgba(51,51,51,1);font-family:PingFangSC-Regular;}
 </style>

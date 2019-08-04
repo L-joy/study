@@ -138,13 +138,18 @@ var _default =
 
   },
   onLoad: function onLoad() {var _this = this;
+    uni.showLoading({
+      title: "加载中......" });
+
     // 请求数据
     uni.request({
       url: 'http://unidemo.dcloud.net.cn/api/news',
       method: 'GET',
       data: {},
       success: function success(res) {
+        console.log(res);
         _this.news = res.data;
+        uni.hideLoading(); //关闭加载
 
       },
       fail: function fail() {},

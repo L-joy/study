@@ -134,19 +134,22 @@ export default {
 .serach {
 	display: flex;
 	width: 100%;
+	height: 100%;
 	//border-bottom: 1px #f5f5f5 solid; //HM修改 去掉边框
 	box-sizing: border-box;
-	font-size: $uni-font-size-base;
+	font-size: 28upx;
+	font-family:PingFangSC-Regular;
+    font-weight:400;
 	.content {
 		display: flex;
 		align-items: center;
 		width: 100%;
-		height: 60upx;
-		//border: 1px #ccc solid; //HM修改 去掉边框
-		background: #fff;
+		border: 1px #ccc solid; //HM修改 去掉边框
+		background: #D8D8D8;
 		overflow: hidden;
 		transition: all 0.2s linear;
-		border-radius: 30px;
+		opacity:0.4;
+		// border-radius: 30px;
 
 		.content-box {
 			width: 100%;
