@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../lib/bootstrap-3.3.7.css">
+    <script src="../lib/vue-2.4.0.js"></script>
+
+<body>
+    <div id="app">
+        <div class="panel panel-primary">
+              <div class="panel-heading">
+                 <h3 class="panel-title">添加品牌</h3>
+              </div>
+              <div class="panel-body form-inline">
+                   <label for="">Id:
+                       <input type="text" class="form-control" v-model="id">
+                   </label>
+                   <label for="">Name:
+                        <input type="text" class="form-control" v-model="name">
+                    </label>
+                    <!-- 在vue中，点击事件加不加小括号都可以，加小括号可以传参 -->
+                    <input type="button" value="添加" 
+                    class="btn btn-primary" @click="add">
+                    <label for="">
+                        搜索名称关键字：
+                        <input type="text" class="form-control" v-model="keywords">
+                    </label>
+              </div>
+        </div>
+        
+        
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Name</td>
+                    <td>Ctime</td>
+                    <td>Operation</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item,index) in search(keywords)" :key="index">
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.ctime }}</td>
+                    <td>
+                        <!-- .prevent阻止默认行为 -->
+                        <a href="" @click.prevent=" del(item.id) ">删除</a>
+                    </td>
+                </tr>
+            </tbody>
+            
+        </table>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+        
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                id:'',
+                name:'',
+                keywords:'',
+                list:[
+                    {id:1,name:'奔驰',ctime:new Date()},
+                    {id:2,name:'宝马',ctime:new Date()},
+                    {id:3,name:'大众',ctime:new Date()},
+                ]
+            },
+            methods: {
+                add(){
+                    console.log("添加")
+                    var car = {
+                        id:this.id,
+                        name:this.name,
+                        ctime:new Date()
+                    }
+                    this.list.push(car)
+                    this.id = this.name = ''
+                },
+                del(id){
+                    // this.list.some((item,i)=>{
+                    //     if(item.id == id){
+                    //         this.list.splice(i,1)
+                    //         return true
+                    //     }
+                    // })
+
+                    var index = this.list.findIndex(item => {
+                        if(item.id ==id){
+                            return true
+                        }
+                    })
+                    this.list.splice(index,1)
+                },
+                //注意：forEach some filter findIndex 这些都是数组的新方法
+                // 都会对数组的每一项进行遍历，执行相关的操作
+                search(keywords){
+                    // let newList = [];
+                    // this.list.forEach(item => {
+                    //     if(item.name.indexOf(keywords) != -1){
+                    //         newList.push(item)
+                    //     }
+                    // });
+                    // return newList;
+
+                    // ES6为字符串提供一个新方法includes("要包含的元素")，如果包含返回true
+                    return this.list.filter(item => {
+                        if(item.name.includes(keywords)){
+                            return item;
+                        }
+                    })
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

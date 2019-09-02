@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../lib/vue-2.4.0.js"></script>
+</head>
+<style>
+    .outer{
+        padding: 40px;
+        background-color: yellow;
+    }
+    .inner{
+        height: 150px;
+        background-color:darkcyan;
+    }
+</style>
+<body>
+    <div id="app">
+        <!-- 使用.stop阻止冒泡 -->
+        <!-- 使用.capture实现捕获触发事件的机制 -->
+        <!-- 使用.self实现只有点击当前元素时候，才会触发事件处理函数 -->
+        <!-- <div class="inner" @click.self="divHandel" >
+            <input type="button" value="点击" @click="btnHandel">
+        </div> -->
+        <!-- 使用.prevent阻止默认行为 -->
+        <!-- 使用.once只触发一次事件处理函数 -->
+        <a href="http://www.baidu.com" v-on:click.prevent.once="linkClick">百度</a>
+        <!-- .self和.stop的区别 -->
+        <!-- <div class="outer" @click="outer">
+            <div class="inner" @click="inner">
+                <input type="button" value="按钮" @click.stop="btn">
+            </div>
+        </div> -->
+        <div class="outer" @click="outer">
+            <div class="inner" @click.self="inner">
+                <input type="button" value="按钮" @click="btn">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {
+                divHandel(){
+                    console.log("点击inner")
+                },
+                btnHandel(){
+                    console.log("点击input")
+                },
+                linkClick(){
+                    console.log("触发链接点击事件")
+                },
+                outer(){
+                    console.log("outer")
+                },
+                inner(){
+                    console.log("inner");
+                },
+                btn(){
+                    console.log("btn");
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

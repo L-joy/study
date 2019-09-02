@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../lib/vue-2.4.0.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div @mousemove="debounce(add,1000)" style="height:150px;line-height:150px;text-align:center;background-color:salmon">{{count}}</div>
+        
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                count:0,
+            },
+            methods: {
+                add(){
+                    this.count++;
+                },
+                // 防抖：就是指触发事件后在 n 秒内函数只能执行一次，如果在 n 秒内又触发了事件，
+                //       则会重新计算函数执行时间。
+               /**
+                * call()、apply()、bind() 都是用来重定义 this 这个对象的！
+                * 
+                * */
+                debounce(func,wait) {  
+                    let timeout = null;
+                    return function(){
+                        if(timeout !== null) clearTimeout(timeout)
+                        timeout = setTimeout(fn,wait);
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
