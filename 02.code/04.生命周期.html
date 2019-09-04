@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../lib/vue-2.4.0.js"></script>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" @click="show">{{ msg }}</div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg:'啦啦啦啦.......',
+            },
+            methods: {
+                show(){
+                    this.msg="嗯嗯嗯....."
+                }
+            },
+            //生命周期函数
+            beforeCreate () {
+                // console.log(this.msg)//undefined
+                // this.show()//报错
+            },
+            created () {
+                //console.log(this.msg)//啦啦啦啦.......
+                //this.show()//嘟嘟嘟
+            },
+            beforeMount () {
+                //console.log(document.getElementById('app').innerText)//{{msg}}
+            },
+            mounted () {
+                //console.log(document.getElementById('app').innerText)//啦啦啦啦.......
+            },
+            //运行中的两个数据
+            beforeUpdate () {//数据更新之后
+                console.log(document.getElementById('app').innerText)//嗯嗯嗯.....
+                console.log(this.msg)//啦啦啦啦.......
+            },
+            updated () {
+                console.log(document.getElementById('app').innerText)//嗯嗯嗯.....
+                console.log(this.msg)//嗯嗯嗯.....
+            }
+        });
+    </script>
+</body>
+
+</html>

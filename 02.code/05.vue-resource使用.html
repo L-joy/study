@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../lib/vue-2.4.0.js"></script>
+    <script src="../lib/node_modules/vue-resource/dist/vue-resource.js"></script>
+</head>
+
+<body>
+    <div id="app">
+         <input type="button" value="get请求" @click="getInfo">
+         <input type="button" value="post请求" @click="postInfo">
+         <input type="button" value="jsonp请求" @click="jsonpInfo">
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {
+                getInfo(){
+                    //发起get请求，.then获取返回的数据
+                    this.$http.get(
+                        'http://mini.98mp.com/api/api.php'
+                    ).then(function (res) {
+                        console.log(res)
+                    })
+                },
+                postInfo(){
+                    this.$http.post(
+                        'http://mini.98mp.com/api/api.php',
+                        {
+                            method: "getMemberInfo",
+                            timestamp: "11111111",
+                            sign: "cb130033b5d4aed20b4e2334e2b038c3",
+                            id: "10d7130c382efd0ec828455da02a953a"
+                        },
+                        {emulateJSON:true}
+                    ).then((res) => {
+                        console.log(res.data)
+                    })
+                },
+                jsonpInfo(){
+                    this.$http.jsonp(
+                        'http://127.0.0.1:8899/api/getlunbo'
+                    ).then(res => {
+                        console.log(res.body)
+                    })
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
