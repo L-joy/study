@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        /**
+         * 给定一个无重复元素的数组candidates和一个目标数target，找出candidates中所有可以使数字和为target的组合。
+         * candidates中的数字可以无限制重复被选取。
+         */
+        /**
+         * @param {number[]} candidates
+         * @param {number} target
+         * @return {number[][]}
+         */
+        var combinationSum = function (candidates, target) {
+            var arr = new Array(0);
+            var row = 0;
+            for (var i = 0; i < candidates.length; i++) {
+                if (target - candidates[i] < 0) {
+                    continue;
+                }
+                if (target - candidates[i] == 0) {
+                    arr[row] = new Array(0);
+                    arr[row].push(target);
+                    row++;
+                }
+                if (isHas(candidates, target - candidates[i])) {
+                    arr[row] = new Array(0);
+                    arr[row].push(candidates[i]);
+                    arr[row].push(target - candidates[i]);
+                    row++;
+                }
+                var temp = combinationSum(candidates, target - candidates[i]);
+                repeat(temp);
+                if (temp) {
+                    for (var j = 0; j < temp.length; j++) {
+                        temp[j].push(candidates[i]);
+                        arr[row] = new Array(0);
+                        for (var t = 0; t < temp[j].length; t++) {
+                            arr[row][t] = temp[j][t];
+                        }
+                        row++;
+                    }
+                }
+            }
+            repeat(arr);
+            return arr;
+        };
+        //判断数组中是否含有target元素
+        function isHas(candidates, target) {
+            if (candidates.indexOf(target) > -1) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        //去重
+        function repeat(arr) {
+            for (var i = 0; i < arr.length - 1; i++) {
+                if (arr[i].length == arr[i + 1].length) {
+                    arr[i].sort(function (a, b) {
+                        if (a > b) {
+                            return -1;
+                        } else if (a == b) {
+                            return 0;
+                        } else {
+                            return 1;
+                        }
+                    });
+                    arr[i + 1].sort(function (a, b) {
+                        if (a > b) {
+                            return -1;
+                        } else if (a == b) {
+                            return 0;
+                        } else {
+                            return 1;
+                        }
+                    });
+                    if (equal(arr[i], arr[i + 1])) {
+                        arr.splice(i, 1);
+                    }
+                }
+            }
+        }
+        function equal(a, b) {
+            for (var i = 0; i < a.length; i++) {
+                if (a[i] != b[i]) {
+                    return false;
+                }
+            }
+            return true;
+
+        }
+        var combinationSum1 = function (candidates, target) {
+            var item = [], path = [];
+            f1(candidates,target,0,item,path);
+            return item;
+        };
+        function f1(candidates, target,it,item, path) {
+            if (target < 0) {
+                return;
+            }
+            if (target == 0) {
+                //浅拷贝
+                path=path.slice();
+                item.push(path);
+                return;
+            }
+            for (var i = it; i < candidates.length; i++) {
+                path.push(candidates[i]);
+                f1(candidates,target-candidates[i],i,item,path);
+                path.pop();
+            }
+
+        }
+        var candidates = [1, 2];
+        var target = 3;
+        var result = combinationSum1(candidates, target);
+        console.log(result);
+        //var item=[],path=[];
+        //f1(candidates,target,0,item,path);
+        //console.log(item);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

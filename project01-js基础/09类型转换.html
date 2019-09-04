@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        //类型转换
+        //其他类型转数字类型：三种方式
+        //1.parseInt();------转整数
+        console.log(parseInt("10"));//10
+        console.log(parseInt("10a"));//10
+        console.log(parseInt("g10"));//NaN
+        console.log(parseInt("1fds0"));//1
+        console.log(parseInt("10.98"));//10
+        console.log(parseInt("10.98fddsaa"));//10
+        //2.parseFloat();-------转小数
+        console.log(parseFloat("10"));//10
+        console.log(parseFloat("10a"));//10
+        console.log(parseFloat("g10"));//NaN
+        console.log(parseFloat("1fds0"));//1
+        console.log(parseFloat("10.98"));//10.98
+        console.log(parseFloat("10.98fddsaa"));//10.98
+        //3.Number();------转数字
+        console.log(Number("10"));//10
+        console.log(Number("10a"));//NaN
+        console.log(Number("g10"));//NaN
+        console.log(Number("1fds0"));//NaN
+        console.log(Number("10.98"));//10.98
+        console.log(Number("10.98fddsaa"));//NaN
+        //其他类型转字符串类型
+        //1 .toString();
+        var str1=10;
+        console.log(str1.toString());//10
+        //2  String();
+        var str2=20;
+        console.log(String(str2));//20
+        //如果字符串有意义调用.toString()使用转换
+        //如果字符串没有意义使用String()转换
+        var str;
+        console.log(String(str));//undefined
+        //console.log(str.toString());//报错
+        //其他类型转布尔类型
+        //1. Boolean(值)
+        console.log(Boolean(1));//true
+        console.log(Boolean(0));//false
+        console.log(Boolean(11));//true
+        console.log(Boolean(-10));//true
+        console.log(Boolean("哈哈"));//true
+        console.log(Boolean(""));//false
+        console.log(Boolean(null));//false
+        console.log(Boolean(undefined));//false
+    </script>
+</head>
+<body>
+
+</body>
+</html>

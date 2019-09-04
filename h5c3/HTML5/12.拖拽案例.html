@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        .box1{
+            width: 400px;
+            height: 400px;
+            border: 1px solid #000;
+        }
+        .box1 div,.box2 div{
+            width: 98px;
+            height: 98px;
+            border-radius: 50%;
+            border: 1px solid #000;
+            float: left;
+            background-color: red;
+            text-align: center;
+            line-height: 98px;
+        }
+        .box2{
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            left: 600px;
+            top: 100px;
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+<!--div{内容}，div[属性]-->
+<div class="box1">
+    <div draggable="true">1</div>
+    <div draggable="true">2</div>
+    <div draggable="true">3</div>
+    <div draggable="true">4</div>
+    <div draggable="true">5</div>
+    <div draggable="true">6</div>
+    <div draggable="true">7</div>
+    <div draggable="true">8</div>
+</div>
+<div class="box2"></div>
+<script>
+    //所有小盒子
+    var box=document.querySelectorAll(".box1 div");
+    //临时盒子，存放当前拖拽的元素
+    var temp=null;
+    //为每一个小盒子绑定拖拽事件
+    for(var i=0;i<box.length;i++){
+        box[i].ondragstart= function () {
+            temp=this;
+            console.log(temp);
+        };
+        box[i].ondragend= function () {
+            temp=null;
+            console.log(temp);
+        }
+    }
+    //目标元素拖拽事件
+    var box2=document.querySelector(".box2");
+    //当被拖拽元素在目标元素上时连续触发，默认不允许接收
+    box2.ondragover= function (e) {
+        e.preventDefault();//阻止默认行为
+    };
+    //当被拖拽元素在目标元素上松开鼠标时触发
+    box2.ondrop= function () {
+//        将被拖拽的元素追加在目标元素中
+        this.appendChild(temp);
+    };
+    
+
+</script>
+</body>
+</html>

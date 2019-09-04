@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .wrap{
+            width: 600px;
+            height: 800px;
+            margin: 100px auto;
+        }
+        .wrap table{
+            width: 400px;
+            height: 50px;
+        }
+        thead{
+            background-color: paleturquoise;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+        }
+        tbody tr{
+            background-color: #f0f0f0;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+        }
+        td{
+            font-size: 14px;
+        }
+        td,th{
+            border: 1px solid #d0d0d0;
+        }
+        td a.get{
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <input type="button" value="清空内容" id="btn1"/>
+    <input type="button" value="添加" id="btn2"/>
+    <table cellspacing="0" cellpadding="5">
+        <thead>
+        <tr>
+            <td>科目</td>
+            <td>所属学院</td>
+            <td>操作</td>
+        </tr>
+        </thead>
+        <tbody id="j_tb">
+        <tr>
+            <td>JavaScript</td>
+            <td>开发学院</td>
+            <td>
+                <a href="javascript:void(0)" class="get">DELETE</a>
+            </td>
+        </tr>
+        <tr>
+            <td>HTML</td>
+            <td>开发学院</td>
+            <td>
+                <a href="javascript:void(0)" class="get">DELETE</a>
+            </td>
+        </tr>
+        <tr>
+            <td>CSS</td>
+            <td>开发学院</td>
+            <td>
+                <a href="javascript:void(0)" class="get">DELETE</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="jquery-1.12.4.js"></script>
+<script>
+    $(function () {
+        //1.清空
+       $("#btn1").on("click", function () {
+           $("#j_tb").empty();
+       });
+        //2.删除
+        $("#j_tb").on("click",".get", function () {
+            $(this).parent().parent().remove();
+        });
+        //3.添加
+        $("#btn2").on("click", function () {
+            $('<tr><td>CSS11</td><td>开发学院</td><td><a href="javascript:void(0)" class="get">DELETE</a></td></tr>').appendTo("#j_tb");
+        });
+    });
+
+</script>
+</body>
+</html>

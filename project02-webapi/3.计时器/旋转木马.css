@@ -1,0 +1,47 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+ul{
+    list-style: none;
+}
+a{
+    text-decoration: none;/*装饰线*/
+}
+a,button{
+    cursor: pointer;
+}
+.wrap{
+    width: 1600px;
+    margin: 100px auto;
+}
+.slide{
+    height: 500px;
+    position: relative;
+}
+.slide li{
+    position: absolute;
+    left: 200px;
+    top: 0;
+}
+.slide img{
+    width: 100%;
+
+}
+.arrow{
+    opacity: 0;/*透明度为0*/
+}
+.prev,.next{
+    width: 76px;
+    height: 112px;
+    position: absolute;
+    top: 50%;
+    z-index: 99;
+}
+.prev{
+    background: url("images1/prev.png") no-repeat;
+}
+.next{
+    right: 0;
+    background: url("images1/next.png") no-repeat;
+}

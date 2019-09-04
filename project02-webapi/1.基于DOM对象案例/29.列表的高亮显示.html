@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        ul{
+            list-style: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<ul id="uu">
+    <li>金士百</li>
+    <li>雪花</li>
+    <li>百威</li>
+    <li>燕京</li>
+    <li>青岛</li>
+    <li>崂山</li>
+    <li>珠江</li>
+    <li>华丹</li>
+</ul>
+<script src="common.js"></script>
+<script>
+    //鼠标进入和鼠标离开两个事件
+    var list=my$("uu").getElementsByTagName("li");
+    for(var i=0;i<list.length;i++){
+        //鼠标进入
+        list[i].onmouseover=function (){
+            this.style.backgroundColor="blue";
+        };
+        //鼠标离开
+        list[i].onmouseout= function () {
+            this.style.backgroundColor="";
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        /*
+        * 函数的定义
+        * 语法：
+        * function 函数名(){
+        *     函数体
+        * }
+        *
+        * 函数的调用：
+        * 函数名();
+        *
+        * */
+        /*
+        * 注意：
+        * 1.函数需要先定义，然后才能使用
+        * 2.函数名要遵循驼峰命名法
+        * 3.函数一旦重名，后面的会把前面的函数覆盖
+        * 4.Ctrl+鼠标左键-------转到定义
+        *
+        * */
+        function sum(){//函数的定义
+            var arr=[10,20,30,40,50];
+            var s=0;
+            for(var i=0;i<arr.length;i++){
+                s=s+arr[i];
+            }
+            console.log(s);
+        }
+        sum();
+        /*
+        * 函数的参数：
+        * 形参-----x,y
+        * 实参-----100,200----调用时传入的值，可以是变量也可以是值
+        *
+        *
+        * */
+        function sum1(x,y){
+            var sum1=x+y;
+            console.log(sum1);
+        }
+        sum1(100,200);
+        /*
+        *
+        *函数的返回值：return 变量；
+        * set：设置
+        * get：获取
+        *
+        * */
+        function sum2(x,y){
+            var s2=x+y;
+            return s2;
+        }
+        var result=sum2(100,200);
+        console.log(result);
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

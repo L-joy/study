@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+            <meta content="IE=edge" http-equiv="X-UA-Compatible">
+                <meta content="width=device-width, initial-scale=1" name="viewport">
+                    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+                    <meta content="" name="description">
+                        <meta content="" name="author">
+                            <link href="../../favicon.ico" rel="icon">
+                                <title>
+                                    Dashboard Template for Bootstrap
+                                </title>
+                                <!-- Bootstrap core CSS -->
+                                <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+                                    <!-- Custom styles for this template -->
+                                    <link href="/public/css/main.css" rel="stylesheet">
+                                    </link>
+                                </link>
+                            </link>
+                        </meta>
+                    </meta>
+                </meta>
+            </meta>
+        </meta>
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                </div>
+            </div>
+        </nav>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                    <h2 class="sub-header">
+                        编辑
+                    </h2>
+                    <form action="/students/edit" method="post">
+                        <!-- 隐藏数据 ：用来放一些不希望被用户看见，但是需要被提交到服务端的数据-->
+                        <input type="hidden"  value="{{ student.id }}" name="id">
+                        <div class="form-group">
+                            <label for="">
+                                姓名
+                            </label>
+                            <input class="form-control" id="" name="name" value="{{ student.name }}" type="text">
+                            </input>
+                        </div>
+                        <div class="form-group">
+                            <label for="">
+                                性别
+                            </label>
+                            <div>
+                              <label class="radio-inline">
+                                <input id="inlineRadio1" name="gender" type="radio" value="0">
+                                    男
+                                </input>
+                            </label>
+                            <label class="radio-inline">
+                                <input id="inlineRadio2" name="gender" type="radio" value="1">
+                                    女
+                                </input>
+                            </label>
+                            </div>              
+                        </div>
+                        <div class="form-group">
+                            <label for="">年龄</label>
+                            <input id="" type="number" name="age" class="form-control" value="{{ student.age }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="">爱好</label>
+                            <input id="" type="text" name="hobbies" class="form-control" value="{{ student.hobbies }}">
+                        </div>
+                        <input type="submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

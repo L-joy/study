@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+       //break关键字：在循环中使用使，遇到break，则立即跳出当前循环
+        for(var i=0;i<10;i++){
+            while(true){
+                console.log("哈哈");
+                break;
+            }
+        }
+        //练习：找到100-200之间能被7整除的第一个数
+        for(var j=100;j<=200;j++){
+            if(j%7==0){
+                console.log(j);
+                break;
+            }
+        }
+        //continue关键字：在循环中遇到continue关键字直接跳到下一次循环
+        //练习：求200-300之间所有奇数的和
+        var sum=0;
+        var k=200;
+        while(k<=300){
+            if(k%2==0){
+                k++;
+                continue;
+            }
+            sum=sum+k;
+            k++;
+        }
+       console.log(sum);
+        //练习：计算100-200之间除了个位数为3的其他数之和
+        var sum1=0;
+        var l=100;
+        while(l<=200){
+            if(l%10==3){
+                l++;
+                continue;
+            }
+            sum1=sum1+l;
+            l++;
+        }
+        console.log(sum1);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

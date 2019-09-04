@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        .box{
+            width: 200px;
+            height: 200px;
+            background-color: darksalmon;
+        }
+        .box1{
+            width: 100px;
+            height: 100px;
+            border: 1px solid #000;
+            background-color: red;
+        }
+        .box2{
+            position: relative;
+            width: 400px;
+            height: 400px;
+            left: 500px;
+            top: 100px;
+            border: 1px solid #000;
+            background-color: darkturquoise;
+        }
+    </style>
+</head>
+<body>
+<div class="box" draggable="true"></div>
+<div class="box1" draggable="true"></div>
+<div class="box2"></div>
+<script>
+    /**
+     * 拖拽事件：
+     * 拖拽开始：.ondragstart
+     * 拖拽结束：.ondragend
+     * 拖拽进入：.ondragenter（鼠标进入）
+     * 拖拽离开：.ondragleave——当鼠标离开被拖拽的元素时触发（鼠标离开）
+     * 拖拽：.ondrag——拖拽过程中持续触发
+     * 当被拖拽元素在目标元素上时连续触发：.ondragover——默认不允许接收，event.preventDefault();//阻止默认行为
+     * 当被拖拽元素在目标元素上松开鼠标时连续触发：.ondrop
+     * @type {Element}
+     */
+    var box=document.querySelector(".box");
+    box.ondragstart= function () {
+        console.log("开始");
+    };
+    box.ondragend= function () {
+        console.log("结束");
+    };
+    box.ondragleave= function () {
+        console.log("离开");
+    };
+    box.ondrag= function () {
+        console.log("拖拽");
+    };
+    //目标元素拖拽事件
+    var box2=document.querySelector(".box2");
+    //当被拖拽元素进入时触发
+    box2.ondragenter= function () {
+    };
+    //当被拖拽元素离开时触发
+    box2.ondragleave= function () {
+    };
+    //当被拖拽元素在目标元素上时连续触发，默认不允许接收
+    box2.ondragover= function (evevt) {
+        event.preventDefault();//阻止默认行为
+    };
+    //当被拖拽元素在目标元素上松开鼠标时连续触发
+    box2.ondrop= function () {
+    };
+
+    var box1=document.querySelector(".box1");
+
+</script>
+</body>
+</html>

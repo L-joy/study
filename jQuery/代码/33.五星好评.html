@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+        }
+        .comment{
+            font-size: 40px;
+            color: gold;
+        }
+        .comment li{
+            float: left;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+<ul class="comment">
+    <li>☆</li>
+    <li>☆</li>
+    <li>☆</li>
+    <li>☆</li>
+    <li>☆</li>
+</ul>
+<script src="jquery-1.12.4.js"></script>
+<script>
+    $(function () {
+        //1.给li注册鼠标经过事件，让自己和前面所有的兄弟变成实心
+        var wjx_k="☆";
+        var wjx_s="★";
+        $(".comment>li").on("mouseenter", function () {
+            $(this).text(wjx_s).prevAll().text(wjx_s);
+            $(this).nextAll().text(wjx_k);
+        });
+        //2.给ul注册鼠标离开时间，让所有的li都变成空心
+        $(".comment").on("mouseleave", function () {
+            $(this).children().text(wjx_k);
+            //在这里需要知道最后点击的五角星是谁,找到current和current前面的都变成实心
+            $("li.current").text(wjx_s).prevAll().text(wjx_s);
+
+        });
+        //3.给li注册点击事件
+        $(".comment>li").on("click", function () {
+            $(this).addClass("current").siblings().removeClass("current");
+        });
+    });
+
+</script>
+</body>
+</html>

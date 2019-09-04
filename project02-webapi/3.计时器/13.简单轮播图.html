@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        img{
+            vertical-align: top;/*垂直对齐*/
+        }
+        ul{
+            list-style: none;
+        }
+        .box{
+            width: 800px;
+            height: 600px;
+            margin: 100px auto;
+            padding: 5px;
+            border: 1px solid #ccc;
+
+
+        }
+        .inner{
+            width: 800px;
+            height: 600px;
+            background-color: pink;
+            overflow: hidden;
+            position: relative;
+            text-align: center;
+
+
+        }
+        .inner ul{
+            width: 1000%;
+            position: absolute;
+            top : 0;
+            left: 0;
+
+        }
+        .inner li{
+            float: left;
+        }
+        .inner li img{
+            width: 800px;
+            height: 600px;
+        }
+        .square{
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+        }
+
+        .square span{
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background-color: #fff;
+            line-height: 16px;
+            border: 1px solid black;
+            cursor: pointer;
+
+        }
+        .square span.current{
+            background-color: darkorange;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div id="box" class="box">
+    <div class="inner"><!--相框-->
+        <ul>
+            <li><a href="#"><img src="../Jackson-yee/10.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="../Jackson-yee/11.jpg" alt="" /></a></li>
+            <li><a href="#"><img src="../Jackson-yee/16.jpg" alt="" /></a></li>
+            <li><a href="#"><img src="../Jackson-yee/13.jpg" alt="" /></a></li>
+            <li><a href="#"><img src="../Jackson-yee/14.jpg" alt="" /></a></li>
+            <li><a href="#"><img src="../Jackson-yee/15.jpg" alt="" /></a></li>
+        </ul>
+        <div class="square">
+            <span class="current">1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+            <span>5</span>
+            <span>6</span>
+        </div>
+    </div>
+</div>
+<script src="../common.js"></script>
+<script>
+    //获取最外面的div
+    var box=my$("box");
+    //获取相框
+    var inner=box.children[0];
+    //获取相框的宽度
+    var imgWidth=inner.offsetWidth;
+    //获取ul
+    var ulObj=inner.children[0];
+    //获取所有的span标签
+    var spanObj=inner.children[1].children;
+    //循环遍历所有的span标签，注册鼠标进入事件
+    for(var i=0;i<spanObj.length;i++){
+        //循环时把每个索引值存在index属性中
+        spanObj[i].setAttribute("index",i);//自定义对象
+        spanObj[i].onmouseover= function () {
+            //先干掉所有span标签的背景颜色
+            for(var j=0;j<spanObj.length;j++){
+                //清除所有span标签的类样式
+                spanObj[j].removeAttribute("class");
+            }
+            this.className="current";
+            //移动ul(每个图片的宽乘以鼠标放的索引)
+            //获取自定义属性
+            var index=this.getAttribute("index");
+            animate(ulObj,-index*imgWidth);
+        }
+    }
+    //封装动画函数--------设置任意的一个元素，移动到指定的目标位置
+    function animate(element,target){
+        //先清理定时器
+        clearInterval(element.timeId);
+        //定时器的id值存储在对象的一个属性中
+        element.timeId=setInterval(function () {
+            //获取元素的当前位置
+            var current=element.offsetLeft;
+            //每次移动的位置
+            var step=4;
+            step=current<target?step:-step;
+            current+=step;
+            if(Math.abs(target-current)>Math.abs(step)){
+                element.style.left=current+"px";
+            }
+            else{
+                clearInterval(element.timeId);
+                element.style.left=target+"px";
+            }
+        },20)
+    }
+
+</script>
+</body>
+</html>

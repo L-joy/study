@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        div{
+            width: 200px;
+            height: 300px;
+            border: 2px dashed red;
+        }
+    </style>
+</head>
+<body>
+<input type="button" value="创建一个p" id="btn"/>
+<div id="dv"></div>
+<script src="common.js"></script>
+<script>
+    /**
+     * 元素创建的不同方式
+     * 1.document.write("标签及内容")--------缺陷：页面加载完毕后，页面上所有内容被替代
+     * 2.对象.innerHTML="标签及内容";
+     * 3.document.creatElement("标签名字");得到的是对象。--------先创建元素----再把元素追加到父级元素中
+     */
+//    my$("btn").onclick= function () {
+//      document.write("<p>这是一个p</p>");
+//    };
+//    my$("btn").onclick= function () {
+//        my$("dv").innerHTML="<p>这是一个p</p>";
+//    };
+    my$("btn").onclick= function () {
+        //创建对象
+        var pObj=document.createElement("p");
+        setInnerText(pObj,"这是一个p");
+        //把创建后的元素追加到父级元素中
+        my$("dv").appendChild(pObj);
+    };
+</script>
+</body>
+</html>

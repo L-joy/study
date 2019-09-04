@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        //给定两个整数n和k,返回 1 ... n 中所有可能的k个数的组合。
+        /**
+         * @param {number} n
+         * @param {number} k
+         * @return {number[][]}
+         */
+        var combine = function(n, k) {
+            var items=[],item=[];
+            f1(items,item,n,k,0,1);
+            return items;
+        };
+        function f1(items,item,n,k,count,it){
+            if(k==count){
+                item=item.slice();
+                items.push(item);
+                return;
+            }
+            for(var i=it;i<=n;i++){
+                item.push(i);
+                count++;
+                f1(items,item,n,k,count,i+1);
+                item.pop();
+                count--;
+            }
+        }
+        console.log(combine(4, 2));
+//        var items=[],item=[];
+//        f1(items,item,8,3,0,1);
+//        console.log(items);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

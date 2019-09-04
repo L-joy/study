@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        /**
+         * 新增的主体结构元素：
+         * article元素：表示页面中的一个内容区域，可被外部引用。 主要运用：论坛帖子、博客文章、新闻故事、评论。
+         * section元素：表示页面中的某个内容区域，主要运用：页面的页眉页脚、章节、头部、底部或者文档的其他区域。
+         * div元素关注结构的独立性；section元素关注内容的独立性
+         * nav元素：用于页面导航的链接部分。主要运用：传统导航条、侧边栏导航、内页导航、翻页操作等
+         * aside元素：表示article元素的内容之外的和内容相关的辅助信息。主要运用：页面的侧边栏内容
+         * time元素：定义时间或日期，表示的时间可有误差
+         * pubdate元素：可以用到article元素中的time上，表示当前文章的发布时间，当有多个datetime属性的时候，pubdate可以表示该时间为发布时间。
+         *
+         * 新增的非主体结构元素：
+         * header元素：定义了文档的头部区域，在一个文档中，可以定义多个header元素。
+         * 使用注意：header标签不能被放在footer，address或者另一个header元素内部。
+         * hgroup元素：将标题和子标题分组的元素，一般会把h1~h6的元素进行分组。
+         * footer元素：可以作为他的上层父级元素或者一个区块的注脚。主要运用：作者、版权信息等。
+         * address元素：用来在页面中呈现联系信息，包括文档的作者、邮箱、地址、电话信息等。
+         */
+    </script>
+    <link rel="stylesheet" href="css/index.css"/>
+    <link rel="stylesheet" href="css/jquery.fullpage.css"/>
+</head>
+<body>
+<!--使用HTML5设计博客主页-->
+<div id="page">
+    <!--页面的侧边栏内容-->
+    <aside id="sidebar">
+        <!--导航栏-->
+        <nav>
+            <a href="#">
+                <span>A portfolio of</span>
+                "Joe"
+            </a>
+            <ul>
+                <li id="nav-1"><a href="#home">home</a></li>
+                <li id="nav-2"><a href="#work">work</a></li>
+                <li id="nav-3"><a href="#about">about</a></li>
+                <li id="nav-4"><a href="#contact">contact</a></li>
+            </ul>
+        </nav>
+    </aside>
+    <!--主要内容-->
+    <div id="main_content">
+        <section id="home">
+            <div id="fullpage">
+                <div class="section">
+                    <div class="slide"><img src="../Jackson-yee/21.jpg" alt=""/></div>
+                    <div class="slide"><img src="../Jackson-yee/22.jpg" alt=""/></div>
+                    <div class="slide"><img src="../Jackson-yee/23.jpg" alt=""/></div>
+                    <div class="slide"><img src="../Jackson-yee/24.jpg" alt=""/></div>
+                    <div class="slide"><img src="../Jackson-yee/25.jpg" alt=""/></div>
+                </div>
+            </div>
+        </section>
+        <section id="work"></section>
+        <section id="about"></section>
+        <section id="contact"></section>
+    </div>
+    <header class="divider intro-text">
+        <h2>I Make Beautiful Websites</h2>
+    </header>
+</div>
+<script src="js/jquery-1.12.4.js"></script>
+<script src="js/jquery.fullpage.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+
+        div{
+            width: 200px;
+            height: 200px;
+            background-color: palegreen;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <!--<a href="http://web.itcast.cn" target="_blank">传智</a>-->
+</div>
+<script src="jquery-1.12.4.js"></script>
+<script>
+    //创建 <a href="http://web.itcast.cn" target="_blank">传智</a>
+    $(function () {
+        $("#box").append('<a href="http://web.itcast.cn" target="_blank">传智</a>');
+    });
+</script>
+</body>
+</html>

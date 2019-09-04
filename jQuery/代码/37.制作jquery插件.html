@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        div{
+            width: 400px;
+            height: 400px;
+            background-color: paleturquoise;
+        }
+    </style>
+</head>
+<body>
+<div></div>
+<script src="jquery-1.12.4.js"></script>
+<script src="jquery.bgColor.js"></script>
+<script>
+    //给数组的原型增加了一个方法
+//    Array.prototype.sayHi= function () {
+//      console.log("经济");
+//    };
+//    var arr=new Array();
+//    arr.sayHi();
+
+    //jquery插件的实质——geijquery的原型上增加方法
+    //jQuery.prototype=$.fn
+//    jQuery.prototype.sayHi= function () {
+//        console.log("啦啦");
+//    };
+//    $(document).sayHi();
+
+    //简易版本jQuery插件
+    $(function () {
+        //给jquery添加一个方法改变背景颜色bgColor()
+        $("div").bgColor("red").width(300);
+
+    });
+</script>
+</body>
+</html>

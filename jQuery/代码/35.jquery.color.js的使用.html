@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        div{
+            width: 300px;
+            height: 300px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+<div></div>
+<!--1.引入jquery的js文件-->
+<script src="jquery-1.12.4.js"></script>
+<!--2.引入插件的js文件-->
+<script src="jquery.color.js"></script>
+<script>
+    $(function () {
+        //3.直接使用即可
+        //jquery不支持颜色的渐变,颜色最后用16进制
+        $("div").animate({backgroundColor:"green"},1000, function () {
+            alert("呵呵");
+        });
+    });
+</script>
+</body>
+</html>

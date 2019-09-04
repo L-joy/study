@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>mysite</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <style>
+        /*body{*/
+        /*min-width:768px;*/
+        /*overflow:auto;*/
+        /*}*/
+        div, p, h1, h2, h3, h4, h5, h6, a {
+            text-decoration: none;
+        }
+
+        ul, dl, dd, body, h1, h2, h3, h4, h5, h6, p {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        input {
+            border: 0 none;
+            outline-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main {
+        }
+
+        .container {
+            padding-right: 0;
+            padding-left: 0;
+
+        }
+
+        .row {
+            margin-right: 0;
+            margin-left: 0;
+        }
+
+        .col-lg-12 {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .col-md-12 {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .col-sm-12 {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .col-xs-12 {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .header {
+            background-color: deepskyblue;
+            height: 200px;
+            color: white;
+        }
+
+        .left {
+            height: 200px;
+            padding: 10px 0 0 10px;
+        }
+
+        .right {
+            height: 200px;
+        }
+
+        .left img {
+            margin-top: 10px;
+            width: 40%;
+            height: 45%;
+        }
+
+        .right .text-right {
+            margin: 10px 10px 0 0;
+        }
+
+        .today {
+            height: 150px;
+            background-color: #cccccc;
+            text-align: center;
+        }
+
+        .today img {
+            width: 50%;
+            height: 100%;
+        }
+
+        .forcase {
+            font-size: 16px;
+            padding: 10px 0 0 10px;
+        }
+
+        .forcasehead {
+            margin-left: 5px;
+        }
+
+        .forcase img {
+            height: 100%;
+            margin-right: 10px;
+        }
+
+        td {
+            border: 0 solid transparent !important;
+            height: 50px;
+            vertical-align: middle !important;
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="container main">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="header">
+            <div class="row">
+                <div class="left col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <span class="h3" id="city"></span>
+                    <small>[<a href="#">切换</a>]</small>
+                    <br/>
+                    <img src="image/32.png" alt=""/>
+                </div>
+                <div class="right col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <p class="text-right h3" id="weather"></p>
+
+                    <p class="text-right h2" id="temper"></p>
+
+                    <p class="text-right" id="temp"></p>
+
+                    <p class="text-right" id="cloud"></p>
+
+                    <p class="text-right diff" id="index"></p>
+                </div>
+            </div>
+        </div>
+        <div class="today">
+            <table class="table">
+                <tbody class="tbody-today">
+                <tr>
+                    <td>1:00</td>
+                    <td>1:00</td>
+                    <td>1:00</td>
+                    <td>1:00</td>
+                    <td>1:00</td>
+                    <td>1:00</td>
+                </tr>
+                <tr>
+                    <td><img src="image/32.png" alt=""/></td>
+                    <td><img src="image/32.png" alt=""/></td>
+                    <td><img src="image/32.png" alt=""/></td>
+                    <td><img src="image/32.png" alt=""/></td>
+                    <td><img src="image/32.png" alt=""/></td>
+                    <td><img src="image/32.png" alt=""/></td>
+                </tr>
+                <tr>
+                    <td>23</td>
+                    <td>24</td>
+                    <td>30</td>
+                    <td>26</td>
+                    <td>28</td>
+                    <td>21</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="forcase">
+            <span class="h4 text-left forcasehead">7日天气预报</span>
+            <table class="table table-condensed" id="table">
+                <tbody id="tbody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="node_modules/jquery/dist/jquery.js"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+<script src="weather-data.js"></script>
+<script>
+    var data = weatherData;
+    console.log(data);
+    console.log(data.HeWeather[0].data);
+    window.onload = function () {
+        var obj = document.getElementById("city");
+        obj.innerHTML = data.HeWeather[0].data.city;
+        var obj1 = document.getElementById("weather");
+        obj1.innerHTML = data.HeWeather[0].data.weather;
+        var obj2 = document.getElementById("temper");
+        obj2.innerHTML = data.HeWeather[0].data.temper;
+        var obj3 = document.getElementById("temp");
+        obj3.innerHTML = data.HeWeather[0].data.temp;
+        var obj4 = document.getElementById("cloud");
+        obj4.innerHTML = data.HeWeather[0].data.cloud;
+        var obj5 = document.getElementById("index");
+        obj5.innerHTML = data.HeWeather[0].data.index;
+        var obj6 = document.getElementById("tbody");
+        var datacurrent = data.HeWeather[0].everyday;
+        for (var i = 0; i < datacurrent.length; i++) {
+            var trobj = getDataRow(datacurrent[i]);
+            obj6.appendChild(trobj);
+        }
+        function getDataRow(data) {
+            //创建行
+            var row = document.createElement("tr");
+            //创建第一列
+            var column1 = document.createElement("td");
+            //为第一列添加数据
+            column1.innerText = data.date;
+            //将列添加在行中
+            row.appendChild(column1);
+            //创建第二列
+            var img1 = document.createElement("img");
+            img1.src = data.src;
+            var span1 = document.createElement("span");
+            span1.innerHTML = data.weather;
+            var column2 = document.createElement("td");
+            column2.appendChild(img1);
+            column2.appendChild(span1);
+//            column2.innerHTML = data.weather;
+            row.appendChild(column2);
+            //创建第三列
+            var column3 = document.createElement("td");
+            column3.innerHTML = data.temp;
+            row.appendChild(column3);
+            return row;
+
+        }
+
+        var obj7 = document.getElementById("tbody-today");
+        var datacurrent1 = data.HeWeather[0].today;
+//        var arr = getDataRow1(datacurrent1);
+//        console.log(arr);
+//        for(var j=0;j<arr.length;j++){
+//            obj7.appendChild(arr[j]);
+//        }
+        getDataRow1(obj7,datacurrent1);
+
+
+        function getDataRow1(obj,data) {
+            var arr = [];
+            //创建行
+            var row1 = document.createElement("tr");
+            for(var i=0;i<data.length;i++){
+                var column1 = document.createElement("td");
+                column1.innerText = data[i].hour;
+                row1.appendChild(column1);
+                console.log(row1);
+            }
+            obj.appendChild(row1);
+            var row2 = document.createElement("tr");
+            for(var j=0;j<data.length;j++){
+                var img1 = document.createElement("img");
+                img1.src = data[j].src;
+                var column2 = document.createElement("td");
+                column2.appendChild(img1);
+                row2.appendChild(column2);
+            }
+            obj.appendChild(row1);
+            var row3 = document.createElement("tr");
+            for(var k=0;k<data.length;k++){
+                var column3 = document.createElement("td");
+                column3.innerText = data[k].temp;
+                row3.appendChild(column3);
+            }
+            obj.appendChild(row1);
+
+
+        }
+    }
+</script>
+</body>
+</html>

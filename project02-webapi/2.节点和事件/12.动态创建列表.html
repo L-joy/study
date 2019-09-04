@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+            cursor: pointer;
+        }
+        div{
+            width: 200px;
+            height: 300px;
+            border: 2px dashed hotpink;
+        }
+    </style>
+</head>
+<body>
+<input type="button" value="创建列表" id="btn"/>
+<div id="dv"></div>
+<script src="common.js"></script>
+<script>
+    var names=["啦啦啦","哈哈哈","嘟嘟嘟","嘿嘿嘿","咯咯咯"];
+    //点击按钮动态的创建列表，把列表添加到div中
+    my$("btn").onclick= function () {
+        //创建ul，把ul立刻加到父级元素div中
+        var ulObj=document.createElement("ul");
+        my$("dv").appendChild(ulObj);
+        //动态的创建li，加到ul中
+        for(var i=0;i<names.length;i++){
+            var liObj=document.createElement("li");
+            //设置i中间的文字
+            liObj.innerHTML=names[i];
+            ulObj.appendChild(liObj);
+            //为li添加点击事件
+            liObj.onmouseover=mouseoverHandle;
+            liObj.onmouseout=mouseoutHandle;
+        }
+
+    };
+
+    //此位置，点击事件的外面
+    function mouseoverHandle(){
+        this.style.backgroundColor="yellow";
+    }
+    function mouseoutHandle(){
+        this.style.backgroundColor="";
+    }
+
+    //如果是循环的方式添加事件推荐使用命名函数，减少空间
+
+</script>
+</body>
+</html>

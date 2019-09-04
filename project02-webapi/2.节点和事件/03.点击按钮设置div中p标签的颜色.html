@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+</head>
+<body>
+<input type="button" value="改变颜色" id="btn"/>
+<div id="dv">
+    <span>这是一个span</span>
+    <p>这是一个p</p>
+    <span>这是一个span</span>
+    <p>这是一个p</p>
+    <a href="https://www.baidu.com/">百度</a>
+</div>
+<script src="common.js"></script>
+<script>
+    //点击按钮，设置p标签的颜色
+    my$("btn").onclick= function () {
+        //先获取div
+        var dnObj=my$("dv");
+        //获取里面所以的子节点
+        var node=dnObj.childNodes;
+        //循环遍历所有的子节点
+        for(var i=0;i<node.length;i++){
+            if(node[i].nodeType==1&&node[i].nodeName=="P"){
+                node[i].style.backgroundColor="yellow";
+            }
+        }
+
+    };
+</script>
+</body>
+</html>

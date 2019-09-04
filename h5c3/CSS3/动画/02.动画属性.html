@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        .box{
+            width: 200px;
+            height: 200px;
+            background-color: hotpink;
+            margin:100px;
+            animation: gun 2s 3 alternate;
+            /*动画名称*/
+            animation-name: gun;
+            /*一次动画持续时间*/
+            animation-duration: 2s;
+            /*动画执行次数--infinite(无数次)*/
+            animation-iteration-count: 3;
+            /*动画方向：normal--正常的 alternate--反向*/
+            animation-direction: normal;
+            /*动画延迟执行*/
+            animation-delay: 1s;
+            /*设置动画结束时状态：forwards--保持动画结束后的状态；backwards--保持动画开始前的状态*/
+            animation-fill-mode: forwards;
+            /*运动曲线:linear ease-in-out(先加速后减速)*/
+            /*animation-timing-function: linear;*/
+            animation-timing-function: steps(3);
+        }
+        @keyframes gun {
+            from{}
+            to{
+                transform:translateX(500px);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="box"></div>
+</body>
+</html>

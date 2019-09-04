@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>游戏</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+    <style>
+        /* CSS初始化 */
+        body{
+            min-width:500px;
+            overflow:auto;
+        }
+        div,p,h1,h2,h3,h4,h5,h6,a{
+            text-decoration: none;
+        }
+        ul,dl,dd,body,h1,h2,h3,h4,h5,h6,p{
+            margin: 0;
+            padding: 0;
+        }
+        a{
+            text-decoration: none;
+            color: white;
+        }
+        ul{
+            list-style: none;
+        }
+        input{
+            border: 0 none;
+            outline-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .image{
+            width: 100%;
+            height: 100%;
+        }
+
+        .bg {
+            background-color: #3c3c3c;
+        }
+        .navbar-brand{
+            font-size: 24px;
+        }
+        .carousel{
+            height: 300px;
+            background-color: #ccc;
+            justify-content: center;
+            margin-top: 0;
+            margin-bottom: 40px;
+        }
+        .carousel .item{
+            height: 300px;
+            background-color: #ccc;
+        }
+        .carousel img{
+            width: 100%;
+        }
+        .carousel-indicators{
+            left: 5%;
+        }
+        .carousel-indicators li{
+            width: 12px;
+            height: 12px;
+        }
+
+        .carousel-caption p{
+            margin-bottom: 20px;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        .content{
+            margin-top: 0;
+            padding-top: 20px;
+            border: 1px solid #cccccc;
+            margin-bottom: 100px;
+        }
+        #summary-container .col-md-6{
+            text-align: center;
+        }
+        hr.divider{
+            margin:10px 0 10px 0;
+            background-color: black;
+            height: 1px;
+        }
+        .main-part{
+            margin-bottom: 50px;
+        }
+        .main-content{
+            background-color: #cccccc;
+            margin-bottom: 0;
+            margin-top: -40px;
+        }
+        #summary-container .left{
+            align-self: center;
+            width: auto;
+            height: auto;
+        }
+        #summary-container .right{
+            text-align: left;
+            display: flex;
+            width: auto;
+            height: auto;
+        }
+        .rightl{
+            width: 100%;
+            height: 100%;
+        }
+        #summary-container .left img{
+            padding: 5px 5px 5px 5px;
+            width: 70%;
+
+        }
+        .right-l{
+            float: left;
+            display: flex;
+        }
+        .mid-box{
+            margin: 20px;
+        }
+        .mid-box a{
+            color: black;
+        }
+        .nav{
+            border-bottom: 1px solid black;
+            flex-wrap: wrap;
+        }
+
+        .navbar-collapse{
+            padding-left: 0;
+        }
+        .navbar{
+            margin-bottom: 0;
+        }
+        .same{
+            padding: 5px 20px 5px 5px;
+        }
+        .more{
+            font-size: 8px;
+            padding: 5px 5px 5px 16%;
+        }
+        .mid-box .new{
+            border-bottom: 1px solid black;
+            padding: 5px 5px 5px 5px;
+        }
+
+        .new a{
+            float: right;
+            margin-right: 10px;
+        }
+
+        .right-r{
+            float: left;
+
+        }
+        .right-r img{
+            width: 100%;
+            margin: 0 0 0 10px;
+        }
+        .footer{
+            margin:10px 0 50px 0;
+        }
+        .foot-content{
+            padding-left: 0;
+            padding-right: 40px;
+        }
+        .p-2{
+            text-align: center;
+
+        }
+        .p-2 img{
+            float: left;
+        }
+        .contentp{
+            font-size: 4px;
+            float: left;
+            margin-left: 5px;
+        }
+        .contentp p{
+            margin-bottom: 5px;
+        }
+        .left-content{
+            padding-left: 100px;
+        }
+        .left-content img{
+            position: absolute;
+            margin: -40px 0 0 -100px;
+            border: 1px solid black;
+        }
+        .blockquote{
+            border-left: 0 solid #eee;
+        }
+        .head-r img{
+            margin:-13px -15px -14px -19px;
+        }
+        .rightfloat{
+            padding-left: 100px;
+        }
+        .Aright{
+            display: flex;
+        }
+        .download{
+            align-self: center;
+        }
+        .download a{
+            color: black;
+            font-size: 8px;
+        }
+        .download div{
+            margin-top: 10px;
+        }
+        .download img{
+            width: 15%;
+        }
+        .Android{
+            width: 60%;
+            border-radius: 30px;
+            float: left;
+        }
+        .AppStore{
+            width: 60%;
+            border-radius: 30px;
+            float: left;
+        }
+        .name{
+            margin-top: 30px;
+        }
+        /*.intro-img{*/
+        /*}*/
+        /*.img-fluid{*/
+        /*max-width: 100%;*/
+        /*height: auto;*/
+        /*}*/
+
+
+
+    </style>
+
+</head>
+<body>
+<div class="main">
+    <div class="head">
+        <div class="container-fluid bg">
+            <div class="container">
+                <nav class="navbar navbar-expand-md bg-secondary navbar-dark">
+                    <a class="navbar-brand" href="#">Logo</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse show" id="collapsibleNavbar">
+                        <ul class="nav-pills nav-justified">
+                            <li class="nav-item"><a class="nav-link" href="#"><img src="image/my_icon_favorites.png" alt="">官网首页</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#"><img src="image/my_icon_favorites.png" alt="">最新活动</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#"><img src="image/my_icon_favorites.png" alt="">游戏资料</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#"><img src="image/my_icon_favorites.png" alt="">攻略合集</a></li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <img src="image/my_icon_favorites.png" alt=""/>
+                                    关注新浪微博
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+
+        </div>
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                    <img src="image/1.6.jpg" alt="">
+                    <!--                    图片中的文字-->
+                    <div class="carousel-caption">
+                        <h2>游戏人生</h2>
+                        <p>本来想在游戏中过一次不同的人生，但潜意识还是选择了和现实中相同的人生。哪怕只是一场游戏，当你全情投入的时候，也会做出和现实中同样的选择。游戏里的人生，也是你的人生...</p>
+                        <p><a href="#" class="btn btn-lg btn-primary" target="_blank" role="button">点我跳转</a></p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="image/1.6.jpg" alt="">
+                </div>
+                <div class="item">
+                    <img src="image/1.6.jpg" alt="">
+                </div>
+                <div class="item">
+                    <img src="image/1.6.jpg" alt="">
+                </div>
+                <div class="item">
+                    <img src="image/1.6.jpg" alt="">
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <div class="container-fluid main-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8 left-content">
+                        <img src="image/home_icon_default_nor.png" alt=""/>
+                        <div class="name">
+                            <h3>游戏名称</h3>
+                            <blockquote class="blockquote">
+                                <p>《天天风之旅》是一款动作冒险类的3D轻动作跑酷
+                                    手机游戏，在架空的奇幻世界中，玩...</p>
+                            </blockquote>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-4 rightfloat">
+                        <div class="row">
+                            <div class="Aright">
+                                <div class="download">
+                                    <div class="AppStore">
+                                        <img src="image/my_icon_favorites.png" alt=""/>
+                                        <a href="#">AppStore下载</a>
+                                    </div>
+                                    <div class="Android">
+                                        <img src="image/my_icon_favorites.png" alt=""/>
+                                        <a href="#">Android下载</a>
+                                    </div>
+                                </div>
+                                <div class="head-r">
+                                    <img src="image/list_icon_favorite_nor.png" alt=""/>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content container">
+        <div class="" id="summary-container">
+            <div class="row">
+                <div class="col-md-6 left image">
+                    <img src="image/1.6.jpg" class=" " alt="" />
+                </div>
+                <div class="col-md-6 right">
+                    <div class="rightl">
+                        <div class="right-l">
+                            <div class="mid-box">
+                                <ul>
+                                    <li>
+                                        <div class="nav">
+                                            <a href="#" class="same">综合</a>
+                                            <a href="#" class="same">活动</a>
+                                            <a href="#" class="same">新闻</a>
+                                            <a href="#" class="same">公告</a>
+                                            <a href="#" class="same more">更多</a>
+                                        </div>
+                                    </li>
+                                    <li class="new">
+                                        <a href="#">></a>
+                                        <p>[活动]xxxx全新活动起航</p>
+                                        <p>2015年04月30日</p>
+                                    </li>
+                                    <li class="new">
+                                        <a href="#">></a>
+                                        <p>[新闻]xxxx全新活动起航</p>
+                                        <p>2015年04月30日</p>
+                                    </li>
+                                    <li class="new">
+                                        <a href="#">></a>
+                                        <p>[公告]xxxx全新活动起航</p>
+                                        <p>2015年04月30日</p>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                        <div class="right-r">
+                            <ul>
+                                <li><a href="#"><img src="image/my_icon_favorites.png" alt=""/></a></li>
+                                <li><a href="#"><img src="image/my_icon_favorites.png" alt=""/></a></li>
+                                <li><a href="#"><img src="image/my_icon_favorites.png" alt=""/></a></li>
+                                <li><a href="#"><img src="image/my_icon_favorites.png" alt=""/></a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="">
+            <hr class="divider">
+        </div>
+        <div class="main-part">
+            <div class="row">
+                <div class="col-md-4 col-xs-12 col-sm-6 image">
+                    <img src="image/1.6.jpg" class="img-responsive img-thumbnail" />
+                </div>
+                <div class="col-md-4 col-xs-12 col-sm-6 image">
+                    <img src="image/1.6.jpg" class="img-responsive img-thumbnail" />
+                </div>
+                <div class="col-md-4 col-xs-12 col-sm-6 image">
+                    <img src="image/1.6.jpg" class="img-responsive img-thumbnail" />
+                </div>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="bg">
+                <nav class="navbar navbar-expand-md bg-secondary navbar-dark">
+                    <!--<a class="navbar-brand" href="#">Navbar</a>-->
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar1">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse show" id="collapsibleNavbar1">
+                        <ul class="nav-pills nav-justified">
+                            <li class="nav-item"><a class="nav-link" href="#"><img src="" alt="">官网首页</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#"><img src="" alt="">最新活动</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#"><img src="" alt="">游戏资料</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#"><img src="" alt="">攻略合集</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="main-part">
+                <div class="row">
+                    <div class="col-md-3 image">
+                        <img src="image/1.6.jpg" class="img-responsive img-thumbnail" />
+                    </div>
+                    <div class="col-md-3 image">
+                        <img src="image/1.6.jpg" class="img-responsive img-thumbnail" />
+                    </div>
+                    <div class="col-md-3 image">
+                        <img src="image/1.6.jpg" class="img-responsive img-thumbnail" />
+                    </div>
+                    <div class="col-md-3 image">
+                        <img src="image/1.6.jpg" class="img-responsive img-thumbnail" />
+                    </div>
+                </div>
+            </div>
+            <div class="main-part">
+                <div class="row">
+                    <div class="col-md-3 image">
+                        <img src="image/1.6.jpg" class="img-responsive img-thumbnail" />
+                    </div>
+                    <div class="col-md-3 image">
+                        <img src="image/1.6.jpg" class="img-responsive img-thumbnail" />
+                    </div>
+                    <div class="col-md-3 image">
+                        <img src="image/1.6.jpg" class="img-responsive img-thumbnail" />
+                    </div>
+                    <div class="col-md-3 image">
+                        <img src="image/1.6.jpg" class="img-responsive img-thumbnail" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="container mt3 foot-content">
+                <div class="d-flex justify-content-between mb-3">
+                    <div class="p-2">
+                        <img src="image/my_icon_favorites.png" alt=""/>
+                        <div class="contentp">
+                            <p>关注新浪微博</p>
+                            <p>了解实时动态</p>
+                        </div>
+                    </div>
+                    <div class="p-2">
+                        <img src="image/my_icon_favorites.png" alt=""/>
+                        <div class="contentp">
+                            <p>关注官方微信</p>
+                            <p>百万金币放送</p>
+                        </div>
+                    </div>
+                    <div class="p-2">
+                        <img src="image/my_icon_favorites.png" alt=""/>
+                        <div class="contentp">
+                            <p>联系客服bug</p>
+                            <p>实时反馈</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="node_modules/jquery/dist/jquery.js"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+</body>
+</html>

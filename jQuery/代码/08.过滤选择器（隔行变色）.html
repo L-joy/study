@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+</head>
+<body>
+<ul>
+    <li>0</li>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+    <li>7</li>
+    <li>8</li>
+    <li>9</li>
+</ul>
+<script src="jquery-1.12.4.js"></script>
+<script>
+
+    $(function () {
+
+        //过滤选择器
+        $("li:even").css("backgroundColor","red");//下标为偶数的li
+        $("li:odd").css("backgroundColor","green");//下标为偶数的li
+        $("li:first").css("fontSize","20px");//第一个li
+        $("li:eq(1)").css("fontSize","24px");//下标为1的li
+        $("li:last").css("fontSize","20px");//最后一个li
+        $("li:gt(1)");//大于下标为1的
+        $("li:lt(1)");//小于下标为1的
+    });
+</script>
+</body>
+</html>

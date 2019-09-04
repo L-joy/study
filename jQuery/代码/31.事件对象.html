@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+</head>
+<body>
+<a href="http://www.baidu.com" id="link">哈哈</a>
+<script src="jquery-1.12.4.js"></script>
+<script>
+    /**
+     * jquery事件的对象
+     * .keyCode:键盘按下的编码
+     * .data:使用on方法时可以给data传值，在事件中通过e.data获取
+     */
+    $(function () {
+        $(document).on("click", function (e) {
+            console.log(e);
+        });
+
+        $("#link").on("click", function (e) {
+            alert("呵呵");
+            //阻止浏览器默认行为
+            e.preventDefault();
+            //阻止事件冒泡
+            e.stopPropagation();
+            //return false;//既能阻止浏览器默认行为又能阻止事件冒泡
+        });
+        $("body").on("click", function () {
+            alert("嘻嘻");
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+</head>
+<body>
+<input type="button" value="改变文本框的值" id="mdn"/><br/>
+<input type="text" value=""/><br/>
+<input type="text" value=""/><br/>
+<input type="text" value=""/><br/>
+<input type="text" value=""/><br/>
+<input type="text" value=""/><br/>
+<input type="text" value=""/><br/>
+<script>
+    //点击按钮改变多个文本框的值
+    document.getElementById("mdn").onclick= function () {
+        var inputs=document.getElementsByTagName("input");
+        for(var i=0;i<inputs.length;i++){
+            if(inputs[i].type!="button"){
+                inputs[i].value="哈喽";
+            }
+        }
+    }
+</script>
+</body>
+</html>

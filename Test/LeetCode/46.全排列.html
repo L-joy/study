@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        //给定一个没有重复数字的序列，返回其所有可能的全排列。
+        /**
+         * @param {number[]} nums
+         * @return {number[][]}
+         */
+        var permuteMain = function (nums) {
+            var arr=[];
+            permute(arr,nums,0,nums.length-1);
+            return arr;
+
+        };
+        function permute(arr,nums,b,c){
+            var n=[];
+            var i;
+            if(b==c){
+                for(var j=0;j<nums.length;j++){
+                    n[j]=nums[j];
+                }
+               arr.push(n);
+            }else{
+                for(i=b;i<=c;i++){
+                    swap(nums,i,b);
+                    permute(arr,nums,b+1,c);
+                    swap(nums,i,b);
+                }
+            }
+        }
+        //交换
+        function swap(nums,a, b) {
+            var temp = nums[a];
+            nums[a] = nums[b];
+            nums[b] = temp;
+        }
+        var nums=[1,2,3];
+        console.log(permuteMain(nums));
+    </script>
+</head>
+<body>
+
+</body>
+</html>

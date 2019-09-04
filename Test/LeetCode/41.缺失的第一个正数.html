@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        /**
+         * 给定一个未排序的整数数组，找出其中没有出现的最小的正整数。
+         */
+        /**
+         * @param {number[]} nums
+         * @return {number}
+         */
+        var firstMissingPositive = function(nums) {
+            var arr=[];
+            if(nums.length==0){
+                return 1;
+            }
+            for(var i=0;i<nums.length;i++){
+                if(nums[i]>0){
+                    arr[nums[i]]=1;
+                }
+            }
+            for(var j=1;j<=arr.length+1;j++){
+                if(arr[j]!=1){
+                    return j;
+                }
+            }
+        };
+        var n=[1,2,0];
+        console.log(firstMissingPositive(n));
+    </script>
+</head>
+<body>
+
+</body>
+</html>

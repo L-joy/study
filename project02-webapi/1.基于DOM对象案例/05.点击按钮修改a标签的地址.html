@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+</head>
+<body>
+<input type="button" value="修改a标签" id="link"/>
+<a href="https://www.baidu.com/" id="ao">百度</a>
+<script>
+    //案例——点击按钮，修改a标签的地址和热点文字
+    document.getElementById("link").onclick=function (){
+        var aobj=document.getElementById("ao");
+        aobj.innerText="领扣";
+        aobj.href="https://leetcode-cn.com/";
+    };
+</script>
+</body>
+</html>

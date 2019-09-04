@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+</head>
+<body>
+<!--样式：在style里面写的，用css操作-->
+<!--属性：在标签里面写的，用attr方法操作-->
+<img src="../Jackson-yee/35.jpg" alt="易烊千玺" title="千玺"/>
+<script src="jquery-1.12.4.js"></script>
+<script>
+    $(function () {
+        //设置单个属性：attr(name,value);
+        //$("img").attr("title","大佬");
+        //设置多个属性
+        $("img").attr({
+            "title":"帅哥",
+            "alt":"二十"
+        });
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+</head>
+<body>
+<div id="dv">
+    <span>这是div的第一个span标签</span>
+    <p>这是div的第二个元素，第一个p标签</p>
+    <ul id="uu">
+        <li>啦啦啦</li>
+        <li>哦哦哦</li>
+        <li id="three">恩恩额</li>
+        <li>哈哈哈</li>
+        <li>嘻嘻嘻</li>
+    </ul>
+</div>
+<script src="common.js"></script>
+<script>
+    /**
+     * 文档：document
+     * 元素：页面中所有的标签，元素-----element 标签----元素----对象
+     * 节点：页面中所有的内容(标签，属性，文本(文字，换行，空格，回车))------Node
+     * 根元素：html标签
+     */
+    /**
+     * 节点的属性：
+     * nodeType:节点的类型----1：标签；2：属性；3：文本
+     * nodeName:节点的名字----标签节点：大写的标签名；属性节点：小写的属性名；文本节点：#text
+     * nodeValue：节点的值----标签节点：null；属性节点：属性值；文本节点：文本内容
+     */
+
+    //父节点
+//    var ulObj=my$("uu");
+//    console.log(ulObj.parentNode);//div
+//    console.log(ulObj.parentNode.parentNode);//body
+//    console.log(ulObj.parentNode.parentNode.parentNode);//html
+//    console.log(ulObj.parentNode.parentNode.parentNode.parentNode);//#document
+//    console.log(ulObj.parentNode.parentNode.parentNode.parentNode.parentNode);//null
+      //ul标签的父级节点
+//    console.log(ulObj.parentNode);
+      //ul标签的父级元素
+//    console.log(ulObj.parentElement);
+//    console.log(ulObj.parentNode.nodeType);//标签属性---1
+//    console.log(ulObj.parentNode.nodeName);//标签名---大写div
+//    console.log(ulObj.parentNode.nodeValue);//标签值---null
+
+    //子节点
+//    var dvObj=my$("dv");
+//    //获取属性的节点
+//    var node=dvObj.getAttributeNode("id");
+//    console.log(node.nodeType+"======"+node.nodeName+"======"+node.nodeValue);
+    //获取每一个子节点
+//    for(var i=0;i<dvObj.childNodes.length;i++){
+//        var node=dvObj.childNodes[i];
+//        console.log(node.nodeType+"======"+node.nodeName+"======"+node.nodeValue);
+//    }
+    //子节点
+//    console.log(dvObj.childNodes);//7个子节点，空格换行也是节点
+    //子元素
+//    console.log(dvObj.children);//3个子元素
+
+</script>
+</body>
+</html>

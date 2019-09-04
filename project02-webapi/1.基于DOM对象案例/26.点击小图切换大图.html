@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+</head>
+<body>
+<a href="../image/2.jpg" id="ak"><img src="../image/3.jpg" width="300" height="450" alt=""/></a>
+<img src="" alt="" id="big"/>
+<script src="common.js"></script>
+<script>
+    //点击超链接
+    my$("ak").onclick=function (){
+        my$("big").src=this.href;
+        return false;
+    };
+</script>
+</body>
+</html>

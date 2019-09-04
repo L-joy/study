@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        div{
+            width: 300px;
+            height: 400px;
+            background-color: darkcyan;
+            /*display:none;隐藏*/
+        }
+    </style>
+</head>
+<body>
+<input type="button" value="隐藏" id="btn"/>
+<div id="dv"></div>
+<script src="common.js"></script>
+<script>
+    //根据id获取按钮，为按钮注册点击事件，添加事件处理函数
+    my$("btn").onclick= function () {
+        if(this.value=="隐藏"){
+            my$("dv").style.display="none";
+            this.value="显示";
+        }else if(this.value=="显示"){
+            my$("dv").style.display="block";
+            this.value="隐藏";
+        }
+    };
+</script>
+</body>
+</html>

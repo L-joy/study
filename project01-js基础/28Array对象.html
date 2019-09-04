@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        //Array对象
+        /**
+         * Array.isArray(对象)-----------判断对象是不是Array类型
+         * .concat()------拼接数组
+         * .every(function (元素的值，索引，原来的数组(没用))---返回布尔类型)-------如果数组中的每一个元素都满足这个函数，返回true
+         * .filter(函数)-----返回满足函数的元素组成的新数组
+         * .push(值)------把值追加在数组中----返回值是新数组的长度
+         * .pop()-----删除数组中最后一个元素---返回值是删除的值
+         * .shift()-----删除数组中第一个元素---返回值是删除的值
+         * .unshift()----向数组的第一个元素前面插入新元素-----返回值是新数组的长度
+         * .forEach(函数)----遍历数组中的元素
+         * .indexof()-----找某个特定值的索引
+         * .join("字符串")-----将一个数组（或一个类数组对象）的所有元素连接成一个字符串并返回这个字符串-------返回的是一个字符串
+         * .map(函数)-------数组中的每个元素都要执行这个函数，返回新数组
+         * .reverse()------反转数组
+         * .sort((function (a,b){
+                  if(a>b){
+                          return 1;
+                  }else if(a==b){
+                          return 0;
+                  }else{
+                          return -1;
+                  }
+                })------(不稳定)排序
+
+
+         * .slice(开始索引值，结束索引值)；------截取对应数组，包括头不包括尾
+         * .splice(索引位置，删除个数，插入的元素)--------删除数组中的元素，或替换元素，或添加元素
+         * /
+
+
+        /**
+         * 判断变量是不是数组类型
+         * 1 instanceof
+         * 2 .isArray
+         */
+        var obj=[];
+        console.log(obj instanceof Array);
+        console.log(Array.isArray(obj));
+        //.from();
+        var arr=["a","b","c","d"];
+        var newarr=Array.from(arr);
+        console.log(newarr);
+        //.concat();
+        var arr1=[10,20];
+        var arr2=[30,40];
+        console.log(arr1.concat(arr2));//[10,20,30,40]
+        //.every();
+        var arr3=[1000,2000,3000];
+        var flag=arr.every(function (a,b){
+            return a>2000;
+        });
+        console.log(flag);//false
+        //.filter();
+        var arr4=[10,20,30,40,50,60,70];
+        var newarr4=arr4.filter(function (ele){
+            return ele>40;
+        });
+        console.log(newarr4);
+        //案例：去掉数组中重复的0
+        var arr5=[1,2,3,0,6,7,0,4,7,0,4,5,0];
+        var newarr5=arr5.filter(function (ele){
+            return ele!=0;
+        });
+        console.log(newarr5);
+
+//        arr4.push(100);//追加
+//        console.log(arr4);
+//        console.log(arr4.push(100));
+
+//        arr4.pop();
+//        console.log(arr4.pop());
+//        console.log(arr4);
+
+//        arr4.shift();
+//        console.log(arr4.shift());
+//        console.log(arr4);
+
+//        arr4.unshift(0);
+//        console.log(arr4.unshift());
+//        console.log(arr4);
+
+//        arr4.forEach(function (ele,index,arr){
+//            console.log(ele+"-----"+index);
+//        });
+
+        console.log(arr4.indexOf(30));
+        console.log(arr4.join("|"));
+        var num=[1,0,3,2,4,9];
+    //    var roots=num.map(Math.sqrt);//开方
+     //   console.log(roots);
+//        console.log(num.reverse());//反转
+//        console.log(num.sort(function (a,b){
+//            if(a>b){
+//                return 1;
+//            }else if(a==b){
+//                return 0;
+//            }else{
+//                return -1;
+//            }
+//        }));
+//        console.log(num.slice(1,5));//截取数组
+//        num.splice(2,0,6);//在索引2的位置添加6，不删除任何元素
+//        console.log(num);
+        num.splice(2,2,6);//删除索引2,3的元素，在索引2的位置添加6
+        console.log(num);
+
+
+
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

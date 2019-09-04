@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background-color: palegreen;
+            position: relative;
+        }
+        #box2{
+            margin-top: 150px;
+            background-color: darkturquoise;
+        }
+        #box3{
+            margin-top: 150px;
+            background-color: hotpink;
+        }
+    </style>
+</head>
+<body>
+<input type="button" value="开始"/>
+<input type="button" value="结束"/>
+<div id="box1"></div>
+<div id="box2"></div>
+<div id="box3"></div>
+<script src="jquery-1.12.4.js"></script>
+<script>
+    $(function () {
+       $("input").eq(0).click(function () {
+           /**
+            * animate(参数一，)
+            * 参数一：对象，里面可以传动画样式
+            * 参数二：speed--动画的执行时间
+            * 参数三：动画执行效果
+            * 参数四：回调函数
+            */
+           $("#box1").animate({left:800},8000);
+           $("#box2").animate({left:800},8000,"swing");//swing:摇摆
+           $("#box3").animate({left:800},8000,"linear", function () {
+               console.log("kala");
+           });//linear：线性,匀速
+       });
+    });
+</script>
+</body>
+</html>

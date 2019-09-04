@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        img {
+            width: 400px;
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+<img src="../image/1.jpg" alt="" id="m1"/>
+<img src="../image/2.jpg" alt="" id="m2"/>
+<img src="../image/3.jpg" alt="" id="m3"/>
+<script>
+    //如果多个标签不够简便
+    //    document.getElementById("m1").onclick=function (){
+    //        alert("易烊千玺1");
+    //    };
+    //    document.getElementById("m2").onclick=function (){
+    //        alert("易烊千玺2");
+    //    };
+    //    document.getElementById("m3").onclick=function (){
+    //        alert("易烊千玺3");
+    //    };
+    //根据标签的名字获取图片标签，分别注册点击事件
+    var imgobj=document.getElementsByTagName("img");
+    //循环遍历数组，获取每个图片标签，注册点击事件，添加事件处理函数
+    for(var i=0;i<imgobj.length;i++){
+        imgobj[i].onclick=function (){
+            alert("被点了");
+        };
+    }
+</script>
+</body>
+</html>

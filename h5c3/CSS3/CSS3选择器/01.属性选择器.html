@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        /**
+         * 选择器：
+         * div p:后代选择器
+         * div>p:子代选择器
+         * div+p:div下紧跟着的第一个p
+         * div~p:div后面所有的p
+         * CSS3新增选择器：
+         * 属性选择器：[]——通过标签的属性来选择；语法：E:[class]，选择E元素带有class属性
+         *            属性值以aa开头——^
+         *            属性值以aa结尾——$
+         *            属性值包含aa——*
+         * 伪类选择器：：hover  鼠标移上去的状态
+         *            ：link   正常状态
+         *            ：active  点击的状态
+         *            : visited  点击之后的状态
+         *            顺序——lvha
+         * 结构伪类：通过结构来筛选
+         */
+    </script>
+    <style>
+        .box{width: 100px;
+            height: 100px;
+            border: 1px solid black;
+        }
+        .box:hover{
+            border-radius: 50%;
+            background-color: red;
+
+        }
+        div{
+            width: 300px;
+            height: 100px;
+            border: 1px solid black;
+            margin: 10px auto;
+        }
+        div[class='box1']{
+            background-color: hotpink;
+        }
+        /*属性值以aa开头——^ */
+        div[class^='aa']{
+            background-color: darkturquoise;
+        }
+        /*属性值以aa结尾——$ */
+        div[class$='aa']{
+            background-color: greenyellow;
+        }
+        /*属性值包含aa——* */
+        div[class*='aa']{
+            background-color: firebrick;
+        }
+    </style>
+</head>
+<body>
+<div class="box1"></div>
+<div class="box2"></div>
+<div class="box3"></div>
+<div class="aabb">以aa开头</div>
+<div class="bbaa">以aa结尾</div>
+<div class="daad">包含aa</div>
+<div class="box"></div>
+</body>
+</html>

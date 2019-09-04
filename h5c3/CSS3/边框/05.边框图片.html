@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        .box{
+            width: 500px;
+            height: 400px;
+            margin: 40px auto;
+            /*图片边框属性*/
+            /*图片边框路径*/
+            border-image-source: url("");
+            /*图片边框裁剪*/
+            border-image-slice: 27 27 27 27;
+            /*图片边框宽度*/
+            border-image-width: 28px;
+            /*边框图片平铺:border-image-repeat: repeat(正常平铺，可能会显示不完整);
+                                               round(平铺，保证图片完整);
+                                               stretch(拉伸显示);*/
+            border-image-repeat: repeat;
+        }
+
+    </style>
+</head>
+<body>
+<img src="../../Jackson-yee/18.jpg" alt=""/>
+<div class="box"></div>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        body{
+            background-color: #eee;
+            font-size: 22px;
+        }
+        h3{
+            font-weight: normal;
+            margin-bottom: 20px;
+        }
+        section{
+            width: 1000px;
+            margin: 50px auto;
+        }
+        ul{
+            background-color: #fff;
+            border: 1px solid #ccc;
+        }
+        ul li{
+            width: 200px;
+            height: 200px;
+            background-color: darkturquoise;
+            margin: 10px;
+        }
+        section:nth-child(1) ul{
+            overflow: hidden;
+        }
+        section:nth-child(1) ul li{
+            float: left;
+        }
+        /*设置伸缩盒子*/
+        section:nth-child(2) ul{
+            display: flex;
+        }
+        section:nth-child(3) ul{
+            /*设置伸缩盒子*/
+            display: flex;
+            /*设置主轴方向 row(从左向右) row-reverse(从右向左) column(从上到下) column-reverse(从下向上)*/
+            flex-direction: row-reverse;
+        }
+        section:nth-child(4) ul{
+            display: flex;
+            /*设置主轴对齐方式 flex-start(沿着主轴开始的方向对齐) flex-end(沿着主轴结束的方向对齐)
+                             center(居中对齐) space-around(均分父盒子空间) space-between(两端对齐)*/
+            justify-content: space-between;
+        }
+        section:nth-child(5) ul{
+            display: flex;
+            /*设置侧轴对齐方式 flex-start(沿着侧轴开始的方向对齐) flex-end(沿着侧轴结束的方向对齐)
+                             center(侧轴方向居中对齐) baseline(基线对齐，和flex-start等效) stretch(拉伸)*/
+            align-items: stretch;
+            height: 400px;
+        }
+        section:nth-child(5) ul li{
+            height: auto;
+        }
+        section:nth-child(6) ul{
+            display: flex;
+            flex-direction: row;
+        }
+        section:nth-child(6) ul li:nth-child(1){
+            /*设置伸缩比例*/
+            flex: 1;
+        }
+        section:nth-child(6) ul li:nth-child(2){
+            flex: 3;
+        }
+        section:nth-child(6) ul li:nth-child(3){
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+<section>
+    <h3>传统布局</h3>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+</section>
+<section>
+    <h3>伸缩布局 display: flex;</h3>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+</section>
+<section>
+    <h3>主轴方向 flex-direction: row(从左向右)|row-reverse(从右向左)|column(从上到下)|column-reverse(从下向上);</h3>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+</section>
+<section>
+    <h3>主轴对齐方式 justify-content:flex-start(沿着主轴开始的方向对齐)|flex-end(沿着主轴结束的方向对齐)
+                    |center(居中对齐)|space-around(均分父盒子空间)|space-between(两端对齐);</h3>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+</section>
+<section>
+    <h3>侧轴对齐方式 flex-start(沿着侧轴开始的方向对齐)|flex-end(沿着侧轴结束的方向对齐)
+        |center(侧轴方向居中对齐)|baseline(基线对齐，和flex-start等效)|stretch(拉伸);</h3>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+</section>
+<section>
+    <h3>伸缩比例  flex: 3(占3份);</h3>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+</section>
+</body>
+</html>

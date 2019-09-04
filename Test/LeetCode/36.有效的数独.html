@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        //        判断一个 9x9 的数独是否有效。只需要根据以下规则，验证已经填入的数字是否有效即可。
+        //
+        //        数字 1-9 在每一行只能出现一次。
+        //        数字 1-9 在每一列只能出现一次。
+        //        数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。
+        /**
+         * @param {character[][]} board
+         * @return {boolean}
+         */
+        var isValidSudoku = function (board) {
+            var rowLen=board.length;
+            var colLen=board[0].length;
+            //判断行
+            for(var i=0;i<rowLen;i++){
+                 var row=[];
+                 for(var j=0;j<colLen;j++){
+                     if(board[i][j]!="."){
+                         row.push(board[i][j]);
+                     }
+                 }
+                 row.sort(function (a,b) {
+                     if(a>b){
+                         return 1;
+                     }else if(a==b){
+                         return 0;
+                     }else{
+                         return -1;
+                     }
+                 });
+                 for(var k=0;k<row.length-1;k++){
+                     if(row[k]==row[k+1]){
+                         return false;
+                     }
+                 }
+            }
+            //判断列
+            for(var i=0;i<colLen;i++){
+                var col=[];
+                for(var j=0;j<rowLen;j++){
+                    if(board[j][i]!="."){
+                        col.push(board[j][i]);
+                    }
+                }
+                col.sort(function (a,b) {
+                    if(a>b){
+                        return 1;
+                    }else if(a==b){
+                        return 0;
+                    }else{
+                        return -1;
+                    }
+                });
+                for(var k=0;k<col.length-1;k++){
+                    if(col[k]==col[k+1]){
+                        return false;
+                    }
+                }
+
+            }
+            //判断块
+            for(var r=0;r<rowLen;r+=3){
+                for(var c=0;c<colLen;c+=3){
+                    var arr=[];
+                    for(var i=r;i<3+r;i++){
+                        for(var j=c;j<3+c;j++){
+                            if(board[i][j]!=".") {
+                                arr.push(board[i][j]);
+                            }
+                        }
+                    }
+                   arr.sort(function (a,b) {
+                        if(a>b){
+                            return 1;
+                        }else if(a==b){
+                            return 0;
+                        }else{
+                            return -1;
+                        }
+                    });
+                    for(var k=0;k<arr.length-1;k++){
+                        if(arr[k]==arr[k+1]){
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
+
+        };
+        var board=[
+            ["5","3",".",".","7",".",".",".","."],
+            ["6",".",".","1","9","5",".",".","."],
+            [".","9","8",".",".",".",".","6","."],
+            ["8",".",".",".","6",".",".",".","3"],
+            ["4",".",".","8",".","3",".",".","1"],
+            ["7",".",".",".","2",".",".",".","6"],
+            [".","6",".",".",".",".","2","8","."],
+            [".",".",".","4","1","9",".",".","5"],
+            [".",".",".",".","8",".",".","7","9"]
+        ];
+        var result=isValidSudoku(board);
+        console.log(result);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

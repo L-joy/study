@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        //封装函数 f，使 f 的 this 指向指定的对象
+//        function bindThis(f, oTarget) {
+//            return function () {
+//                return f.apply(oTarget,null);
+//            }
+//
+//        }
+        var oTarget={test:1};
+        function f1(a,b){
+            return this.test+a+b;
+        }
+        /**
+         * 方法一：.bind()
+         * @param f1
+         * @param oTarget
+         * @returns {function(this:*)}
+         */
+        function bindThis(f1,oTarget){
+            return f1.bind(oTarget);
+        }
+        /**
+         * 方法二：.apply(this指向的对象，数组)
+         * @param f1
+         * @param oTarget
+         * @returns {Function}
+         */
+        function bindThis1(f1,oTarget){
+            return function () {
+                return f1.apply(oTarget,arguments);
+            };
+        }
+        /**
+         * 方法三：.call(this指向的对象，每个参数)
+         * @param f1
+         * @param oTarget
+         * @returns {Function}
+         */
+        function bindThis2(f1,oTarget){
+            return function (a,b) {
+                return f1.call(oTarget,a,b);
+            };
+        }
+        var f=bindThis2(f1,oTarget);
+        console.log(f(2,3));
+        console.log(f1(2,3));
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

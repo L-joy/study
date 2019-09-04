@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        div{
+            width: 400px;
+            height: 400px;
+            background-color: black;
+            border: 2px solid yellow;
+            position: relative;
+        }
+        span{
+            font-size: 14px;
+            color: yellow;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<input type="button" value="一闪一闪" id="btn"/>
+<div id="dv"></div>
+<script src="../common.js"></script>
+<script>
+    my$("btn").onclick= function () {
+        setInterval(function () {
+            my$("dv").innerHTML="<span>★</span>";
+            var x=parseInt(Math.random()*400);
+            var y=parseInt(Math.random()*400);
+            my$("dv").firstElementChild.style.left=x+"px";
+            my$("dv").firstElementChild.style.top=y+"px";
+        },100);
+    };
+</script>
+</body>
+</html>

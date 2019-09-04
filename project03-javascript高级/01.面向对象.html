@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        /**
+         * 面向对象编程 —— Object Oriented Programming，简称 OOP ，是一种编程开发思想。
+         * 它将真实世界各种复杂的关系，抽象为一个个对象，然后由对象之间的分工与合作，完成对真实世界的模拟。
+         *
+         * 面向对象与面向过程：
+         *
+         * 面向过程就是亲力亲为，事无巨细，面面俱到，步步紧跟，有条不紊
+         * 面向对象就是找一个对象，指挥得结果
+         * 面向对象将执行者转变成指挥者
+         * 面向对象不是面向过程的替代，而是面向过程的封装
+         *
+         * 在 JavaScript 中，所有数据类型都可以视为对象，当然也可以自定义对象。
+         * 自定义的对象数据类型就是面向对象中的类（ Class ）的概念。
+         *
+         *
+         * 对象----特指的某个事物，具有属性和方法（一组无序的属性的集合）
+         * 特征----属性
+         * 行为----方法
+         *
+         * 创建对象的三种方式：
+         * 1.字面量的方式
+         * 2.调用系统的构造函数
+         * 3.自定义构造函数
+         *
+         */
+
+        //字面量的方式
+        var per1={
+            name:"小乔",
+            age:"18",
+            sex:"女",
+            eat: function () {
+                console.log("吃吃吃");
+            },
+            play: function () {
+                console.log("玩玩玩");
+            }
+
+        };
+        per1.eat();
+
+        //调用系统的构造函数
+        var per2=new Object();
+        per2.name="小乔乔";
+        per2.age="17";
+        per2.sex="女";
+        per2.eat= function () {
+            console.log("吃啥吃");
+        };
+        per2.play= function () {
+            console.log("玩啥玩");
+        };
+        per2.eat();
+
+        //自定义构造函数
+        function Person(name,age,sex){
+            this.name=name;
+            this.age=age;
+            this.sex=sex;
+            this.eat= function () {
+                console.log("不能吃");
+            };
+            this.play= function () {
+                console.log("不许玩");
+            }
+        }
+        //创建对象----实例化对象，同时对属性进行初始化
+        var per3=new Person("小小乔","16","女");
+        /**
+         * 1.开辟空间存储对象
+         * 2.把this设置为当前的对象
+         * 3.设置属性和方法的值
+         * 4.把this对象返回
+         */
+        console.log(per3.sex);
+        per3.play();
+
+        //工厂模式创建对象
+        function createObject(name,age){
+            var obj=new Object();
+            obj.name=name;
+            obj.age=age;
+            obj.eat= function () {
+                console.log("不吃饿");
+            };
+          return obj;
+        }
+        var per4=createObject("乔","15");
+        console.log(per4.name);
+        per4.eat();
+
+        /**
+         * 自定义构造函数和工厂模式创建对象的区别
+         *
+         * 1.自定义构造函数
+         * -构造构造函数----函数名是大写
+         * -通过new的方式创建对象
+         * -没有new
+         * -没有返回值
+         *
+         * 2.工厂模式创建对象
+         * -构造函数----函数名为驼峰命名法
+         * -直接调用函数创建对象
+         * -有new
+         * -有返回值
+         *
+         */
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

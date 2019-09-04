@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        #box{
+            width: 450px;
+            margin: 200px auto;
+        }
+        #txt{
+            width: 350px;
+            height: 25px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <input type="text" id="txt" value=""/>
+    <input type="button" value="搜索" id="btn"/>
+</div>
+<script src="common.js"></script>
+<script>
+    var names=["哈哈哈","哈哈哈哈哈哈","哈哼哈哼",
+               "手机","手机回收","手机号码","手机排行榜",
+               "百度翻译","百度地图","百度网盘","百度学术"];
+    //获取文本框注册键盘抬起事件
+    my$("txt").onkeyup= function () {
+        //只要鼠标抬起就判断一次，删除一次
+        if(my$("dv")){
+            my$("box").removeChild(my$("dv"));
+        }
+      //获取文本框输入的内容
+        var text=this.value;
+        //建立临时数组----存出对应上的数据
+        var temparr=[];
+        for(var i=0;i<names.length;i++){
+            //判断是否最开始出现
+            if(names[i].indexOf(text)==0){
+                temparr.push(names[i]);//追加
+            }
+        }
+        //如果文本框是空的，临时数组是空的，不用创建div
+        if(this.value.length==0||temparr.length==0){
+            //如果页面中有这个div，删除这个div
+            if(my$("dv")){
+                my$("box").removeChild(my$("dv"));
+            }
+            return;
+        }
+        //创建div，把div加入到id为box的div中
+        var dvObj=document.createElement("div");
+        my$("box").appendChild(dvObj);
+        dvObj.id="dv";
+        dvObj.style.width="350px";
+        dvObj.style.height="100px";
+        dvObj.style.marginTop="-3px";
+        dvObj.style.border="1px solid black";
+        for(var j=0;j<temparr.length;j++){
+            var pObj=document.createElement("p");
+            dvObj.appendChild(pObj);
+            setInnerText(pObj,temparr[j]);
+            pObj.style.margin=0;
+            pObj.style.padding=0;
+            pObj.style.cursor="pointer";
+            pObj.style.marginTop="2px";
+            pObj.style.marginLeft="2px";
+            pObj.onmouseover= function () {
+                this.style.backgroundColor="yellow";
+            };
+            pObj.onmouseout= function () {
+                this.style.backgroundColor="";
+            };
+
+        }
+
+    };
+</script>
+</body>
+</html>

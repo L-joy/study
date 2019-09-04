@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        /**
+         * 表单新增属性
+         * placeholder：提示文字——占位符
+         * autofocus:自动获取焦点
+         * autocomplete:自动完成（填充的） on（默认开启）off
+         * required:必填项，空值会提示
+         * multiple:多选
+         * novalidate:关闭表单自带验证功能（只能加给form）
+         * pattern="正则表达式"：自定义正则验证
+         */
+    </script>
+    <style>
+        form{
+            width: 100%;
+            /*最大宽度*/
+            max-width: 640px;
+            /*最小宽度*/
+            min-width: 320px;
+            margin: 0 auto;
+            font-size: 20px;
+        }
+        input{
+            display: block;
+            width: 100%;
+            height: 30px;
+            margin: 10px 0;
+        }
+
+    </style>
+</head>
+<body>
+<form action="" novalidate>
+    <fieldset>
+        <legend>表单新增属性</legend>
+        <label for="">
+            用户名：<input type="text" name="userName" placeholder="例如：易烊千玺" autofocus autocomplete="off" required/>
+        </label>
+        <label for="">
+            tel: <input type="tel" pattern="1\d{10}"/>
+        </label>
+        <input type="file" multiple/>
+        <input type="submit" value="提交"/>
+        <label for="">
+            邮箱：<input type="email"/>
+        </label>
+    </fieldset>
+
+</form>
+</body>
+</html>

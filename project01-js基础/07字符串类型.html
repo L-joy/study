@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        //字符串可以使用单引号也可以使用双引号
+        var str1="10";
+        var str2='20';
+        //字符串的个数有多少？----字符串的长度
+        //用变量名.length;
+        var str3="dhchcjsdhs sjhdjsbc shcsjksxns";
+        console.log(str3.length);//30
+        //html中的转义符：<:&lt;   >:&gt;   空格:&nbsp;
+        //js中的字符串也有转义符
+        /*
+        * Tab键------水平制表符：\t
+        * \ :\\
+        * ' :\'
+        * " :\"
+        *
+        * */
+        console.log('哈哈\t嘎嘎');//tab键
+        console.log('哈哈\\嘎嘎');//\
+        console.log('哈哈\'嘎嘎');//'
+        console.log('哈哈\"嘎嘎');//"
+        //字符串的拼接：使用+可以把多个字符串放在一起形成一个新的字符串
+        var str4="10";
+        var str5="20";
+        console.log(str4+str5);//1020
+        //只要有一个是字符串类型使用+都是字符串的拼接
+        var str6=20;
+        console.log(str4+str6);//1020
+        //使用-时，浏览器帮助我们自动的把字符串类型转换成数字类型，这种方式叫隐式转换
+        console.log(str4-str6);//-10
+        console.log(str4*str6);//200
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

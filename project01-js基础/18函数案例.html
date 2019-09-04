@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        //1.求两个数中的最大值
+        function getTwoMax(x,y){
+            if(x>=y){
+                return x;
+            }else{
+                return y;
+            }
+        }
+        console.log(getTwoMax(4,7));
+        //求三个数中的最大值
+        function getThreeMax(x,y,z){
+            var Max=x;
+            if(Max<y){
+                Max=y;
+            }
+            if(Max<z){
+                Max=z;
+            }
+            return Max;
+        }
+        console.log(getThreeMax(100,30,400));
+        //3.判断一个数是否为素数
+        function isPrimeNumber(x){
+            for(var i=2;i<x;i++){
+                if(x%i==0){
+                    return "NO";
+                }
+            }
+            return "YES";
+        }
+        console.log(isPrimeNumber(6));
+        //4.求两个数字的差
+        function getSubtract(x,y){
+            var dif=x-y;
+            return dif;
+        }
+        console.log(getSubtract(5,7));
+        //5.求一组数中的最大值
+        function getArrayMax(array){
+           var Max=array[0];
+            for(var i=0;i<array.length;i++){
+                if(Max<=array[i]){
+                    Max=array[i];
+                }
+            }
+            return Max;
+        }
+        var array=[2,6,3,9,1,8,4];
+        console.log(getArrayMax(array));
+        //6.求一组数中的最小值
+        function getArrayMin(array){
+            var Min=array[0];
+            for(var i=0;i<array.length;i++){
+                if(Min>=array[i]){
+                    Min=array[i];
+                }
+            }
+            return Min;
+        }
+        console.log(getArrayMin(array));
+        //7.求一组数的和
+        function getSum(array){
+            var sum=0;
+            for(var i=0;i<array.length;i++){
+               sum+=array[i];
+            }
+            return sum;
+        }
+        console.log(getSum(array));
+        //8.通过函数实现数组反转
+        function getReverse(array){
+            var len=array.length/2;
+            for(var i=0;i<len;i++){
+                var temp=array[i];
+                array[i]=array[array.length-1-i];
+                array[array.length-1-i]=temp;
+            }
+            return array;
+        }
+        console.log(getReverse(array));
+        //9.通过函数实现冒泡排序
+        /**
+         *
+         * @param array
+         * @returns {*}
+         */
+        function bubbleSort(array){
+            for(var i=0;i<array.length;i++){
+                for(var j=0;j<array.length-i;j++){
+                    if(array[j]<array[j+1]){
+                        var temp=array[j];
+                        array[j]=array[j+1];
+                        array[j+1]=temp;
+                    }
+                }
+            }
+            return array;
+        }
+        console.log(bubbleSort(array));
+        //10.求一个数字的阶乘
+        function getFactorial(x){
+            var fac=1;
+            for(var i=x;i>0;i--){
+                fac*=i;
+            }
+            return fac;
+        }
+        console.log(getFactorial(4));
+        //11，求斐波那契数列Fibonacci中的第n个数
+        //1 1 2 3 5 8 13 21 34 55 89 144
+        function Fibonacci(x){
+            var n1=1;
+            var n2=1;
+            var sum=0;
+            for(var i=3;i<=x;i++){
+                sum=n1+n2;
+                n1=n2;
+                n2=sum;
+            }
+            return sum;
+        }
+        console.log(Fibonacci(6));
+    </script>
+</head>
+<body>
+
+</body>
+</html>

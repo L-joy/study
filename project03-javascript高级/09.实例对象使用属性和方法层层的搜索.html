@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        /**
+         * 实例对象用到的属性和方法，先在实例中查找，找到直接使用，找不到就去原型对象中寻找
+         * @param age
+         * @constructor
+         */
+        function Person(age) {
+            this.age = age;
+            this.play = function () {
+                console.log("啦啦啦");
+            };
+            this.eat = function () {
+                console.log("吃吃吃");
+            };
+        }
+        Person.prototype.age = 13;
+        Person.prototype.play= function () {
+            console.log("玩啥呢");
+        };
+        var per = new Person(12);
+        console.log(per.age);//12
+        //对象用到的属性如果在实例对象中不存在就会去原型对象中找
+        console.dir(per);
+        per.play();
+    </script>
+</head>
+<body>
+
+</body>
+</html>

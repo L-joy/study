@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+</head>
+<body>
+<input type="button" value="改变图片的alt" id="chp"/>
+<img src="" alt="Jackson" title="Jackson"/>
+<script>
+    //点击按钮修改图片的alt和title
+    document.getElementById("chp").onclick=function (){
+        var imgobjs=document.getElementsByTagName("img");
+        imgobjs[0].src="image/2.jpg";
+        imgobjs[0].alt="易烊千玺";
+        imgobjs[0].title="易烊千玺";
+        imgobjs[0].width="300";
+        imgobjs[0].height="400";
+    };
+
+</script>
+</body>
+</html>

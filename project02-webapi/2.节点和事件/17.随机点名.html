@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            width: 1000px;
+            height: 600px;
+            margin: 100px auto;
+            border: 0 solid black;
+            /*background-image: url("image/1.27.jpg");*/
+        }
+        #leftcontent{
+            width: 800px;
+            float: left;
+        }
+        #lhand{
+            height: 100px;
+            font: bold 24px "宋体";
+        }
+        #lhand input{
+            height: 30px;
+            text-align: center;
+            margin-left: 299px;
+            font: bold 16px "楷体";
+        }
+        #bodyleft{
+            float: left;
+        }
+
+        #bodyright{
+            float: right;
+        }
+        #rightcontent{
+            width: 199px;
+            height: 100%;
+            /*border-left: 1px solid black;*/
+            float: right;
+        }
+        #rightcontent input{
+            width: 100px;
+            height: 40px;
+            background-color: darkorange;
+            text-align: center;
+            margin-top: 20px;
+            margin-left: 53px;
+            font: bold 16px "楷体";
+        }
+    </style>
+</head>
+<div id="box">
+    <div id="leftcontent">
+        <div id="lhand">
+            <p>随机点名</p>
+            <input type="text" id="btn"/>
+        </div>
+        <div id="lbody">
+            <div id="bodyleft"></div>
+            <div id="bodyright"></div>
+        </div>
+    </div>
+    <div id="rightcontent">
+        <input type="button" value="单人点名" id="one"/><br/>
+        <input type="button" value="双人点名" id="two"/><br/>
+        <input type="button" value="三人点名" id="thr"/><br/>
+        <input type="button" value="一行点名" id="row"/><br/>
+        <input type="button" value="暂停" id="stop"/>
+    </div>
+</div>
+<body>
+<script src="common.js"></script>
+<script>
+    var name1=["叶明轩","叶卓然","叶卓冉","叶卓苒","叶俐彤",
+               "叶诗蕊", "叶亦萱","叶亦凯","叶思贝","叶洪滔",
+               "叶仁昊","叶仁毅","叶千赀","叶芯瑞","叶思余",
+               "叶沥鹦","叶铸耽","叶还诩","叶继游","叶雨龙"];
+
+    var name2=["叶千雨","叶芯妮","叶思羽","叶星辰","叶建",
+               "叶子","叶彩婵","叶蕴贤","叶家豪","叶炎取",
+               "叶霭丁","叶冠源","叶青","叶祖儿","叶兰婷",
+               "叶敏榆","叶巧珍","叶馨萩","叶婷婷","叶佳琪"];
+    var taObj=document.createElement("table");
+    var count=0;
+    my$("bodyleft").appendChild(taObj);
+    taObj.width="380px";
+    for(var i=0;i<name1.length/5;i++){
+       var trObj=document.createElement("tr");
+        taObj.appendChild(trObj);
+        trObj.style.height="60px";
+        for(var j=0;j<5;j++){
+            var tdObj=document.createElement("td");
+            tdObj.innerHTML=name1[count];
+            trObj.appendChild(tdObj);
+            count++;
+        }
+    }
+    var taObj1=document.createElement("table");
+    var count1=0;
+    my$("bodyright").appendChild(taObj1);
+    taObj1.width="380px";
+    for(var k=0;k<name2.length/5;k++){
+        var trObj1=document.createElement("tr");
+        taObj1.appendChild(trObj1);
+        trObj1.style.height="60px";
+        for(var l=0;l<5;l++){
+            var tdObj1=document.createElement("td");
+            tdObj1.innerHTML=name2[count1];
+            trObj1.appendChild(tdObj1);
+            count1++;
+        }
+
+    }
+    my$("one").onclick= function () {
+        var name=name1.concat(name2);
+        for(var i=0;i<Math.MAX_VALUE;i++){
+            var index=parseInt(Math.random()*40);
+        }
+        my$("btn").value=name[index];
+    };
+    my$("two").onclick= function () {
+        var name=name1.concat(name2);
+        var index1=parseInt(Math.random()*40);
+        var index2=parseInt(Math.random()*40);
+        for(;;){
+            if(index1!=index2){
+                my$("btn").value=name[index1]+" "+name[index2];
+                break;
+            }else{
+                index2=parseInt(Math.random()*40);
+            }
+        }
+    };
+    my$("thr").onclick= function () {
+        var name=name1.concat(name2);
+        var index1=parseInt(Math.random()*40);
+        var index2=parseInt(Math.random()*40);
+        var index3=parseInt(Math.random()*40);
+        for(;;){
+            if(index1!=index2){
+                my$("btn").value=name[index1]+" "+name[index2];
+                break;
+            }else{
+                index2=parseInt(Math.random()*40);
+            }
+        }
+
+    };
+    my$("row").onclick= function () {
+
+    };
+    my$("stop").onclick= function () {
+
+    };
+
+
+
+
+
+</script>
+</body>
+</html>

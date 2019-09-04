@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+</head>
+<body>
+<input type="button" value="修改性别" id="btn"/>
+<input type="radio"  value="1" name="sex"/>男
+<input type="radio"  value="2" name="sex" id="rad"/>女
+<input type="radio"  value="3" name="sex"/>保密
+<script>
+    //规律：在表单标签中，如果属性和值相同，则，DOM操作时这个属性值是布尔类型就可以
+    function my$(id){
+        return document.getElementById(id);
+    }
+    my$("btn").onclick=function (){
+        my$("rad").checked=true;
+    };
+</script>
+<br/>
+<input type="button" value="改变兴趣" id="btn2"/>
+<input type="checkbox" value="1" name="兴趣" id="chk2"/>吃饭
+<input type="checkbox" value="1" name="兴趣"/>睡觉
+<input type="checkbox" value="1" name="兴趣" id="chk1"/>打豆豆
+<input type="checkbox" value="1" name="兴趣"/>打篮球
+<input type="checkbox" value="1" name="兴趣"/>打足球
+<input type="checkbox" value="1" name="兴趣"/>打铅球
+<script>
+    my$("btn2").onclick=function (){
+        my$("chk1").checked=true;
+        my$("chk2").checked=true;
+    };
+</script>
+</body>
+</html>

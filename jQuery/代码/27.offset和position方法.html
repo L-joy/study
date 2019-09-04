@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #father{
+            width: 400px;
+            height: 400px;
+            background-color: pink;
+            position: relative;
+            margin: 100px;
+        }
+        #son{
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            position: absolute;
+            top: 100px;
+            left: 100px;
+        }
+    </style>
+</head>
+<body>
+<input type="button" value="按钮" id="btn"/>
+<div id="father">
+    <div id="son">
+
+    </div>
+</div>
+<script src="jquery-1.12.4.js"></script>
+<script>
+    $(function () {
+        //获取元素相对于document的位置
+        console.log($("#son").offset());
+        //获取元素相对于有定位的父元素的位置
+        console.log($("#son").position());
+        //为元素注册多个事件----做一个事
+//        $("#son").bind("click mouseenter", function () {
+//            alert("啦啦");
+//        });
+        //添加新元素
+        $("#btn").click(function () {
+            $("<p>lala</p>").appendTo($("#son"));
+        });
+        //delegate:委托事件----给父元素注册---最终还是子元素执行
+        $("#son").delegate("p","click", function () {
+            alert("卡卡");
+        })
+
+    });
+</script>
+</body>
+</html>

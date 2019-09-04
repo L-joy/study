@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        img{
+            width: 250px;
+            height: 200px;
+        }
+        div{
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<input type="button" value="摇起来" id="btn1"/>
+<input type="button" value="停止" id="btn2"/>
+<div id="dv">
+    <img src="../image/1.27.jpg" alt=""/>
+    <img src="../image/1.28.jpg" alt=""/>
+</div>
+<script src="../common.js"></script>
+<script>
+    var timeId="";
+    my$("btn1").onclick= function () {
+        timeId=setInterval(function () {
+            //随机数
+            var x=parseInt(Math.random()*100+1);
+            var y=parseInt(Math.random()*100+1);
+            my$("dv").style.left=x+"px";
+            my$("dv").style.top=y+"px";
+        },100);
+
+    };
+    my$("btn2").onclick= function () {
+        window.clearInterval(timeId);
+
+    };
+</script>
+</body>
+</html>

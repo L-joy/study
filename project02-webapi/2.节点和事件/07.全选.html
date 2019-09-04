@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        body{
+            margin-top: 100px;
+        }
+        #dv{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div id="dv">
+    <table border="2" cellpadding="3" cellspacing="0" align="center" height="200" width="300" >
+        <thead>
+           <tr>
+               <th>
+                   <input type="checkbox" id="j_cbAll"/>
+               </th>
+               <th>菜名</th>
+               <th>饭店</th>
+           </tr>
+        </thead>
+        <tbody align="center" id="j_tb">
+           <tr>
+            <td>
+                <input type="checkbox"/>
+            </td>
+            <td>啦啦啦</td>
+            <td>啦啦</td>
+        </tr>
+           <tr>
+            <td>
+                <input type="checkbox"/>
+            </td>
+            <td>嘻嘻嘻</td>
+            <td>嘻嘻</td>
+        </tr>
+           <tr>
+            <td>
+                <input type="checkbox"/>
+            </td>
+            <td>哦哦哦</td>
+            <td>哦哦</td>
+        </tr>
+           <tr>
+            <td>
+                <input type="checkbox"/>
+            </td>
+            <td>嗯嗯嗯</td>
+            <td>嗯嗯</td>
+        </tr>
+        </tbody>
+
+    </table>
+</div>
+<script src="common.js"></script>
+<script>
+    //获取全选的复选框
+    var ckAll=my$("j_cbAll");
+    //获取tbody中所有的复选框
+    var cks=my$("j_tb").getElementsByTagName("input");
+    //点击全选的这个复选框，获取当前状态，设置tbody中所有复选框的状态
+    ckAll.onclick= function () {
+      //console.log(this.checked);
+        for(var i=0;i<cks.length;i++){
+            cks[i].checked=this.checked;
+        }
+    };
+    //获取tbody中所有的复选框，分别注册点击事件
+    for(var j=0;j<cks.length;j++){
+        cks[j].onclick= function () {
+            var flag=true;//默认都被选中了
+            for(var k=0;k<cks.length;k++){
+                if(!cks[k].checked){
+                   flag=false;
+                    break;
+                }
+            }
+            ckAll.checked=flag;
+        };
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        /*
+         * 伪类选择器：：hover  鼠标移上去的状态
+         *            ：link   正常状态
+         *            ：active  点击的状态
+         *            : visited  点击之后的状态
+         *            顺序——lvha
+         * (1)结构伪类： 通过结构来筛选
+         *              选择li的父元素中的第一个孩子:first-child
+         *              选择最后一个:last-child
+         *              选择第11个孩子:nth-child(11)——注意：编号从1开始
+         *              n表示0,1,2,3,4,5,6,7,8......；当n小于1时无效；:nth-child(n)，此时全部选择
+         *              选择全部奇数:nth-child(odd)——也可写成2n+1
+         *              选择全部偶数:nth-child(even)——也可写成2n
+         *              选择前五个:nth-child(-n+5)
+         *              选择后5个:nth-last-child(-n+5)——从后往前选
+         *              选择7的倍数::nth-child(7n)
+         * (2)empty伪类：空的——如果div为空被选中:empty
+         * (3)target伪类：配合锚点使用，表示被激活的状态——:target
+         * 伪元素：假的标签——标志性符号：双冒号（::）
+         *        ::before ::after——通过CSS模拟html标签的效果
+         *        注意：必须有content属性才行
+         *        伪元素选择器：选择第一个字母::first-letter
+         *                     选择第一行::first-line
+         *        
+         */
+    </script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        /*选择第一个字母::first-letter*/
+        .uu li::first-letter{
+            color: red;
+        }
+        /*选择第一行::first-line*/
+
+        span::before{
+            content: "今天";
+            color: red;
+        }
+        span::after{
+            content: "真好";
+            color: gold;;
+        }
+        div{
+            width: 300px;
+            height: 100px;
+            border: 1px solid black;
+            margin-top: 10px;
+        }
+        /*如果div为空被选中*/
+        div:empty{
+            background-color: red;
+        }
+        .uu1{
+            width: 520px;
+            height: auto;
+            margin: 100px auto;
+        }
+        .uu1 li{
+            float: left;
+            width: 70px;
+            height: 70px;
+            border: 1px solid #CCC;
+            text-align: center;
+            line-height: 70px;
+            margin-left: -1px;
+            margin-top: -1px;
+        }
+        /*选择li的父元素中的第一个孩子:first-child*/
+        .uu1 li:first-child{
+            background-color: darkturquoise;
+        }
+        /*选择最后一个:last-child*/
+        .uu1 li:last-child{
+            background-color: salmon;
+        }
+        /*选择第11个孩子:nth-child(11)——注意：编号从1开始*/
+        .uu1 li:nth-child(11){
+            background-color: aqua;
+        }
+        /*选择全部奇数:nth-child(odd)——也可写成2n+1*/
+        .uu1 li:nth-child(odd){
+            background-color: lawngreen;
+        }
+        /*选择全部偶数:nth-child(even)——也可写成2n*/
+        .uu1 li:nth-child(even){
+            background-color: indigo;
+        }
+        /*n表示0,1,2,3,4,5,6,7,8......*/
+        /*当n小于1时无效*/
+        /*:nth-child(n)，此时全部选择*/
+        .uu1 li:nth-child(n){
+            background-color: yellow;
+        }
+        /*选择前五个:nth-child(-n+5)*/
+        .uu1 li:nth-child(-n+5){
+            background-color: hotpink;
+        }
+        /*选择后5个:nth-last-child(-n+5)——从后往前选*/
+        .uu1 li:nth-last-child(-n+5){
+            background-color: indigo;
+        }
+        /*选择7的倍数::nth-child(7n)*/
+        .uu1 li:nth-child(7n){
+            background-color: burlywood;
+        }
+    </style>
+
+</head>
+<body>
+<!--元素 标签 节点-->
+<span>天气</span>
+<div></div>
+<div>span</div>
+<ul class="uu">
+    <li>dkdlclsdckl</li>
+    <li>wryvfjdvkc  csdfdg</li>
+    <li>Qsadsgfh vcvfhg</li>
+</ul>
+<ul class="uu1">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+    <li>7</li>
+    <li>8</li>
+    <li>9</li>
+    <li>10</li>
+    <li>11</li>
+    <li>12</li>
+    <li>13</li>
+    <li>14</li>
+    <li>15</li>
+    <li>16</li>
+    <li>17</li>
+    <li>18</li>
+    <li>19</li>
+    <li>20</li>
+    <li>21</li>
+    <li>22</li>
+    <li>23</li>
+    <li>24</li>
+    <li>25</li>
+    <li>26</li>
+    <li>27</li>
+    <li>28</li>
+    <li>29</li>
+    <li>30</li>
+    <li>31</li>
+    <li>32</li>
+    <li>33</li>
+    <li>34</li>
+    <li>35</li>
+</ul>
+</body>
+</html>

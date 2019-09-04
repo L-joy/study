@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        li,ul{
+            list-style: none;
+        }
+
+        .dv{
+            width: 700px;
+            height: 800px;
+            margin: 0 auto;
+        }
+        h2{
+            padding: 10px;
+        }
+        .dv ul li{
+            display:inline;
+        }
+
+    </style>
+</head>
+<body>
+<div class="dv">
+    <h2>
+        易烊千玺
+    </h2>
+    <ul id="uu">
+        <li><a href="../image/1.jpg" title="易烊千玺1"><img src="../image/1.1.jpg" width="126" alt="易烊千玺1"/></a></li>
+        <li><a href="../image/2.jpg" title="易烊千玺2"><img src="../image/2.2.jpg" width="126" alt="易烊千玺2"/></a></li>
+        <li><a href="../image/3.jpg" title="易烊千玺3"><img src="../image/3.3.jpg" width="126" alt="易烊千玺3"/></a></li>
+        <li><a href="../image/4.jpg" title="易烊千玺4"><img src="../image/4.4.jpg" width="126" alt="易烊千玺4"/></a></li>
+    </ul>
+    <div style="clear: both;"></div>
+    <img src="../image/5.jpg" alt="" width="450" id="imags"/>
+    <p id="ip">选择一个图片</p>
+    <script src="common.js"></script>
+    <script>
+        var aObjs=my$("uu").getElementsByTagName("a");
+        for(var i=0;i<aObjs.length;i++){
+            aObjs[i].onclick=function (){
+                my$("imags").src=this.href;
+                my$("ip").innerText=this.title;
+                return false;
+            };
+        }
+    </script>
+</div>
+
+</body>
+</html>

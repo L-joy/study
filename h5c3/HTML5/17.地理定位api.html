@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+</head>
+<body>
+<script>
+//    兼容代码
+   if(navigator.geolocation){
+       //获取用户位置
+       /*.getCurrentPosition(successCallBack,errorCallBack);
+        * successCallBack——获取成功时的回调函数
+        * errorCallBack——获取失败时的回调函数
+        */
+
+       navigator.geolocation.getCurrentPosition(function (position) {
+//           获取用户当前的经纬度
+           //coords坐标  latitude维度 longitude经度
+           var wd=position.coords.latitude;
+           var jd=position.coords.longitude;
+           console.log("成功"+"维度："+wd+"经度"+jd);
+       }, function () {
+           console.log("失败");
+       });
+   }else{
+       console.log("不支持");
+   }
+</script>
+</body>
+</html>

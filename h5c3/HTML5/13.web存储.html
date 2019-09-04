@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        /**
+         * HTML4以document.cookie来进行存储
+         * HTML5存储两种方式
+         * 1.sessionStorage（会话存储）——5M——生命周期：关闭浏览器，数据销毁
+         * 2.localStorage（本地存储）——20M——永久生效，除非手动删除
+         *   存储数据   .setItem("userName","zs")
+         *   获取数据   .getItem("userName")
+         *   更新数据   .setItem("userName",txt.value
+         *   删除数据   .removeItem("userName")
+         *   清除数据   .clear()
+         */
+    </script>
+</head>
+<body>
+<input type="text" id="txt1"/>
+<button class="btn1">sessionStorage存储</button>
+<button class="btn1">sessionStorage获取</button>
+<button class="btn1">sessionStorage更新</button>
+<button class="btn1">sessionStorage删除</button>
+<button class="btn1">sessionStorage清除</button>
+<br/>
+<input type="text" id="txt2"/>
+<button class="btn2">localStorage存储</button>
+<button class="btn2">localStorage获取</button>
+<button class="btn2">localStorage更新</button>
+<button class="btn2">localStorage删除</button>
+<button class="btn2">localStorage清除</button>
+<script>
+    var txt=document.querySelector("#txt1");
+    var btns=document.querySelectorAll(".btn1");
+    //存储数据
+    btns[0].onclick= function () {
+        window.sessionStorage.setItem("userName","zs");
+        window.sessionStorage.setItem("userNam","laj");
+        window.sessionStorage.setItem("userNa","ygcx");
+    };
+    //获取数据
+    btns[1].onclick= function () {
+       txt.value= window.sessionStorage.getItem("userName");
+    };
+    //更新数据
+    btns[2].onclick= function () {
+        window.sessionStorage.setItem("userName",txt.value);
+    };
+    //删除数据
+    btns[3].onclick= function () {
+        window.sessionStorage.removeItem("userName");
+    };
+    //清除数据
+    btns[4].onclick= function () {
+        window.sessionStorage.clear();
+    }
+</script>
+<script>
+    var txt=document.querySelector("#txt2");
+    var btns=document.querySelectorAll(".btn2");
+    //存储数据
+    btns[0].onclick= function () {
+        window.localStorage.setItem("userName","zs");
+    };
+    //获取数据
+    btns[1].onclick= function () {
+        txt.value=window.localStorage.getItem("userName");
+    };
+    //更新数据
+    btns[2].onclick= function () {
+        window.localStorage.setItem("userName",txt.value);
+    };
+    //删除数据
+    btns[3].onclick= function () {
+        window.localStorage.removeItem("userName");
+    };
+    //清除数据
+    btns[4].onclick= function () {
+        window.localStorage.clear();
+    }
+</script>
+</body>
+</html>

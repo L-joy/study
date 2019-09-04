@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+</head>
+<body>
+<input type="button" value="改变多个p标签的值" id="mp"/>
+<div id="div1">
+    <p>哈哈</p>
+    <p>哈哈</p>
+    <p>哈哈</p>
+    <p>哈哈</p>
+    <p>哈哈</p>
+</div>
+<div id="div2">
+    <p>哈哈</p>
+    <p>哈哈</p>
+    <p>哈哈</p>
+    <p>哈哈</p>
+</div>
+<script>
+    //案例——点击按钮设置多个p标签的文字内容
+    // document.getElementsByTagName("标签的名字");-----返回的是一个伪数组
+    document.getElementById("mp").onclick=function (){
+        //根据标签名字获取标签
+        var pobjs=document.getElementById("div1").getElementsByTagName("P");
+        console.log(pobjs);
+        //循环遍历这个数组
+        for(var i=0;i<pobjs.length;i++){
+            //为每个p标签设置文字
+            pobjs[i].innerText="我们都是p";
+        }
+    };
+
+</script>
+</body>
+</html>

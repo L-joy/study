@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        body{
+            background-color: #CCCCCC;
+        }
+        p{
+            text-align: center;
+            font-size: 80px;
+            margin-top: 50px;
+            font-weight: bold;
+            color: #CCCCCC;
+        }
+        .one{
+            /*右下亮时：左右上下平移均为正数*/
+            /*左上亮时：左右上下平移均为负数*/
+            /*凸*/
+            text-shadow: -1px -1px 1px #fff,1px 1px 1px #000;
+        }
+        .two{
+            /*凹*/
+            text-shadow: 1px 1px 1px #fff,-1px -1px 1px #000;
+        }
+    </style>
+</head>
+<body>
+<p class="one">易烊千玺</p>
+<p class="two">易烊千玺</p>
+</body>
+</html>

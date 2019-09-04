@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script src="02格式化日期和时间.js">
+        //案例：格式化日期和时间---格式化后的指定格式的日期和时间---封装成一个函数
+
+    </script>
+    <script>
+        //Date对象
+//        var date=new Date();
+//        console.log(date);//当前的时间-----当前服务器
+        var date=new Date("2019-08-12");//"2019/08/12"也可以
+        console.log(date);//传入的时间
+
+        var dt=new Date();
+        console.log(dt.getFullYear());//获取年份
+        console.log(dt.getMonth()+1);//获取月份，从0开始
+        console.log(dt.getDate());//获取日期
+        console.log(dt.getHours());//获取小时
+        console.log(dt.getMinutes());//获取分钟
+        console.log(dt.getSeconds());//获取秒
+        console.log(dt.getDay());//获取星期
+
+        var dt1=new Date();
+        console.log(dt1.toString());//转化成字符串
+        console.log(dt1.toDateString());//英文格式--日期
+        console.log(dt1.toLocaleDateString());//数字格式--日期
+        console.log(dt1.toTimeString());//英文格式--时分秒
+        console.log(dt1.toLocaleTimeString());//数字格式--时分秒
+        console.log(dt1.valueOf());//毫秒数
+
+        var dt2=+new Date();//一种特殊的写法，只适用于Date这个对象
+        console.log(dt2);//毫秒
+
+        console.log("年月日");
+
+//        function mydate(dt){
+//            var year=dt.getFullYear();
+//            var month=dt.getMonth()+1;
+//            var day=dt.getDate();
+//            var hour=dt.getHours();
+//            var minutes=dt.getMinutes();
+//            var second=dt.getSeconds();
+//            var week=dt.getDay();
+//
+//            return year+"年"+month+"月"+day+"日 "+hour+":"+minutes+":"+second+" 星期"+week;
+//        }
+        console.log(mydate(new Date()));
+
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>

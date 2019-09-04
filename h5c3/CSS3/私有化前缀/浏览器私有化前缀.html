@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        /**
+         * 浏览器私有化前缀，解决兼容性问题：
+         *   -webkit-谷歌浏览器内核
+         *   -moz-火狐浏览器内核
+         *   -ms-IE浏览器内核
+         *   -o-欧鹏浏览器内核
+         */
+    </script>
+    <style>
+        .box{
+            width: 1000px;
+            height: 200px;
+            margin: 100px auto;
+            border: 1px solid #000;
+            background: -webkit-linear-gradient(left,red,green);
+            background: -moz-linear-gradient(left,red,green);
+            background: -ms-linear-gradient(left,red,green);
+            background: -o-linear-gradient(left,red,green);
+            /*线性渐变*/
+            background: linear-gradient(left,red,green);
+        }
+    </style>
+</head>
+<body>
+<div class="box"></div>
+</body>
+</html>

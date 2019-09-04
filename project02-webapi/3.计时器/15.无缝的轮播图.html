@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        img{
+            vertical-align: top;/*垂直对齐*/
+        }
+        ul{
+            list-style: none;
+        }
+        .box{
+            width: 800px;
+            height: 600px;
+            margin: 100px auto;
+            padding: 5px;
+            border: 1px solid #ccc;
+
+
+        }
+        .inner{
+            width: 800px;
+            height: 600px;
+            background-color: pink;
+            overflow: hidden;
+            position: relative;
+            text-align: center;
+
+
+        }
+        .inner ul{
+            width: 1000%;
+            position: absolute;
+            top : 0;
+            left: 0;
+
+        }
+        .inner li{
+            float: left;
+        }
+        .inner li img{
+            width: 800px;
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+<div id="box" class="box">
+    <div class="inner"><!--相框-->
+        <ul>
+            <li id="li1"><img src="../Jackson-yee/10.jpg" alt=""/></li>
+            <li><img src="../Jackson-yee/11.jpg" alt="" /></li>
+            <li><img src="../Jackson-yee/16.jpg" alt="" /></li>
+            <li><img src="../Jackson-yee/13.jpg" alt="" /></li>
+            <li><img src="../Jackson-yee/14.jpg" alt="" /></li>
+            <li><img src="../Jackson-yee/15.jpg" alt="" /></li>
+            <li><img src="../Jackson-yee/10.jpg" alt=""/></li>
+        </ul>
+    </div>
+</div>
+<script src="../common.js"></script>
+<script>
+    var current=0;
+    function f1(){
+        var ulObj=my$("box").children[0].children[0];
+        var imgWidth=ulObj.children[0].offsetWidth;
+        console.log(imgWidth);
+        current-=imgWidth;
+        if(current<(-(ulObj.children.length-1)*imgWidth)){
+            ulObj.style.left=0+"px";
+            current=0;
+        }else{
+            ulObj.style.left=current+"px";
+        }
+    }
+    var timeId=setInterval(f1,1000);
+    //鼠标进入停止
+    my$("box").onmouseover= function () {
+        clearInterval(timeId);
+    };
+    my$("box").onmouseout= function () {
+       timeId= setInterval(f1,1000);
+    };
+</script>
+</body>
+</html>

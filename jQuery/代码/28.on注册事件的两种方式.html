@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        div{
+            width: 400px;
+            height: 300px;
+            background-color: palegreen;
+        }
+    </style>
+</head>
+<body>
+<input type="button" value="添加" id="btn"/>
+<div>
+    <p>11111</p>
+
+    <p>11111</p>
+
+    <p>11111</p>
+
+    <p>11111</p>
+
+</div>
+<script src="jquery-1.12.4.js"></script>
+<script>
+    $(function () {
+        //这是给p自己注册的事件----注册简单事件---两个参数就可以
+        $("p").on("click", function () {
+            alert("啦啦哈");
+        });
+        //注册委托事件----三个参数
+        //给div中的p注册的
+        $("div").on("click","p", function () {
+            alert("啦啦克");
+        });
+        $("div").on("click", function () {
+            alert("嘿嘿");
+        });
+        $("#btn").on("click",function () {
+            $(" <p>新的p</p>").appendTo("div");
+        });
+    });
+    /**
+     * 事件的执行顺序
+     * 
+     */
+</script>
+</body>
+</html>

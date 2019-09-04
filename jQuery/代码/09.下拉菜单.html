@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+        }
+        .wrap{
+            width: 330px;
+            height: 30px;
+            margin: 100px auto;
+            background-color: darksalmon;
+            text-align: center;
+            line-height: 30px;
+            border-radius: 10px;
+            /*overflow: hidden;*/
+        }
+        .wrap ul li{
+            position: relative;
+            width: 100px;
+            height: 100%;
+            text-align: center;
+            line-height: 30px;
+            margin-left: 7px;
+            float: left;
+        }
+        .wrap li{
+            background-color: darkviolet;
+        }
+        .wrap li ul{
+            position: absolute;
+            top:30px;
+            left: -7px;
+            display: block;
+        }
+    </style>
+    <script src="jquery-1.12.4.js"></script>
+    <script>
+        //mouseover:鼠标经过事件-----一直触发
+        //mouseout:鼠标离开事件
+
+        //jQuery中的
+        //mouseenter:鼠标进入事件
+        //mouseleave:鼠标离开事件
+        $(function () {
+            var $li=$(".wrap>ul>li");
+            //给li注册鼠标经过事件，让自己的ul显示出来
+            $li.mouseenter(function () {
+                //找到所有的儿子还得是ul
+                //$(this).children("ul").show();
+                //stop：停止当前正在执行的动画
+
+                $(this).children("ul").stop().slideDown();
+                console.log("啦啦");
+            });
+            $li.mouseleave(function () {
+                //找到所有的儿子还得是ul
+                //$(this).children("ul").hide();
+                $(this).children("ul").stop().slideUp();
+            });
+
+        });
+    </script>
+</head>
+<body>
+<div class="wrap">
+    <ul>
+        <li>
+            <a href="javascript:void(0);">一级菜单1</a>
+            <ul class="ul" style="display: none;">
+                <li><a href="javascript:void(0);">二级菜单11</a></li>
+                <li><a href="javascript:void(0);">二级菜单12</a></li>
+                <li><a href="javascript:void(0);">二级菜单13</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:void(0);">二级菜单2</a>
+            <ul class="ul" style="display: none;">
+                <li><a href="javascript:void(0);">二级菜单21</a></li>
+                <li><a href="javascript:void(0);">二级菜单22</a></li>
+                <li><a href="javascript:void(0);">二级菜单23</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:void(0);">三级菜单3</a>
+            <ul class="ul" style="display: none;">
+                <li><a href="javascript:void(0);">二级菜单31</a></li>
+                <li><a href="javascript:void(0);">二级菜单32</a></li>
+                <li><a href="javascript:void(0);">二级菜单33</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+</head>
+<body>
+<div id="dv">
+    <span>这是div的第一个span标签</span>
+    <p>这是div的第二个元素，第一个p标签</p>
+    <ul id="uu">
+        <li>啦啦啦</li>
+        <li>哦哦哦</li>
+        <li id="three">恩恩额</li>
+        <li>哈哈哈</li>
+        <li>嘻嘻嘻</li>
+    </ul>
+</div>
+<script src="common.js"></script>
+<script>
+    //12行代码：都是获取节点和元素
+    //ul
+    var ulObj=my$("uu");
+    //父级节点
+    console.log(ulObj.parentNode);
+    //父级元素
+    console.log(ulObj.parentElement);
+    //子节点
+    console.log(ulObj.childNodes);
+    //子元素
+    console.log(ulObj.children);
+
+    console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+    //第一个子节点
+    console.log(ulObj.firstChild);
+    //第一个子元素
+    console.log(ulObj.firstElementChild);
+    //某个元素的前一个兄弟节点
+    console.log(ulObj.previousSibling);
+    //某个元素的前一个兄弟元素
+    console.log(ulObj.previousElementSibling);
+    //某个元素的后一个兄弟节点
+    console.log(ulObj.nextSibling);
+    //某个元素的后一个兄弟元素
+    console.log(ulObj.nextElementSibling);
+    //最后一个节点
+    console.log(ulObj.lastChild);
+    //最后一个元素
+    console.log(ulObj.lastElementChild);
+</script>
+</body>
+</html>

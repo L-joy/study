@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        /**
+         * h5中——DOM扩展
+         * 获取元素：
+         * document.querySelector("");——获取满足条件的第一个元素
+         * document.querySelectorAll("");——获取满足条件的所有元素
+         * 类名操作：
+         * 添加类名:.classList.add("active");
+         * 删除类名:.classList.remove("active");
+         * 判断是否为类名:.classList.contains("box");
+         * 切换类:.classList.toggle("active");
+         * 自定义属性：
+         * 定义：必须以data-开头
+         * 获取：元素.dataset.属性/元素.dataset['属性']
+         * 获取自定义属性：data-my-id="osos";——————.dataset.myId;
+         *
+         */
+    </script>
+    <style>
+        div{
+            width:400px;
+            height: 100px;
+            margin: 10px auto;
+            border: 1px solid #000;
+        }
+        .active{
+            border-radius: 50%;
+            background-color: darksalmon;
+
+        }
+    </style>
+</head>
+<body>
+<div class="box1" data-name="zs" data-my-id="osos"></div>
+<div class="box box2"></div>
+<div class="box box3"></div>
+<div class="box box4"></div>
+<input type="button" value="切换" id="btn"/>
+<script>
+   // var box1=document.getElementById("box1");
+    var box1=document.querySelector(".box1");
+    box1.style.background="red";
+   var box2=document.querySelectorAll(".box");
+   for(var i=0;i<box2.length;i++) {
+       box2[i].style.background = "yellow";
+   }
+</script>
+<script>
+    var box1=document.querySelector(".box1");
+//    html——box1.className="";
+//    juqery——addClass(),removeClass(),hasClass(),toggleClass()
+//    html5中
+//    添加类名
+    box1.classList.add("active");
+   // alert("哈哈");
+//    删除类名
+    //box1.classList.remove("active");
+//    判断是否为类名
+    var f=box1.classList.contains("box");
+    console.log(f);
+//    切换类
+    document.querySelector("#btn").onclick= function () {
+        document.querySelector(".box3").classList.toggle("active");
+    };
+//    获取自定义属性
+    console.log(box1.dataset.name);
+//   获取自定义属性： data-my-id="osos"
+    console.log(box1.dataset.myId);
+</script>
+</body>
+</html>

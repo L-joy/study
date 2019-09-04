@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        .out{
+            width: 600px;
+            height: 800px;
+            border: 1px solid #000;
+            margin:100px auto;
+            /*伸缩布局*/
+            display: flex;
+            /*设置主轴方向*/
+            flex-direction: column;
+        }
+        .header{
+            background-color: paleturquoise;
+            flex: 1;
+        }
+        .section{
+            /*background-color: fuchsia;*/
+            flex: 5;
+            display: flex;
+            flex-direction: row;
+        }
+        .left{
+            background-color: royalblue;
+            flex: 1;
+        }
+        .right{
+            background-color: orchid;
+            flex: 3;
+        }
+        .footer{
+            background-color: tomato;
+            flex: 1;
+        }
+
+    </style>
+</head>
+<body>
+<div class="out">
+    <div class="header"></div>
+    <div class="section">
+        <div class="left"></div>
+        <div class="right"></div>
+    </div>
+    <div class="footer"></div>
+</div>
+</body>
+</html>

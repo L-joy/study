@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+        /* CSS初始化 */
+        div,p,h1,h2,h3,h4,h5,h6,a{
+            text-decoration: none;
+        }
+        ul,dl,dd,body,h1,h2,h3,h4,h5,h6,p{
+            margin: 0;
+            padding: 0;
+        }
+        a{
+            text-decoration: none;
+        }
+        ul{
+            list-style: none;
+        }
+        input{
+            border: 0 none;
+            outline-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar{
+            margin-bottom: 15px;
+        }
+        nav{
+            background-color: #cccccc;
+            height: 50px;
+            line-height: 50px;
+        }
+        .part{
+            text-align: center;
+        }
+        .part img{
+            width: 30px;
+            height: 30px;
+        }
+        .part a{
+            padding-left: 5px;
+            font-size: 16px;
+            color: black;
+        }
+        .nav-left{
+            text-align: center;
+            line-height: 50px;
+        }
+        .nav-left p{
+            font-size: 42px;
+            font-family: cursive;
+        }
+        .nav-right{
+            height: 50px;
+            text-align: center;
+            margin-top:8px;
+        }
+        .contentMain{
+            width: 246px;
+            height: 30px;
+            display: inline-block;
+            align-items: center;
+            line-height: 30px;
+        }
+        .contentMain img{
+            width: 30px;
+            height: 30px;
+            float: left;
+        }
+        .contentp{
+            width: 182px;
+            height: 30px;
+            float: left;
+            font-size: 4px;
+        }
+        .contentp p{
+            margin-top: -9px;
+            margin-left: -72px;
+            height: 25px;
+        }
+        .header-main{
+            margin-top: -17px;
+            width: 100%;
+            height: 200px;
+            background-color: darkgrey;
+        }
+        .header-content{
+            width: 100%;
+            height: 120px;
+            background-color: #ccc;
+        }
+        .c-left{
+            float: left;
+            width: 570px;
+            height: 120px;
+            margin-left: 46px;
+        }
+        .c-left .pic{
+            width: 120px;
+            height: 120px;
+            position: absolute;
+            margin: -30px 20px 0 20px;
+        }
+        .pic img{
+            width: 120px;
+            height: 120px;
+        }
+        .name{
+            width: 400px;
+            float: right;
+            height: 120px;
+            margin-left: 80px;
+        }
+        .name h3{
+            padding-top: 10px;
+            color: #ffffff;
+            font-family: cursive;
+
+        }
+        .name p{
+            color: #ffffff;
+            font-family: cursive;
+        }
+        .c-right{
+            float: left;
+            width: 400px;
+            height: 120px;
+            line-height: 120px;
+        }
+        .c-right .scan{
+            float: right;
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            margin: 10px 10px 10px 10px;
+        }
+        .scan img{
+            width: 100px;
+            height: 100px;
+        }
+        .c-right .download{
+            width: 200px;
+            height: 120px;
+            float: right;
+            margin: 17px -24px 0 0;
+        }
+        .download .AppStore{
+            width: 150px;
+            height: 30px;
+            background-color: #fff;
+            border-radius: 6px;
+            margin: 5px 5px 10px 10px;
+        }
+        .download .Android{
+            width: 150px;
+            height: 30px;
+            background-color: #fff;
+            border-radius: 6px;
+            margin: 5px 5px 5px 10px;
+        }
+        .download img{
+            float: left;
+            width: 30px;
+            height: 30px;
+            margin-left: 5px;
+        }
+        .download .only{
+            float: left;
+            width: 100px;
+            height: 30px;
+            line-height: 30px;
+            margin-left: 10px;
+        }
+        .download a{
+            font-size: 14px;
+            text-align: center;
+        }
+        .Main{
+            border: 1px solid #cccccc;
+        }
+        .part1{
+            margin-top: 40px;
+        }
+        .part1 .left{
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            float: left;
+
+        }
+        .part1 .left img{
+            width: 530px;
+            height: 320px;
+        }
+        .part1 .right{
+            width: 100%;
+            height: 320px;
+            float: left;
+
+        }
+        .mid-box{
+            width: 373px;
+            height: 274px;
+            float: left;
+            margin:34px 0 0 10px;
+        }
+        .nav{
+            height: 30px;
+            margin: 5px 5px 5px 8px;
+            line-height: 30px;
+            border-bottom: 1px solid black;
+
+        }
+        .sum{
+            color: aqua;
+            margin: 5px 5px 5px 8px;
+        }
+        .same{
+            margin: 5px 5px 5px 8px;
+
+        }
+        .more{
+            float: right;
+            font-size: 12px;
+        }
+        .mid-box .new{
+            height: 50px;
+            border-bottom: 1px solid black;
+            margin: 5px 5px 5px 8px;
+        }
+        .new p{
+            margin: 5px 5px 5px 5px;
+        }
+        .new a{
+            float: right;
+            text-align: center;
+            line-height: 42px;
+            margin-right: 10px;
+        }
+
+        .right-r{
+            text-align: center;
+            margin-top: 5px;
+
+        }
+        .right-r img{
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            margin: 20px 0 0 10px;
+        }
+        .part2{
+            height: 170px;
+            margin-top: 10px;
+            text-align: center;
+            line-height: 170px;
+        }
+        .part2 img{
+            width: 350px;
+            height: 150px;
+            text-align: center;
+        }
+        .part3{
+            height: 50px;
+            margin-top: 10px;
+            line-height: 50px;
+        }
+        .part3 p{
+            margin-left: 20px;
+            font-size: 20px;
+        }
+        .part4{
+            height: 400px;
+            margin-top: 10px;
+        }
+        .list1{
+            height: 170px;
+            text-align: center;
+        }
+        .list1 img{
+            width: 200px;
+            height: 150px;
+        }
+        .list2{
+            height: 170px;
+            text-align: center;
+        }
+        .list2 img{
+            width: 200px;
+            height: 150px;
+
+        }
+        .footer{
+            margin-top: 10px;
+        }
+        .footer .content{
+            height: 100px;
+            text-align: center;
+        }
+        .footer .content .contentMain{
+            margin-top: 25px;
+        }
+
+    </style>
+</head>
+<body>
+<!--头部div-->
+<div class="container-fluid">
+    <nav class="navbar navbar-defult">
+        <div class="container-fluid">
+            <div class="col-md-3 nav-left"><p>log</p></div>
+            <div class="col-md-6 nav-med">
+                <div class="navbar">
+                    <div class="row">
+                        <div class="col-md-3 part"><img src="image/3.jpg" alt=""/><a href="#">官网首页</a></div>
+                        <div class="col-md-3 part"><img src="image/3.jpg" alt=""/><a href="#">最新活动</a></div>
+                        <div class="col-md-3 part"><img src="image/3.jpg" alt=""/><a href="#">游戏资料</a></div>
+                        <div class="col-md-3 part"><img src="image/3.jpg" alt=""/><a href="#">攻略合集</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 nav-right">
+                <div class="contentMain">
+                    <img src="image/3.jpg" alt=""/>
+                    <div class="contentp">
+                        <p>关注微信公众号</p>
+                        <p>海量活动抢先看</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="header-main"></div>
+    <div class="container header-content">
+        <div class="row header-content-main">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-5">
+                <div class="c-left">
+                    <div class="pic">
+                        <img src="image/3.jpg" alt=""/>
+                    </div>
+                    <div class="name">
+                        <h3>游戏名称</h3><br/>
+                        <p class="introduce">《天天风之旅》是一款动作冒险类的3D轻动作跑酷
+                            手机游戏，在架空的奇幻世界中，玩</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="c-right">
+                    <div class="scan">
+                        <img src="image/3.jpg" alt=""/>
+                    </div>
+                    <div class="download">
+                        <div class="AppStore">
+                            <img src="image/3.jpg" alt=""/>
+                            <div class="only">
+                                <a href="#">AppStore下载</a>
+                            </div>
+                        </div>
+                        <div class="Android">
+                            <img src="image/3.jpg" alt=""/>
+                            <div class="only">
+                                <a href="#">Android下载</a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-2">
+            </div>
+        </div>
+     </div>
+</div>
+<!--内容div-->
+<div class="container Main">
+    <div class="row part1">
+        <div class="col-md-6">
+            <div class="left">
+                <img src="image/3.jpg" alt=""/>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="right">
+                <div class="col-md-9 right-l">
+                    <div class="mid-box">
+                        <ul>
+                            <li>
+                                <div class="nav">
+                                        <a href="#" class="sum">综合</a>
+                                        <a href="#" class="same">活动</a>
+                                        <a href="#" class="same">新闻</a>
+                                        <a href="#" class="same">公告</a>
+                                        <a href="#" class="more">更多+</a>
+                                </div>
+                            </li>
+                            <li class="new">
+                                <a href="#">></a>
+                                <p>[活动]xxxx全新活动起航</p>
+                                <p>2015年04月30日</p>
+                            </li>
+                            <li class="new">
+                                <a href="#">></a>
+                                <p>[新闻]xxxx全新活动起航</p>
+                                <p>2015年04月30日</p>
+                            </li>
+                            <li class="new">
+                                <a href="#">></a>
+                                <p>[公告]xxxx全新活动起航</p>
+                                <p>2015年04月30日</p>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                </div>
+                <div class="col-md-3 right-r">
+                    <img src="image/3.jpg" alt=""/>
+                    <img src="image/3.jpg" alt=""/>
+                    <img src="image/3.jpg" alt=""/>
+                    <img src="image/3.jpg" alt=""/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row part2">
+        <div class="col-md-4">
+            <img src="image/3.jpg" alt=""/>
+        </div>
+        <div class="col-md-4">
+            <img src="image/3.jpg" alt=""/>
+        </div>
+        <div class="col-md-4">
+            <img src="image/3.jpg" alt=""/>
+        </div>
+    </div>
+    <div class="row part3" >
+            <p>游戏相关</p>
+    </div>
+    <div class="row part4">
+        <nav class="navbar">
+            <div class="row">
+                <div class="col-md-3 part"><a href="#">软件介绍</a></div>
+                <div class="col-md-3 part"><a href="#">装备宝库</a></div>
+                <div class="col-md-3 part"><a href="#">宠物介绍</a></div>
+                <div class="col-md-3 part"><a href="#">幻境画廊</a></div>
+            </div>
+        </nav>
+        <div class="row list1">
+            <div class="col-md-3">
+                <img src="image/3.jpg" alt=""/>
+            </div>
+            <div class="col-md-3">
+                <img src="image/3.jpg" alt=""/>
+            </div>
+            <div class="col-md-3">
+                <img src="image/3.jpg" alt=""/>
+            </div>
+            <div class="col-md-3">
+                <img src="image/3.jpg" alt=""/>
+            </div>
+        </div>
+        <div class="row list2">
+            <div class="col-md-3">
+                <img src="image/3.jpg" alt=""/>
+            </div>
+            <div class="col-md-3">
+                <img src="image/3.jpg" alt=""/>
+            </div>
+            <div class="col-md-3">
+                <img src="image/3.jpg" alt=""/>
+            </div>
+            <div class="col-md-3">
+                <img src="image/3.jpg" alt=""/>
+            </div>
+        </div>
+
+    </div>
+    <div class="row footer">
+        <div class="col-md-4">
+            <div class="content">
+                <div class="contentMain">
+                    <img src="image/3.jpg" alt=""/>
+                    <div class="contentp">
+                        <p>关注新浪微博</p>
+                        <p>了解实时动态</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="content">
+                <div class="contentMain">
+                    <img src="image/3.jpg" alt=""/>
+                    <div class="contentp">
+                        <p>关注官方微信</p>
+                        <p>百万金币放送</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="content">
+                <div class="contentMain">
+                    <img src="image/3.jpg" alt=""/>
+                    <div class="contentp">
+                        <p>联系客服bug</p>
+                        <p>实时反馈</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

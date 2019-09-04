@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        div{
+            width: 200px;
+            height: 300px;
+            background-color: hotpink;
+        }
+    </style>
+</head>
+<body>
+<input type="button" value="创建列表" id="btn"/>
+<div id="dv"></div>
+
+<script src="common.js"></script>
+<script>
+//    my$("btn").onclick= function () {
+//      my$("dv").innerHTML="<ul> <li>啦啦啦</li> <li>哈哈哈</li> <li>嗯嗯嗯</li> <li>哦哦哦</li> <li>吼吼吼</li> </ul>";
+//    };
+    var names=["啦啦啦","哈哈哈","嘟嘟嘟","嘿嘿嘿","咯咯咯"];
+    my$("btn").onclick= function () {
+        var str="<ul style='list-style: none;cursor: pointer'>";
+        //循环遍历对应对数的li标签
+        for(var i=0;i<names.length;i++){
+            str+="<li>"+names[i]+"</li>";
+        }
+        str+="</ul>";
+        my$("dv").innerHTML=str;
+        //以上，所有的li标签已经被创建
+        //点击li标签显示高亮
+        //获取所有的li，遍历，添加鼠标进入事件，鼠标离开事件
+        var list=my$("dv").getElementsByTagName("li");
+        for(var j=0;j<list.length;j++){
+            list[j].onmouseover= function () {
+                this.style.backgroundColor="yellow";
+            };
+            list[j].onmouseout= function () {
+                this.style.backgroundColor="";
+            };
+        }
+    };
+</script>
+</body>
+</html>

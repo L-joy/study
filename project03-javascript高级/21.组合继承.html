@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        //原型实现继承
+        //借用构造函数实现继承
+        //组合继承：原型继承+借用构造函数继承
+        function Person(name,age,sex){
+            this.name=name;
+            this.age=age;
+            this.sex=sex;
+        }
+        Person.prototype.eat= function () {
+            console.log("吃");
+        };
+        function Student(name,age,sex,score){
+            Person.call(this,name,age,sex);//继承父级属性
+            this.score=score;
+        }
+        Student.prototype=new Person();//继承父级方法
+        Student.prototype.study= function () {
+            console.log("学");
+        };
+        var stu1=new Student("小明",12,"男",87);
+        console.log(stu1.name,stu1.age,stu1.sex,stu1.score);
+        stu1.eat();
+        stu1.study();
+        var stu2=new Student("小蓝",13,"男",83);
+        console.log(stu2.name,stu2.age,stu2.sex,stu2.score);
+        stu2.eat();
+        stu2.study();
+        var stu3=new Student("小红",16,"女",90);
+        console.log(stu3.name,stu3.age,stu3.sex,stu3.score);
+        stu3.eat();
+        stu3.study();
+    </script>
+</head>
+<body>
+
+</body>
+</html>

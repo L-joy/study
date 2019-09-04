@@ -1,0 +1,129 @@
+xxxxxxxxxxxxxxxxx<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Mysite</title>
+    <script>
+
+        /**
+         *
+         *  局部变量：函数中定义的变量
+         *  全局变量：其他地方定义的变量 ;全局变量不能被删除，delete 全局变量；没有被删除
+         *  隐式全局变量：声明变量没有var ;隐式全局变量可以被删除，delet 隐式全局变量；被删除---undefined
+         *  定义变量使用var是不会被删除的，没有var是可以被删除的
+         *
+         *
+         */
+
+
+        function f1() {
+            num = 100;
+        }
+        f1();
+        console.log(num);
+        var num1 = 10;
+        //delete num1;
+        console.log(typeof num1);//number
+        console.log(num1 + 10);//20
+        delete num;
+        console.log(typeof num);//undefined
+
+        //作用域链
+
+        //预解析：提前解析代码
+        //预解析：变量声明提前，函数声明提前
+        console.log(num0);//undefined
+        var num0 = 10;
+        //上面的代码等于下面的代码
+        //        var num;
+        //        console.log(num);
+        //        num=10;
+        f();
+        function f() {
+            console.log("haha");
+        }
+        //上面的代码等于下面的代码
+        //        function f(){
+        //            console.log("haha");
+        //        }
+        //        f();
+        console.log('***************￥￥*************************');
+
+        console.log(a);
+        function a() {
+            console.log("易烊千玺");
+        }
+        var a = 1;
+        console.log(a);
+        //上面的代码等于下面的代码
+        //        var a;
+        //        function a() {
+        //            console.log("易烊千玺");
+        //        }
+        //        console.log(a);
+        //        a = 1;
+        //        console.log(a);
+        console.log('******************************************');
+        var b = 18;
+        f2();
+        function f2() {
+            var b = 9;
+            console.log(a);
+            console.log(b);
+            var a = '123';
+        }
+        //上面的代码等于下面的代码
+        //        var b=18;
+        //        function f2(){
+        //            var b=9;
+        //            var a;
+        //            console.log(a);//undefined
+        //            console.log(b);//9
+        //            a='123';
+        //        }
+        //        f2();
+        console.log('******************************************');
+        f3();
+        console.log(n);
+        console.log(m);
+      //  console.log(c);
+        function f3() {
+            var c = m = n = 9;
+            console.log(c);
+            console.log(m);
+            console.log(n);
+        }
+        console.log(parseInt(Math.random() * 57 + 1));
+        //上面的代码等于下面的代码
+        //         function f3() {
+        //             var c;
+        //             c = 9;
+        //             m = 9;//隐式全局变量
+        //             n = 9;
+        //             console.log(c);//9
+        //             console.log(m);//9
+        //             console.log(n);//9
+        //          }
+        //          f3();
+        //          console.log(n);//9
+        //          console.log(m);//9
+        //          console.log(c);//报错
+        console.log('******************************************');
+        f4();//报错
+        var f4 = function () {
+            console.log(t);
+            var t = 10;
+        }
+        //上面的代码等于下面的代码
+        //        var f4;
+        //        f4();//报错-----不能调用
+        //        f4=function (){
+        //            console.log(t);
+        //            var t=10;
+        //        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

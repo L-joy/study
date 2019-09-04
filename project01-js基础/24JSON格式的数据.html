@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        //JSON格式的数据：一般都是成对的，是键值对
+        //json也是一个对象，数据都是成对的，一般json格式的数据无论是键还是值都是用双引号括起来的
+        var obj = {
+            name: "小名",
+            age: 10
+        };
+        var json = {
+            "name": "小明",
+            "age": "10",
+            "sex": "男"
+        };
+        var key = "name";
+        console.log(json[key]);
+        //遍历对象：不能用for循环---无序
+        //key1是变量，存储的是该对象所有的属性名
+        for (var key1 in json) {
+            console.log(key1);//json对象中属性的名字
+            console.log(json[key1]);//json.key是添加属性
+        }
+        //对象中确实有key属性，则可以用对象.key,或者对象[key]
+
+
+        /**
+         * 原始数据类型：number,string,boolean,undefined,null,object
+         * 简单类型和复杂类型
+         * 基本类型(简单类型)，值类型：number,string.boolean
+         * 复杂类型(引用类型)：object
+         * 空类型：undefined,null
+         *
+         * 值类型的值一般在栈中存储
+         * 引用类型一般在栈和堆中存储
+         *
+         * 值类型传递--传递的是值
+         * 引用类型传递---传递的是地址
+         */
+        var num = 10;//值类型----存在栈中
+        var obj1 = {};//复杂类型----对象存在堆中，地址(引用)存在栈中
+        var obj2 = {
+            name: "小明"
+        };
+        function f2(obj3) {
+            obj3.name = "小红";
+        }
+        console.log(obj.name);//小明
+        f2(obj2);
+        console.log(obj.name);//小红
+
+        //        var num1=10;
+        //        var num2=num1;
+        //        num1=20;
+        //        console.log(num1);//20
+        //        console.log(num2);//10
+
+        //        var num1=50;
+        //        function f1(num1){
+        //            num1=60;
+        //            console.log(num1);//60
+        //        }
+        //        f1(num1);
+        //        console.log(num1);//50
+
+        //        var num1 = 55;
+        //        var num2 = 66;
+        //        function f1(num, num1) {
+        //            num = 100;
+        //            num1 = 100;
+        //            num2 = 100;//隐式全局变量
+        //            console.log(num);//100
+        //            console.log(num1);//100
+        //            console.log(num2);//100
+        //        }
+        //        f1(num1, num2);
+        //        console.log(num1);//55
+        //        console.log(num2);//100
+        //        console.log(num);//报错
+
+        //        function Person(name, age, salary) {
+        //            this.name = name;
+        //            this.age = age;
+        //            this.salary = salary;
+        //        }//构造函数
+        //        function f1(person) {
+        //            person.name = "ls";
+        //            person = new Person("aa", 18, 10);
+        //        }
+        //        var p = new Person("zs", 18, 1000);//创建对象
+        //        console.log(p.name);//zs
+        //        f1(p);
+        //        console.log(p.name);//ls
+
+        /**
+         * js中三种对象
+         * 内置对象：js系统自带的对象
+         * 自定义对象：自己定义的构造函数创建的对象
+         * 浏览器对象：BOM时讲
+         *
+         * 内置对象：
+         * Math
+         * Date
+         * String
+         * Array
+         * Object
+         */
+        //如何验证变量是不是对象
+        console.log(Array instanceof Object);//true-----系统自带的
+        var obj3={};
+        console.log(obj3 instanceof Object);//true
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

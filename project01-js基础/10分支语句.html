@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        //if语句
+        if (8 > 6) {
+            console.log(8);
+        }
+
+        //if-else语句
+        var age = parseInt(prompt("请您输入年龄："));//弹框------并且有输入，输入的内容在age变量中，结果都是字符串类型
+        if (age > 18) {
+            console.log("可以看电影");
+        } else {
+            console.log("回去写作业");
+        }
+        //练习1：找到两个数字中的最大值
+        //方法1
+        var num1 = 10, num2 = 11;
+        if (num1 > num2) {
+            console.log(num1);
+        } else {
+            console.log(num2);
+        }
+        //方法2：用三元运算符   ？ ：
+        var num = num1 > num2 ? num1 : num2;
+        console.log(num);
+        //练习2：判断这个数字是奇数还是偶数
+        var num3 = parseInt(prompt("请输入一个数字："));
+        if (num3 % 2 == 0) {
+            console.log("偶数");
+        } else {
+            console.log("奇数");
+        }
+        //一般if-else:语句都可以用三元表达式的方式来表示
+
+        //多分支
+        var score = Number(prompt("请输入成绩："));
+        if (!isNaN(score)) {
+            if (score > 90 && score <= 100) {
+                console.log("A");
+            } else if (score > 80 && score <= 90) {
+                console.log("B");
+            } else if (score > 70 && score <= 80) {
+                console.log("C");
+            } else if (score > 60 && score <= 70) {
+                console.log("D");
+            } else {
+                console.log("E");
+            }
+        } else {
+            console.log("输入有误");
+        }
+        //例子：判断闰年
+        var year = parseInt(prompt("请您输入年份"));
+        if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
+            console.log("闰年");
+        } else {
+            console.log("平年");
+        }
+
+        //switch-case
+        var str = "E";
+        switch (str) {
+            case "A":
+                console.log("90-100");
+                break;
+            case "B":
+                console.log("80-90");
+                break;
+            case "C":
+                console.log("70-80");
+                break;
+            case "D":
+                console.log("60-70");
+                break;
+            default :
+                console.log("0-60");
+        }
+        //例子：根据月份判断天数
+        //1.3.5.7.8.10.12----31天；2------28天；4,6,9,11-----30天
+        var month=parseInt(prompt("请输入月份："));
+        switch(month){
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:console.log("31天");break;
+            case 2:console.log("28天");break;
+            case 4:
+            case 6:
+            case 9:
+            case 11:console.log("30天");break;
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

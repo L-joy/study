@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        //        一个数独的解法需遵循如下规则：
+        //
+        //        数字 1-9 在每一行只能出现一次。
+        //        数字 1-9 在每一列只能出现一次。
+        //        数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。
+        //        空白格用 '.' 表示。
+        /**
+         * @param {character[][]} board
+         * @return {void} Do not return anything, modify board in-place instead.
+         *
+         */
+        var solveSudoku = function (board) {
+           research(board);
+        };
+        //搜索
+        function research(board){
+            var rowLen=board.length;
+            var colLen=board[0].length;
+            for(var i=0;i<6;i++){
+                for(var j=0;j<colLen;j++){
+                    if(board[i][j]!="."){
+                        continue;
+                    }
+                    for(var k="1";k<"10";k++){
+                    //判断是否有效
+                        if(!isValid(board,i,j,k)){
+                            continue;
+                        }
+                        board[i][j]=k+"";
+                        if(research(board)){
+                            return true;
+                        }else{
+                           board[i][j]='.';
+                        }
+                    }
+                    return false;
+                }
+            }
+            return true;
+        }
+        function isValid(board,i,j,k) {
+            for(var row=0;row<9;row++){
+                if(board[row][j]==k){
+                    return false;
+                }
+            }
+            for(var col=0;col<9;col++){
+                if(board[i][col]==k){
+                   return false;
+                }
+            }
+            for(var row1=parseInt(i/3*3);row1<parseInt(i/3*3)+3;row1++){
+                for(var col1=parseInt(j/3*3);col1<parseInt(j/3*3)+3;col1++){
+                    if(board[row1][col1]==k){
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        function f1(board){
+            var rowLen=board.length;
+            var colLen=board[0].length;
+            for(var i=0;i<rowLen;i++){
+                for(var j=0;j<colLen;j++){
+                    if(board[i][j]=="."){
+                        this.board[i][j]='3';
+                        console.log(board);
+                    }
+                }
+            }
+        }
+        var board=[
+            ["5","3",".",".","7",".",".",".","."],
+            ["6",".",".","1","9","5",".",".","."],
+            [".","9","8",".",".",".",".","6","."],
+            ["8",".",".",".","6",".",".",".","3"],
+            ["4",".",".","8",".","3",".",".","1"],
+            ["7",".",".",".","2",".",".",".","6"],
+            [".","6",".",".",".",".","2","8","."],
+            [".",".",".","4","1","9",".",".","5"],
+            [".",".",".",".","8",".",".","7","9"]
+        ];
+        solveSudoku(board);
+        console.log(board);
+        //console.log(board);
+        //continue:continue只是终止本次循环，接着还执行后面的循环
+//        var sum=0;
+//        for(var i=0;i<9;i++){
+//            if(i==5){
+//                continue;
+//            }
+//            sum=sum+i;//当i=5时这句不执行
+//        }
+//        console.log(sum);
+        //break:break则完全终止循环
+//        var sum=0;
+//        for(var i=0;i<9;i++){
+//            sum=sum+i;
+//            if(i==5){
+//                break;
+//            }
+//        }
+//        console.log(sum);
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

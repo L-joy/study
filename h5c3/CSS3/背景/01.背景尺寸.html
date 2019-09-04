@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        /**
+         * 背景：
+         * 背景尺寸：控制背景大小:background-size: 400px 400px;——具体数值
+         *                      background-size: 50% 50%;——百分比
+         *                      background-size: cover;覆盖——保证完全覆盖盒子，不能保证完全显示
+         *                      background-size: contain;包含——保证最大化在盒子中等比例显示，不能保证铺满盒子
+         * 背景原点  控制背景从什么地方开始显示:background-origin
+         *                                  background-origin: padding-box;(默认值)——
+         *                                  background-origin: border-box;
+         *                                  background-origin: content-box;
+         * 背景裁剪:background-clip;background-clip: padding-box;——从padding-box开始裁剪
+         *                         background-clip: border-box;——从border-box开始裁剪
+         *                         background-clip: content-box;——从content-box开始裁剪
+         * 多背景：给盒子加多个背景，按照背景语法格式书写，多个背景使用逗号隔开
+         *
+         */
+    </script>
+    <style>
+        .box{
+            width: 400px;
+            height: 400px;
+            margin: 100px auto;
+            border: 1px solid black;
+            background: url("../../Jackson-yee/45.jpg") no-repeat;
+            /*控制背景大小:background-size: 400px 400px;*/
+            /*具体数值*/
+            /*background-size: 400px 400px;*/
+            /*百分比*/
+            /*background-size: 50% 50%;*/
+            /*cover：覆盖——保证完全覆盖盒子，不能保证完全显示;contain：包含——保证最大化在盒子中等比例显示，不能保证铺满盒子;*/
+            /*background-size: cover;*/
+            background-size: contain;
+        }
+    </style>
+</head>
+<body>
+<div class="box"></div>
+</body>
+</html>

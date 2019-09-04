@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        /**
+         *
+         * 命名函数：有名字
+         * 匿名函数：没有名字
+         *
+         * 函数定义：
+         * 1.函数声明---函数定义
+         * function 函数名(){
+         *     函数体
+         * }
+         * 2.函数表达式
+         * 把一个函数给一个变量
+         * var f1=function (){
+         *
+         * };
+         * f1();//函数的调用
+         *
+         * 注意：函数表达式后面要加分号;
+         */
+
+        //函数的声明
+        function f1(){
+            console.log("易烊千玺");
+        }
+        f1();
+        // console.log(f1);//函数名f1是函数的代码
+
+        //函数表达式
+        var f2=function (){
+            console.log("好帅");
+        };
+        f2();
+        console.log(f2);
+
+        //函数的自调用，没有名字，声明的同时，直接调用
+        //一次性的------
+        (function (){
+            console.log("易烊千玺");
+        })();
+
+        function f(){
+            console.log("易烊千玺");
+        }
+        //如何获取某个变量的类型？typeof
+        //函数的数据类型是：function
+        console.log(typeof f1);//function
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+</head>
+<body>
+<input type="button" value="变色" id="btn"/>
+<ul id="uu">
+    <li>哈哈哈</li>
+    <li>嘻嘻嘻</li>
+    <li>啦啦啦</li>
+    <li>吼吼吼</li>
+    <li>biubiubiu</li>
+    <li>咯咯咯</li>
+    <li>嘟嘟嘟</li>
+    <li>哒哒哒</li>
+</ul>
+<script src="common.js"></script>
+<script>
+    //隔行变色
+    my$("btn").onclick= function () {
+      var count=0;//记录有多少li
+        //获取ul中所有的li节点
+        var nodes=my$("uu").childNodes;
+        //循环遍历所有的子节点、
+        for(var i=0;i<nodes.length;i++){//i为节点数
+            //判断这个节点是不是li标签
+            if(nodes[i].nodeType==1&&nodes[i].nodeName=="LI"){
+                nodes[i].style.backgroundColor=count%2?"red":"yellow";
+                count++;
+            }
+        }
+    };
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        /**
+         * 给定一个可包含重复数字的序列，返回所有不重复的全排列。
+         */
+        /**
+         * @param {number[]} nums
+         * @return {number[][]}
+         */
+        var permuteUnique = function(nums) {
+            var arr=[];
+            permute(arr,nums,0);
+            return arr;
+        };
+        function permute(arr,nums,k){
+            var n=nums.length;
+            var n0=[];
+            if(n==k){
+                for(var l=0;l<n;l++){
+                    n0[l]=nums[l];
+                }
+                arr.push(n0);
+            }
+            for(var i=k;i<n;i++){
+                var flag=0;
+                for(var j=k;j<i;j++){
+                    if(nums[i]==nums[j]){
+                        flag=1;
+                        break;
+                    }
+                }
+                if(flag==0){
+                    swap(nums,k,i);
+                    permute(arr,nums,k+1);
+                    swap(nums,k,i);
+                }
+            }
+        }
+        function swap(nums,a, b) {
+            var temp = nums[a];
+            nums[a] = nums[b];
+            nums[b] = temp;
+        }
+        var nums=[1,2,1];
+        console.log(permuteUnique(nums));
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        //函数可以作为参数使用，如果一个函数作为参数，那么这个参数可以叫回调函数
+        //只要看到一个函数作为参数使用了，那么就是回调函数
+        function f1(x,y){
+            console.log(x+y);
+        }
+        f1(10,20);
+
+        //函数声明，fn是变量，fn是参数
+        function f(fn){
+            fn();//函数调用----说明fn这个变量中存储的是一个函数
+        }
+        function f2(){
+            console.log("易烊千玺");
+        }
+        f(f2);
+
+        //函数可以作为返回值使用
+        function f3(){
+            return 100;
+        }
+
+        function f4(){
+            console.log("f1函数调用了");
+            return function (){
+                console.log("这是一个函数");
+            };
+        }
+        var ff=f4();//ff是一个函数
+        ff();
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+</head>
+<body>
+<ul>
+    <li>啦啦</li>
+    <li>嘻嘻</li>
+    <li>哈哈</li>
+    <li>嘟嘟</li>
+</ul>
+<script src="jquery-1.12.4.js"></script>
+<script>
+    $(function () {
+        /**
+         * 用jquery修改css样式
+         * 1.-.css(name.value);
+         * 2.修改多个样式
+         * -.css(obj);
+         */
+//        $("li").css("backgroundColor","pink");
+//        $("li").css({
+//            "backgroundColor":"pink",
+//            "fontSize":"16px",
+//            "border":"1px solid black"
+//
+//        });
+        /**
+         * 用jquery获取css样式
+         * css(name);
+         */
+        $("li").eq(0).css("fontSize","16px");
+        $("li").eq(1).css("fontSize","14px");
+        $("li").eq(2).css("fontSize","26px");
+        $("li").eq(3).css("fontSize","19px");
+
+        //隐式迭代：
+        //设置操作的时候：会给jquery内部的所有对象都设置相同的值
+        //获取的时候：只会返回第一个元素对应的值
+        console.log($("li").css("fontSize"));//16px
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        /**
+         * 函数中this的指向
+         *
+         * 普通函数中this是谁--------window
+         * 对象.方法中的this是谁-------当前实例对象
+         * 定时器方法中的this是谁--------window
+         * 构造函数中的this是谁-------实例对象
+         * 原型对象方法中的this是谁-------实例对象
+         *
+         */
+        //严格模式
+        "use strict";
+
+        function f2(){
+            console.log(this);//undefined
+        }
+        f2();
+
+        function f1(){
+            console.log(this);//window
+        }
+        window.f1();
+
+
+
+        //BOM中顶级对象是window，浏览器中所有的东西都是window
+        //普通函数
+//        function f1(){
+//            console.log(this);
+//        }
+//        f1();
+        //定时器
+//        window.setInterval(function () {
+//            console.log(this);
+//        },1000);
+        //对象
+//        function Person(){
+//            console.log(this);//构造函数中this
+//           this.sleep= function () {
+//                console.log(this);//对象中方法中的this
+//            };
+//        }
+//        Person.prototype.play= function () {
+//            console.log(this);//原型对象方法的this
+//        };
+//        var per=new Person();
+//        console.log(per);
+//        per.sleep();
+//        per.play();
+    </script>
+</head>
+<body>
+
+</body>
+</html>

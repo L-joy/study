@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        /**
+         * arguments对象：可以获取传入的每个参数的值------伪数组
+         * arguments.length可以获取实参的个数
+         */
+        function Sum(){
+            var sum=0;
+            for(var i=0;i<arguments.length;i++){
+                sum+=arguments[i];
+            }
+            return sum;
+        }
+        console.log(Sum(10,30,45,67));
+    </script>
+</head>
+<body>
+
+</body>
+</html>

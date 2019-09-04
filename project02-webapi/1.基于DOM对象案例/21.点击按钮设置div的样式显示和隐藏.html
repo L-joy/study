@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        div{
+            width: 300px;
+            height: 400px;
+            background-color: salmon;
+            border: 5px solid royalblue;
+        }
+        .cls{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<input type="button" value="隐藏" id="btn"/>
+<div id="tt" class=""></div>
+<script src="common.js"></script>
+<script>
+    my$("btn").onclick=function (){
+
+        if(my$("tt").className=="cls"){
+            //现在是隐藏，应该显示
+            my$("tt").className="";
+            this.value="隐藏";
+        }else{
+            //现在是显示，应该隐藏
+            my$("tt").className="cls";
+            this.value="显示";
+        }
+    };
+
+</script>
+</body>
+</html>

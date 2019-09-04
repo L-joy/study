@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        input {
+            color: gray;
+        }
+    </style>
+
+</head>
+<body>
+<input type="text" value="请输入搜索内容" id="txt"/>
+<br/>
+<p>啦啦啦啦啦</p>
+<br/>
+<input type="text" value="" id="txt1"/>
+<script src="common.js"></script>
+<script>
+    //模拟搜索框
+    //获取文本框
+    //注册获取焦点的事件
+    my$("txt").onfocus = function () {
+        //判断文本框中的内容是不是默认的值
+        if (this.value == "请输入搜索内容") {
+            this.value = "";//清空文本框
+            this.style.color = "black";
+
+        }
+    };
+    //注册失去焦点的事件
+    my$("txt").onblur = function () {
+//        if(this.value==""){
+//            this.value="请输入搜索内容";
+//            this.style.color="gray";
+//        }
+        if (this.value.length == 0) {
+            this.value = "请输入搜索内容";
+            this.style.color = "gray";
+        }
+        console.log(this.value);//获取input的value值
+        console.log(this.type);//获取input的类型
+    };
+
+    //验证文本框密码长度
+    my$("txt1").onblur= function () {
+        if(this.value.length>=6&&this.value.length<=10){
+            this.style.backgroundColor="";
+        }else{
+            this.style.backgroundColor="red";
+        }
+    };
+
+    //获取p标签的内容
+    console.log(document.getElementsByTagName("p")[0].innerText);
+</script>
+</body>
+</html>

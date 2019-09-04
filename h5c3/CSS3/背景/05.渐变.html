@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        /**
+         * 线性渐变:background:linear-gradient(方向(默认方向：从上往下)，起始颜色，终止颜色)
+         *         background:linear-gradient(right yellow green);
+         * 斜着渐变:background-image:linear-gradient(45deg(角度),yellow,green);
+         * 多个颜色渐变：background-image:linear-gradient(to right,yellow 0%,green 40%,blue 100%);
+         *
+         * 径向渐变:background-image: radial-gradient(辐射半径,中心点位置,起始颜色,终止颜色);
+         */
+    </script>
+    <style>
+        div{
+            width: 800px;
+            height: 200px;
+            margin: 30px auto;
+            border: 1px solid #000000;
+        }
+        div:nth-child(1){
+            background-image:linear-gradient(to right,yellow,green);
+        }
+        div:nth-child(2){
+            background-image:linear-gradient(yellow,green);
+        }
+        div:nth-child(3){
+            width: 200px;
+            height: 200px;
+            background-image:linear-gradient(45deg,yellow,green);
+        }
+        div:nth-child(4){
+            background-image:linear-gradient(to right,yellow 0%,green 40%,blue 100%);
+        }
+        div:nth-child(5){
+            background-image:linear-gradient(45deg,yellow 0%,yellow 25%,blue 25%,blue 50%,red 50%,red 75%,green 75%,green 100%);
+        }
+        /*斑马线*/
+        div:nth-child(6){
+            background-image:linear-gradient(135deg,
+                                             #000 0%,
+                                             #000 25%,
+                                             #fff 25%,
+                                             #fff 50%,
+                                             #000 50%,
+                                             #000 75%,
+                                             #fff 75%,
+                                             #fff 100%);
+            /*background-repeat: no-repeat;*/
+            /*background-size: 100px 100%;*/
+        }
+    </style>
+</head>
+<body>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+</body>
+</html>

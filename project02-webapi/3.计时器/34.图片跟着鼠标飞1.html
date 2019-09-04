@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            width: 2000px;
+            height: 2000px;
+        }
+        img{
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<img src="images1/tianshi.gif" alt="" id="im"/>
+<script src="common.js"></script>
+<script>
+    //文档的鼠标移动事件
+    //谷歌和火狐中都有这个事件参数对象，IE8中没有-----在IE8中用window.event来代替
+//    document.onmousemove= function (e) {
+//        //console.log(arguments.length);//事件处理函数有一个参数，这个参数是一个对象---->事件参数对象
+//        //console.log(arguments);
+//        console.log(e);
+//
+//    };
+//    document.onmousemove= function (e) {
+//        e=window.event||e;
+//        //可视区的横坐标
+//        //可视区的纵坐标
+//        my$("im").style.left= e.clientX+"px";
+//        my$("im").style.top= e.clientY+"px";
+//    };
+//    document.onmousemove= function (e) {
+//      //页面相对于顶部的位置----IE8不可用
+//        my$("im").style.left= e.pageX+"px";
+//        my$("im").style.top= e.pageY+"px";
+//    };
+
+    var evt={
+        //window.event和事件参数对象e的兼容
+        getEvent: function (e) {
+            return e||window.event;
+        },
+        //可视区域的横坐标的兼容代码
+        getClientX: function (evt) {
+            return this.getEvent(evt).clientX;
+        },
+        //可视区域的纵坐标的兼容代码
+        getClientY: function (evt) {
+            return this.getEvent(evt).clientY;
+        },
+        //页面向左卷曲出去的横坐标
+        getScrollLeft: function () {
+          return window.pageXOffset||document.body.scrollLeft||document.documentElement.scrollLeft||0;
+        },
+        //页面向上卷曲出去的纵坐标
+        getScrollTop: function () {
+            return window.pageYOffset||document.body.scrollTop||document.documentElement.scrollTop||0;
+        },
+        //相对于页面的横坐标（pageX）
+        getPageX: function (evt) {
+            return this.getEvent(evt).pageX?this.getEvent(evt).pageX:this.getClientX(evt)+this.getScrollLeft;
+        },
+        //相对于页面的纵坐标（pageY）
+        getPageY: function (evt) {
+            return this.getEvent(evt).pageX?this.getEvent(evt).pageY:this.getClientY(evt)+this.getScrollTop;
+        }
+    };
+    document.onmousemove= function (e) {
+        e=window.event||e;
+        my$("im").style.left= evt.getPageX(e)+"px";
+        my$("im").style.top= evt.getPageY(e)+"px";
+    };
+</script>
+</body>
+</html>

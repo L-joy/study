@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        /**
+         * 给定一个数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
+         * candidates 中的每个数字在每个组合中只能使用一次。
+         */
+        /**
+         * @param {number[]} candidates
+         * @param {number} target
+         * @return {number[][]}
+         */
+        var combinationSum2 = function(candidates, target) {
+            var items=[],path=[];
+            f1(candidates,target,items,path,0);
+            return items;
+
+        };
+        function f1(candidates,target,items,path,it){
+            if(target<0){
+                return;
+            }
+            if(target==0){
+                path=path.slice();
+                items.push(path);
+                repeat(items);
+                return;
+            }
+            for(var i=it;i<candidates.length;i++){
+                path.push(candidates[i]);
+                f1(candidates,target-candidates[i],items,path,i+1);
+                path.pop();
+            }
+        }
+        //去重
+        function repeat(arr) {
+            for(var j=0;j<arr.length;j++) {
+                for (var i = j+1; i < arr.length; i++) {
+                    if (arr[j].length == arr[i].length) {
+                        arr[i].sort(function (a, b) {
+                            if (a > b) {
+                                return 1;
+                            } else if (a == b) {
+                                return 0;
+                            } else {
+                                return -1;
+                            }
+                        });
+                        arr[j].sort(function (a, b) {
+                            if (a > b) {
+                                return 1;
+                            } else if (a == b) {
+                                return 0;
+                            } else {
+                                return -1;
+                            }
+                        });
+                        if (arr[i].toString()==arr[j].toString()) {
+                            //console.log("llala");
+                            arr.splice(i,1);
+                        }
+                    }
+                }
+            }
+        }
+        var candidates=[10,1,2,7,6,1,5];
+        var target=8;
+        arr=[[1,2,5],[1,2],[2,1,5]];
+        //repeat(arr);
+        //console.log(arr);
+        console.log(combinationSum2(candidates,target));
+//        var items=[],path=[];
+//        f1(candidates,target,items,path,0);
+//        console.log(items);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

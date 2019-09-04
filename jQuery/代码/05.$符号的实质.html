@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+</head>
+<body>
+<script src="jquery-1.12.4.js"></script>
+<script>
+    //$其实就是一个函数，$();
+    //参数不同，功能就不同
+    //3种用法
+
+    //1.参数是一个函数，入口函数
+    $(function () {
+
+    });
+
+    //2.$(domobj); 把dom对象转换为jquery对象
+    $(document).ready(function () {
+
+    });
+
+    //3.参数是一个字符串，用来找对象
+    $("div");
+    $("#btn");
+    $(".current");
+
+    console.log(typeof $);//function
+</script>
+</body>
+</html>

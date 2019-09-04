@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        //while循环
+        var num=1;
+        while(num<=10){
+            console.log("哈哈");
+            num++;
+        }
+        //计算1-100的和
+        var num1=1;
+        var sum=0;
+        while(num1<=100){
+            sum=sum+num1;
+            num1++;
+        }
+        console.log(sum);
+        //6的阶乘
+        var x=6;
+        var result=1;
+        while(x>0){
+            result=result*x;
+            x--;
+        }
+        console.log("6的阶乘为："+result);
+        //求1-100之间偶数的和
+        var sum1=0;
+        var num2=1;
+        while(num2<=100){
+            if(num2%2==0){
+                sum1=sum1+num2;
+            }
+            num2++;
+        }
+        console.log("1-100之间偶数的和: "+sum1);
+        //求1-100之间奇数的和
+        var sum2=0;
+        var num3=1;
+        while(num3<=100){
+            if(num3%2!=0){
+                sum2=sum2+num3;
+            }
+            num3++;
+        }
+        console.log("1-100之间奇数的和: "+sum2);
+        //输出1-100之间能被7整除的数字
+        var num4=1;
+        while(num4<=100){
+            if(num4%7==0){
+                console.log(num4);
+            }
+            num4++;
+        }
+        var username=prompt("请输入用户名：");
+        var password=prompt("请输入密码：");
+        while(username!="admin"||password!="123123"){
+            // console.log("账号或密码有误");
+             username=Number(prompt("请输入用户名："));
+             password=Number(prompt("请输入密码："));
+        }
+        console.log("登录成功");
+
+        //do-while循环
+        do{
+            var n=prompt("您觉得我帅吗？（请输入y或者n）");
+        }while(n!="y");
+        console.log("您真有眼光");
+        //练习：求100以内所有3的倍数的和
+        var s=0;
+        var i=3;
+        do{
+            if(i%3==0){
+                s=s+i;
+            }
+            i++
+        }while(i<=100)
+        console.log(s);
+
+        //for循环
+        for(var j=0;j<10;j++){
+            console.log("帅");
+        }
+        var s1=0;
+        for(var k=0;k<=100;k++){
+            s1=s1+k;
+        }
+        console.log(s1);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

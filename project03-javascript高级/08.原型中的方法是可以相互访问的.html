@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        //        function Person(age){
+        //            this.age=age;
+        //            this.play= function () {
+        //                console.log("啦啦啦");
+        //                //玩的同时吃-------实例对象的方法可以相互调用的
+        //                this.eat();
+        //            };
+        //            this.eat= function () {
+        //                console.log("吃吃吃");
+        //            };
+        //        }
+        //        //创建对象并实例化
+        //        var per=new Person(12);
+        //        per.play();
+
+
+
+        //原型中的方法可以相互调用
+
+        function Person(age) {
+            this.age = age;
+        }
+        Person.prototype.play = function () {
+            console.log("啦啦啦");
+            this.eat();
+        };
+        Person.prototype.eat = function () {
+            console.log("吃吃吃");
+            //this.play();
+        };
+        //创建对象并实例化
+        var per = new Person(12);
+        per.play();
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

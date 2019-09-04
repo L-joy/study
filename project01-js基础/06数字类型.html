@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        var num=12;
+        /*
+        * 数字类型：整数和小数
+        * 所有的数字都是number类型
+        * js中可以表示那些进制
+        * var num=12;十进制
+        * var num=012;八进制
+        * var num=0x123;十六进制
+        * */
+         var num1=12;//十进制
+         var num2=012;//八进制
+         var num3=0x123;//十六进制
+        console.log(num1,num2,num3);
+        //数字范围
+        console.log(Number.MAX_VALUE);//最大值
+        console.log(Number.MIN_VALUE);//最小值
+        //不要用小数去验证小数，存在bug
+        var x=0.1;
+        var y=0.2;
+        var sum=x+y;
+        console.log(sum==0.3);//false
+        //不要用NaN去验证NaN
+        var num4;
+        console.log(num4+10==NaN);//false
+        //判断结果不是一个数字可以使用isNaN(变量名)
+        var str="你好";
+        console.log(isNaN(str));//true------str不是一个数字
+        var num5;
+        console.log(num5+10);//NaN------不是一个数字
+        console.log(isNaN(num5+10));//true
+    </script>
+</head>
+<body>
+
+</body>
+</html>

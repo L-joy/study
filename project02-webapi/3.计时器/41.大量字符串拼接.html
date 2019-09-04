@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+</head>
+<body>
+<input type="button" value="拼接" id="btn"/><br/>
+<input type="text" value=""/><br/>
+<input type="text" value=""/><br/>
+<input type="text" value=""/><br/>
+<input type="text" value=""/><br/>
+<input type="text" value=""/><br/>
+<script src="common.js"></script>
+<script>
+    //点击按钮实现拼接
+//    document.getElementById("btn").onclick= function () {
+//        var str="";
+//        //获取所有的文本框
+//        var list=document.getElementsByTagName("input");
+//        for(var i=0;i<list.length-1;i++){
+//            if(list[i].type!="button"){
+//                str+=list[i].value+"|";
+//            }
+//        }
+//        console.log(str+list[list.length-1].value);
+//    };
+    //推荐使用数组的方法拼接大量字符串---减少内存使用
+    document.getElementById("btn").onclick= function () {
+        var str=[];
+        //获取所有的文本框
+        var list=document.getElementsByTagName("input");
+        for(var i=0;i<list.length-1;i++){
+            if(list[i].type!="button"){
+                str.push(list[i].value);
+            }
+        }
+        console.log(str.join("|"));
+    };
+</script>
+</body>
+</html>

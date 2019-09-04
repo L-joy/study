@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        textarea{
+            width: 300px;
+            height: 300px;
+            font: bold 18px "楷体";
+
+        }
+    </style>
+</head>
+<body>
+<textarea name="texta" id="" cols="30" rows="10">
+    简单生活才能幸福生活，人要自足常乐，宽容大度，什么事情都不能想繁杂，心灵的负荷重了，就会怨天忧人。要定期的对记忆进行一次删除，把不愉快的人和事从记忆中摈弃，人生苦短，财富地位都是附加的，生不带来死不带去，简简单单的生活就是快快乐乐的生活。
+</textarea><br/>
+<input type="button" value="请仔细阅读协议(5)" id="btn" disabled="disabled"/>
+<script src="../common.js"></script>
+<script>
+    var time=5;
+    var timeId=setInterval(function () {
+        time--;
+        my$("btn").value="请仔细阅读协议("+time+")";
+        if(time<=0){
+            //停止定时器就可以
+            clearInterval(timeId);
+            //按钮就可以被点击了
+            my$("btn").disabled=false;
+            my$("btn").value="同意";
+        }
+    },1000);
+
+</script>
+</body>
+</html>

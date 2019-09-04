@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            width: 300px;
+            height: 200px;
+            border: 2px solid black;
+            overflow: auto;
+        }
+        input{
+            position: absolute;
+            left: 350px;
+            top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="dv">
+    啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦
+    啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦
+    啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦
+    啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦
+    啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦
+    啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦
+    啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦
+    啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦
+    啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦
+    啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦
+    啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦
+    啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦
+    啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦
+    啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦
+    啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦
+    啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦
+    啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦
+    啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦
+    啦啦
+</div>
+<input type="button" value="显示效果" id="btn"/>
+<script src="../common.js"></script>
+<script>
+    /**
+     * offset系列：
+     *
+     * offsetWidth---获取元素的宽（包括border）
+     * offsetHeight---获取元素的高（包括border）
+     * offsetLeft---获取元素距离左边位置的值
+     * offsetTop---获取元素距离上边的值
+     *
+     * scroll系列：卷曲---滚出去
+     *
+     * scrollWidth----元素中内容实际的宽（没有边框），如果没有内容就是元素的宽
+     * scrollHeight----元素中内容实际的高（没有边框），如果没有内容就是元素的高
+     * scrollLeft-----向左卷曲出去的距离
+     * scrollTop----向上卷曲出去的距离
+     */
+//    my$("btn").onclick= function () {
+//        console.log( my$("dv").offsetWidth);//304
+//        console.log( my$("dv").offsetHeight);//204
+//        console.log( my$("dv").offsetLeft);//0
+//        console.log( my$("dv").offsetTop);//0
+//
+//    };
+
+    my$("btn").onclick= function () {
+        console.log(my$("dv").scrollWidth);
+        console.log(my$("dv").scrollHeight);
+        console.log(my$("dv").scrollLeft);
+        console.log(my$("dv").scrollTop);
+    };
+    //时时的获取向上卷曲出去的距离的值
+    //div的滚动事件
+    my$("dv").onscroll= function () {
+        console.log(this.scrollTop);
+    };
+
+</script>
+</body>
+</html>

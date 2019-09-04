@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        div {
+            width: 200px;
+            height: 150px;
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+<input type="button" value="设置值" id="btn"/>
+
+<div id="dv"></div>
+<script src="common.js"></script>
+<script>
+    //设置标签中的文本内容，应该用textContent属性，谷歌，火狐支持，IE8不支持
+    //设置标签中的文本内容，应该用innerContent属性，谷歌，火狐,IE8都支持
+
+    //如果这个属性在浏览器中不支持，那么这个属性的类型是undefined
+
+    //兼容代码
+    //设置任意标签中的任意文本内容
+    function setInnerText(element,text){
+        if(typeof element.textContent=="undefined"){
+            element.innerText=text;
+        }else{
+            element.textContent=text;
+        }
+    }
+    //获取任意标签中的文本内容
+    function getInnerText(element){
+        if(typeof element.textContent=="undefined"){
+            return element.innerText;
+        }else{
+            return element.textContent;
+        }
+    }
+    //测试
+
+    setInnerText(my$("dv"),"哈哈哈哈");
+    console.log(getInnerText(my$("dv")));
+
+    //点击按钮设置div中的内容
+//    my$("btn").onclick = function () {
+//      //  my$("dv").textContent = "你还差点VCD合并代表";
+//      //  my$("dv").innerText = "学科是可敬的承诺的进口车";
+//    };
+</script>
+</body>
+</html>

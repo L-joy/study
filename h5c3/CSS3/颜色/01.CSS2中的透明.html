@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        .out{
+            width: 400px;
+            height: 400px;
+            background-color: darkturquoise;
+            margin: 100px auto;
+            border: 1px solid #000;
+            /*大盒子变透明*/
+            opacity: 0.3;
+        }
+        .in{
+            width: 200px;
+            height: 200px;
+            background-color: salmon;
+            margin: 100px auto;
+            /*小盒子不透明——没有作用*/
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+<!--opacity可以给盒子设置半透明，但会影响里面的盒子，并且里面的盒子无法改变透明度-->
+<div class="out">
+    <div class="in"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+
+        //某人有8 角的邮票5 张，1 元的邮票4 张，1 元8 角的邮票6 张，用这些邮票中的一张或若干张可以得到多少中不同的邮资？
+        var arr=[];
+        arr[0]=0;
+        var sum= 0,t=1,l;
+        for(var i=0;i<=5;i++){
+            for(var j=0;j<=4;j++){
+                for(var k=0;k<=6;k++){
+                    sum=8*i+10*j+18*k;
+                    for(l=0;l<t;l++){
+                        if(arr[l]==sum){
+                            break;
+                        }
+                    }
+                    if(l==t){
+                        arr[t]=sum;
+                        t++;
+                    }
+
+                }
+            }
+        }
+        arr.sort(function (x1,x2) {
+            if(x1>x2){
+                return 1;
+            }else if(x1==x2){
+                return 0;
+            }else{
+                return -1;
+            }
+        });
+        console.log(arr);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

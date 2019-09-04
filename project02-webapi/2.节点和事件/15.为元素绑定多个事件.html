@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+</head>
+<body>
+<input type="button" value="按钮" id="btn"/>
+<script src="common.js"></script>
+<script>
+    /**
+     * 为元素绑定事件(DOM):
+     * 1.对象.addEventListener(参数1，参数2，参数3)；--------不兼容，IE8不支持
+     * 参数一：事件的类型-----事件的名字，没有on
+     * 参数二：事件处理函数----(命名函数，匿名函数)
+     * 参数三：布尔类型，目前就写false
+     *
+     * 2.对象.attachEvent(参数1，参数2)；--------IE8支持
+     * 参数一：事件类型---事件名字：加on
+     * 参数二：时间处理函数
+     */
+    //为按钮绑定多个点击事件
+    my$("btn").addEventListener("click", function () {
+        console.log("啦啦啦");
+    },false);
+    my$("btn").addEventListener("click", function () {
+        console.log("嘟嘟嘟");
+    },false);
+    my$("btn").addEventListener("click", function () {
+        console.log("哈哈哈");
+    },false);
+    my$("btn").addEventListener("click", function () {
+        console.log("咯咯咯");
+    },false);
+
+//    my$("btn").attachEvent("onclick", function () {
+//        console.log("啦啦啦");
+//    })
+
+</script>
+</body>
+</html>

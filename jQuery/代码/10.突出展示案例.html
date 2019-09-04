@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+        }
+        .wrap{
+            width: 930px;
+            height: 420px;
+            border: 1px solid black;
+            margin: 100px auto;
+        }
+        img{
+            width: 300px;
+            height: 200px;
+        }
+        .wrap ul li{
+            position: relative;
+            float: left;
+            width: 300px;
+            height: 200px;
+            margin: 5px 5px 5px 5px;
+
+        }
+    </style>
+    <script src="jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+            var $li=$(".wrap>ul>li");
+            //为所有li注册鼠标经过事件
+            $li.mouseenter(function () {
+//                $(this).css("opacity","1");
+//                $(this).siblings().css("opacity","0.5");
+                $(this).css("opacity","1").siblings().css("opacity","0.5");
+            });
+            $(".wrap").mouseleave(function () {
+                //让所有的li亮
+                //$(this).children().children("li");
+                $(this).find("li").css("opacity","1");//可以找后代
+            });
+
+        });
+    </script>
+</head>
+<body>
+<div class="wrap">
+    <ul>
+        <li><a href="#"><img src="../Jackson-yee/11.jpg" alt=""/></a></li>
+        <li><a href="#"><img src="../Jackson-yee/12.jpg" alt=""/></a></li>
+        <li><a href="#"><img src="../Jackson-yee/13.jpg" alt=""/></a></li>
+        <li><a href="#"><img src="../Jackson-yee/14.jpg" alt=""/></a></li>
+        <li><a href="#"><img src="../Jackson-yee/15.jpg" alt=""/></a></li>
+        <li><a href="#"><img src="../Jackson-yee/16.jpg" alt=""/></a></li>
+    </ul>
+</div>
+</body>
+</html>

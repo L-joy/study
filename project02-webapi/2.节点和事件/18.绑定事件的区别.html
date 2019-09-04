@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+</head>
+<body>
+<input type="button" value="按钮" id="btn"/>
+<script src="common.js"></script>
+<script>
+    /**
+     * 绑定时间的区别
+     * addEventListener("click"，fn，false)-----谷歌，火狐，IE11支持，IE8不支持---this返回：当前绑定事件的对象
+     * attachEvent("onclick"，fn)-----谷歌，火狐，IE11不支持，IE8支持-----this返回：window
+     */
+    //为按钮绑定多个点击事件
+    addEventListener(my$("btn"),"click",fn);
+    function fn(){
+        console.log(this);
+    }
+</script>
+</body>
+</html>

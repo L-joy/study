@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        /**
+         * 3D变换：
+         * 屏幕坐标系
+         */
+    </script>
+    <style>
+        .rotatex{
+            width: 400px;
+            height: 250px;
+            margin: 100px auto;
+            /*透视：加给变换的父盒子——perspective: 500px;属性值越大，立体感越小*/
+            /*透视效果只是视觉上的呈现，并不是真正的3D*/
+            perspective: 500px;
+        }
+        img{
+            width: 400px;
+            height: 250px;
+            /*过渡*/
+            transition: transform 2s;
+        }
+        .rotatex:hover img{
+            transform: rotateX(360deg);
+        }
+    </style>
+</head>
+<body>
+<div class="rotatex">
+    <img src="../../Jackson-yee/38.jpg" alt=""/>
+</div>
+</body>
+</html>

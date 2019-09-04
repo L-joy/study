@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        //实现获取下一个排列的函数，算法需要将给定数字序列重新排列成字典序中下一个更大的排列。
+        //如果不存在下一个更大的排列，则将数字重新排列成最小的排列（即升序排列）。
+        //必须原地修改，只允许使用额外常数空间。
+        /**
+         * @param {number[]} nums
+         * @return {void} Do not return anything, modify nums in-place instead.
+         */
+        var nextPermutation = function (nums) {
+            if (nums.length != 0) {
+                if (isDownSort(nums, 0, nums.length - 1)) {
+                    nums.reverse();
+                } else {
+                    for (var i = nums.length - 1; i > 0; i--) {
+                        if (nums[i - 1] < nums[i]) {//从右向左，第一个左边小于右边的位置
+                            var a = i - 1;
+                            break;
+                        }
+                    }
+                    for (var j = nums.length - 1; j > a; j--) {
+                        if (nums[j] > nums[a]) {//从右向左，第一个大于nums[a]的位置
+                            var b = j;
+                            break;
+                        }
+                    }
+                    swap(nums, a, b);
+                    sort(nums, a, nums.length - 1);
+                }
+            }
+        };
+        //交换
+        function swap(nums, a, b) {
+            var temp = nums[a];
+            nums[a] = nums[b];
+            nums[b] = temp;
+        }
+        //将a后面的排序
+        function sort(nums, a, n) {
+            var temp = 0;
+            for (var i = 0; i < n - a; i++) {
+                for (var j = a + 1; j < nums.length - 1; j++) {
+                    if (nums[j] > nums[j + 1]) {
+                        temp = nums[j];
+                        nums[j] = nums[j + 1];
+                        nums[j + 1] = temp;
+                    }
+                }
+            }
+
+        }
+        //判断序列是不是降序
+        function isDownSort(nums, start, end) {
+            if (start == end) {
+                return true;
+            } else if (nums[start] >= nums[start + 1]) {
+                return isDownSort(nums, start + 1, end);
+            } else {
+                return false;
+            }
+        }
+        //判断序列是不是升序
+        function isUpSort(nums, start, end) {
+            if (start == end) {
+                return true;
+            } else if (nums[start] <= nums[start + 1]) {
+                return isUpSort(nums, start + 1, end);
+            } else {
+                return false;
+            }
+        }
+        var nums = [0,-1,1];
+        //console.log(upSort(nums, 0, nums.length - 1));
+        //nextPermutation(nums);
+        var arr=permute(nums);
+        console.log(arr);
+    </script>
+</head>
+<body>
+
+</body>
+</html>
