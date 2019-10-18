@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //组合继承：原型继承+借用构造函数继承
+        function Quene() {
+            let items = []
+            this.enquene = function (element) {
+                // items.push(element)
+                console.log("234")
+            }
+            this.dequene = function () {
+                //删除数组中第一项
+                return items.shift()
+            }
+            this.front = function () {
+                return items[0]
+            }
+            this.isEmpty = function () {
+                // return items.length === 0
+                console.log('234')
+            }
+            this.clear = function () {
+                items = []
+            }
+            this.size = function () {
+                return items.length
+            }
+        }
+        Quene.prototype.test = function () {
+            console.log("Quenetest")
+        }
+        
+        function PriorityQuene() {
+            Quene.call(this) //只针对构造函数本身的继承，还需继承原型
+            // 修改父类构造函数内的方法或属性，直接在子类的构造函数中覆盖即可
+            this.isEmpty = function () {
+                console.log('123')
+            }
+        }
+        
+        // 原型继承的方法
+        //方法一：
+        //PriorityQuene.prototype = Quene.prototype
+        //缺点：引用类型，在操作对象原型时候，直接改变堆内存中对象的方法
+        //指向同一个对象
+        //方法二
+        //PriorityQuene.prototype = new Quene()
+        //这种继承借助原型并基于已有的对象创建新对象，同时还不必因此创建自定义类型，但是构造函数两次继承，不是很好
+        //方法三
+        PriorityQuene.prototype = Object.create(Quene.prototype)
+        PriorityQuene.prototype.constructor = PriorityQuene
+        //修改父类原型中的方法需要在继承父类原型的基础上进行方法重写
+        PriorityQuene.prototype.test = function (){
+            console.log("PriorityQuenetest")
+        }
+        //使用Quene原型对象及其属性去创建一个新的对象，并将这个对象的constructor指向PriorityQuene函数本身，不存在重复继承的问题
+        //方法四
+        // for (var i in Quene.prototype){
+        //     PriorityQuene.prototype[i] = Quene.prototype[i]
+        // }
+        //将Quene的原型链遍历给PriorityQuene对象，实现原型的深度拷贝，双方互不影响
+
+        let p = new PriorityQuene()
+        console.dir(p)
+        p.isEmpty()
+        p.test()
+    </script>
+</body>
+
+</html>

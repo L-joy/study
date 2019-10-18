@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function Quene() {
+            this.items = []
+            this.enquene = function (element) {
+               this.items.push(element)
+            }
+            this.dequene = function () {
+                //删除数组中第一项
+                return this.items.shift()
+            }
+            this.front = function () {
+                return this.items[0]
+            }
+            this.isEmpty = function () {
+                return this.items.length === 0
+            }
+            this.clear = function () {
+                this.items = []
+            }
+            this.size = function () {
+                return this.items.length
+            }
+        }
+        let quene = new Quene()
+        // console.log(quene.isEmpty())//true
+        // quene.enquene(2)
+        // quene.enquene(5)
+        // console.log(quene.size())//2
+        // console.log(quene.dequene())//2
+        // console.log(quene.size())//1
+        // quene.clear()
+        // console.log(quene.isEmpty())//true
+
+        function PriorityQuene() {
+            Quene.call(this) //继承父级构造函数
+            function QueneElement(element, priority) {
+                this.element = element
+                this.priority = priority
+            }
+            console.log(this)
+            this.enquene = function (element, priority) {
+                let queneElement = new QueneElement(element, priority)
+                if (this.isEmpty()) {
+                    this.items.push(queneElement)
+                } else {
+                    let flag = false
+                    for (let i = 0; i < this.items.length; i++) {
+                        if (queneElement.priority < this.items[i].priority) {
+                            this.items.splice(i, 0, queneElement) //将元素添加到数组索引为i的位置
+                            flag = true
+                            break
+                        }
+
+                    }
+                    if (!flag) { //说明此元素优先级最高
+                        this.items.push(queneElement)
+                    }
+                }
+            }
+        }
+        PriorityQuene.prototype = Object.create(Quene.prototype) //继承父级原型
+        PriorityQuene.prototype.constructer = PriorityQuene
+
+        let priorityQuene = new PriorityQuene()
+        priorityQuene.enquene("1", 1)
+        priorityQuene.enquene("2", 2)
+        priorityQuene.enquene("3", 3)
+        priorityQuene.enquene("4", 5)
+        console.log(priorityQuene.size())
+        priorityQuene.dequene()
+        priorityQuene.enquene("5", 4)
+
+        //2、循环队列 (击鼓传花游戏)
+        //孩子们围成一个圈，把花尽快传给旁边的人，某一刻传花停止，花在谁手里，谁就淘汰，知道最后只剩一个孩子,返回这个孩子
+
+        function hotPotato(nameList, num) {
+            let quene = new Quene()
+            for (let i = 0; i < nameList.length; i++) {
+                quene.enquene(nameList[i])
+            }
+            while (quene.size() > 1) {
+                for (let i = 0; i < num; i++) {
+                    quene.enquene(quene.dequene())
+                }
+                quene.dequene()
+            }
+            return quene.dequene()
+        }
+        let name = ["小明","小李","小花","小白","小小"]
+        let winner = hotPotato(name,7)
+        console.log(winner)
+    </script>
+</body>
+
+</html>

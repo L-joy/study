@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //在面向对象编程（OOP）中，对象是类的实例，一个类定义了对象的特征。
+        //我们会创建很多类来表示算法和数据结构。例如我们声明了一个类来表示书：
+        function Book(title,name,id){
+            this.title = title
+            this.name = name
+            this.id = id
+        }
+        //用代码来实例化这个类：
+        var book = new Book('啦啦啦','嗯嗯嗯','1')
+        console.log(book.title)
+        book.id = '2'
+        console.log(book.id)
+
+        //类可以包含函数。可以声明和使用函数，如下在原型上定义实例共享函数：
+        Book.prototype.print = function () {
+            console.log(this.name)
+        }
+        book.print()
+        /*
+           数组：
+
+        */
+        //创建和初始化数组的方法
+        let array = new Array()
+        // let array = []
+        //数组的方法
+        let arr = ['2','3','4','1','56','2','34','0','2']
+        // push,pop(后进后出)
+        //arr.push('24') //["2", "3", "4", "1", "56", "34", "0", "24"]
+        //arr.pop() //["2", "3", "4", "1", "56", "34"]
+        //unshift,shift(前进前出)
+        //arr.unshift('12') //["12", "2", "3", "4", "1", "56", "34", "0"]
+        //arr.shift() // ["3", "4", "1", "56", "34", "0"]
+        //arr.splice(1,2) //从索引为1的位置开始删除两个
+        //arr = arr.slice(1, 5) //返回从索引1到索引5（不包括索引5）对应的元素组成的新数组
+        //let l = arr.lastIndexOf('2',7)//从索引为8的位置开始从后往前搜索'2'
+        //console.log(l)
+        //  let arrF = arr.map((item) => {
+        //      return (item+2)
+        //  })
+        //  console.log(arrF)
+        // let strArr1 = [2,5,13]
+        // let strArr2 = ['s','r','f']
+        // function compute(total,currentValue) {
+        //    return total+currentValue
+        // }
+        // let res1 = strArr1.reduce(compute)
+        // let res2 = strArr2.reduce(compute)
+        // console.log(res1+"----"+res2)//20----srf
+        arr.splice(1,0,'8')
+        console.log(arr)//["2", "8", "3", "4", "1", "56", "2", "34", "0", "2"]
+
+
+
+    </script>
+</body>
+</html>

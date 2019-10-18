@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       function Stack() {
+           let items = [];
+           //push方法
+           this.push = function (element) {
+               items.push(element)
+           }
+           //pop方法
+           this.pop = function () {
+               return items.pop()
+           }
+           //peek方法---返回栈顶的元素，不对栈做任何修改；
+           this.peek = function (element) {
+               return items[items.length-1]
+           }
+           //isEmpty方法
+           this.isEmpty = function (element) {
+               return (items.length === 0)
+           }
+           this.clear = function () {
+               items = []
+           }
+           this.size = function () {
+               return items.length
+           }
+       }
+       //使用栈
+       let stack = new Stack();
+       console.log(stack.isEmpty())//true
+       stack.push(2)
+       stack.push(5)
+       console.log(stack.size())//2
+       console.log(stack.peek())//5
+       console.log(stack.pop())//5
+       console.log(stack.peek())//2
+       stack.clear()
+       console.log(stack.isEmpty())//true
+    //    用栈实现进制换算
+       function baseConverter(number) {
+           let stack = new Stack()
+           while(number){
+               stack.push(number%2)
+               number = Math.floor(number/2)
+           }
+           let result = ''
+           while(!stack.isEmpty()){
+               result = result+stack.pop()
+           }
+           return result
+       }
+       console.log(baseConverter(100))//1100100
+
+    //用栈判断字符串是否是回文字符串---“回文串”是一个正读和反读都一样的字符串，比如“level”或者“noon”等等就是回文串
+       function isPalindrome(word) {
+          let stack = new Stack()
+          let len = word.length
+          for(let i = 0; i<len ; i++){
+              stack.push(word[i])
+          }
+          let newword = ''
+          while(stack.size() !== 0){
+              newword = newword + stack.pop()
+          }
+          if(newword === word){
+              return true
+          }else{
+              return false
+          }
+       }
+       console.log(isPalindrome("level"))//true
+       console.log(isPalindrome("levellevell"))//false
+
+    //用栈实现递归-----阶乘
+    //普通方法
+    function factorial(n) {
+        if(n === 0){
+            return 1;
+        }else{
+            return n*factorial(n-1)
+        }
+    }
+    console.log(factorial(4))
+    //用栈
+    function stackfactorial(n) {
+        let stack = new Stack()
+        while(n){
+            stack.push(n--)
+        }
+        let res = 1
+        while(stack.size() !== 0){
+            res = res*stack.pop()
+        }
+        return res
+    }
+    console.log(stackfactorial(4))
+    </script> 
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>login</title>
+		<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+		
+	    <style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			body{
+				background-color: #F2F2F2;
+				text-align: center;
+			}
+			/* 面板 */
+			.panel{
+				display: inline-block;
+				margin-top: 50px;
+				background-color: white;
+				border: 1px solid #dddddd;
+				padding: 20px;
+				border-radius: 6px;
+				width: 300px;
+				/* 阴影:水平,垂直,模糊x像素,颜色 */
+				box-shadow: 0px 0px 10px #999;
+			}
+			/* 面板头部 */
+			.header{
+				font-size: 13px;
+				font-family: arial;
+				border-bottom: 1px solid #DDDDDD;
+				padding: 10px 0;
+				width: 150px;
+				margin: 0px auto;
+			}
+			/* 面板头部完 */
+			/* 面板内容 */
+			.content{
+				margin-top: 20px;
+			}
+			.input{
+				margin-bottom: 10px;
+				position: relative;
+				height: 36px;
+			}
+			.input label{
+				position: absolute;
+				top: 7px;
+				left: 6px;
+			}
+			.input input{
+				width: 100%;
+				height: 100%;
+				padding-left: 40px;
+				border: 1px solid #DDDDDD;
+				box-sizing: border-box;
+			}
+			.login{
+				position: relative;
+				height: 20px;
+				line-height: 20px;
+			}
+			.login input{
+				position: absolute;
+				float: left;
+				left: 0;
+				top: 4px;
+			}
+			.login a{
+				text-decoration: none;
+				color: gray;
+				font-size: 13px;
+			}
+			.login-left{
+				float: left;
+				margin-left: 15px;
+			}
+			.login-right{
+				float: right;
+			}
+			.login-btn button{
+				width: 100%;
+				height: 33px;
+				border-radius: 6px;
+				border: 0px;
+				color: white;
+				font-size: 17px;
+				margin: 10px 0;
+				background-color: orange;
+			}
+			.reg{
+				height: 30px;
+				line-height: 30px;
+				font-size: 13px;
+				border-bottom: 1px solid #DDDDDD;
+			}
+			.reg a{
+				text-decoration: none;
+				color: orange;
+			}
+			/* 面板内容完 */
+			/* 面板底部 */
+			.footer{
+				height: 40px;
+				line-height: 40px;
+				text-align: left;
+			}
+			.footer span{
+				left: 0;
+			}
+			.footer img{
+				width: 24px;
+				vertical-align: middle;
+			}
+			/* 面板底部完 */
+		</style>
+	</head>
+	<body>
+		<!-- 面板 -->
+		<div class="panel">
+			<!-- 面板的头部 -->
+			<div class="header">
+				<h2>欢迎登录</h2>
+			</div>
+			<!-- 面板的主要内容 -->
+			<div class="content">
+				<div class="input">
+					<label for=""><img src="image/user.png" width="24"></label>
+					<input type="text" placeholder="您的手机号/用户名">
+				</div>
+				<div class="input">
+					<label for=""><img src="image/user.png" width="24"></label>
+					<input type="password" placeholder="输入密码">
+				</div>
+				<div class="login">
+					<input type="checkbox">
+					<a href="#" class="login-left">下次自动登录</a>
+					<a href="#" class="login-right">忘记密码</a>
+				</div>
+				<div class="login-btn">
+					<button type="button">登录</button>
+				</div>
+				<div class="reg">
+					还没账号？<a href="#">马上注册</a>
+				</div>
+			</div>
+			<!-- 面板的底部 -->
+			<div class="footer">
+				<span>社交账号登录</span>
+				<img src="image/alipay.png" alt="">
+				<img src="image/sina.png" alt="">
+				<img src="image/wechat.png" alt="">
+			</div>
+		</div>
+	</body>
+</html>
