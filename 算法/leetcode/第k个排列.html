@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+<script>
+    /**
+     * @param {number} n
+     * @param {number} k
+     * @return {string}
+     */
+    var getPermutation = function(n, k) {
+        var totalNum = [];
+        for (var i = 1; i < n+1; i++) {
+            totalNum.push(i);
+        }
+        console.log(totalNum);
+        var result = "";
+        if(n < 1){
+            return result;
+        }
+        if(n === 1&&k === 1){
+            return "1";
+        }
+        var total = sum(n);//排列总数
+        var everyTotal = total / n;//第一数字固定排列总数
+        var firstNum , index;
+        if(k === everyTotal){
+            firstNum = 1;
+            index = everyTotal;
+        }else {
+            if(everyTotal === 1){
+                firstNum = totalNum[k-1];
+                index = 1;
+            }else {
+                if(k % everyTotal === 0){
+                    firstNum = totalNum[k/everyTotal-1];
+                    index = everyTotal;
+                }else {
+                    firstNum = totalNum[parseInt(k / everyTotal)];
+                    index = k % everyTotal;
+                }
+            }
+        }
+        while (totalNum.indexOf(firstNum) === -1){
+            firstNum++;
+        }
+        totalNum.splice(totalNum.indexOf(firstNum),1);
+        console.log(totalNum);
+        result =result + firstNum + anotherNum(totalNum , index);
+        return result;
+    };
+    function sum(n){
+        if(n === 1){
+            return 1;
+        }
+        return n*sum(n-1);
+    }
+    function anotherNum(totalNum , k){
+        if(totalNum.length === 1){
+            return totalNum[0];
+        }
+        var total = sum(totalNum.length);
+        var everyTotal = total / totalNum.length;//第一数字固定排列总数
+        var firstNum , index;
+        if(k === everyTotal){
+            firstNum = 1;
+            index = everyTotal;
+        }else {
+            if(everyTotal === 1){
+                firstNum = totalNum[k-1];
+                index = 1;
+            }else {
+                if(k % everyTotal === 0){
+                    firstNum = totalNum[k/everyTotal-1];
+                    index = everyTotal;
+                }else {
+                    firstNum = totalNum[parseInt(k / everyTotal)];
+                    index = k % everyTotal;
+                }
+            }
+
+        }
+        while (totalNum.indexOf(firstNum) === -1){
+            firstNum++;
+        }
+        totalNum.splice(totalNum.indexOf(firstNum),1);
+        console.log(totalNum);
+        return "" + firstNum + anotherNum(totalNum , index);
+    }
+    console.log(getPermutation(5,6));
+</script>
+</html>

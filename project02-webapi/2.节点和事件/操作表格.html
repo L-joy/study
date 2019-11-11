@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--<table border="1" width="100%">-->
+<!--    <tbody>-->
+<!--       <tr>-->
+<!--           <td>Cell 1.1</td>-->
+<!--           <td>Cell 2.1</td>-->
+<!--       </tr>-->
+<!--       <tr>-->
+<!--           <td>Cell 1.2</td>-->
+<!--           <td>Cell 2.2</td>-->
+<!--       </tr>-->
+<!--    </tbody>-->
+<!--</table>-->
+</body>
+<script>
+    var table = document.createElement("table");
+    table.border = "1";
+    table.width = "100%";
+
+    var tbody = document.createElement("tbody");
+    table.appendChild(tbody);
+    tbody.insertRow(0);
+    tbody.rows[0].insertCell(0);
+    tbody.rows[0].cells[0].appendChild(document.createTextNode("Cell 1.1"));
+    tbody.rows[0].insertCell(1);
+    tbody.rows[0].cells[1].appendChild(document.createTextNode("Cell 1.2"));
+
+    tbody.insertRow(1);
+    tbody.rows[1].insertCell(0);
+    tbody.rows[1].cells[0].appendChild(document.createTextNode("Cell 2.1"));
+    tbody.rows[1].insertCell(1);
+    tbody.rows[1].cells[1].appendChild(document.createTextNode("Cell 2.2"));
+
+    document.body.appendChild(table);
+</script>
+</html>

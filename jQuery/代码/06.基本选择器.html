@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <title>mysite</title>
 </head>
+<style>
+    #dv{
+        width: 200px;
+        height: 100px;
+
+    }
+</style>
 <body>
 <ul>
     <li>0</li>
@@ -17,6 +24,7 @@
     <li>8</li>
     <li>9</li>
 </ul>
+<div id="dv"></div>
 <script src="jquery-1.12.4.js"></script>
 <script>
     //入口函数
@@ -26,15 +34,19 @@
          * css(name,value)
          * name:样式名 value:样式值
          */
+        $(document).ready(function () {
+            $("#dv").css("border-radius","5px");
+            $('#dv').css({"border":"1px solid black","background-color":"red"});
+        })
 
         //id选择器 $("#id");
-//        $("#four").css("backgroundColor","red");
-//        $(".green").css("backgroundColor","green");
-//        $("li").css("backgroundColor","pink");
+       // $("#four").css("backgroundColor","red");
+       // $(".green").css("backgroundColor","green");
+       // $("li").css("backgroundColor","pink");
 
         //交集 并集
-//        $("#four,.green").css("backgroundColor","yellow");
-//        $("li.green").css("backgroundColor","red");
+       // $("#four,.green").css("backgroundColor","yellow");//并集，id为four或类名为green的元素
+       // $("li.green").css("backgroundColor","red");//交集，标签为li且类名为green的元素
     })
 </script>
 </body>

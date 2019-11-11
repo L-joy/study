@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        input{
+            top: 250px;
+            position: absolute;
+        }
+        #dv1{
+            width: 200px;
+            height: 150px;
+            background-color: salmon;
+            /*margin-left: 100px;*/
+            /*padding-left: 50px;*/
+            /*border: 20px solid beige;*/
+            margin-left: 100px;
+            position: relative;
+
+        }
+        #dv2{
+            width: 100px;
+            height: 50px;
+            background-color: darkturquoise;
+            /*margin-left: 30px;*/
+            /*padding-left: 100px;*/
+            /*border: 20px solid pink;*/
+            position: absolute;
+            left: 10px;
+        }
+    </style>
+</head>
+<body>
+<div id="dv1">
+    <div id="dv2"></div>
+</div>
+<input type="button" value="显示效果" id="btn"/>
+<script src="../common.js"></script>
+<script>
+    /**
+     * 获取元素
+     *
+     * 1.获取元素的宽：offsetWidth
+     * 2.获取元素的高：offsetHeight
+     * 3.获取元素距离左边位置的值：offsetLeft
+     * 4.获取元素距离上边位置的值：offsetTop
+     */
+    my$("btn").onclick= function () {
+
+//        console.log(my$("dv1").offsetWidth);
+//        console.log(my$("dv1").offsetHeight);
+//        console.log(my$("dv1").offsetLeft);
+//        console.log(my$("dv1").offsetTop);
+
+        //父级元素脱标
+        //console.log(my$("dv2").offsetLeft);
+    };
+
+    /**
+     * 直接通过document获取元素
+     */
+    console.log(document.body);
+    console.log(document.title);
+    document.title="啦啦啦";
+    console.log(document.documentElement);//获取html
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+<script>
+    /**
+     * 给定一个正整数 n，生成一个包含 1 到 n2 所有元素，
+     * 且元素按顺时针顺序螺旋排列的正方形矩阵。
+     * 输入: 3
+     输出:
+     [
+     [ 1, 2, 3 ],
+     [ 8, 9, 4 ],
+     [ 7, 6, 5 ]
+     ]
+     * @param {number} n
+     * @return {number[][]}
+     */
+    var generateMatrix = function(n) {
+        var result = [];
+        for (let j = 0; j < n; j++) {
+            var temp = [];
+            for (let k = 0; k < n; k++) {
+                temp.push(0);
+            }
+            result.push(temp);
+        }
+        if (n < 1){
+            return [];
+        }
+        if (n === 1){
+            return [[1]];
+        }
+        var topRow = 0,bottomRow = n-1,leftCol = 0,rightCol = n-1;
+        var i = 1,count = 0;
+        while (i <= Math.pow(n,2)){
+            if(topRow < bottomRow && leftCol < rightCol) {
+                for (let j = leftCol; j < n - count; j++) {
+                    result[topRow][j] = i;
+                    i++;
+                }
+                topRow++;
+                for (let j = topRow; j < n - 1 - count; j++) {
+                    result[j][rightCol] = i;
+                    i++;
+                }
+                rightCol--;
+                for (let j = rightCol + 1; j >= count; j--) {
+                    result[bottomRow][j] = i;
+                    i++;
+                }
+                bottomRow--;
+                for (let j = bottomRow; j > count; j--) {
+                    result[j][leftCol] = i;
+                    i++;
+                }
+                leftCol++;
+            }else {
+                if (topRow === bottomRow){
+                    for (let j = leftCol; j < n - count; j++) {
+                        result[topRow][j] = i;
+                        i++;
+                    }
+                    topRow++;
+                }
+                if(leftCol === rightCol){
+                    for (let j = topRow; j < n - 1 - count; j++) {
+                        result[j][rightCol] = i;
+                        i++;
+                    }
+                    rightCol--;
+                }
+            }
+            count++;
+        }
+        return result;
+    };
+
+    console.log(螺旋矩阵2(1));
+</script>
+</html>

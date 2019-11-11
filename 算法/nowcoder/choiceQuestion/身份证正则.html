@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * [1-9]\d{5} //前6位地区码
+     * \d{4} //年
+     * (0[1-9]|1[0-2]) //月
+     * (0[1-9]|[1-2]\d|3[0-1]) //日
+     * \d{3}(\d|[xX]) //末四位
+     *
+     * @param str
+     */
+    function isIDcard(str) {
+        var idCard = /^[1-9]\d{9}(0[1-9]|1[0-2])(0[1-9]|[1-2]\d|3[0-1])\d{3}(\d|[xX])$/;
+        if(idCard.test(str)){
+            console.log("正确");
+        }else {
+            console.log("错误");
+        }
+    }
+    var str = "612819940424142x";
+    isIDcard(str);
+</script>
+</body>
+</html>

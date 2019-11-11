@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        /*#dv{*/
+            /*width: 300px;*/
+            /*height: 400px;*/
+            /*border: 1px solid darkorange;*/
+        /*}*/
+        a{
+            text-decoration: none;
+        }
+        #box{
+            width: 1000px;
+            height: 600px;
+            margin: 100px auto;
+            position: relative;
+            border: 1px solid black;
+        }
+        #box a{
+            position: absolute;
+            left: -9px;
+            top: -10px;
+            font: bold 20px "黑体";
+        }
+        #box img{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<!--<input type="button" value="显示效果" id="btn"/>-->
+<!--<div id="dv"></div>哈哈-->
+<div id="box">
+    <a href="http://baidu.com">×</a>
+    <img src="../Jackson-yee/39.jpg" alt=""/>
+    <p style="cursor: pointer" id="ps">close</p>
+</div>
+<script src="common.js"></script>
+<script>
+    //隐藏元素
+//    document.getElementById("btn").onclick= function () {
+//        var dv=document.getElementById("dv");
+//        //dv.style.display="none";//不占位
+//        //dv.style.opacity="0";//透明度为0，占位
+//        //dv.style.height="0";
+//        //dv.style.border="0";//占位
+//        //dv.style.visibility="hidden";//占位
+//
+//    };
+    my$("ps").onclick= function () {
+        my$("box").style.display="none";
+    };
+</script>
+</body>
+</html>

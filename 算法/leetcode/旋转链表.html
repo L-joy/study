@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+<script>
+    /**
+     * 给定一个链表，旋转链表，将链表每个节点向右移动 k 个位置，其中 k 是非负数。
+     * @param {ListNode} head
+     * @param {number} k
+     * @return {ListNode}
+     */
+    function ListNode(val) {
+        this.val = val;
+        this.next = null;
+    }
+    var rotateRight = function(head, k) {
+        if(head === null || head.next === null){
+            return head;
+        }
+        let current = head;
+        let length = 0;
+        while (current){
+            length++;
+            current = current.next;
+        }
+        let rotateNum = k%length;
+        let res = head;
+        for (let i = 0; i < rotateNum; i++) {
+            res = rotate(res);
+        }
+        return res;
+    };
+    function rotate(head) {
+        let current = head.next;
+        let previous = head;
+        while (current.next){
+            current = current.next;
+            previous = previous.next;
+        }
+        current.next = head;
+        let res = previous.next;
+        previous.next = null;
+        return res;
+    }
+    var head = new ListNode(0);
+    var head1 = new ListNode(5);
+    var head2 = new ListNode(7);
+    var head3 = new ListNode(8);
+    head.next = head1;
+    head1.next = head2;
+    head2.next = head3;
+    console.log(head);
+    console.log(rotateRight(head, 11));
+</script>
+</html>

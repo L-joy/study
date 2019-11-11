@@ -32,34 +32,42 @@
      */
 
     //父节点
-//    var ulObj=my$("uu");
-//    console.log(ulObj.parentNode);//div
-//    console.log(ulObj.parentNode.parentNode);//body
-//    console.log(ulObj.parentNode.parentNode.parentNode);//html
-//    console.log(ulObj.parentNode.parentNode.parentNode.parentNode);//#document
-//    console.log(ulObj.parentNode.parentNode.parentNode.parentNode.parentNode);//null
-      //ul标签的父级节点
-//    console.log(ulObj.parentNode);
-      //ul标签的父级元素
-//    console.log(ulObj.parentElement);
-//    console.log(ulObj.parentNode.nodeType);//标签属性---1
-//    console.log(ulObj.parentNode.nodeName);//标签名---大写div
-//    console.log(ulObj.parentNode.nodeValue);//标签值---null
+    var ulObj = document.getElementById("uu");
+    console.log(ulObj.nodeName);//UL
+    console.log(ulObj.nodeType);//1
+    console.log(ulObj.nodeValue);//null
+
+   console.log(ulObj.parentNode);//div
+   console.log(ulObj.parentNode.parentNode);//body
+   console.log(ulObj.parentNode.parentNode.parentNode);//html
+   console.log(ulObj.parentNode.parentNode.parentNode.parentNode);//#document
+   console.log(ulObj.parentNode.parentNode.parentNode.parentNode.parentNode);//null
+      // ul标签的父级节点
+   console.log(ulObj.parentNode);
+      // ul标签的父级元素
+   console.log(ulObj.parentElement);
+   console.log(ulObj.parentNode.nodeType);//标签属性---1
+   console.log(ulObj.parentNode.nodeName);//标签名---大写div
+   console.log(ulObj.parentNode.nodeValue);//标签值---null
 
     //子节点
-//    var dvObj=my$("dv");
-//    //获取属性的节点
-//    var node=dvObj.getAttributeNode("id");
-//    console.log(node.nodeType+"======"+node.nodeName+"======"+node.nodeValue);
-    //获取每一个子节点
-//    for(var i=0;i<dvObj.childNodes.length;i++){
-//        var node=dvObj.childNodes[i];
-//        console.log(node.nodeType+"======"+node.nodeName+"======"+node.nodeValue);
-//    }
-    //子节点
-//    console.log(dvObj.childNodes);//7个子节点，空格换行也是节点
-    //子元素
-//    console.log(dvObj.children);//3个子元素
+   var dvObj=document.getElementById('dv');
+
+   //获取属性的节点
+   var node=dvObj.getAttributeNode("id");
+   console.log(node.nodeType+"======"+node.nodeName+"======"+node.nodeValue);
+    // 获取每一个子节点
+   for(var i=0;i<dvObj.childNodes.length;i++){
+       var node=dvObj.childNodes[i];
+       console.log(node.nodeType+"======"+node.nodeName+"======"+node.nodeValue);
+   }
+    // 子节点
+   console.log(dvObj.childNodes);//7个子节点，空格换行也是节点
+
+    var array = [].slice.call(dvObj.childNodes);
+    console.log(array);//[text, span, text, p, text, ul#uu, text]
+    // 子元素
+   console.log(dvObj.children);//3个子元素
 
 </script>
 </body>

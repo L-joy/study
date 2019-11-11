@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <script>
+        /**
+         *  push()、pop() 是从数组的尾部进行增减，unshift()、shift() 是从数组的头部进行增减。
+         * @type {number[]}
+         */
+        var arr=[10,20,30,40,50,60,70];
+        //console.log(arr.shift());//删除数组中第一个数
+//        console.log(arr);//删除后的数组
+//        arr.push(arr.shift());//把删除的数添加在数组最后一位
+//        console.log(arr);
+        //删除数组最后一位放在第一位
+        arr.unshift(arr.pop());
+        console.log(arr);
+    </script>
+</head>
+<body>
+<a href="http://www.baidu.com" id="btn">百度</a>
+<!--<input type="button" value="按钮" id="btn"/>-->
+<script src="common.js"></script>
+<script>
+    my$("btn").onclick= function (e) {
+      alert("被点了");
+        //阻止超链接跳转
+        //return false;
+        e.preventDefault();//阻止浏览器的默认事件
+    };
+</script>
+</body>
+</html>

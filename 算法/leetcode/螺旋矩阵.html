@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 给定一个包含 m x n 个元素的矩阵（m 行, n 列），请按照顺时针螺旋顺序，返回矩阵中的所有元素。
+		 * @param {number[][]} matrix
+		 * @return {number[]}
+		 */
+		var spiralOrder = function(matrix) {
+			var result = [];
+			if(matrix.length === 0){
+				return [];
+			}
+			if(matrix.length === 1){
+				return matrix[0];
+			}
+			if(matrix[0].length === 1){
+				for (var i = 0; i < matrix.length; i++) {
+					result.push(matrix[i][0]);
+				}
+				return result;
+			}
+			var topRow = 0,bottomRow = matrix.length-1,leftCol = 0,rightCol = matrix[0].length-1;
+			var count = 0;
+			while(topRow <= bottomRow && leftCol <= rightCol){
+				if(topRow < bottomRow && leftCol < rightCol){
+					for (var i = leftCol; i < matrix[topRow].length-count; i++) {
+						result.push(matrix[topRow][i]);//第一行入队列
+					}
+					topRow++;
+					for (var i = topRow; i < matrix.length-count; i++) {
+						result.push(matrix[i][rightCol]);//最后一列入队列
+					}
+					rightCol--;
+					for (var i = matrix[bottomRow].length-2-count; i >= count; i--) {
+						result.push(matrix[bottomRow][i]);//最后一行入队列
+					}
+					bottomRow--;
+					
+					for (var i = matrix.length-2-count; i > count; i--) {
+						result.push(matrix[i][leftCol]);
+					}
+					leftCol++;
+					count++;
+				}else{
+					if(topRow === bottomRow){
+						for (var i = leftCol; i < matrix[topRow].length-count; i++) {
+							result.push(matrix[topRow][i]);//第一行入队列
+						}
+						topRow++;
+					}
+					if(leftCol === rightCol){
+						for (var i = topRow; i < matrix.length-count; i++) {
+							result.push(matrix[i][rightCol]);//最后一列入队列
+						}
+						rightCol--;
+					}
+					count++;
+				}
+			}
+			
+			return result;
+		};
+		var a =[[1,2,3,4],[5,6,7,8],[9,10,11,12]];
+		var a1 =[[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]]
+		var a2 =[[2,3,4],[5,6,7],[8,9,10],[11,12,13],[14,15,16]];
+		console.log(螺旋矩阵(a));
+		console.log(螺旋矩阵(a1));
+		console.log(螺旋矩阵(a2));
+	</script>
+</html>

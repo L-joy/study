@@ -18,9 +18,13 @@
 </div>
 <script src="common.js"></script>
 <script>
+    console.dir(Node);
+
     //12行代码：都是获取节点和元素
     //ul
     var ulObj=my$("uu");
+    console.log(ulObj.ownerDocument);
+    console.dir(ulObj);
     //父级节点
     console.log(ulObj.parentNode);
     //父级元素

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        div{
+            width: 100px;
+            height: 130px;
+            border: 20px solid darkorange;
+        }
+    </style>
+    <script>
+        /**
+         *
+         * offset系列：获取元素的高，宽，left，top
+         * offsetWidth-----获取元素的宽（有边框）
+         * offsetHeight-----获取元素的高（有边框）
+         * offsetLeft-----获取元素距离左边位置的值
+         * offsetTop-----获取元素距离上边位置的值
+         *
+         * scroll系列：卷曲出去的值
+         * scrollLeft:向左卷曲出去的值
+         * scrollTop:向上卷曲出去的值
+         * scrollWidth:元素中内容实际的宽（如果内容很少，没有内容，就是元素自身的高），没有边框
+         * scrollHeight:元素中内容实际的高（如果内容很少，没有内容，就是元素自身的高），没有边框
+         *
+         * client系列：可视区域
+         * clientWidth：可视区域的宽（没有边框），边框内部的宽度
+         * clientHeight：可视区域的高（没有边框），边框内部的高度
+         * clientLeft：左边边框的宽度
+         * clientTop：上边边框的宽度
+         *
+         */
+    </script>
+</head>
+<body>
+<div id="dv"></div>
+<script src="common.js"></script>
+<script>
+    console.log(my$("dv").clientWidth);
+    console.log(my$("dv").clientHeight);
+    console.log(my$("dv").clientLeft);
+    console.log(my$("dv").clientTop);
+
+</script>
+</body>
+</html>

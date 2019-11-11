@@ -5,20 +5,222 @@
 		<title>执行上下文</title>
 	</head>
 	<body>
+	<div id="app" style="width: 100px;height: 100px;background:red;">
+
+	</div>
 	</body>
 	<script type="text/javascript">
-		var fn = null;
-		function foo(){
-			var a = 2;
-			function innerFoo(){
-				console.log(a);
-			}
-			fn = innerFoo;
-		}
-		function bar(){
-			fn();
-		}
+		// var fn = null;
+		// function foo(){
+		// 	var a = 2;
+		// 	function innerFoo(){
+		// 		console.log(a);
+		// 	}
+		// 	fn = innerFoo;
+		// }
+		// function bar(){
+		// 	fn();
+		// }
 		// foo();
-		bar();
+		// bar();
+
+		// function outer() {
+		// 	var  a = "变量";
+		// 	var inner = function () {
+		// 		console.log(a);
+		// 	}
+		// 	return inner;// inner 就是一个闭包函数，因为他能够访问到outer函数的作用域
+		// }
+		// var inner = outer();//获取闭包函数
+		// inner();
+
+		// var a = 1; //a是一个基本类型
+		// var b = {m:20}; //b是一个对象
+
+		// var a = 1;
+		// function fn(){
+		// 	var b = 2;
+		// 	function fn1(){
+		// 		console.log(b);
+		// 	}
+		// 	fn1();
+		// }
+		// fn();
+		// function outer() {
+		// 	var result = [];
+		// 	for (var i = 0; i < 10; i++) {
+		// 		result[i] = function f(num) {
+		// 			return function () {
+		// 				console.log(num);
+		// 			}
+		// 		}(i);
+		// 	}
+		// 	return result;
+		// }
+		//
+		// var inner = outer();
+		// for (var i = 0; i < inner.length; i++) {
+		// 	inner[i]();
+		// }
+		// var name = "window";
+		// var obj = {
+		// 	name : "object",
+		// 	getName : function () {
+		// 		return this.name;
+		// 	}
+		// }
+		// console.log((obj.getName()));//object
+		// function showId() {
+		// 	var el = document.getElementById("app");
+		// 	var id = el.id;
+		// 	el.onclick = function () {
+		// 		console.log(id);// 这样会导致闭包引用外层的el，当执行完showId后，el无法释放
+		// 	};
+		// 	el = null;
+		// }
+		// showId();//app
+
+		// setTimeout(function () {
+		// 	console.log(1)
+		// },1000);
+		//
+		// setInterval(function () {
+		// 	console.log(2)
+		// },1000);
+
+		// alert("111");
+
+		// confirm("Are you sure?");
+		// if(confirm("Are you sure?")){
+		// 	alert("sure");
+		// }else {
+		// 	alert("not sure")
+		// }
+		//
+		// var result = prompt("What's you name","jackson");
+		// if(result !== null){
+		// 	alert(result);
+		// }
+
+		// console.log(navigator.plugins);
+
+		// var a = 10;
+		// var obj = {
+		// 	a: 20
+		// };
+		// function fn() {
+		// 	'use strict';
+		// 	console.log(this);
+		// 	console.log(this.a);
+		// }
+		// window.fn();//10
+		// fn.call(obj);//20
+
+		// var a = 20;
+		// function fn() {
+		// 	console.log(this.a);
+		// }
+		// fn();//20
+		//
+		// var a = 20;
+		// function fn() {
+		// 	function foo() {
+		// 		'use strict';
+		// 		console.log(this);
+		// 		console.log(this.a);
+		// 	}
+		// 	// foo();
+		// 	return foo;
+		// }
+		// var result = window.fn();
+		// window.result();
+
+
+		/**
+		 * 单独的对象是不会形成新的作用域的，因此这里的this.a，由于并没有作用域的限制，
+		 * 所以它仍然处于全局作用域之中。所以这里的this其实是指向的window对象。
+		 * @type {number}
+		 */
+		// var a = 20;
+		// var obj = {
+		// 	a : 10,
+		// 	c : this.a + 20,
+		// 	fn : function () {
+		// 		return this.a;
+		// 	}
+		// }
+		// console.log(obj);
+		// console.log(obj.c);//40
+		// console.log(obj.fn());//10
+
+		// 'use strict';
+		// var a = 20;
+		// function foo() {
+		// 	var a = 1;
+		// 	var obj = {
+		// 		a: 10,
+		// 		c: this.a + 20,//window
+		// 		fn: function () {
+		// 			console.log(this);
+		// 			return this.a;//obj
+		// 		}
+		// 	}
+		// 	return obj.fn();
+		// }
+		// console.dir(foo);
+		// console.log(window.foo());
+
+		// var a = 20;
+		// var foo = {
+		// 	a: 10,
+		// 	getA: function () {
+		// 		return this.a;
+		// 	}
+		// }
+		// console.log(foo.getA());//10
+		// var test = foo.getA;
+		// console.log(test());//20
+
+		// var a = 20;
+		// function getA() {
+		// 	return this.a;
+		// }
+		// var foo = {
+		// 	a: 10,
+		// 	getA: getA
+		// }
+		// console.log(foo.getA());//10
+		//
+		// function foo() {
+		// 	console.log(this.a)//window
+		// }
+		// function active() {
+		// 	foo();
+		// }
+		// var a = 20;
+		// var obj = {
+		// 	a: 10,
+		// 	getA: foo
+		// }
+		// active(obj.getA);
+		// obj.getA();
+
+
+		function exam(a,b,c,d,e) {
+			console.log(arguments);//Arguments(5) [2, 8, 9, 3, 4, callee: ƒ, Symbol(Symbol.iterator): ƒ]
+			var arg = [].slice.apply(arguments);
+			var arg1 = Array.from(arguments);
+			var arg2 = [...arguments];
+			var arg3 = [].map.call(arguments,o=>o);
+			console.log(arg);//[2, 8, 9, 3, 4]
+			console.log(arg1);//[2, 8, 9, 3, 4]
+			console.log(arg2);//[2, 8, 9, 3, 4]
+			console.log(arg3);//[2, 8, 9, 3, 4]
+		}
+		exam(2,8,9,3,4);
+
+
+
+
 	</script>
 </html>

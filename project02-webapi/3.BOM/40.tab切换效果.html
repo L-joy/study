@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+        }
+        div{
+            width: 400px;
+            height: 50px;
+            margin-left: 100px;
+            margin-top: 50px;
+        }
+        div li{
+            width: 60px;
+            height: 100%;
+            line-height: 50px;
+            text-align: center;
+            background-color: wheat;
+            margin-right: 5px;
+            float: left;
+        }
+        div li a{
+            font: 16px "楷体";
+        }
+        .current{
+            background-color: peru;
+        }
+    </style>
+</head>
+<body>
+<div id="menu">
+    <ul id="list">
+        <li class="current"><a href="http://www.baidi.com">首页</a></li>
+        <li><a href="javascript:void(0)">播客</a></li>
+        <li><a href="javascript:void(0)">博客</a></li>
+        <li><a href="javascript:void(0)">相册</a></li>
+        <li><a href="javascript:void(0)">关于</a></li>
+        <li><a href="javascript:void(0)">帮助</a></li>
+    </ul>
+</div>
+<script src="common.js"></script>
+<script>
+    //获取所有的li标签
+    var list=my$("list").children;
+    //循环遍历，找到每个li中的a，注册点击事件
+    for(var i=0;i<list.length;i++){
+        var aObj=getFirstElementChild(list[i]);//获取父级元素的第一个子元素
+        aObj.onclick= function () {
+            //把a所在的li的所有的兄弟元素的全部类样式清零
+            for(var i=0;i<list.length;i++){
+                list[i].removeAttribute("class");
+            }
+            //当前点击a的父级元素设置背景颜色
+            this.parentNode.className="current";
+
+            //阻止超链接跳转
+            return false;
+
+        };
+    }
+</script>
+</body>
+</html>

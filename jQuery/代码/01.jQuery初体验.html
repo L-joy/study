@@ -11,21 +11,6 @@
             display: none;
         }
     </style>
-    <!-- 1.需要先引入jQuery文件-->
-    <script src="jquery-1.12.4.js"></script>
-    <script>
-        //2.入口函数
-        $(document).ready(function () {
-            //注册事件，把on去掉，是一个方法
-            $("#btn1").click(function () {
-                //隐式迭代：jQuery会自动遍历，不需要我们遍历
-                $("div").show(1000);
-            });
-            $("#btn2").click(function () {
-                $("div").text("我是内容");
-            });
-        });
-    </script>
     <script>
         /**
          * jq和js的关系
@@ -42,4 +27,19 @@
 <div></div>
 <div></div>
 </body>
+<!-- 1.需要先引入jQuery文件-->
+<script src="jquery-1.12.4.js"></script>
+<script>
+    //2.入口函数
+    $(document).ready(function () {
+        //注册事件，把on去掉，是一个方法
+        $("#btn1").click(function () {
+            //隐式迭代：jQuery会自动遍历，不需要我们遍历
+            $("div").show(1000);
+        });
+        $("#btn2").click(function () {
+            $("div").text("我是内容");
+        });
+    });
+</script>
 </html>

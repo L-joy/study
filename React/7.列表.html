@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+</body>
+<script type="text/babel">
+    // const numbers = [1,2,3,4,5];
+    // const double = numbers.map(item => {
+    //    return item*2;
+    // });
+    // const double1 = numbers.map(item => item * 2);
+    // const listItems = numbers.map(item => <li>{item*2}</li>);
+    // console.log(listItems);
+    // ReactDOM.render(
+    //     <ul>{listItems}</ul>,
+    //     document.getElementById('root')
+    // )
+
+    //基础列表组件
+    function ListItem(props) {
+        return <li>{props.value}</li>
+    }
+    function NumberList(props) {
+        const numbers = props.numbers;
+        const listItems = numbers.map(item =>
+            <ListItem value={item} key={item.toString()}/>
+        );
+        return (
+            <ul>{listItem}</ul>
+        );
+    }
+    const numbers = [1,2,3,4,5];
+    // <!--ReactDOM.render(-->
+    // <!--    <NumberList numbers={numbers}/>,-->
+    // <!--    document.getElementById('root')-->
+    // <!--)-->
+
+    function Blog(props) {
+        const sidebar = (
+            <ul>
+                {props.posts.map((item) =>
+                    <li key={item.id}>
+                        {item.title}
+                    </li>
+                )}
+            </ul>
+        );
+        const content = props.posts.map((item) =>
+            <div key={item.id}>
+                <h3>{item.title}</h3>
+                <p>{item.content}</p>
+            </div>
+        );
+        return (
+            <div>
+                {sidebar}
+                <hr />
+                {content}
+            </div>
+        )
+    }
+    const posts = [
+        {id:1, title:"Hello world", content:"Welcome to learning React"},
+        {id:2, title:"Installation", content:"You can install React from npm"}
+    ];
+    ReactDOM.render(
+        <Blog posts={posts}/>,
+        document.getElementById('root')
+    )
+</script>
+</html>

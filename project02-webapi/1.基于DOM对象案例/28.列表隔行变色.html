@@ -18,18 +18,13 @@
 </ul>
 <script src="common.js"></script>
 <script>
-  my$("btn").onclick=function (){
       //获取所有的li标签
-      var list=my$("uu").getElementsByTagName("li");
+      var list=getElementsByTagName("li");
       for(var i=0;i<list.length;i++){
-//          if(i%2==0){
-//              list[i].style.backgroundColor="red";
-//          }else{
-//              list[i].style.backgroundColor="yellow";
-//          }
-          list[i].style.backgroundColor=i%2==0?"red":"yellow";
+
+          list[i].style.backgroundColor=i%2==0?"#000":"aaa";
       }
-  };
+
 </script>
 </body>
 </html>

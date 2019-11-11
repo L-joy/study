@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * 给定一个包含红色、白色和蓝色，一共 n 个元素的数组，原地对它们进行排序，
+     * 使得相同颜色的元素相邻，并按照红色、白色、蓝色顺序排列。
+     * 此题中，我们使用整数 0、 1 和 2 分别表示红色、白色和蓝色。
+     * @param {number[]} nums
+     * @return {void} Do not return anything, modify nums in-place instead.
+     */
+    var sortColors = function(nums) {
+        var red = 0, white = 1, blue = 2;
+        var redLen = 0,whiteLen = 0,blueLen = 0;
+        for (let i = 0; i < nums.length; i++) {
+            if (nums[i] === red){
+                redLen++;
+            }
+            if (nums[i] === white){
+                whiteLen++;
+            }
+            if (nums[i] === blue){
+                blueLen++;
+            }
+        }
+        for (let i = 0; i < nums.length; i++) {
+            if (i < redLen){
+                nums[i] = red;
+            }else if (i < redLen+whiteLen){
+                nums[i] = white;
+            }else {
+                nums[i] = blue;
+            }
+
+        }
+
+
+    };
+    var nums = [2,0,2,1,1,0,1,0,1,2,2,0,1];
+    sortColors(nums);
+    console.log(nums);
+</script>
+</body>
+</html>

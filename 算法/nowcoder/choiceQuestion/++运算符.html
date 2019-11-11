@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * 运算符前置和后置的区别
+     * 如果该运算符作为后置操作符，则返回它递减之前的值。
+     * 如果该运算符作为前置操作符，则返回它递减之后的值。
+     * @param x
+     */
+    function out(x) {
+        var temp = 2;
+        function inside(y) {
+            document.write(x+y+(temp--));//3+5+2=10
+            console.log(temp);//1
+        }
+        inside(5);
+    }
+    out(3);
+    //没有break
+    /**
+     * 执行顺序：switch中，对x+1,此时x为1，然后进入case 1 中，又执行++x，此时x变为2；由于case 1中没有break，然后继续执行 case 2，执行++x，所以x变成3
+     * @type {number}
+     */
+    var x = 0;
+    switch (++x) {
+        case 0: ++x;
+        case 1: ++x;
+        case 2: ++x;
+    }
+    console.log(x);
+
+
+</script>
+
+</body>
+</html>

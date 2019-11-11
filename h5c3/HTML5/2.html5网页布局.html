@@ -52,13 +52,45 @@
 <!--解决办法：引入html5shiv.js文件-->
 <!--语义化标签-->
 <div class="container">
-    <header>头部</header>
+    <header>头部
+        <div class="bd user disabled" id="head" data-id="123456" data-myname="Jackson"></div>
+    </header>
     <nav>导航</nav>
-    <section>
+    <section class="main foot">
         <aside>侧边栏</aside>
         <article>文章</article>
     </section>
-    <footer>底部</footer>
+    <footer class="foot">
+        <input type="button" value="submit" id="submit" class="submit">
+    </footer>
 </div>
 </body>
+<script>
+    // 这个<div>元素一共有三个类名。要从中删除一个类名，需要把这三个类名拆开，删除不想要的那
+    // 个，然后再把其他类名拼成一个新字符串。
+    var divName = document.getElementById("head");
+    console.log(divName.dataset);//DOMStringMap {id: "123456", myname: "Jackson"}
+    // divName = divName.split(/\s+/);
+    // var pos = -1;
+    // for (let i = 0; i < divName.length; i++) {
+    //     if(divName[i] === "user"){
+    //         pos = i;
+    //         break;
+    //     }
+    // }
+    // divName.splice(pos,1);
+    // document.getElementById("head").className = divName.join(" ");
+    console.log(divName.classList);
+    divName.classList.remove("user");
+    console.log(divName);
+
+
+    var classObj = document.getElementsByClassName("submit");
+    classObj[0].focus();
+    console.log(document.activeElement);
+
+    console.log(classObj);
+    console.log(document.readyState);
+
+</script>
 </html>

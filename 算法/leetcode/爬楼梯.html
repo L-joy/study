@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * 假设你正在爬楼梯。需要 n 阶你才能到达楼顶。
+     * 每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢
+     * @param {number} n
+     * @return {number}
+     */
+    var climbStairs = function(n) {
+        if (n === 1){
+            return 1;
+        }
+        if (n === 2){
+            return 2;
+        }
+        var a = [];
+        while (n > 2){
+            a[1] = 1;
+            a[2] = 2;
+            for (let i = 3; i < n+1; i++) {
+                a[i] = a[i-1]+a[i-2];
+            }
+            return a[n];
+        }
+        return 0;
+    };
+    console.log(climbStairs(45));
+</script>
+</body>
+</html>

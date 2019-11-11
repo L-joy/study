@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+<script>
+    /**
+     * 给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素最多出现两次，返回移除后数组的新长度。
+     * @param {number[]} nums
+     * @return {number}
+     */
+    var removeDuplicates = function(nums) {
+        if (nums.length <= 2) {
+            return nums.length;
+        }
+        var temp = null;
+        var count = 0;
+        for (let i = 0; i < nums.length; i++) {
+            if (nums[i] !== temp){
+                temp = nums[i];
+                count = 1;
+            }else {
+                count++;
+            }
+            if (count > 2){
+                nums.splice(i,1);
+                i--;
+            }
+        }
+        return nums.length;
+
+    };
+    var nums = [1,1,1,1,2,2,2,3,3];
+    console.log(removeDuplicates(nums));
+    console.log(nums);
+</script>
+</html>

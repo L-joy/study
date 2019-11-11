@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+</body>
+<script type="text/babel">
+    // 函数组件和class组件
+
+    // 1.函数组件
+    // function Welcome(props) {
+    //     return <h1>Hello,{props.name}</h1>
+    // }
+
+    // 2.class组件
+    // class Welcome extends React.Component {
+    //     render() {
+    //         return <h1>Hello,{this.props.name}</h1>
+    //     }
+    // }
+    // 上述两个组件在 React 里是等效的。
+
+    // const element = <div />;
+    // 自定义组件
+    // 当 React 元素为用户自定义组件时，它会将 JSX 所接收的属性（attributes）
+    // 转换为单个对象传递给组件，这个对象被称之为 “props”。
+    // const element = <Welcome name="Jackson" />;
+    // ReactDOM.render(
+    //     element,
+    //     document.getElementById('root')
+    // )
+
+    // 组合组件
+    function Welcome(props) {
+        return <h1>Hello,{props.name}</h1>
+    }
+    function App() {
+        return (
+            <div>
+                <Welcome name="Jackson1" />
+                <Welcome name="Jackson2" />
+                <Welcome name="Jackson3" />
+            </div>
+        )
+    }
+    ReactDOM.render(
+        <App />,
+        document.getElementById('root')
+    );
+
+    // 提取组件
+    function Comment(props) {
+        return (
+          <div className="Comment">
+              <UserInfo user={props.author}/>
+              <div className="Comment-text">
+                  {props.text}
+              </div>
+              <div className="Comment-date">
+                  {formatName(props.date)}
+              </div>
+          </div>
+        );
+    }
+    //首先，提取Avatar组件
+    function Avatar(props) {
+        return (
+            <img className="Avatar"
+                 src={props.user.avatarUrl}
+                 alt={props.user.name}
+            />
+        )
+    }
+    //然后，提取UserInfo组件
+    function UserInfo(props) {
+        return (
+            <div className="UserInfo">
+                <Avatar user={props.user}/>
+                <div className="UserInfo-name">
+                    {props.user.name}
+                </div>
+            </div>
+        )
+    }
+    // Props的只读性
+    function sum(a,b) {//纯函数
+        return a+b;
+    }
+    function withdraw(account,amount) {//不是纯函数，更改了入参
+        account.total -= amount;
+    }
+
+
+</script>
+</html>

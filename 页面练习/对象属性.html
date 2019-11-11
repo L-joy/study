@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var person={
+        name:"Nick"
+    };
+    Object.defineProperty(person,"name",{
+        writable:false,
+        value:"Jackson"
+    });
+    console.log(person.name);//Jackson
+    person.name = "Nerge";
+    console.log(person.name);//Jackson
+
+    var book = {
+        _year:2019,
+        edition:1
+    };
+    Object.defineProperty(book,"year",{
+        get:function () {
+            return this._year;
+        },
+        set:function (newValue) {
+            if(newValue>2019){
+                this._year = newValue;
+                this.edition += newValue - 2019;
+            }
+        }
+    });
+    book.year = 2023;
+    console.log(book.edition);//5
+
+    var books = {};
+    Object.defineProperties(books,{
+        _year:{
+            value:2019
+        },
+        edition:{
+            value:1
+        },
+        year:{
+            get: function () {
+                return this._year;
+            },
+            set: function (newValue) {
+                if(newValue>2019){
+                    this._year = newValue;
+                    this.edition += newValue - 2019;
+                }
+            }
+        }
+    });
+    var descriptor = Object.getOwnPropertyDescriptor(book,"_year");
+    console.log(descriptor);//{value: 2023, writable: true, enumerable: true, configurable: true}
+
+
+    function Person(age) {
+        this.age=age;
+        console.log(this);
+    }
+    Person.prototype.name = "Jackson";
+    Person.prototype.eat=function () {
+        console.log(this);
+        console.log("您吃了没,走着,吃点臭豆腐去");
+    };
+    var per=new Person(10);
+    per.eat();
+    console.log(per);
+    console.log(Person.prototype.isPrototypeOf(per));//判断per的_proto_是否指向Person.prototype
+    console.log(Object.getPrototypeOf(per));
+    console.log(Object.getPrototypeOf(per) === Person.prototype);//true
+    //确定 Object.getPrototypeOf()返回的对象实际就是这个对象的原型
+
+    //判断访问的属性为来自实例对象还是原型对象
+    console.log(per.name);//Jackson---此时这个属性来自原型(原型属性)
+    console.log(per.hasOwnProperty("name"));//false
+    per.name = "JacksonE";
+    console.log(per.name);//JacksonE---此时这个属性来自实例(实例属性)
+    console.log(per.hasOwnProperty("name"));//true
+    //得到所有实例属性，无论它是否可枚举
+    console.log(Object.getOwnPropertyNames(Person.prototype));
+    //["constructor", "name", "eat"]
+
+    console.log(window.document);
+
+</script>
+</body>
+</html>

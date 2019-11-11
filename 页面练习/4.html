@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="微普科技 http://www.wiipu.com" />
+    <title>js动态创建元素并设置样式</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        #zmkt {
+            width: 600px;
+            height: 250px;
+            margin: 50px auto;
+            background-color: #EAE7FF;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+        }
+        #zmkt input{
+            width: 400px;
+            height: 50px;
+            margin-top: 100px;
+        }
+    </style>
+    <script>
+        window.onload = function (){
+            var oZmkt = document.getElementById("zmkt");
+            oZmkt.innerHTML = '<input type=\"text\" value=\"请输入你的手机号\">';
+
+        }
+    </script>
+</head>
+<body>
+<!--提示：使用js动态创建元素input输入框，添加到form元素中，
+    并为输入框设置样式，宽：400px;高：50px;margin-top: 100px;
+    type类型为text;value值为：请输入你的手机号
+-->
+<form action="" id="zmkt">
+
+</form>
+</body>
+</html>

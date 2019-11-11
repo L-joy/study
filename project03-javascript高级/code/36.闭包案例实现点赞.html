@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mysite</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+            margin: 100px auto;
+
+        }
+        li{
+            width: 400px;
+            height: 300px;
+            float: left;
+            margin-left: 20px;
+        }
+        li img{
+            width: 400px;
+            height: 300px;
+        }
+        li input{
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li><img src="Jackson-yee/41.jpg" alt=""/><br/><input type="button" value="赞(1)"/></li>
+    <li><img src="Jackson-yee/42.jpg" alt=""/><br/><input type="button" value="赞(1)"/></li>
+    <li><img src="Jackson-yee/43.jpg" alt=""/><br/><input type="button" value="赞(1)"/></li>
+    <li><img src="Jackson-yee/44.jpg" alt=""/><br/><input type="button" value="赞(1)"/></li>
+</ul>
+<script>
+    //根据标签名获取元素
+    function my$(tagName){
+        return document.getElementsByTagName(tagName);
+    }
+    //闭包缓存数据
+    function getValue(){
+        var value=2;
+        return function () {
+            this.value="赞("+(value++)+")";
+
+        }
+    }
+    var btnObj =my$("input");
+    for(var i=0;i<btnObj.length;i++){
+        btnObj[i].onclick= getValue();
+    }
+</script>
+</body>
+</html>

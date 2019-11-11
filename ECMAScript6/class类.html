@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+<script>
+    // function Person(name,age) {
+    //     this.name = name;
+    //     this.age = age;
+    // }
+    // Person.prototype.say = function () {
+    //     return "My name is "+this.name+","+this.age+" years old";
+    // };
+    // var person = new Person("Jackson",18);
+    // console.log(person.say());
+
+    class Person{//定义一个名为Person的类
+        constructor(name,age){//constructor是一个构造方法，用来接收参数
+            this.name = name;
+            this.age = age;
+            console.log(222);
+        }
+        say(){//这是类的一个方法，注意千万不要加function
+            return "My name is "+this.name+","+this.age+" years old";
+        }
+    }
+    var person = new Person("Jackson",19);
+    console.log(person.say());
+    console.log(typeof Person);//function
+    console.log(Person === Person.prototype.constructor);//true
+    console.log(Person.prototype);
+    Person.prototype.add = function () {
+        console.log(111)
+    };
+    person.add();
+    Object.assign(Person.prototype,{
+        getName:function () {
+            return this.name;
+        },
+        getAge:function () {
+            return this.age;
+        }
+    });
+    console.log(person.getName());
+    console.log(person.getAge());
+
+    class Student{
+        constructor(){
+            return new Person('YY',20);
+        }
+    }
+    var student = new Student();
+    console.log(student.name);
+    console.log(person.hasOwnProperty("name"));//true
+    console.log(person.hasOwnProperty("say"));//false
+    console.log("age" in person);//true
+    console.log("age" in student);//true
+    console.log("say" in person);//true
+</script>
+</html>

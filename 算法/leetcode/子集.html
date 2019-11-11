@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * 给定一组不含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。
+     * @param {number[]} nums
+     * @return {number[][]}
+     */
+    var subsets = function(nums) {
+        var result = [];
+        var len = Math.pow(2,nums.length);
+        //0
+        result.push([]);
+        if (nums.length === 0){
+            return result;
+        }
+        //n
+        result.push(nums);
+        if (nums.length === 1){
+            return result;
+        }
+        for (let i = 1; i < nums.length; i++) {
+            var temp = [],j = 0;
+            sets(result,nums,temp,i,j);
+        }
+        return result;
+    };
+    //递归
+    function sets(result,nums,temp,n,i) {
+        if (temp.length === n){
+            var temp1 = [];
+            temp.forEach(item => {
+                temp1.push(item)
+            });
+            result.push(temp1);
+            return;
+        }
+        if (i === nums.length){
+            return;
+        }
+        for (let j = i; j < nums.length; j++) {
+            temp.push(nums[j]);
+            sets(result,nums,temp,n,j+1);
+            temp.pop();
+        }
+        //全排列
+        // for (let j = 0; j < nums.length; j++) {
+        //     temp.push(nums[j]);
+        //     sets(result,nums,temp,n,j);
+        //     temp.pop();
+        // }
+    }
+    var nums = [1,2,3,4,5];
+    // var temp = [];
+    // var result = [];
+    // sets(result,nums,temp,1,0);
+    console.log(subsets(nums));
+
+    //根据2进制1产生的位置确定子集的排列(例如，4位即2的4次，就是1-16的2进制)
+    function fn(nums) {
+        var len = nums.length;
+        var sum = Math.pow(2,len);
+        var result = [];
+        for (let i = 0; i < sum; i++) {
+            var temp = [];
+            for (let j = 0; j < len; j++) {
+                var index = i >> j & 1;
+                if(index === 1){
+                    temp.push(nums[j]);
+                }
+            }
+            result.push(temp);
+        }
+        return result;
+    }
+    /**
+     * 根据依次累加，先push[]，再push[1],在将[2]push进[]和[1],以此类推...
+     * @param nums
+     * @returns {[]}
+     */
+    function f1(nums) {
+        var result = [];
+        var temp = [];
+        result.push(temp);
+        for (let i = 0; i < nums.length; i++) {
+            var temp1 = [];
+            for (let j = 0; j < result.length; j++) {
+                var temp2 = [];
+                for (let k = 0; k < result[j].length; k++) {
+                    temp2[k] = result[j][k];
+                }
+                temp2.push(nums[i]);
+                temp1.push(temp2);
+            }
+            temp1.forEach(item => {
+                result.push(item);
+            })
+        }
+        return result;
+    }
+    // var nums = [1,2,3,4];
+    // console.log(fn(nums));
+    // console.log(f1(nums));
+    // var temp = [];
+    // var result = [];
+    // sets(result,nums,3,temp);
+    // var nums = [1];
+    // console.log(subsets(nums));
+</script>
+</body>
+</html>

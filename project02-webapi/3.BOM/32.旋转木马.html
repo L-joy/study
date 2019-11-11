@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>旋转木马</title>
+    <link rel="stylesheet" href="旋转木马.css"/>
+    <script src="common.js"></script>
+    <script>
+        var config=[
+            {width:500,top:50,left:100,opacity:0.5,zIndex:2},
+            {width:700,top:100,left:0,opacity:0.8,zIndex:3},
+            {width:900,top:150,left:350,opacity:1,zIndex:4},
+            {width:700,top:100,left:900,opacity:0.8,zIndex:3},
+            {width:500,top:50,left:1000,opacity:0.5,zIndex:2}];
+        //页面加载的事件
+        window.onload= function () {
+            //1----图片散开
+            var flag=true;//假设全部执行完
+            var list=my$("slide").getElementsByTagName("li");
+            function assign(){
+                for(var i=0;i<list.length;i++){
+                    animate(list[i],config[i], function () {
+                        flag=true;
+                    });
+                }
+            }
+            assign();
+            //左边按钮
+            my$("arrLeft").onclick= function () {
+                if(flag){
+                    flag=false;
+                    config.unshift(config.pop());
+                    assign();//重新分配
+                }
+
+            };
+            //右边按钮
+            my$("arrRight").onclick= function () {
+                if(flag){
+                    flag=false;
+                    config.push(config.shift());//把第一个删除放在最后位置
+                    assign();//重新分配
+                }
+
+
+            };
+            //鼠标进入：左右焦点显示
+            my$("slide").onmouseover= function () {
+                animate(my$("arrow"),{opacity:1});
+            };
+            //鼠标离开：左右焦点隐藏
+            my$("slide").onmouseout= function () {
+                animate(my$("arrow"),{opacity:0});
+            };
+        };
+    </script>
+</head>
+<body>
+<div class="wrap" id="wrap">
+    <div class="slide" id="slide">
+        <ul>
+            <li><a href="#"><img src="../Jackson-yee/32.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="../Jackson-yee/31.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="../Jackson-yee/33.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="../Jackson-yee/59.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="../Jackson-yee/28.jpg" alt=""/></a></li>
+        </ul>
+        <div class="arrow" id="arrow">
+            <a href="javascript:void(0);" class="prev" id="arrLeft"></a>
+            <a href="javascript:void(0);" class="next" id="arrRight"></a>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

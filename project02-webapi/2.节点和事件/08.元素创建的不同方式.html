@@ -22,12 +22,15 @@
      * 2.对象.innerHTML="标签及内容";
      * 3.document.creatElement("标签名字");得到的是对象。--------先创建元素----再把元素追加到父级元素中
      */
-//    my$("btn").onclick= function () {
-//      document.write("<p>这是一个p</p>");
-//    };
-//    my$("btn").onclick= function () {
-//        my$("dv").innerHTML="<p>这是一个p</p>";
-//    };
+    function my$(id){
+        return document.getElementById(id);
+    }
+    my$("btn").onclick= function () {
+     document.write("<p>这是一个p</p>");
+   };
+   my$("btn").onclick= function () {
+       my$("dv").innerHTML="<p>这是一个p</p>";
+   };
     my$("btn").onclick= function () {
         //创建对象
         var pObj=document.createElement("p");

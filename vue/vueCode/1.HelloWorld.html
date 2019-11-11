@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">{{ message }}</div>
+<div id="app2">
+    <span :title="message">
+        鼠标停留查看提示消息
+    </span>
+</div>
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: "Hello vue"
+        }
+    });
+    var app2 = new Vue({
+        el: "#app2",
+        data: {
+            message: "页面加载于 "+new Date().toLocaleTimeString()
+        }
+    })
+</script>
+</html>
