@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .main{
+            color: blue;
+        }
+        span{
+            color: green;
+        }
+    </style>
+</head>
+<body>
+<div class="main" style="color:red !important;">
+    <span>123</span>
+</div>
+<script>
+    /**
+     * Definition for a binary tree node.
+     */
+    function TreeNode(val) {
+        this.val = val;
+        this.left = this.right = null;
+    }
+    /**
+     * @param {TreeNode} root
+     * @return {void} Do not return anything, modify root in-place instead.
+     */
+    var flatten = function(root) {
+        let node = root;
+        while (node){
+            if (node.left){
+                let current = node.left;
+                // 找到树的左节点的最后一个右节点
+                while (current.left || current.right){
+                    if (current.right){
+                        current = current.right;
+                    }else {
+                        current = current.left;
+                    }
+                }
+                current.right = node.right;
+                node.right = node.left;
+                node.left = null;
+                node = node.right;
+            }else {
+                node = node.right;
+            }
+        }
+        console.log(root);
+
+    };
+    let root = new TreeNode(1);
+    let left = new TreeNode(2);
+    let right = new TreeNode(5);
+    let left1 = new TreeNode(3);
+    let right1 = new TreeNode(4);
+    let left2 = new TreeNode(6);
+    let right2 = new TreeNode(6);
+    root.left = left;
+    root.right = right;
+    left.left = left1;
+    left.right = right1;
+    right.right = right2;
+    flatten(root);
+
+</script>
+</body>
+</html>

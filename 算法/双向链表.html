@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function Node(element) {
+        this.element = element;
+        this.next = null;
+        this.prev = null;
+    }
+    function DoublyLinkedList() {
+        let length = 0;
+        let head = null;
+        let tail = null;//保存对列表最后一项的引用
+
+        this.append = append;//向链表尾部添加元素
+        this.insert = insert;//向链表特定位置插入元素
+        this.remove = remove;//移除元素
+        this.removeAt = removeAt;//移除特定位置的元素
+        this.indexOf = indexOf;//返回元素在链表中的索引，没有该元素返回-1
+        this.size = size;//返回链表中包含元素个数
+        this.isEmpty = isEmpty;//判断链表是否为空
+        this.toString = toString;
+        this.getHead = getHead;
+    }
+    function append(element) {
+        let node = new Node(element);
+        let current;
+        if (this.head == null){
+            this.head = node;
+            this.tail = node;
+        }else {
+            current = this.tail;
+            current.next = node;
+            node.prev = current;
+            this.tail = node;
+        }
+        length++;
+    }
+    function insert(position,element) {
+        // 判断position是否越界
+        if (position < 0 || position > length){
+            return false;
+        }
+        let node = new Node(element);
+        let current = this.head, index = 0, previous;
+        if (position === 0){//在第一个位置插入
+            if (!this.head){//空列表
+                this.head = node;
+                this.tail = node;
+            }else {
+                node.next = current;
+                current.prev = node;
+                this.head = node;
+            }
+        }else if (position === length){//在最后一个位置插入
+            console.log(111);
+            current = this.tail;
+            current.next = node;
+            node.prev = current;
+            this.tail = node;
+        }else {
+            while (index++ < position){
+                previous = current;
+                current = current.next;
+            }
+            previous.next = node;
+            node.prev = previous;
+            node.next = current;
+            current.prev = node;
+        }
+        length ++;
+        return true;
+    }
+    //根据位置移除元素,返回被移除的元素的值
+    function removeAt(position) {
+        if (position < 0 || position > length){
+            return null;
+        }
+        let current = this.head;
+        let previous, index = 0;
+        if (position === 0){//移除第一个元素
+            this.head = current.next;
+            if (length === 1){
+                this.tail = null;
+            }else {
+                this.head.prev = null;
+            }
+        }else if (position === length-1){//移除最后一个元素
+            current = this.tail;
+            previous = current.prev;
+            previous.next = null;
+            this.tail = previous;
+        }else {
+            while (index++ < position){
+                previous = current;
+                current = current.next;
+            }
+            previous.next = current.next;
+            current.next.prev = previous;
+        }
+        length --;
+        return current.element;
+    }
+    function remove(element) {
+        let index = this.indexOf(element);
+        return this.removeAt(index);
+    }
+    //toString方法，将LinkedList对象转换成一个字符串
+    function toString() {
+        let current = this.head;
+        let str = '';
+        while (current){
+            str += current.element + " ";
+            current = current.next;
+        }
+        return str;
+    }
+    function indexOf(element) {
+        let current = this.head;
+        let index = 0;
+        while (current){
+            if (current.element === element){
+                return index;
+            }
+            current = current.next;
+            index ++;
+        }
+        return -1;
+    }
+    function size() {
+        return length;
+    }
+    function isEmpty() {
+        return length === 0;
+    }
+    function getHead(){
+        return this.head;
+    }
+    let list = new DoublyLinkedList();
+    list.append(11);
+    list.append(12);
+    list.insert(0,10);
+    list.insert(3,13);
+    list.append(15);
+    list.append(16);
+    list.append(17);
+    console.log(list.indexOf(11));
+    console.log(list.indexOf(15));
+    list.remove(11);
+    console.log(list.toString());
+    console.log(list.isEmpty());
+    console.log(list.size());
+
+
+</script>
+</body>
+</html>

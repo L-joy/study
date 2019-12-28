@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * @param {string} s
+     * @return {boolean}
+     */
+    var isPalindrome = function(s) {
+        if (s === " "){
+            return true;
+        }
+        s = s.toLowerCase();
+        let len = s.length;
+        let result = "";
+        for (let i = 0; i < len; i++) {
+            if ((s.charCodeAt(i) >= 97 && s.charCodeAt(i) <= 122)||((s.charCodeAt(i) >= 48 && s.charCodeAt(i) <= 57))){
+                result += s.charAt(i);
+            }
+        }
+        let left = 0,right = result.length-1;
+        while (left < right && left !== right){
+            if (result.charAt(left) !== result.charAt(right)){
+                return false
+            }else {
+                left++;
+                right--;
+            }
+        }
+        return true;
+    };
+    // let s = "A man, a plan, a canal: Panama";
+    // let s = " ";
+    let s = "0P";
+    console.log(isPalindrome(s));
+</script>
+</body>
+</html>

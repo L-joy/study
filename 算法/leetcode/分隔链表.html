@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+<script>
+    /**
+     * Definition for singly-linked list.
+     *
+     */
+    function ListNode(val) {
+        this.val = val;
+        this.next = null;
+     }
+    /**
+     * 给定一个链表和一个特定值 x，对链表进行分隔，
+     * 使得所有小于 x 的节点都在大于或等于 x 的节点之前。
+     * @param {ListNode} head
+     * @param {number} x
+     * @return {ListNode}
+     */
+    var partition = function(head, x) {
+        if (head === null || head.next === null){
+            return head;
+        }
+        let l = head;
+        let left = new ListNode(null);
+        let right = new ListNode(null);
+        let resultl = left;
+        let resultr = right;
+        while (l !== null){
+            if (l.val < x){
+                left.next = new ListNode(l.val);
+                l = l.next;
+                left = left.next;
+            }else {
+                right.next = new ListNode(l.val);
+                l = l.next;
+                right = right.next;
+            }
+        }
+        left.next = resultr.next;
+        return resultl.next;
+    };
+    let l1 = new ListNode(1);
+    let l2 = new ListNode(4);
+    let l3 = new ListNode(3);
+    let l4 = new ListNode(2);
+    let l5 = new ListNode(5);
+    let l6 = new ListNode(2);
+    l1.next = l2;
+    l2.next = l3;
+    l3.next = l4;
+    l4.next = l5;
+    l5.next = l6;
+    console.log(partition(l1, 3));
+</script>
+</html>

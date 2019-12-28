@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * Definition for singly-linked list.
+     */
+    function ListNode(val) {
+        this.val = val;
+        this.next = null;
+    }
+    /**
+     * 给定一个链表，判断链表中是否有环。
+     * @param {ListNode} head
+     * @return {boolean}
+     */
+    var hasCycle = function(head) {
+        if (head === null){
+            return false
+        }
+        let p = head, q = p;
+        while (p.next && q.next && q.next.next){
+            p = p.next;
+            q = q.next.next;
+            if (p.val === q.val){
+                return true;
+            }
+        }
+        return false;
+    };
+    let head = new ListNode(3),
+        node1 = new ListNode(2),
+        node2 = new ListNode(0),
+        node3 = new ListNode(-4),
+        node4 = new ListNode(1),
+        node5 = new ListNode(6),
+        node6 = new ListNode(5),
+        node7 = new ListNode(8),
+        node8 = new ListNode(9);
+    head.next = node1;
+    node1.next = node2;
+    node2.next = node3;
+    node3.next = node4;
+    node4.next = node5;
+    node5.next = node6;
+    node6.next = node7;
+    node7.next = node8;
+    console.log(hasCycle(head));
+
+</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * Definition for a binary tree node.
+     */
+    function TreeNode(val) {
+         this.val = val;
+         this.left = this.right = null;
+    }
+    /**
+     * 判断二叉树是否对称
+     * @param {TreeNode} root
+     * @return {boolean}
+     */
+    var isSymmetric = function(root) {
+        if (root == null){
+            return true
+        }else if (root.left == null || root.right == null){
+            return root.left === root.right;
+        }
+        if (root.left.val === root.right.val && isSymmetric1(root.left,root.right)){
+            return true
+        }else {
+            return false;
+        }
+    };
+    var isSymmetric1 = function(left, right){
+        if (left == null || right == null){
+            return left === right;
+        }
+        if (left.val === right.val && isSymmetric1(left.left,right.right) && isSymmetric1(left.right,right.left)){
+            return true;
+        }else {
+            return false;
+        }
+    };
+    // let root = null;
+    let root = new TreeNode(1);
+    let rootLeft1 = new TreeNode(2);
+    let rootRight1 = new TreeNode(2);
+    root.left = rootLeft1;
+    root.right = rootRight1;
+    let rootLeft2 = new TreeNode(3);
+    let rootRight2 = new TreeNode(4);
+    rootLeft1.left = rootLeft2;
+    rootLeft1.right = rootRight2;
+    rootRight1.left = rootRight2;
+    rootRight1.right = rootLeft2;
+    let rootLeft3 = new TreeNode(5);
+    let rootRight3 = new TreeNode(6);
+    let rootLeft4 = new TreeNode(7);
+    let rootRight4 = new TreeNode(8);
+
+    console.log(isSymmetric(root));
+</script>
+</body>
+</html>

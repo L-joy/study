@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * Definition for a binary tree node.
+     */
+    function TreeNode(val) {
+        this.val = val;
+        this.left = this.right = null;
+    }
+    /**
+     * @param {number[]} inorder
+     * @param {number[]} postorder
+     * @return {TreeNode}
+     */
+    var buildTree = function(inorder, postorder) {
+        if (inorder.length === 0 || postorder.length === 0){
+            return null;
+        }
+        if (inorder.length === 1){
+            return new TreeNode(postorder[0]);
+        }
+        let len = postorder.length;
+        let root = new TreeNode(postorder[len-1]);
+        let rootIndex = inorder.indexOf(postorder[len-1]);
+        let leftInorder = [], rightInorder = [],
+            leftPostorder = [], rightPostorder = [];
+        let j = 0, k = 0;
+        for (let i = 0; i < inorder.length; i++) {
+            if (i < rootIndex){
+                leftInorder[j] = inorder[i];
+                leftPostorder[j] = postorder[i];
+                j++;
+            }
+            if (i > rootIndex){
+                rightInorder[k] = inorder[i];
+                rightPostorder[k] = postorder[i-1];
+                k++;
+            }
+        }
+        root.left = buildTree(leftInorder,leftPostorder);
+        root.right = buildTree(rightInorder,rightPostorder);
+        return root;
+    };
+    let inorder = [9,3,15,20,7],
+        postorder = [9,15,7,20,3];
+    console.log(buildTree(inorder, postorder));
+</script>
+</body>
+</html>

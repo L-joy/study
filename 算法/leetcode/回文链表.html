@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * Definition for singly-linked list.
+     */
+    function ListNode(val) {
+        this.val = val;
+        this.next = null;
+    }
+    /**
+     * 判断一个链表是否为回文链表
+     * @param {ListNode} head
+     * @return {boolean}
+     */
+    var isPalindrome = function(head) {
+        if (head === null || head.next === null){
+            return false;
+        }
+        let left = head;
+        let right = reverseList1(head);
+        console.log(left);
+        console.log(right);
+        while (left.next && right.next){
+            if (left.val !== right.val){
+                return false;
+            }else {
+                left = left.next;
+                right = right.next;
+            }
+        }
+        return true;
+    };
+    var isPalindrome1 = function(head) {
+        if (head === null || head.next === null){
+            return true;
+        }
+        if (head.next.next === null){
+            return head.val === head.next.val;
+        }
+        let p = head, q = p;
+        let stack = [];
+        while (p.next){
+            if (q.next === null){
+                if (stack.pop() !== p.next.val){
+                    return false;
+                }else {
+                    p = p.next;
+                }
+            }else if (q.next.next === null){
+                stack.push(p.val);
+                q = q.next;
+            }else {
+                stack.push(p.val);
+                p = p.next;
+                q = q.next.next;
+            }
+        }
+        return true;
+    };
+    var reverseList = function(head){
+        if (head === null || head.next === null){
+            return head;
+        }
+        let prev = head, cur = prev.next;
+        while (cur){
+            let next = cur.next;
+            cur.next = head;
+            prev.next = next;
+            head = cur;
+            cur = next;
+        }
+        return head;
+    };
+    var reverseList1 = function(head) {
+        if (head === null || head.next === null){
+            return head;
+        }
+        let l = head;
+        // let result = new ListNode(null);
+        let reverse = new ListNode(head.val);
+        while (l.next !== null){
+            let temp = new ListNode(l.next.val);
+            temp.next = reverse;
+            reverse = temp;
+            l = l.next;
+        }
+        return reverse;
+    };
+    let head = new ListNode(1);
+    let next1 = new ListNode(2);
+    let next2 = new ListNode(1);
+    let next3 = new ListNode(1);
+    // head.next = next1;
+    // next1.next = next2;
+    // next2.next = next3;
+    // console.log(reverseList(head));
+    console.log(isPalindrome1(head));
+</script>
+</body>
+</html>

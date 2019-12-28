@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * Definition for a binary tree node.
+     */
+    function TreeNode(val) {
+        this.val = val;
+        this.left = this.right = null;
+    }
+    /**
+     * @param {TreeNode} root
+     * @param {number} sum
+     * @return {boolean}
+     */
+    var hasPathSum = function(root, sum) {
+        if (root == null){
+            return false;
+        }
+        sum = sum - root.val;
+        if ((root.left == null && root.right == null) && sum === 0){
+            return true;
+        }
+
+        return hasPathSum(root.left,sum) || hasPathSum(root.right,sum);
+    };
+    let root = new TreeNode(2);
+    let left = new TreeNode(3);
+    let right = new TreeNode(4);
+    let left1 = new TreeNode(5);
+    let right1 = new TreeNode(6);
+    let left2 = new TreeNode(7);
+    let right2 = new TreeNode(8);
+    root.left = left;
+    root.right = right;
+    left.left = left1;
+    left.right = right1;
+    right.left = left2;
+    right.right = right2;
+    console.log(hasPathSum(root, 11));
+
+</script>
+</body>
+</html>

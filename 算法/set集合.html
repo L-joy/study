@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    // let arr = [1,2,2,3,4,5,6,6];
+    // let set = new Set([1,2,3]);
+    // set.forEach(function (val, key, ownerSet) {
+    //     console.log(val,key,ownerSet);
+    // })
+    // console.log(set.size);//6
+    // set.add(5);
+    // set.add('6');
+    // set.delete(5);
+    // set.add(5);
+    // let obj = {};
+    // set.add(obj);
+    // set.add(5);
+    // console.log(set.size);
+
+    //将数组中布尔值为false的成员指为0
+    console.log(Array.from([1, , 2, 3, 3], x => x || 0));// [1, 0, 2, 3, 3]
+    //将一个类似数组的对象转为一个数组，并在原来的基础上乘以2倍
+    let arrayLike = {
+        '0':'2',
+        '1':'4',
+        '2':'5',
+        length:3
+    };
+    console.log(Array.from(arrayLike, (x) => {
+        return x * 2;
+    } ));//[4, 8, 10]
+
+    //将一个set对象转为数组，并在原来的基础上乘以2倍
+    console.log(Array.from(new Set([1, 2, 3, 4]), x => x*2));//[2, 4, 6, 8]
+
+    console.log(Array.from({length: 3}, () => 'jack'));// ["jack", "jack", "jack"]
+    console.log(Array.from({length: 3}, item => (item = {'name': 'Jack', 'age': 18})));
+    // 0: {name: "Jack", age: 18}
+    // 1: {name: "Jack", age: 18}
+    // 2: {name: "Jack", age: 18}
+    console.log(Array.from({length: 2}, (v, i) => v = {index: i}));
+    //0: {index: 0}
+    //1: {index: 1}
+    console.log(Array.from('abc'));//["a", "b", "c"]
+
+    let arr = [1,2,2,3,4,4,6];
+    let set = new Set(arr);
+    console.log(Array.from(set));//[1, 2, 3, 4, 6]
+    console.log([...set]);////[1, 2, 3, 4, 6]
+
+    let set1 = new Set([1,2,3]);
+    let set2 = new Set([2,3,4,5,6]);
+    let union = new Set([...set1,...set2]);
+    console.log([...union]);//[1, 2, 3, 4, 5, 6]
+    var intersect = new Set([...set1].filter(x => {
+        return set2.has(x)
+    }));
+    console.log([...intersect]);//[2, 3]
+    var difference = new Set([...set1].filter(x => {
+        return !set2.has(x)
+    }));
+    console.log([...difference]);//[4, 5, 6]
+
+</script>
+
+</html>

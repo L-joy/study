@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * @param {number} numRows
+     * @return {number[][]}
+     */
+    var generate = function(numRows) {
+        let result = [];
+        if (numRows <= 0){
+            return [];
+        }
+        if (numRows === 1){
+            result.push([1]);
+            return result;
+        }
+        for (let i = 0; i < numRows; i++) {
+            if (i === 0){
+                result.push([1]);
+            }else {
+                let prev = result[i-1];
+                let temp = new Array(i+1);
+                let index = 0;
+                temp[0] = prev[0];
+                temp[i] = prev[prev.length-1];
+                if (i >= 2){
+                    for (let j = 1; j < i; j++) {
+                        temp[j] = prev[index] + prev[index + 1];
+                        index ++;
+                    }
+                }
+                result.push(temp);
+            }
+        }
+        return result;
+
+    };
+    console.log(generate(7));
+</script>
+</body>
+</html>

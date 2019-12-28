@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+<script>
+    /**
+     * Definition for singly-linked list.
+     */
+    function ListNode(val) {
+         this.val = val;
+         this.next = null;
+     }
+    /**
+     * 反转从位置 m 到 n 的链表。请使用一趟扫描完成反转。
+     * @param {ListNode} head
+     * @param {number} m
+     * @param {number} n
+     * @return {ListNode}
+     */
+    var reverseBetween = function(head, m, n) {
+        if (head === null||head.next === null){
+            return head;
+        }
+        let before = new ListNode(null);
+        let mid = new ListNode(null);
+        let after = new ListNode(null);
+        let beforeList = before, midList = mid, afterList = after;
+        let count = 0, l = head;
+        while (l !== null){
+            count++;
+            if (count < m){
+                before.next = l;
+                before = before.next
+            }else if (count >= m&&count <=n){
+                before.next = null;
+                mid.next = l;
+                mid = mid.next;
+            }else {
+                mid.next = null;
+                after.next = l;
+                after = after.next
+            }
+            l = l.next;
+        }
+        midReverse = reverse(midList.next);
+        midList = midReverse;
+        while (midReverse.next.val !== null){
+            midReverse = midReverse.next;
+        }
+        midReverse.next = afterList.next;
+        before.next = midList;
+        return beforeList.next;
+    };
+    function reverse(head){
+        let prev = new ListNode(null);
+        let cur = head;
+        while (cur !== null){
+            let nextNode = cur.next;
+            cur.next = prev;
+            prev = cur;
+            cur = nextNode;
+        }
+        return prev;
+    }
+    let l1 = new ListNode(1);
+    let l2 = new ListNode(2);
+    let l3 = new ListNode(3);
+    let l4 = new ListNode(4);
+    let l5 = new ListNode(5);
+    l1.next = l2;
+    l2.next = l3;
+    l3.next = l4;
+    l4.next = l5;
+    console.log(reverseBetween(l1, 3, 5));
+    // console.log(reverse(l1));
+</script>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * @param {string} s
+     * @param {number} k
+     * @return {string}
+     */
+    var reverseStr = function(s, k) {
+        if (s.length < 2){
+            return s;
+        }
+        let result = "";
+        let index = 0, len = s.length,sub = "";
+        while (index < len){
+            if (index + 2 * k - 1 > len){
+                sub = s.substring(index, len);
+            }else {
+                sub = s.substring(index, index + 2 * k);
+            }
+            result += reverseSub(sub, k);
+            index = index + 2 * k;
+        }
+        return result;
+    };
+
+    var reverseSub = function(str, k){
+        if (str.length < k){
+            return str = str.split("").reverse().join("");
+        }else {
+            let sub = str.substring(0,k);
+            sub = sub.split("").reverse().join("");
+            return sub + str.substring(k, str.length);
+        }
+    };
+    let str = 'sp';
+    console.log(reverseSub(str, 3));
+    let s = "abcdefghklmnsp",k = 3;
+    console.log(reverseStr(s, k));
+</script>
+</body>
+</html>

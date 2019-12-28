@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * 集合是由一组无序且唯一（即不能重复）的项组成。
+     * 不包含任何元素的集合是空集。
+     */
+    //创建集合
+    function Set() {
+        let items = {};
+        //has方法--判断某个值是否在集合中
+        this.has = function (value) {
+            return items.hasOwnProperty(value);
+        };
+        //add方法--添加元素
+        this.add = function (value) {
+            if (!this.has(value)){
+                items[value] = value;
+                return true;
+            }
+            return false;
+        };
+        //remove方法--移除元素
+        this.remove = function (value) {
+            if (this.has(value)){
+                delete items[value];
+                return true;
+            }
+            return false;
+        };
+        //clear方法--移除集合中的所有值
+        this.clear = function () {
+            items = {};
+        };
+        //size方法--返回集合中有多少项
+        this.size = function () {
+            let count = 0;
+            for(let prop in items){
+                if (items.hasOwnProperty(prop)){
+                    count ++;
+                }
+            }
+            return count;
+        };
+        //values方法--遍历对象中的所有属性并添加至数组中
+        this.values = function () {
+            let keys = [];
+            for (let key in items){
+                keys.push(key);
+            }
+            return keys;
+        };
+        this.union = union;//并集
+        this.intersection = intersection;//交集
+        this.difference = difference;//差集
+        this.subset = subset;//子集
+    }
+    /**
+     * 集合的操作：
+     * 并集：对于给定的两个集合，返回一个包含两个集合中所有元素的新集合。
+     * 交集：对于给定的两个集合，返回一个包含两个集合中共有元素的新集合。
+     * 差集：对于给定的两个集合，返回一个包含所有存在于第一个集合且不存在于第二个集
+     合的元素的新集合。
+     * 子集：验证一个给定集合是否是另一集合的子集。
+     *
+     */
+    function union(otherSet) {
+        let unionSet = new Set();
+        let values = this.values();
+        for (let i = 0; i < values.length; i++) {
+            unionSet.add(values[i]);
+        }
+        values = otherSet.values();
+        for (let i = 0; i < values.length; i++) {
+            unionSet.add(values[i]);
+        }
+        return unionSet;
+    }
+    function intersection(otherSet) {
+        let intersectionSet = new Set();
+        let values = this.values();
+        for (let i = 0; i < values.length; i++) {
+            if (otherSet.has(values[i])){
+                intersectionSet.add(values[i])
+            }
+        }
+        return intersectionSet;
+    }
+    function difference(otherSet) {
+        let differenceSet = new Set();
+        let values = this.values();
+        for (let i = 0; i < values.length; i++) {
+            if (!otherSet.has(values[i])){
+                differenceSet.add(values[i])
+            }
+        }
+        return differenceSet;
+    }
+    function subset(otherSet) {
+        if (this.size() > otherSet.size()){
+            return false;
+        }
+        let values = this.values();
+        for (let i = 0; i < values.length; i++) {
+            if (!otherSet.has(values[i])){
+                return false;
+            }
+        }
+        return true;
+    }
+    let set = new Set();
+    set.add(1);
+    set.add(2);
+    set.add(3);
+    let setB = new Set();
+    setB.add(1);
+    setB.add(2);
+    setB.add(3);
+    setB.add(4);
+    setB.add(5);
+    setB.add(6);
+    console.log(set.union(setB).values());
+    console.log(set.intersection(setB).values());
+    console.log(set.difference(setB).values());
+    console.log(set.subset(setB));
+    // console.log(set.values());
+    // console.log(set.has(1));
+    // console.log(set.size());
+    // set.add(2);
+    // console.log(set.values());
+    // console.log(set.has(2));
+    // console.log(set.size());
+    // set.remove(1);
+    // console.log(set.values());
+    // set.clear();
+    // console.log(set.values());
+
+
+
+
+
+    //判断对象中是否含有某个键值
+    //方法一：使用in关键字
+    var o = {x:1};
+    // console.log("x" in o);//true
+    // console.log("y" in o);//false
+    // console.log("toString" in o);//true---继承属性
+    // 该方法可以判断对象的自有属性和继承属性是否存在
+
+    //方法二：使用对象的hasOwnProperty()方法
+    // console.log(o.hasOwnProperty("x"));//true
+    // console.log(o.hasOwnProperty("y"));//false
+    // console.log(o.hasOwnProperty("toString"));//false
+    //该方法只能判断自有属性是否存在，对继承属性返回false
+
+    //方法三：使用undefined判断
+    // console.log(o.x !== undefined);//true
+    // console.log(o.y !== undefined);//false
+    // console.log(o.toString !== undefined);//true
+    //该方法有一个问题，如果x对应的值为undefined则返回false
+
+    //方法四：在条件语句中判断
+    if (o.x){
+        // console.log(true);
+    }
+</script>
+</body>
+</html>

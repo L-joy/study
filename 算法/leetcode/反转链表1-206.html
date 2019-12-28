@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    /**
+     * Definition for singly-linked list.
+     */
+    function ListNode(val) {
+        this.val = val;
+        this.next = null;
+     }
+    /**
+     * 反转一个单链表。
+     * @param {ListNode} head
+     * @return {ListNode}
+     */
+    var reverseList = function(head) {
+        if (head === null || head.next === null){
+            return head;
+        }
+        let l = head;
+        let reverse = new ListNode(head.val);
+        while (l.next !== null){
+            let temp = new ListNode(l.next.val);
+            temp.next = reverse;
+            reverse = temp;
+            l = l.next;
+        }
+        return reverse;
+    };
+    //迭代
+    var reverseList1 = function(head) {
+        if (head === null || head.next === null){
+            return head;
+        }
+        let cur = head;
+        let prev = new ListNode(null);
+        while (cur !== null){
+            let next = cur.next;
+            cur.next = prev;
+            prev = cur;
+            cur = next;
+        }
+        return prev;
+    };
+    //递归
+    var reverseList2 = function(head) {
+        if (head == null || head.next == null) return head;
+        let p = reverseList2(head.next);
+        head.next.next = head;
+        head.next = null;
+        return p;
+    };
+
+    let l1 = new ListNode(1);
+    let l2 = new ListNode(2);
+    let l3 = new ListNode(3);
+    let l4 = new ListNode(4);
+    let l5 = new ListNode(5);
+    l1.next = l2;
+    l2.next = l3;
+    l3.next = l4;
+    l4.next = l5;
+    // let l1 = new ListNode(null);
+    console.log(reverseList1(l1));
+</script>
+</html>

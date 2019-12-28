@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * Definition for a binary tree node.
+     */
+    function TreeNode(val) {
+        this.val = val;
+        this.left = this.right = null;
+    }
+    /**
+     * @param {number[]} preorder
+     * @param {number[]} inorder
+     * @return {TreeNode}
+     */
+    var buildTree = function(preorder, inorder) {
+        if (preorder.length === 0 || inorder.length === 0){
+            return null;
+        }
+        if (preorder.length === 1){
+            return new TreeNode(preorder[0]);
+        }
+        let root = new TreeNode(preorder[0]);
+        let leftInorder = [], rightInorder  =[],
+            leftPreorder = [], rightPreorder  =[];
+        let ri = 0;
+        let rootIndex = inorder.indexOf(preorder[0]);
+        for (let i = 0; i < inorder.length; i++) {
+            if (i < rootIndex){
+                leftInorder[i] = inorder[i]
+            }
+            if (i > rootIndex){
+                rightInorder[ri] = inorder[i];
+                ri++;
+            }
+        }
+        let leftLen = leftInorder.length, j = 0,k = 0;
+        for (let i = 1; i < preorder.length; i++) {
+            if (j < leftLen){
+                leftPreorder[j] = preorder[i];
+                j++;
+            }else {
+                rightPreorder[k] = preorder[i];
+                k++;
+            }
+        }
+        root.left = buildTree(leftPreorder,leftInorder);
+        root.right = buildTree(rightPreorder,rightInorder);
+        return root;
+
+    };
+    let preorder = [3,9,20,15,7],
+        inorder = [9,3,15,20,7];
+    console.log(buildTree(preorder, inorder));
+</script>
+</body>
+</html>

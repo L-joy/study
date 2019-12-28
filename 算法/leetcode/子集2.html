@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+<script>
+    /**
+     * 给定一个可能包含重复元素的整数数组 nums，
+     * 返回该数组所有可能的子集（幂集）。
+     * @param {number[]} nums
+     * @return {number[][]}
+     */
+    var subsetsWithDup = function(nums) {
+        var result = [];
+        for (let i = 0; i <= nums.length; i++) {
+            var temp = [], j = 0;
+            sets(result,nums,temp,i,j);
+        }
+        let map = new Map();
+        result.forEach(item => {
+            item.sort((a,b) => a-b);
+            map.set(item.join(),item);
+        });
+        result = [...map.values()];
+        return result;
+    };
+    function sets(result,nums,temp,n,i) {
+        if (temp.length === n){
+            var temp1 = [];
+            temp.forEach(item => {
+                temp1.push(item)
+            });
+            result.push(temp1);
+            return;
+        }
+        if (i === nums.length){
+            return;
+        }
+        for (let j = i; j < nums.length; j++) {
+            temp.push(nums[j]);
+            sets(result,nums,temp,n,j+1);
+            temp.pop();
+        }
+    }
+    var subsetsWithDup1 = function(nums) {
+        var result = [];
+        nums = nums.sort((a,b) => a-b);
+        for (let i = 0; i <= nums.length; i++) {
+            var temp = [], j = 0;
+            sets1(result,nums,temp,i,j);
+        }
+        return result;
+    };
+    function sets1(result,nums,temp,n,i) {
+        if (temp.length === n){
+            var temp1 = [];
+            temp.forEach(item => {
+                temp1.push(item)
+            });
+            result.push(temp1);
+            return;
+        }
+        if (i === nums.length){
+            return;
+        }
+        for (let j = i; j < nums.length; j++) {
+            if (j > i && nums[j] === nums[j-1]){
+
+            }else {
+                temp.push(nums[j]);
+                sets1(result,nums,temp,n,j+1);
+                temp.pop();
+            }
+        }
+    }
+    var nums = [3,1,2,2,4,3,5];
+    console.log(subsetsWithDup1(nums));
+    // let arr = [[1],[2],[1,2],[2,1],[1],[3]];
+    // let map = new Map();
+    // let obj = {};
+    // arr.forEach(item => {
+    //     item.sort((a,b) => a-b);
+    //     obj[item] = item;
+    //     map.set(item.join(),item);
+    // });
+    // console.log([...map.values()]);
+    // console.log(Object.values(obj));
+</script>
+</html>

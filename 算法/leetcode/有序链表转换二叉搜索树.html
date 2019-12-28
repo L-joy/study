@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<marquee behavior="" direction="right" scrolldelay="200">123456789</marquee>
+<script>
+    /**
+     * Definition for singly-linked list.
+     */
+    function ListNode(val) {
+        this.val = val;
+        this.next = null;
+    }
+    /**
+     * Definition for a binary tree node.
+     */
+    function TreeNode(val) {
+        this.val = val;
+        this.left = this.right = null;
+    }
+    /**
+     * @param {ListNode} head
+     * @return {TreeNode}
+     */
+    var sortedListToBST1 = function(head) {
+        if (head == null){
+            return null;
+        }
+        if (head.next == null){
+            return new TreeNode(head.val);
+        }
+        let len = 0, cur = head;
+        while (cur){
+            len++;
+            cur = cur.next;
+        }
+        cur = head;
+        let midLen = parseInt(len/2);
+        let leftNode , rightNode, root;
+        let curIndex = 0;
+        while (cur && curIndex <= midLen + 1){
+            if (curIndex === midLen){
+                root = new TreeNode(cur.val);
+            }
+            if (curIndex === midLen + 1){
+                rightNode = cur;
+            }
+            cur = cur.next;
+            curIndex++;
+        }
+        leftNode = head, curIndex = 0;
+        let leftCur = leftNode;
+        while (curIndex <= midLen - 1){
+            if (curIndex === midLen - 1){
+                leftCur.next = null;
+            }else {
+                leftCur = leftCur.next;
+            }
+            curIndex++;
+        }
+        root.left = sortedListToBST1(leftNode);
+        root.right = sortedListToBST1(rightNode);
+        return root;
+    };
+    var sortedListToBST = function(head) {
+        if (head === null){
+            return null;
+        }
+        if (head.next === null){
+            return new TreeNode(head.val);
+        }
+        let len = 0, cur = head;
+        while (cur){
+            len++;
+            cur = cur.next;
+        }
+        cur = head;
+        let midLen = parseInt(len/2);
+        let leftNode = 0, rightNode = 0, root;
+        let curIndex = 0;
+        while (curIndex < len){
+            if (curIndex < midLen){
+                leftNode ++;
+            }
+            if (curIndex === midLen){
+                root = new TreeNode(cur.val);
+            }
+            if (curIndex > midLen){
+                rightNode ++;
+            }
+            cur = cur.next;
+            curIndex++;
+        }
+        console.log(leftNode,rightNode,root);
+    };
+    var getNode = function(){
+
+    };
+    let head = new ListNode(-10);
+    let next1 = new ListNode(-3);
+    let next2 = new ListNode(0);
+    let next3 = new ListNode(5);
+    let next4 = new ListNode(9);
+    let next5 = new ListNode(10);
+    head.next = next1;
+    next1.next = next2;
+    next2.next = next3;
+    next3.next = next4;
+    next4.next = next5;
+    console.log(sortedListToBST1(head));
+
+</script>
+</body>
+</html>

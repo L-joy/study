@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function Node(val) {
+        this.val = val;
+        this.left = null;
+        this.right = null;
+    }
+    function AVLTree() {
+        this.Node = Node;
+        let root = null;
+        this.insert = insert;//向树中插入一个新的元素
+        this.getHeight = getHeight;//获取树的高度
+        this.getRoot = getRoot;//获取根节点
+    }
+    //获取树的高度
+    function getHeight(node) {
+        let hLeft = 0,
+            hRight = 0;
+        if (node.left){
+            hLeft = getHeight(node.left);
+        }
+        if (node.right){
+            hRight = getHeight(node.right);
+        }
+        return Math.max(hLeft,hRight) + 1;
+    }
+    //获取平衡因子
+    function balanceFactor(node) {
+        let hLeft = 0,
+            hRight = 0;
+        if (node.left){
+            hLeft = getHeight(node.left);
+        }
+        if (node.right){
+            hRight = getHeight(node.right);
+        }
+        return hLeft-hRight;
+    }
+    //插入元素
+    function insert(element) {
+        let node = new Node(element);
+        if (this.root == null){//根节点为空时
+            this.root = node;
+        }else {//根节点不为空时
+            //先将元素按照二叉树的结构进行插入
+            insertNode(this.root, node);
+            //然后将此时的二叉树调整为一个平衡二叉树
+            this.root = balanceNode(this.root);
+        }
+    }
+    function insertNode(root, node) {
+        if (node.val < root.val){
+            if (root.left === null){
+                root.left = node;
+            }else {
+                insertNode(root.left, node);
+            }
+        }else {
+            if (root.right === null){
+                root.right = node;
+            }else {
+                insertNode(root.right, node);
+            }
+        }
+    }
+    //调整为平衡二叉树
+    function balanceNode(root) {
+        if (root.left){
+            root.left = balanceNode(root.left);
+        }
+        if (root.right){
+            root.right = balanceNode(root.right);
+        }
+        let bf = balanceFactor(root);
+        if (bf >= 2){
+            if (balanceFactor(root.left) > 0){ //LL
+                root = LLRotate(root);
+            } else {  //LR
+                root = LRRotate(root);
+            }
+        }else if (bf <= -2){
+            if (balanceFactor(root.right) > 0){ //RL
+                root = RLRotate(root);
+            } else { //RR
+                root = RRRotate(root);
+            }
+        }
+        return root;
+    }
+    //LL型
+    function LLRotate(root) {
+        let a = root,
+            b = root.left;
+        a.left = b.right;
+        b.right = a;
+        return b;
+    }
+    //LR型
+    function LRRotate(root) {
+        let a = root,
+            b = root.left,
+            c = root.left.right;
+        b.right = c.left;
+        a.left = c.right;
+        c.left = b;
+        c.right = a;
+        return c;
+    }
+    //RL型
+    function RLRotate(root) {
+        let a = root,
+            b = root.right,
+            c = root.right.left;
+        b.left = c.right;
+        a.right = c.left;
+        c.left = a;
+        c.right = b;
+        return c;
+    }
+    //RR型
+    function RRRotate(root) {
+        let a = root,
+            b = root.right;
+        a.right = b.left;
+        b.left = a;
+        return b;
+    }
+
+    function getRoot() {
+        return this.root;
+    }
+    let tree = new AVLTree();
+    tree.insert(5);
+    tree.insert(3);
+    tree.insert(9);
+    tree.insert(10);
+    tree.insert(7);
+    tree.insert(6);
+    tree.insert(8);
+    // tree.insert(9);
+    // tree.insert(10);
+    console.log(tree.getRoot());
+    console.log(tree.getHeight(tree.root));
+    console.log(balanceFactor(tree.root));
+
+</script>
+</body>
+</html>

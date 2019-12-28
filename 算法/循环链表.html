@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function Node(element) {
+        this.element = element;
+        this.next = null;
+        this.prev = null;
+    }
+    function CircularLinkedList() {
+        let length = 0;
+        let head = null;
+        let tail = null;
+
+        this.append = append;//向链表尾部添加元素
+        this.insert = insert;//向链表的特定位置插入元素
+        this.remove = remove;//移除元素
+        this.removeAt = removeAt;//移除特定位置元素
+        this.indexOf = indexOf;//返回元素在链表中的索引，没有该元素返回-1
+        this.isEmpty = isEmpty;
+        this.size = size;
+        this.toString = toString;
+        this.getHead = getHead;
+    }
+    function append(element) {
+        let node = new Node(element);
+        let current;
+        if (this.head == null){
+            this.head = node;
+            this.tail = node;
+        }else {
+            current = this.tail;
+            current.next = node;
+            node.prev = current;
+            node.next = this.head;
+            this.tail = node;
+        }
+        length ++;
+    }
+    function insert(position,element) {
+        if (position < 0 || position > length){
+            return false;
+        }
+        let node = new Node(element);
+        let current = this.head;
+        let previous, index = 0;
+        if (position === 0){//向链表头部插入元素
+            node.next = current;
+            this.head = node;
+            this.tail.next = node;
+        }else if (position === length){//向链表尾部插入元素
+            current = this.tail;
+            current.next = node;
+            node.prev = current;
+            node.next = this.head;
+            this.tail = node;
+        }else {
+            while (index++ < position){
+                previous = current;
+                current = current.next
+            }
+            previous.next = node;
+            node.next = current;
+            current.prev = node;
+            node.prev = previous;
+        }
+        length ++;
+    }
+    function remove(element) {
+        let position = this.indexOf(element);
+        return this.removeAt(position);
+    }
+    function removeAt(position) {
+        if (position < 0 || position > length){
+            return null;
+        }
+        let current = this.head;
+        let previous, index = 0;
+        if (position === 0){//移除第一个元素
+            this.head = current.next;
+            if (length === 1){
+                this.tail = null;
+            }else {
+                current.next.prev = null;
+                this.tail.next = this.head;
+            }
+        }else if (position === length-1){//移除最后一个元素
+            current = this.tail.prev;
+            current.next = this.head;
+            this.tail = current;
+        }else {
+            while (index++ < position){
+                previous = current;
+                current = current.next
+            }
+            previous.next = current.next;
+            current.next.prev = previous;
+        }
+        length --;
+        return current.element;
+    }
+    function indexOf(element) {
+        let current = this.head;
+        let index = 0;
+        let len = length;
+        while (len){
+            if (current.element === element){
+                return index;
+            }
+            current = current.next;
+            index ++;
+            len--;
+        }
+        return -1;
+    }
+    function toString() {
+        let current = this.head;
+        let str = '';
+        let len = length;
+        while (len >= 0){
+            str += current.element+" ";
+            current = current.next;
+            len--;
+        }
+        return str;
+    }
+    function isEmpty() {
+        return length === 0;
+    }
+    function size() {
+        return length;
+    }
+    function getHead(){
+        return this.head;
+    }
+
+    let list = new CircularLinkedList();
+    list.append(12);
+    // list.removeAt(0);
+    // console.log(list.getHead());
+    list.append(14);
+    list.append(15);
+    list.insert(2,13);
+    console.log(list.toString());
+    // list.removeAt(1);
+    // console.log(list.toString());
+    list.remove(14);
+    console.log(list.toString());
+    console.log(list.indexOf(14));
+    // console.log(list.getHead());
+    // console.log(list.size());
+</script>
+</body>
+</html>

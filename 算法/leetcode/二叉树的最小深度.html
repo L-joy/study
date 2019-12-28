@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * Definition for a binary tree node.
+     */
+    function TreeNode(val) {
+        this.val = val;
+        this.left = this.right = null;
+    }
+    /**
+     * @param {TreeNode} root
+     * @return {number}
+     */
+    var minDepth = function(root) {
+        let result = 0, hLeft = 0, hRight = 0;
+        if (root === null){
+            return 0;
+        }
+        if (root.left === null && root.right === null){
+            return 1;
+        }
+        if (root.left !== null){
+            hLeft = minDepth(root.left);
+        }else {
+            hLeft = Number.MAX_VALUE;
+        }
+        if (root.right !== null){
+            hRight = minDepth(root.right);
+        }else {
+            hRight = Number.MAX_VALUE;
+        }
+        console.log(hLeft,hRight);
+        result = Math.min(hLeft,hRight)+1;
+        return result;
+    };
+
+    let root = new TreeNode(1);
+    root.left = new TreeNode(2);
+    // root.right = new TreeNode(3);
+    // root.right.left = new TreeNode(4);
+    console.log(minDepth(root));
+
+</script>
+</body>
+</html>

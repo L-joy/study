@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * Definition for a binary tree node.
+     */
+    function TreeNode(val) {
+        this.val = val;
+        this.left = this.right = null;
+    }
+    /**
+     * @param {TreeNode} root
+     * @param {number} sum
+     * @return {number[][]}
+     */
+    var pathSum = function(root, sum) {
+        let result = [], temp = [];
+        if (root === null){
+            return [];
+        }
+        return path(root, temp,sum,result);
+
+    };
+    var path = function(root,temp,sum,result){
+        if (root === null){
+            return [];
+        }
+        temp.push(root.val);
+        sum = sum - root.val;
+        if (root.left){
+            path(root.left,temp,sum,result);
+        }
+        if (root.right){
+            path(root.right,temp,sum,result);
+        }
+        if (root.left === null && root.right === null){
+            if (sum === 0){
+                let temp1 = [];
+                for(var key of temp){
+                    temp1.push(key);
+                }
+                result.push(temp1);
+            }
+        }
+        temp.pop();
+        sum = sum + root.val;
+        return result;
+    };
+    let root = new TreeNode(5);
+    let left = new TreeNode(4);
+    let right = new TreeNode(8);
+    let left1 = new TreeNode(11);
+    let left2 = new TreeNode(7);
+    let right2 = new TreeNode(2);
+    let left3 = new TreeNode(13);
+    let right3 = new TreeNode(4);
+    let left4 = new TreeNode(5);
+    let right4 = new TreeNode(1);
+    root.left = left;
+    root.right = right;
+    left.left = left1;
+    left1.left = left2;
+    left1.right = right2;
+    right.left = left3;
+    right.right = right3;
+    right3.left = left4;
+    right3.right = right4;
+    console.log(pathSum(root, 22));
+</script>
+</body>
+</html>

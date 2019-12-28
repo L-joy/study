@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * 在字典中，使用键值对的形式存储数据
+     * 字典所能使用的方法：
+     * set(key,value)：向字典中添加新元素。
+     * remove(key)：通过使用键值来从字典中移除键值对应的数据值。
+     * has(key)：如果某个键值存在于这个字典中，则返回true，反之则返回false。
+     * get(key)：通过键值查找特定的数值并返回。
+     * clear()：将这个字典中的所有元素全部删除。
+     * size()：返回字典所包含元素的数量。与数组的length属性类似。
+     * keys()：将字典所包含的所有键名以数组形式返回。
+     * values()：将字典所包含的所有数值以数组形式返回
+     */
+    function Dictionary() {
+        this.items = {};
+        this.set = set;//向字典中添加新元素
+        this.remove = remove;//通过使用键值来从字典中移除键值对应的数据值
+        this.has = has;//如果某个键值存在于这个字典中，则返回true，反之则返回false
+        this.get = get;//通过键值查找特定的数值并返回
+        this.clear = clear;//将这个字典中的所有元素全部删除
+        this.size = size;//返回字典所包含元素的数量。与数组的length属性类似
+        this.keys = keys;//将字典所包含的所有键名以数组形式返回
+        this.values = values;//将字典所包含的所有数值以数组形式返回
+        this.getItems = getItems;
+    }
+    function has(key) {
+        return this.items.hasOwnProperty(key);
+    }
+    function set(key,value) {
+        this.items[key] = value;
+    }
+    function remove(key) {
+        if (this.has(key)){
+            delete this.items[key];
+            return true;
+        }
+        return false;
+    }
+    function get(key) {
+        return this.has(key) ? this.items[key] : undefined;
+    }
+    function values() {
+        let values = [];
+        for (let key in this.items){
+            if (this.has(key)){
+                values.push(this.items[key]);
+            }
+        }
+        return values;
+    }
+    function keys() {
+        let keys = [];
+        for (let key in this.items){
+            if (this.has(key)){
+                keys.push(key);
+            }
+        }
+        return keys;
+    }
+    function clear() {
+        this.items = {};
+    }
+    function size() {
+        let count = 0;
+        for (let key in this.items){
+            if (this.has(key)){
+                count++;
+            }
+        }
+        return count;
+    }
+    function getItems() {
+        return this.items;
+    }
+    let dictionary = new Dictionary();
+    dictionary.set("111","aaa");
+    dictionary.set("222","bbb");
+    dictionary.set("333","ccc");
+    console.log(dictionary.has("111"));
+    console.log(dictionary.getItems());
+    console.log(dictionary.size());
+    console.log(dictionary.keys());
+    console.log(dictionary.values());
+    dictionary.remove("111");
+    console.log(dictionary.getItems());
+    console.log(dictionary.get("333"));
+
+</script>
+</body>
+</html>

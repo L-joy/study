@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * Definition for a binary tree node.
+     */
+    function TreeNode(val) {
+        this.val = val;
+        this.left = this.right = null;
+    }
+    /**
+     * @param {number[]} nums
+     * @return {TreeNode}
+     */
+    var sortedArrayToBST = function(nums) {
+        let result = null;
+        if (nums.length === 0){
+            return result;
+        }
+        let mid = parseInt(nums.length/2);
+        result = new TreeNode(nums[mid]);
+        let left = [],right = [];
+        for (let i = 0; i < nums.length; i++) {
+            if (i < mid){
+                left.push(nums[i]);
+            }
+            if (i > mid){
+                right.push(nums[i]);
+            }
+        }
+        let leftNode = sortedArrayToBST(left);
+        let rightNode = sortedArrayToBST(right);
+        result.left = leftNode;
+        result.right = rightNode;
+        return result;
+    };
+    var nums = [-10,-3,0,5,9];
+    console.log(sortedArrayToBST(nums));
+</script>
+</body>
+</html>

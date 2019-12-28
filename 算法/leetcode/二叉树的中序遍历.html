@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+<script>
+    /**
+     * Definition for a binary tree node.
+     *
+     */
+    function TreeNode(val) {
+         this.val = val;
+         this.left = this.right = null;
+    }
+    /**
+     * 给定一个二叉树，返回它的中序遍历
+     * @param {TreeNode} root
+     * @return {number[]}
+     */
+    var inorderTraversal = function(root) {
+        let inorder = [];
+        inOrder(root,inorder);
+        return inorder;
+    };
+    function inOrder(root,inorder){
+        if (root){
+            inOrder(root.left,inorder);
+            inorder.push(root.val);
+            inOrder(root.right,inorder);
+        }
+    }
+    let l1 = new TreeNode(1),
+        l2 = new TreeNode(2),
+        l3 = new TreeNode(3);
+    l1.right = l2;
+    l2.left = l3;
+
+    console.log(inorderTraversal(l1));
+</script>
+</html>

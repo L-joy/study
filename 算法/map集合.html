@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    let map = new Map();
+    console.log(map);
+    map.set("name","Jack");
+    map.set("age",18);
+    console.log(map.get("name"));
+    let key = {"name":"Jackson","age":18};
+    map.set(key,12);
+    console.log(map.get(key));//12
+    map.delete("name");
+    // map.clear();
+    console.log(map.has("name"));
+    console.log(map.size);
+    let map1 = new Map([["name","JACKSON"],["age",19]]);
+    console.log(map1);
+    console.log(map1.has("name"));
+    console.log(map1.get("name"));
+    let map2 = new Map();
+    let key1 = ['a'];
+    let key2 = ['a'];
+    map2
+        .set(key1,111)
+        .set(key2,222);
+    console.log(map2.get(key1));//111
+    console.log(map2.get(key2));//222
+
+    const map3 = new Map([
+        ['F','no'],
+        ['T','yes']
+    ]);
+    for (let key of map3.keys()){
+        console.log(key);//F    T
+    }
+    for (let value of map3.values()){
+        console.log(value);//no   yes
+    }
+    for (let item of map3.entries()){
+        console.log(item);
+    }
+    for (let [key,value] of map3){
+        console.log([key,value]);
+    }
+    map3.forEach((value,key,map) => {
+        console.log(value,key);
+    });
+    const fn = {
+        report: function (key,value) {
+            console.log(key+"-------"+value);
+        }
+    };
+    map3.forEach(function (value,key,map3) {
+        this.report(key,value);
+    },fn);
+    console.log([...map3]);
+
+    const map4 = new Map();
+    map4.set(1,'a');
+    map4.set(2,'b');
+    map4.set(3,'c');
+    const map5 = new Map([...map4].filter(([k,v]) => k<3));
+    console.log(map5);//Map(2) {1 => "a", 2 => "b"}
+    const map6 = new Map([...map4].map(([k,v]) => [k*2,'_'+v]));
+    console.log(map6);//Map(3) {2 => "_a", 4 => "_b", 6 => "_c"}
+
+
+</script>
+</html>

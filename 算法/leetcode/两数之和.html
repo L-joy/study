@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+<font></font>
+<script>
+    /**
+     * @param {number[]} nums
+     * @param {number} target
+     * @return {number[]}
+     */
+    var twoSum = function(nums, target) {
+        for(let i = 0; i < nums.length; i++){
+            if(nums.indexOf(target - nums[i]) !== -1 && nums.indexOf(target - nums[i]) !== i){
+                return [i,nums.indexOf(target - nums[i])];
+            }
+        }
+    };
+    let nums = [3,2,4];
+    console.log(twoSum(nums, 6));
+</script>
+</html>
