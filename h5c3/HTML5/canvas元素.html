@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<canvas id="myCanvas" width="400" height="400" style="border: 1px solid red"></canvas>
+</body>
+<script>
+    var c = document.getElementById('myCanvas');
+    var context = c.getContext('2d');
+    // 绘制直线
+    // context.moveTo(0,0);//规定直线的起点
+    // context.lineTo(400,400);//规定直线的终点
+    // context.stroke();
+
+    // 绘制矩形
+    // context.fillStyle="#FF00FF";//指定要绘制的图形的填充颜色
+    // context.fillRect(50,25,100,50);//绘制矩阵（坐标位置及大小）
+    // context.strokeStyle="#FFFFFF";//绘制的图形的轮廓颜色
+    // context.strokeRect(50,25,50,25);//要绘制的轮廓
+
+    //绘制圆形
+    // context.fillStyle="#FF00FF";
+    // context.beginPath();//开始绘制路径
+    // context.arc(100,100,50,0,Math.PI*2,true);//arc方法用于绘制圆形
+    // //arc(x,y,radius,startAngle,endAngle,anticlockwise是否按照顺时针方向绘制)
+    // context.closePath();//结束绘制路径
+    // context.fill();
+
+    //绘制三角形
+    // context.strokeStyle="red";
+    // context.beginPath();
+    // context.moveTo(100,100);
+    // context.lineTo(200,100);
+    // context.lineTo(100,200);
+    // context.closePath();
+    // context.stroke();
+
+    //清空画布
+    // context.clearRect(100,100,100,100);//清空指定区域图形（坐标和大小）
+
+
+
+</script>
+</html>

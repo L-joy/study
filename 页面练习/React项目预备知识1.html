@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>
+    console.log(b);//undefined
+    var b = 2;
+    // console.log(a);//报错
+    // let a = 1;
+    // console.log(c);//报错
+    // const c = 3;
+
+    //箭头函数
+    let value = 2;
+    let double = x => 2 * x;
+    let treble = x => {
+        return 3 * x;
+    };
+    console.log(double(value));//4
+    console.log(treble(value));//6
+
+    //没有独立作用域
+    var obj = {
+        commonFn : function () {
+            console.log(this);//obj
+        },
+        arrFn : () => {
+            console.log(this);//window
+        }
+    };
+    obj.commonFn();
+    obj.arrFn();//this 指向了obj所在作用域，指向window
+
+    //不能用作构造函数
+    let Animal = () => {
+
+    };
+    // let animal = new Animal();
+    // console.log(animal);//报错：Animal is not a constructor
+
+    //没有prototype
+    let commonFn = function () {};
+    let arrowFn = () => {};
+    // console.log(commonFn.prototype);
+    // console.log(arrowFn.prototype);//undefined
+
+    //模板字符串
+    //基本用法
+    let str = `
+    <div>
+       <h1 class="title">123</h1>
+     </div>
+    `;
+    document.querySelector('body').innerHTML = str;
+
+    //嵌套变量
+    let name = 'Jackson';
+    let str1 = `
+    <div>
+       <h1 class="title">${name}</h1>
+     </div>
+    `;
+    document.querySelector('body').innerHTML = str1;
+
+    //嵌套函数
+    let getName = () => {
+        return "Jackson test";
+    };
+    let str2 = `
+    <div>
+       <h1 class="title">${getName()}</h1>
+     </div>
+    `;
+    document.querySelector('body').innerHTML = str2;
+
+    //循环嵌套
+    let names = ['Jackson','Rose','Joe'];
+    let str3 = `
+    <ul>
+    ${
+        names.map(name => `<li>I am ${name}</li>`).join('')
+    }
+    </ul>
+    `;
+    document.querySelector('body').innerHTML = str3;
+
+    //Promise对象
+    //Promise结构
+    new Promise((resolve, reject) => {
+        //异步函数
+        $.ajax({
+            url: 'http://localhost:8080/manage/product/list.do',
+            type: 'post',
+            success(res) {
+                resolve(res);
+            },
+            error(err) {
+                reject(err);
+            }
+        });
+    }).then((res) => {
+        console.log('success:',res);
+    },(err) => {
+        console.log('error:',err);
+    });
+
+    // //链式promise
+    // var promiseFn1 = new Promise((resolve, reject) => {
+    //     $.ajax({
+    //         url: 'http://happymmall.com/user/login.do',
+    //         type: 'post',
+    //         success(res) {
+    //             resolve(res);
+    //         },
+    //         error(err) {
+    //             reject(err);
+    //         }
+    //     });
+    // });
+    // var promiseFn2 = new Promise((resolve, reject) => {
+    //     $.ajax({
+    //         url: 'http://happymmall.com/cart/get_cart_product_count.do',
+    //         type: 'post',
+    //         success(res) {
+    //             resolve(res);
+    //         },
+    //         error(err) {
+    //             reject(err);
+    //         }
+    //     });
+    // });
+    // promiseFn1.then(() =>{
+    //     console.log('promiseFn1 success');
+    //     return promiseFn2;
+    // }).then(() =>{
+    //     console.log('promiseFn2 success');
+    // });
+
+
+
+</script>
+</html>

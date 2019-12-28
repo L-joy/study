@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+<script>
+    // class constructor
+    class Animal{
+        constructor(name){
+            this.name = name;
+        }
+        getName(){
+            return this.name;
+        }
+    }
+    let animal = new Animal('Jackson1');
+    console.log(animal);
+    console.log(animal.getName());
+
+    // 类的继承
+    class Animal{
+        constructor(){
+            this.name = "animal";
+        }
+        getName(){
+            return this.name;
+        }
+    }
+    class Cat extends Animal{
+        constructor(){
+            super();
+            this.name = 'cat';
+        }
+    }
+    let animal = new Animal();
+    console.log(animal.getName());//animal
+    let cat = new Cat();
+    console.log(cat.getName());//cat
+
+    // 对象的用法
+    // var name = 'Jackson',
+    //     age = 19;
+    // var obj = {
+    //     name : name,
+    //     age : age
+    //     getName : function () {
+    //         return this.name;
+    //     },
+    //     getAge : function () {
+    //         return this.age;
+    //     }
+    // };
+    //ES6中对象的用法
+    let name = 'Jackson',
+        age = 19;
+    let obj = {
+        //变量名可以直接用作对象的属性名称
+        name,
+        age,
+        //对象里的方法可以简写
+        getName(){
+            return this.name;
+        },
+        //表达式作为属性名或者是方法名
+        ['get'+'Age'](){
+            return this.age;
+        }
+    };
+    console.log(obj);
+    console.log(obj.getName());//Jackson
+    console.log(obj.getAge());//19
+
+    //Object对象的扩展
+    console.log(Object.keys(obj)); //["name", "age", "getName", "getAge"]
+    console.log(Object.assign({a: 1}, {b: 2}));//{a: 1, b: 2}
+    console.log(Object.assign({a: 1}, {a: 2, b: 4}));//{a: 2, b: 4}
+
+</script>
+</html>
