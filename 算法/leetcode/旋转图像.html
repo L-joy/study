@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * @param {number[][]} matrix
+     * @return {void} Do not return anything, modify matrix in-place instead.
+     */
+    var rotate = function(matrix) {
+        let row = matrix.length;
+        let level = 0;
+        while (level < parseInt(row/2)){
+            let a = level,
+                c = row-1-level;
+            while (a < row-1-level && c > level ){
+                let temp = matrix[c][level];
+                matrix[c][level] = matrix[row-1-level][c];
+                matrix[row-1-level][c] = matrix[a][row-1-level];
+                matrix[a][row-1-level] = matrix[level][a];
+                matrix[level][a] = temp;
+                a++;
+                c--;
+            }
+            level++;
+        }
+    };
+    let matrix = [
+        [1,2,3],
+        [4,5,6],
+        [7,8,9]
+    ];
+    // let matrix = [
+    //   [1,2,3,4],
+    //   [5,6,7,8],
+    //   [9,10,11,12],
+    //   [13,14,15,16]
+    // ];
+    rotate(matrix);
+    console.log(matrix);
+</script>
+</body>
+</html>
