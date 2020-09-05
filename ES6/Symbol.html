@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    //创建Symbol实例
+    let s1 = Symbol();
+    let s2  = Symbol();
+    console.log(typeof s1);
+    console.log(s1 == s2);
+    //应用场景1：使用Symbol来作为对象属性名
+    let obj = {
+        abc: 123,
+        "hello": "world"
+    };
+    console.log(obj["abc"]);
+    console.log(obj["hello"]);
+
+    const PROR_NAME = Symbol();
+    const PPOR_AGE = Symbol();
+    let obj1 = {
+        [PROR_NAME]: "啦啦啦"
+    };
+    obj1[PPOR_AGE]=18;
+    console.log(obj1[PROR_NAME]);
+    console.log(obj1[PPOR_AGE]);
+    //对对象进行枚举--不会枚举Symbol类型的属性
+    let obj2 = {
+        [Symbol("name")]: "lalala",
+        age: 18,
+        title: 'hello'
+    };
+    console.log(Object.keys(obj2));
+    for (let p in obj2){
+        console.log(p);
+    }
+    console.log(JSON.stringify(obj2));
+    //如何获取以Symbol方式定义的对象属性
+    console.log(Object.getOwnPropertySymbols(obj2));
+    console.log(Reflect.ownKeys(obj2));
+    //注册和获取全局Symbol
+    let s3 = Symbol('foo');
+    let s4 = Symbol.for('foo');
+    let s5 = Symbol.for('foo');
+    console.log(s4 === s5);//true
+    console.log(Symbol.keyFor(s5));//foo
+    console.log(Symbol.keyFor(s3));//undefined
+
+
+</script>
+</html>

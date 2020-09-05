@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="lib/vue-2.4.0.js"></script>
+</head>
+<body>
+<div id="app">
+    <custom-input :value="searchText"
+                  @input="input"
+    ></custom-input>
+    <div :style="{fontSize: postFontSize + 'em'}">
+        <blog-post v-for="post in posts"
+                   :key="post.id"
+                   :post="post"
+                   @big="big"
+        ></blog-post>
+    </div>
+</div>
+
+</body>
+<script>
+    //定义一个名为button-counter的新组件
+    //组件是可复用的Vue实例
+    //一个组件里的data必须是一个函数
+    Vue.component('button-counter',{
+        data: function() {
+            return {
+                count: 0
+            }
+        },
+        template : '<button v-on:click="count++">Click {{count}}</button>'
+    });
+    Vue.component('blog-post',{
+        props: ['post'],//通过Prop向子组件传递数据
+        template: `
+                    <div class="blog-post">
+                        <h3>{{post.title}}</h3>
+                        <button @click="$emit('big',0.1)">放大</button>
+                        <div v-html="post.content"></div>
+                    </div>
+        `
+    });
+    Vue.component('custom-input',{
+        props:['value'],
+        template:`<input type="text"
+                         :value="value"
+                         @input="$emit('input',$event.target.value)"
+        >`
+    });
+
+    var vm = new Vue({
+        el:'#app',
+        data: {
+            posts:[
+                {id:1,title:'First title',content:'<p>阿拉啦啦啦啦1</p>'},
+                {id:2,title:'Second title',content:'<p>阿拉啦啦啦啦2</p>'},
+                {id:3,title:'Third title',content:'<p>阿拉啦啦啦啦3</p>'}
+            ],
+            postFontSize:1,
+            searchText:'请输入....'
+        },
+        methods: {
+            input(e){
+                this.searchText = e;
+                console.log(this.searchText);
+            },
+            big(e){
+                console.log(e);
+                this.postFontSize += e;
+            }
+        }
+    })
+</script>
+</html>

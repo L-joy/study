@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    //Set数据结构类似数组，但是成员值唯一没有重复的值
+    const s = new Set();
+    [2,3,5,4,5,2,2].forEach(x => s.add(x));
+    for (let i of s){
+        console.log(i);//2,3,4,5
+    }
+
+    //Set数据结构可用于去重
+    const set = new Set([1,2,3,4,4]);
+    console.log([...set]);//[1,2,3,4]
+
+    const item = new Set(document.querySelectorAll('div'));
+    console.log(item.size);
+
+    //也可用于字符串去重
+    console.log([...new Set("abcddfrraa")].join(''));
+
+    let set1 = new Set();
+    let a = NaN, b = NaN;
+    set1.add(a);
+    set1.add(b);
+    console.log(set1.size);//1,Set加入值时认为NaN等于自身，即两个NaN总是相等的
+    //但两个对象总是不相等的
+    set1.add({});
+    set1.add({});
+    console.log(set1.size);//3
+
+    //Set实例的属性和方法
+    //两个属性：constructor(构造函数)、size(成员个数)
+    let newset = new Set();
+    console.log(newset.constructor);
+    console.log(newset.size);
+    //两类方法：操作方法和遍历方法
+    //四个操作方法：add，delete,has,clear
+    newset.add(1);
+    newset.add(2);
+    newset.add(3);
+    newset.add(4);
+    newset.add(5);
+    console.log([...newset]);//[1,2,3,4,5]
+    newset.delete(4);
+    console.log([...newset]);//[1,2,3,5]
+    console.log(newset.has(1));//true
+    // newset.clear();
+    // console.log(newset.size);//0
+
+    //Array.from方法可以将Set结构转换为数组
+    console.log(Array.from(newset));
+
+    //数组去重的另一个方法
+    function dedupe(array) {
+        return Array.from(new Set(array));
+    }
+
+    console.log(dedupe([1, 2, 3, 2, 4, 5, 4, 5, 6, 3, 3, 1, 1]));
+    //四个遍历方法：keys(键)，values(值),entries(键值对),forEach
+    //Set遍历顺序就是插入顺序
+    //由于Set结构没有键名，因此keys和values方法完全相同
+    let subset = new Set(["123","abc","sdf"]);
+    for(let key of subset.keys()){
+        console.log(key);
+    }
+    console.log(subset.values());
+    //可以直接遍历
+    for(let key of subset){
+        console.log(key);
+    }
+    console.log(subset.entries());
+    subset.forEach((item) => {
+        item = item + "1";
+        console.log(item);
+    });
+
+    //使用Set结构实现并集，交集，差集
+    let x = new Set([1,2,3]);
+    let y = new Set([4,3,2]);
+
+    let union = new Set([...x,...y]);
+    console.log(union);
+
+    let intersect = new Set([...x].filter(x => y.has(x)));
+    console.log(intersect);
+
+    let difference = new Set([...x].filter(x => !y.has(x)));
+    console.log(difference);
+
+    //WeakSet结构与Set类似，区别是其成员只能是对象，且垃圾回收机制不考虑WeakSet对对象的引用，只要不用了会直接回收
+    //WeakSet不能遍历，都是弱引用
+
+
+
+
+
+
+</script>
+</html>

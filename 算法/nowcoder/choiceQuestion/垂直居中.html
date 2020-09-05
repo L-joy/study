@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        parent{
+            /*display: table;*/
+            /*width: 200px;*/
+            /*height: 200px;*/
+            border: 1px solid black;
+        }
+        /*child{*/
+        /*    display: table-cell;*/
+        /*    vertical-align: middle;*/
+        /*}*/
+
+        /*parent{*/
+        /*    width: 200px;*/
+        /*    height: 200px;*/
+        /*    border: 1px solid black;*/
+        /*    display: flex;*/
+        /*    align-items: center;*/
+        /*}*/
+
+        /*parent{*/
+        /*    display: block;*/
+        /*    position: relative;*/
+        /*    width: 200px;*/
+        /*    height: 200px;*/
+        /*    border: 1px solid black;*/
+        /*}*/
+        /*child{*/
+        /*    position: absolute;*/
+        /*    top: 50%;*/
+        /*    transform:translateY(-50%);*/
+        /*}*/
+        parent:after{
+            content: '';
+            height: 100%;
+            vertical-align: middle;
+            width: 0;
+        }
+        child{
+            display: inline-block;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+<parent>
+    <child>
+        content
+    </child>
+</parent>
+</body>
+<script>
+
+    // console.log(1);
+    // let a = setTimeout(() => {
+    //     console.log(2);
+    // },0);
+    // console.log(3);
+    // Promise.resolve(4).then(b => {
+    //     console.log(b);
+    //     clearTimeout(a);
+    // });
+    // console.log(5);
+
+    // function Foo() {
+    //     'use strict'
+    //     console.log(this.location);
+    // }
+    // Foo();
+
+    // var i = 0;
+    // while (i < 40){
+    //     if (i < 30){
+    //         continue;
+    //         Document.write("#####");
+    //         i++;
+    //     }
+    // }
+    
+    // var str = "stiabsstringapbs";
+    // var obj = {};
+    // for (var i = 0; i < str.length; i++) {
+    //     var key = str[i];
+    //
+    // }
+
+    console.log((() => {
+    }).length);
+    console.log(1 & 2);
+    console.log(+[]);
+    console.log([1, 2, -3].reduce((a, b) => a - b, 0));
+</script>
+</html>

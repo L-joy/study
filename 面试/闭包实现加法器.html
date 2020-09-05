@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    function add(num){
+        var one = num;
+        return function f(two) {
+            if (two){
+                one += two;
+                return f;
+            } else {
+                return one;
+            }
+        }
+    }
+
+    console.log(add(1)(2)());
+</script>
+</html>

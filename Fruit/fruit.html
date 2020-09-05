@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script>
+	    let Cr = new Array();
+	    let r0 = new Array();
+	    let p0 = new Array();
+	    let q0 = new Array();
+	    let c4 = new Array();
+	
+	    for (let i = 127; i < Math.pow(2,8); i++) {
+	        let temp = new Array();
+	        let r = new Array();
+	        let p = new Array();
+	        let q = new Array();
+	        for (let j = 0; j < 7; j++) {
+	            temp[7-j-1] = (i >> j) & 1;
+	        }
+	        c4.push(temp[4]);
+	        r.push(temp[6]);
+	        r.push(temp[5]);
+	        r.push(temp[4]);
+	        r.push(temp[3]);
+	
+	        p.push(temp[5]);
+	        p.push(temp[4]);
+	        p.push(temp[3]);
+	        p.push(temp[2]);
+	        p.push(temp[1]);
+	
+	        q.push(temp[4]);
+	        q.push(temp[3]);
+	        q.push(temp[2]);
+	        q.push(temp[1]);
+	        q.push(temp[0]);
+	
+	        Cr[i] = temp.join("");
+	        r0[i] = temp[3]*Math.pow(2,0) + temp[4]*Math.pow(2,1) + temp[5]*Math.pow(2,2) + temp[6]*Math.pow(2,3);
+	        p0[i]+16 = temp[1]*Math.pow(2,0) + temp[2]*Math.pow(2,1) + temp[3]*Math.pow(2,2) + temp[4]*Math.pow(2,3) + temp[5]*Math.pow(2,4);
+	        q0[i]+48 = temp[0]*Math.pow(2,0) + temp[1]*Math.pow(2,1) + temp[2]*Math.pow(2,2) + temp[3]*Math.pow(2,3) + temp[4]*Math.pow(2,4);
+	    }
+	
+	    console.log(c4);
+	    console.log(Cr);
+	    console.log(r0);
+	    console.log(p0);
+	    console.log(q0);
+	
+	</script>
+	
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    function getUrl(url){
+        var result = new Object();
+        var index = url.indexOf("?");
+        var search = url.substr(index+1);
+        var strs =search.split("&");
+        for (let i = 0; i < strs.length; i++) {
+            var str = strs[i].split("=");
+            if(str[1] == ""){
+                str[1] = null;
+            }
+            result[str[0]]=str[1];
+        }
+        return result;
+    }
+    var url = "http://www.baidu.com?a=123&b=456&fin=";
+    console.log(getUrl(url));
+</script>
+</html>

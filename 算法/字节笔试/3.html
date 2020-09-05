@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    // 本题为考试多行输入输出规范示例，无需提交，不计分。
+    var n = parseInt(readline());
+    var ans = [];
+    for(var i = 0;i < n; i++){
+        lines = readline().split(" ");
+        let arr = [];
+        for(var j = 0;j < lines.length; j++){
+            arr.push(lines[j]);
+        }
+        if ((arr[0]-1)+(arr[1]-1)>(arr[2]+2) || (arr[2]-1)+(arr[1]-1)>(arr[0]+2) || (arr[0]-1)+(arr[2]-1)>(arr[1]+2)) {
+           print(true);
+        }else {
+            print(false);
+        }
+    }
+</script>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    function f(arr) {
+        let result = arr[1],
+            sum = arr[1];
+        for (let i = 2; i < arr[0] + 1; i++) {
+            if (sum < 0){
+                sum = arr[i];
+            } else {
+                sum += arr[i];
+            }
+            result = Math.max(result,sum);
+        }
+        return result;
+    }
+    var arr = [6,1,2,3,4,5,6];
+    console.log(f(arr));
+</script>
+</html>
