@@ -14,6 +14,10 @@
             /*transform:rotateX(30deg) rotateY(-30deg);*/
             animation: gun 8s linear infinite;
         }
+        img{
+            width:250px;
+            height:250px;
+        }
         .box>div{
             width: 100%;
             height: 100%;
@@ -21,32 +25,32 @@
             text-align: center;
             line-height: 250px;
             font-size: 60px;
-            color: #daa520;
+            /*color: #daa520;*/
         }
         .left{
-            background-color: rgba(255, 0, 0, 0.3);
+            /*background-color: rgba(255, 0, 0, 0.3);*/
             transform-origin:left;
             transform:rotateY(90deg) translate(-125px);
         }
         .right{
-            background-color: rgba(0, 0, 255, 0.3);
+            /*background-color: rgba(0, 0, 255, 0.3);*/
             transform-origin:right;
             transform:rotateY(90deg) translate(125px);
         }
         .front{
-            background-color: rgba(255, 255, 0, 0.3);
+            /*background-color: rgba(255, 255, 0, 0.3);*/
             transform: translateZ(125px);
         }
         .back{
-             background-color: rgba(0, 255, 255, 0.3);
+             /*background-color: rgba(0, 255, 255, 0.3);*/
              transform: translateZ(-125px);
          }
         .up{
-            background-color: rgba(255, 0, 255, 0.3);
+            /*background-color: rgba(255, 0, 255, 0.3);*/
             transform: rotateX(90deg) translateZ(-125px);
         }
         .down{
-            background-color: rgba(99, 66, 33, 0.3);
+            /*background-color: rgba(99, 66, 33, 0.3);*/
             transform: rotateX(90deg) translateZ(125px);
         }
         @keyframes gun {
@@ -62,12 +66,12 @@
 </head>
 <body>
 <div class="box">
-    <div class="front">前</div>
-    <div class="back">后</div>
-    <div class="up">上</div>
-    <div class="down">下</div>
-    <div class="left">左</div>
-    <div class="right">右</div>
+    <div class="front"><img src="../../Jackson-yee/00.jpg" alt=""></div>
+    <div class="back"><img src="../../Jackson-yee/01.jpg" alt=""></div>
+    <div class="up"><img src="../../Jackson-yee/02.jpg" alt=""></div>
+    <div class="down"><img src="../../Jackson-yee/03.jpg" alt=""></div>
+    <div class="left"><img src="../../Jackson-yee/04.jpg" alt=""></div>
+    <div class="right"><img src="../../Jackson-yee/05.jpg" alt=""></div>
 </div>
 </body>
 </html>

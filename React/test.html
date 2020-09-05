@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+</body>
+<script type="text/babel">
+    class FilterableProductTable extends React.Component{
+        constructor(props){
+            super(props);
+        }
+        render() {
+            return (
+                <div>
+                    <SearchBar />
+                    <ProductTable products={this.props.products}/>
+                </div>
+            )
+
+        }
+
+    }
+    class SearchBar extends React.Component{
+        constructor(props){
+            super(props);
+        }
+        render(){
+            return (
+                <form action="">
+                    <input type="text" placeholder="Search..."/>
+                    <input type="checkbox"/>
+                    {' '}Only show products in stock
+                </form>
+            )
+        }
+
+    }
+    class ProductTable  extends React.Component{
+        constructor(props){
+            super(props);
+        }
+        render(){
+            let products = this.props.products;
+            let row = [];
+            let lastCategory = null;
+            products.forEach((product) => {
+                if (product.category !== lastCategory) {
+                    row.push(<ProductCategoryRow category={product.category} key={product.name} />);
+                }
+                row.push(<ProductRow product={product} key={product.price} />);
+                lastCategory = product.category;
+            });
+            return(
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {row}
+                    </tbody>
+                </table>
+            )
+        }
+
+    }
+    class ProductCategoryRow extends React.Component{
+        constructor(props){
+            super(props);
+        }
+        render() {
+            const category = this.props.category;
+            return (
+                <tr>
+                    <th colSpan="2">
+                        {category}
+                    </th>
+                </tr>
+            )
+        }
+
+    }
+    class ProductRow  extends React.Component{
+        constructor(props){
+            super(props);
+        }
+
+        render() {
+            const product = this.props.product;
+            const name = product.stocked ? product.name : <span style={{color : 'red'}}>{product.name}</span>
+            return (
+                <tr>
+                    <th>{name}</th>
+                    <th>{product.price}</th>
+                </tr>
+            );
+        }
+
+    }
+
+    let PRODUCTS=[
+        {category: 'Sporting Goods', price: '$49.99', stocked: true, name: 'Football'},
+        {category: 'Sporting Goods', price: '$9.99', stocked: true, name: 'Baseball'},
+        {category: 'Sporting Goods', price: '$29.99', stocked: false, name: 'Basketball'},
+        {category: 'Electronics', price: '$99.99', stocked: true, name: 'iPod Touch'},
+        {category: 'Electronics', price: '$399.99', stocked: false, name: 'iPhone 5'},
+        {category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7'}
+    ];
+
+    ReactDOM.render(
+        <FilterableProductTable products={PRODUCTS} />,
+        document.getElementById('root')
+    )
+</script>
+</html>

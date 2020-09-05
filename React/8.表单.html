@@ -164,11 +164,87 @@
             )
         }
     }
-    ReactDOM.render(
-        <Reservation />,
-        document.getElementById('root')
-    )
+    // ReactDOM.render(
+    //     <Reservation />,
+    //     document.getElementById('root')
+    // )
 
+
+    class Form extends React.Component{
+        constructor(props){
+            super(props);
+            this.state={
+                name:"",
+                age:"",
+                selectValue:"3",
+                textareaValue:"",
+            }
+        }
+        handleInput(e){
+            let name = e.target.name,
+                value = e.target.value;
+            this.setState({
+                [name]:value
+            });
+        }
+        handleSelect(e){
+            let value = e.target.value;
+            this.setState({
+                selectValue:value
+            });
+        }
+        handleText(e){
+            let value = e.target.value;
+            this.setState({
+                textareaValue:value
+            });
+        }
+        submit(){
+            alert(this.state.name+this.state.age+this.state.selectValue+this.state.textareaValue);
+        }
+        render(){
+            return (
+                <form action="" onSubmit={e => this.submit(e)}>
+                    <label>
+                        姓名：<input name="name"
+                                    type="text"
+                                    value={this.state.name}
+                                    onChange={e => this.handleInput(e)}
+                             />
+                    </label>
+                    <label>
+                        年龄：<input name="age"
+                                    type="number"
+                                    value={this.state.age}
+                                    onChange={e => this.handleInput(e)}
+                             />
+                    </label>
+                    <label>
+                        选择：
+                        <select value={this.state.selectValue} onChange={e => this.handleSelect(e)}>
+                            <option value="1">one</option>
+                            <option value="2">two</option>
+                            <option value="3">three</option>
+                            <option value="4">four</option>
+                        </select>
+                    </label>
+                    <label>
+                        描述：
+                        <textarea value={this.state.textareaValue}
+                                  onChange={e => this.handleText(e)}
+                                  rows="10"
+                                  cols="30"
+                        />
+                    </label>
+                    <input type="submit" value="提交"/>
+                </form>
+            )
+        }
+    }
+ReactDOM.render(
+    <Form />,
+    document.getElementById('root')
+)
 
 
 </script>

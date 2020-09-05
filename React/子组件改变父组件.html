@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+</body>
+<script type="text/babel">
+    class Father extends React.Component{
+        constructor(props){
+            super(props);
+            this.state = {
+                name:'xiao',
+                age:18
+            };
+            this.onChangeState = this.onChangeState.bind(this);
+        }
+        onChangeState(setName){
+            this.setState(setName);
+        }
+        render() {
+            return (
+                <div>
+                    <p>{this.state.name}</p>
+                    <p>{this.state.age}</p>
+                    <input type="submit"
+                           value="Father"
+                           onClick={(e) => this.onChangeState({name:'song',age:26})}
+                    />
+                    <Childern onClicked={(e) => this.onChangeState(e)}/>
+                </div>
+            );
+        }
+    }
+    class Childern extends React.Component{
+        constructor(props){
+            super(props);
+        }
+
+        render() {
+            return (
+                <div>
+                    <input type="submit"
+                           value="Childern"
+                           onClick={() => this.props.onClicked({name:'liu',age:30})}
+                    />
+
+                </div>
+            );
+        }
+    }
+ReactDOM.render(
+    <Father />,
+    document.getElementById('root')
+)
+</script>
+</html>

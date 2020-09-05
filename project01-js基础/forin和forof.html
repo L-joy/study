@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    //for-in是ES5标准，遍历的是key（可遍历对象、数组或字符串的key）；
+    //for-of是ES6标准，遍历的是value（可遍历对象、数组或字符串的value）。
+    var arr = [1,2,3,4,5];
+    for (let index in arr){
+        //index为索引值
+        console.log(arr[index]);
+    }
+    for (let value of arr){
+        //value为数组的值
+        console.log(value);
+    }
+    //遍历数组推荐使用for-of
+    //for in遍历的是数组的索引（即键名），而for of遍历的是数组元素值。
+    var obj = {
+        'name':'xiaoliu',
+        'age':18
+    };
+    for (let key in obj){
+        console.log(key);
+    }
+    for (let [key,value] of obj){
+        console.log(key,value);
+    }
+</script>
+</html>

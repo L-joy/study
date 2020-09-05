@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul id="uu">
+    <li id="l1">l1</li>
+    <li id="l2">l2</li>
+    <li id="l3">l3</li>
+</ul>
+</body>
+<script>
+    function click1() {
+        console.log('l1');
+    }
+    function click2() {
+        console.log('l2');
+    }
+    function click3() {
+        console.log('l3');
+    }
+    document.getElementById('uu').addEventListener('click',function (e) {
+        let ID = e.target.id;
+        if (ID === 'l1'){
+            click1();
+        }else if (ID === 'l2'){
+            click2();
+        }else {
+            click3();
+        }
+
+    })
+</script>
+</html>

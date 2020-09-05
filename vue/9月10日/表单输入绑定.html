@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="lib/vue-2.4.0.js"></script>
+</head>
+<body>
+<div id="app">
+    <p>单行输入：{{inputMsg}}</p>
+    <input type="text" v-model="inputMsg" placeholder="edit me">
+    <p>多行输入：{{textareaMsg}}</p>
+    <textarea  cols="30"
+               rows="10"
+               v-model="textareaMsg"
+               placeholder="edit me"
+    ></textarea>
+    <p>复选框:{{checked}}</p>
+    <input type="checkbox" v-model="checked">
+    <p>多个复选框：{{checkedName}}</p>
+    <div>
+        <input type="checkbox" id="jack" value="Jack" v-model="checkedName">
+        <label for="jack">Jack</label>
+        <input type="checkbox" id="john" value="John" v-model="checkedName">
+        <label for="jack">John</label>
+        <input type="checkbox" id="mike" value="Mike" v-model="checkedName">
+        <label for="jack">Mike</label>
+    </div>
+    <p>单选按钮：{{picked}}</p>
+    <div>
+        <input type="radio" id="one" value="One" v-model="picked">
+        <label for="one">One</label>
+        <input type="radio" id="two" value="Two" v-model="picked">
+        <label for="two">Two</label>
+    </div>
+    <p>选择框：{{selected}}</p>
+    <div>
+        <select v-model="selected">
+            <option disabled value="">请选择</option>
+            <option >A</option>
+            <option >B</option>
+            <option >C</option>
+        </select>
+    </div>
+</div>
+</body>
+<script>
+    //创建Vue的实例对象
+    var vm = new Vue({
+        el: '#app',//绑定页面中要控制的区域
+        data: {//保存页面中的数据
+            inputMsg:"",
+            textareaMsg:"",
+            checked:true,
+            checkedName:[],
+            picked:'',
+            selected:''
+        },
+        methods: {//定义页面中的事件
+
+        }
+    })
+
+
+</script>
+</html>

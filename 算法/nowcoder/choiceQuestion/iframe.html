@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<iframe id="iframe1"
+        src="#"
+        frameborder="1"
+        width="500px"
+        height="500px"
+        scrolling="auto"
+></iframe>
+</body>
+<script>
+    //获取iframe
+    var iframe = document.getElementById('iframe1');
+    //获取iframe的window对象
+    var iwindow = iframe.contentWindow;
+    // var iwindow = window.frames['name'];
+    console.log(iwindow);
+    //获取iframe的document对象
+    var idoc = iwindow.document;
+    console.log(idoc);
+    //获得上一级的window对象
+    var parent = window.parent;
+    //获得最顶级容器的window对象
+    var top = window.top;
+    //返回自身window对象
+    var self = window.self;
+    console.log(parent);
+    console.log(top);
+    console.log(self);
+
+
+</script>
+</html>

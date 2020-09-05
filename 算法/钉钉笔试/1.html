@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    function arrayNoRepeatfy(arr) {
+        let map = new Map();
+        let array = new Array();
+        for (let i = 0; i < arr.length; i++) {
+            if (typeof arr[i] === 'object'){
+                if (map.has(Object.keys(arr[i])[0])) {
+                    if (Object.values(arr[i])[0] !== map.get(Object.keys(arr[i])[0])){
+                        array.push(arr[i]);
+                    }
+                }else {
+                    map.set(Object.keys(arr[i])[0],Object.values(arr[i])[0]);
+                    array.push(arr[i]);
+                }
+            }else {
+                if (map.has(arr[i])){
+                    map.set(arr[i],true);
+                } else {
+                    map.set(arr[i],false);
+                    array.push(arr[i]);
+                }
+            }
+        }
+        console.log(map);
+
+        return array;
+    }
+    var arr = [1,'a',{b:2},{c:3},{b:2},"1",'a'];
+    console.log(arrayNoRepeatfy(arr));
+</script>
+</html>
