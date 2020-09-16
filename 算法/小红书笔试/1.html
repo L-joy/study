@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=div, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        /* html,body{
+            height: 100%;
+        } */
+        .root{
+            width: 600px;
+            height: 300px;
+            display: flex;
+            /* flex-direction: column;
+            background-color: gold; */
+        }
+        .header{
+            flex: 1 2 300px;
+            background-color: gold;
+        }
+        .footer{
+            flex: 2 1 180px;
+            background-color: red;
+        }
+        /* .main{
+            width: 100%;
+            flex:1;
+            overflow: auto;
+            background-color: blueviolet;
+        } */
+        
+    </style>
+</head>
+<body>
+    <div class="root">
+        <div class="header">header</div>
+        <!-- <div class="main">
+            middle
+            <div class="content">
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+                content </br>
+            </div>
+        </div> -->
+        <div class="footer">footer</div>
+    </div>
+</body>
+<script>
+    // function solution(str){
+    //     let stack = [];
+    //     for(let key in str){
+    //         if(str[key] === '['){
+    //             stack.push(key);
+    //         }
+    //         if(str[key] === ']'){
+    //             let newStr = subStr(str.slice(stack.pop() - 1, key + 1));
+    //             str.replace(str.slice(stack.pop() - 1, key + 1), newStr);
+    //         }
+    //     }
+    //     return str;
+    // }
+    // function subStr(str){
+    //     let len = Number(str.charAt(0));
+    //     let sub = str.slice(1, str.length - 1);
+    //     let res = "";
+    //     for(let i = 0; i < len;i++){
+    //         res += sub;
+    //     }
+    //     return res;
+    // }
+    // console.log(solution("3[a2[c]]"));
+    // var x = 21;
+    // var girl = function () {
+    //     console.log(x);
+    //     var x = 20;
+    //   }
+    //   girl();
+    //   console.log(null == undefined);
+    //   console.log(0.1 + 0.2 == 0.3);
+    //   console.log(typeof NaN);
+    //   console.log(typeof Function);
+    //   console.log(typeof Object);
+    //   console.log(typeof {});
+    //   console.log('a' + 1);
+    //   console.log('a' - 1);
+    //   console.log(Function instanceof Object);
+    //   console.log('12345'.length);
+
+    //   setTimeout(() => console.log(1),0);
+    //   (async () => {
+    //       console.log(2);
+    //       await Promise.resolve();
+    //       console.log(3)
+    //   })();
+    //   console.log(4)
+
+      var name = 'world';
+
+      (function (){
+          if(typeof name === 'undefined'){
+              var name = 'JACK';
+              console.log('Goodbye' + this.name)
+          }else{
+              console.log('Hello' + name)
+          }
+      })()
+      window.name = 'A';
+      const obj = {
+          name: 'B',
+          getName: () => {
+              console.log(this.name)
+          }
+      }
+      const f1 = obj.getName;
+      f1();
+      obj.getName();
+      f1.call({name: 'c'})
+
+      
+      
+</script>
+</html>

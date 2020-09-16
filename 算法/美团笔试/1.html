@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function solution(str){
+        let uNum = 0;
+        let lNum = 0;
+        let res = 0;
+        for(var i=0;i<str.length;i++){
+		var c=str.charAt(i);
+            if(c<'A' || c>'Z'){
+                uNum ++;
+            } else {
+                lNum ++;
+            }
+	    }
+        while(uNum !== lNum){
+            if(uNum > lNum){
+                res ++;
+                uNum = uNum - 1;
+                lNum = lNum + 1;
+            }else{
+                res ++;
+                uNum = uNum + 1;
+                lNum = lNum - 1;
+            }
+        }
+        return res;
+    }
+    console.log(solution('AAAb'))
+
+    function solution1(n, arr){
+        if(n <= 0){
+            return 0;
+        }
+        let res;
+        let b = [];
+        for(let i = 0;i<arr.length;i++){
+            let temp = arr[i];
+            for(let j = 1;j <= n;j++){
+                console.log(parseInt(j%(i+1)));
+                temp = temp ^ modys(j, (i+1))
+            }
+            b.push(temp);
+        }
+        res = b[0];
+        for(let k = 1;k<b.length;k++){
+            res = res ^ b[k]
+        }
+        return res;
+    }
+    console.log(solution1(2,[3,2]));
+
+    function modys(a,b){
+        if(b == 0){
+            return;
+        }
+        if((a < 0 && b < 0) || (a >=0 && b >= 0)){   
+            if(parseInt(a) == a && parseInt(b) == b){      
+                return a % b;
+            }else{
+                return (a - (Math.floor(a/b) * a)).toFixed(1);
+            }
+        }else{ 
+            var zbcs = Math.abs(a);        //绝对值
+            var zcs = Math.abs(b);            //绝对值
+            var jg = Math.abs(Math.abs(b) * (Math.floor(zbcs/zcs) + 1) - Math.abs(a));
+            if(cs < 0){
+                jg = -jg
+            }
+            return jg;
+        }
+    }
+
+    function solution2(n,p,q,a,b){
+        let allWant = 0,aWant = 0, bWant = 0;
+        for(let i = 0;i<a.length;i++){
+            if(b.indexOf(a[i])!== -1){
+                allWant += 1;
+            }else{
+                aWant += 1;
+            }
+        }
+        bWant = b.length - allWant;
+        return [aWant,bWant,allWant];
+    }
+    console.log(solution2(5,3,3,[1,2,3],[3,4,5]))
+    function solution3(n,arr) {
+        if(n <= 0){
+            return 'NO';
+        }
+        if(arr.indexOf(2) !== -1){
+            return 'NO';
+        }
+        for(let i = 0;i<arr.length;i++){
+            if(arr[i] === 1){
+                arr[i] = 0;
+            }
+        }
+        let sum = 0;
+        for(let i = 0;i<arr.length;i++){
+            sum += arr[i];
+        }
+        if(sum === n){
+            return 'YES'
+        }else{
+            return 'NO'
+        }
+    }
+    console.log(solution3(3,[1,1,3]))
+    function solution4(n,arr){
+        let res = [];
+        for(let i = 0;i<arr.length;i++){
+            if(res.indexOf(arr[i]) !== -1){
+                res[res.indexOf(arr[i])] = 0;
+                res.unshift(arr[i]);
+            }else{
+                res.unshift(arr[i]);
+            }
+        }
+        let temp = []
+        for(let i = 0;i<res.length;i++){
+            if(res[i] !== 0){
+                temp.push(res[i])
+            }
+        }
+        return temp;
+    }
+    console.log(solution4(3,[1,2,1]))
+</script>
+</html>

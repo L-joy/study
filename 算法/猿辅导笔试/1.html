@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    function solution(argus, n) {
+        let arr = argus;
+        while (n > 0) {
+            let arr1 = arr.slice(0, parseInt(arr.length / 2));
+            let arr2 = arr.slice(parseInt(arr.length / 2), arr.length);
+            let newArr = [];
+            let index1 = 0, index2 = 0;
+            for(let i = 0; i < arr.length; i++){
+                if(parseInt(i%2) === 0){
+                    newArr.push(arr2[index2]);
+                    index2++;
+                }else{
+                    newArr.push(arr1[index1]);
+                    index1++;
+                }
+            }
+            n--;
+            arr = newArr;
+        }
+        return arr.join(" ");
+    }
+    console.log(solution([3, 1, 4, 2, 5, 6], 2));
+
+    function isInvalid(str){
+        let newStr = str.trim();
+        let arr = [];
+        for(let i = 0;i<str.length;i++){
+            if(newStr.charAt(i) !== " "){
+                if(Number(newStr.charAt(i)) >= 0 && Number(newStr.charAt(i)) <= 9){
+                    if(newStr.charAt(i - 1) === " "){
+                        arr.push(newStr.charAt(i));
+                    }else{
+                        arr[arr.length - 1] = arr[arr.length - 1] + newStr.charAt(i);
+                    }
+                }else{
+                    arr.push(newStr.charAt(i));
+                }
+                
+            }
+        }
+        console.log(arr);
+        if(arr[0] !== '(' && arr[arr.length - 1] !== ')'){
+            return "invalid";
+        }
+        if(arr[1] !== '-' && arr[1] !== '+' && arr[1] !== '*'){
+
+            return "invalid";
+        }
+        if(typeof Number(arr[2]) !== 'number' && typeof Number(arr[3]) !== 'number'){
+            
+            return "invalid";
+        }
+        let result = 0;
+        if(arr[1] === '-'){
+            result = Number(arr[2]) - Number(arr[3]);
+        }
+        if(arr[1] === '+'){
+            result = Number(arr[2]) + Number(arr[3]);
+        }
+        if(arr[1] === '*'){
+            result = Number(arr[2]) * Number(arr[3]);
+        }
+        console.log(result);
+        let res = parseInt(result % 10000000) + 10000000;
+        res = parseInt(res % 10000000);
+        return res;
+
+    }
+    console.log(isInvalid("(+ 2 20)"));
+</script>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // function solution(arr,m,x){
+    //     for (const key in arr) {
+    //         arr[key] = parseInt(arr[key]);
+    //     }
+    //    arr.sort((a,b) => a-b);
+    //    return arr[0] + m * x;
+    // }
+    // console.log(solution([1,2,3],1,1));
+    // function solution1(arr){
+    //     let res = [];
+    //     for(let i = 0;i < arr.length; i++){
+    //         if(res.indexOf(arr[i]) === -1){
+    //             res.push(arr[i]);
+    //         }else{
+    //             res[res.indexOf(arr[i])] = res[res.indexOf(arr[i])] * 2;
+    //         }
+    //     }
+    //     for(let i = 0;i < res.length - 1; i++){
+    //         if(res[i] === res[i+1]){
+    //             res = solution1(res);
+    //         }
+    //     }
+    //     return res;
+    // }
+    // console.log(solution1([5,5,5,5,4]));
+
+    // for(var i = 0;i<5;i++){
+    //     setTimeout(() => {
+    //         console.log(i++);
+    //     },100)
+    // }
+    // var x = [typeof x,typeof y][1];
+    // console.log((true+false)>2+true);
+
+    // function bar(){
+    //     return foo;
+    //     foo = 10;
+    //     function foo(){
+    //         var foo = '11'
+    //     }
+    // }
+    // console.log(typeof bar())
+
+    function a(arr){
+        let res = "";
+        if(arr.length === 0){
+            return res;
+        }
+        if(arr.length === 1){
+            return arr[0].name;
+        }
+        for(let i = 0;i<arr.length;i++){
+            if( i === 0){
+                res = res + arr[i].name;
+            }else if(i === arr.length - 1){
+                res = res + ' & ' + arr[i].name;
+            }else{
+                res = res + ', ' + arr[i].name;
+            }
+        }
+        return res;
+    }
+    console.log(a([]))
+
+</script>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // function solution(arr) {
+    //     let i = 0;
+    //     let res = 0;
+    //     while(i < arr.length){
+    //         if(i === 0 && arr[i] === 0){
+    //             return 'Infinity';
+    //         }else{
+    //             if(arr[i] >= arr.length - 1 - i){
+    //                 res ++;
+    //                 return res;
+    //             }
+    //             i = next(i,arr[i],arr);
+    //             res ++;
+    //         }
+    //     }
+    // }
+    function next(i, j, arr) {
+        let max = 0,
+            maxIndex = 0;
+        for (let k = i + 1; k <= i + j; k++) {
+            if (arr[k] > max) {
+                max = arr[k];
+                maxIndex = k;
+            }
+        }
+        return maxIndex;
+    }
+
+    function Solution(S) {
+        let i = 0;
+        let res = 0;
+        while (i < S.length - 1) {
+            if (i === 0 && S[i] === 0) {
+                return 'Infinity';
+            }
+            let steps = S[i];
+            if (steps >= S.length - 1 - i) {
+                res++;
+                break;
+            }
+            let max = S[i + 1];
+            let index = i + 1;
+            for (let j = index; j <= i + steps && j < S.length - 1; j++) {
+                if (S[j] + j - index >= max) {
+                    max = S[j];
+                    index = j;
+                }
+            }
+            res++;
+            i = index;
+        }
+        return res;
+    }
+    console.log(Solution([0, 3, 1, 1, 4]));
+
+    // function plusFloat(num1, num2) {
+    //     var r1, r2, m;
+    //     try {
+    //         r1 = num1.toString().split('.')[1].length;
+    //     } catch (e) {
+    //         r1 = 0;
+    //     }
+    //     try {
+    //         r2 = num2.toString().split(".")[1].length;
+    //     } catch (e) {
+    //         r2 = 0;
+    //     }
+    //     console.log(r1, r2);
+    //     m = Math.pow(10, Math.max(r1, r2));
+    //     r1 = Number(new String(num1).replace(".", ""));
+    //     r2 = Number(num2.toString().replace(".", ""));
+    //     //放大倍数后两个数相除 后，乘以两个小数位数长度相减后的10的次幂
+    //     var money = Mul((r1 / r2), Math.pow(10, t2 - t1));
+    //     lastA = Math.round(num1 * m + num2 * m) / m;
+    //     return money;
+    // }
+    function Mul(a, b) {
+        var m = 0,
+            s1 = a.toString(),
+            s2 = b.toString();
+        try {
+            m += s1.split(".")[1].length;
+        } catch (e) {}
+        try {
+            m += s2.split(".")[1].length;
+        } catch (e) {}
+        return Number(s1.replace(".", "")) * Number(s2.replace(".", "")) / Math.pow(10, m);
+    }
+    var a = Mul(0.9, 0.001);
+    console.log(a);
+</script>
+
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // let func = function(){
+    //     return new Promise((resolve,reject) => {
+    //         resolve('返回值');
+    //     });
+    // };
+    // let cb = function () {
+    //     return "新的值";
+    // };
+    // func.then(function () {
+    //     return cb();
+    // }).then(resp => {
+    //     console.warn(resp);
+    //     console.warn('1=================<');
+    // })
+
+
+    function format(timer) {
+        let date = new Date(timer);
+        let str = 'YYYY-MM-DD:hh:mm:ss';
+        console.log(date);
+        let YYYY = date.getFullYear();
+        let MM = date.getMonth();
+        let DD = date.getDate();
+        console.log(YYYY, MM, DD);
+        let hh = date.getUTCHours();
+        let mm = date.getMinutes();
+        let ss = date.getSeconds();
+        console.log(hh, mm, ss);
+        str = str.replace('YYYY', YYYY);
+        str = str.replace('MM', addZero(MM + 1));
+        str = str.replace('DD', addZero(DD));
+        str = str.replace('hh', addZero(hh));
+        str = str.replace('mm', addZero(mm));
+        str = str.replace('ss', addZero(ss));
+        return str;
+    }
+
+    function addZero(num) {
+        if (num < 10) {
+            return '0' + num;
+        }
+        return num;
+    }
+    console.log(format(1594031855361))
+
+    // function test(input) {
+    //     let str = input.split(" ");
+    //     let k = parseInt(str[1]);
+    //     let arr = str[0].split(",");
+    //     arr = arr.sort((a, b) => b - a);
+    //     return arr[k - 1];
+    // }
+    // console.log(test("3,2,3,1,2,4,5,5,6 4"))
+
+    // function getSort(array) {
+    //     let arr = [];
+    //     let map = new Map();
+    //     for (let i = 0; i < array.length; i++) {
+    //         if (!map.has(array[i])) {
+    //             map.set(array[i], 0)
+    //         } else {
+    //             let temp = map.get(array[i]);
+    //             map.delete(array[i]);
+    //             map.set(array[i], temp + 1);
+    //         }
+    //     }
+    //     console.log(map);
+    //     let max = 0;
+    //     let res = [];
+    //     let len = array.length;
+    //     let res0 = [];
+    //     map.forEach((key, value) => {
+    //         if (value === 0) {
+    //             res0.push(key);
+    //         }
+    //     })
+    //     console.log(res);
+
+    //     // console.log(sort(arr));
+
+    // }
+
+    // function sort(element) {
+    //     let arr = [];
+    //     for (let i = 0; i < element.length; i++) {
+    //         arr.push(i);
+    //     }
+    //     for (var i = 0; i < element.length - 1; i++) {
+    //         for (var j = 0; j < element.length - i - 1; j++) {
+    //             if (element[j] < element[j + 1]) {
+    //                 var swap = element[j];
+    //                 var temp = arr[j];
+    //                 element[j] = element[j + 1];
+    //                 arr[j] = arr[j + 1];
+    //                 element[j + 1] = swap;
+    //                 arr[j + 1] = temp;
+    //             }
+    //             if (element[j] === element[j + 1]) {
+
+    //             }
+    //         }
+    //     }
+    //     return arr;
+    // }
+
+    console.log(getSort([0, 2, 2, 4, 1, 3, 2, 3]))
+
+    function getSort(array) {
+        var str = array.join("");
+        var filter = [];
+        var result = [];
+        for (i in array) {
+            var elm = [];
+            var tmp;
+            var fstr = filter.join();
+            if (fstr.indexOf(array[i]) >= 0)
+                continue;
+            else {
+                var tmp_arr = get(str, array[i], elm, tmp);
+                result.push(tmp_arr.length + ':' + tmp_arr[0]);
+                filter.push(array[i]);
+            }
+        }
+        result.sort();
+        result.reverse();
+        var res = [];
+        for (index in result) {
+            var show = result[index].split(':');
+            res.push(show[1])
+
+        }
+        return res.join(",");
+    }
+
+
+    // var str = '1245242';
+    // var array = str.split('');
+    // var filter = [];
+    // var result = [];
+
+    function get(str, tar, arr, tmp) {
+        if (str.indexOf(tar) >= 0) {
+            tmp = str.slice(str.indexOf(tar) + 1);
+            arr.push(tar);
+            get(tmp, tar, arr, tmp);
+        }
+        return arr;
+    }
+    // for (i in array) {
+    //     var elm = [];
+    //     var tmp;
+    //     var fstr = filter.join();
+    //     if (fstr.indexOf(array[i]) >= 0)
+    //         continue;
+    //     else {
+    //         var tmp_arr = get(str, array[i], elm, tmp);
+    //         result.push(tmp_arr.length + ':' + tmp_arr[0]);
+    //         filter.push(array[i]);
+    //     }
+    // }
+    // result.sort();
+    // result.reverse();
+    // for (index in result) {
+    //     var show = result[index].split(':');
+    //     console.log(index == 0 ? show[1] + '出现' + show[0] + '次' : '，' + show[1] + '出现' + show[0] + '次');
+    // }
+
+    function sortIndex(array){
+        let map = new Map();
+        for(let i = 0; i < array.length; i++){
+            if(!map.has(array[i])){
+                map.set(array[i], 1);
+            }else{
+                let temp = map.get(array[i]);
+                map.delete(array[i]);
+                map.set(array[i], temp + 1);
+            }
+        }
+        let arr = [...map];
+        console.log(arr);
+        // for(let i = 0; i < arr.length; i++){
+        //     for(let j = i + 1; j < arr.length; j++){
+        //         if(arr[j][1] > arr[i][1]){
+        //             let temp = arr[i];
+        //             arr[i] = arr[j];
+        //             arr[j] = temp;
+        //         }
+        //     }
+        // }
+        console.log(arr);
+    }
+    console.log(sortIndex([0,2,2,4,1,3,2,3]));
+</script>
+
+</html>

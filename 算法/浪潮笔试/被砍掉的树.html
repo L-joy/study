@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    /*
+    某条街道两侧分别种植了一排树木，并按如下编号：
+    1 3 5 7 .... 45 47 49 ... 99
+    2 4 6 8 ... 46 48 50 ... 100
+    但是有一些树被砍去，希望你能找出一边最长的连续的大树。。
+    */
+    function solution(arr){
+        let even = [],odd = [];
+        let maxLen = 0,index = 0;
+        for(let i = 0; i < arr.length; i++){
+            if(arr[i]%2 === 0){
+                odd.push(arr[i]);
+            }else{
+                even.push(arr[i]);
+            }
+        }
+        even = even.sort();
+        odd = odd.sort();
+        let resEven = [], resOdd = [];
+        if(even.length === 1){
+            resEven = getMax(even[0],false)
+        }else{
+            resEven = getMaxLen(arr, even, false);
+        }
+        if(odd.length === 1){
+            resOdd = getMax(odd[0],true);
+        }else{
+            resOdd = getMaxLen(arr, odd, true);
+        }
+        return resOdd[0] > resEven[0] ? resOdd : resEven;
+    }
+    function getMax(num, isOdd){
+        if(isOdd){
+            return num > 50 ? [num/2, num - 2] : [(100-num)/2,num + 2]
+        }else{
+            return num > 49 ? [(num-1)/2, num - 2] : [(99-num)/2,num + 2]
+        }
+    }
+    function getMaxLen(arr, temp ,isOdd){
+        let maxLen = 0,index = 0;
+        for(let i = 0; i < temp.length;i++){
+            let len = 0;
+            if(i === 0){
+                len = (arr[i] - 1)/2;
+            }else if(i === temp.length - 1){
+                len = (isOdd ? 100 : 99 - arr[i])/2;
+            }else{
+                len = (arr[i + 1] - arr[i])/2
+            }
+            if(len > maxLen){
+                maxLen = len;
+                index = arr[i];
+            }
+        }
+        return [maxLen, index];
+    }
+    let arr = [9,15,27,35,6];
+    console.log(solution(arr));
+</script>
+</html>

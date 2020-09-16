@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function debounce(fn,wait){
+        let timer = null;
+        return function(...args){
+            if(timer){
+                clearTimeout(timer);
+            }
+            timer = setTimeout(() => {
+                fn.apply(this,args);
+            },wait)
+        }
+    }
+    function throttle(fn,wait){
+        let timer = null;
+        return function(...args){
+            if(timer) return;
+            timer = setTimeout(() => {
+                fn.apply(this,args);
+                timer = null;
+            })
+        }
+    }
+    var arr = [1];
+    let res = arr.reduce((pre,cur) => {
+        return pre + cur;
+    },10)
+    console.log(res);
+
+    let test = {name: 'xiao',age: 18};
+    console.log(arr.splice);
+    console.log(test.splice);
+    let newArr = [3,6,7,9,8,4];
+    console.log(Object.assign(arr,newArr));
+
+    // 深拷贝
+    function deepClone(target){
+        let obj = {};
+        const prototype = Object.getPrototypeOf(target);
+        Reflect.setPrototypeOf(obj,prototype);
+        Reflect.ownKeys(target).forEach((key) => {
+            let value = target[key];
+            const constructor = Reflect.getPrototypeOf(value).constructor;
+            if(constructor === Date || constructor === RegExp){
+                obj[key] = new constructor(value.valueOf());
+            }else if(value !== nul && typeof value === 'object'){
+                obj[key] = deepClone(value);
+            }else{
+                obj[key] = value;
+            }
+        })
+        return obj;
+    }
+
+    // 有效括号的所有组合
+    function dfs(res, str, l, r){
+        if(l === 0 && r === 0){
+            res.push(str);
+            return res;
+        }
+        if(l < r){
+            dfs(res, str + ')', l, r - 1);
+        }
+        if(l > 0){
+            dfs(res, str + '(', l - 1, r);
+        }
+
+    }
+    function solution(n){
+        let res = [];
+        dfs(res,"",n,n);
+        return res;
+    }
+    console.log(solution(4));
+
+</script>
+</html>

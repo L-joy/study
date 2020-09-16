@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    function solution(n, m, k, arr) {
+        let count = 0;
+        for (let key = 0; key < arr.length; key++) {
+            if (arr[key][2] <= k) {
+                count++;
+            }
+            if (count >= n - 1) {
+                return 'Yes';
+            }
+        }
+        return 'No';
+    }
+    console.log(solution(3, 3, 400, [
+        [1, 2, 200],
+        [1, 3, 300],
+        [2, 3, 500]
+    ]));
+
+    function solution1(start, end, arr,str) {
+        let res = 0;
+        let path = [start];
+        let p = 0;
+        let newStr = str.replace('.'," ");
+        newStr = newStr.replace('/'," ");
+        let time = newStr.split(" ");
+        while (p < path.length) {
+            let stack = [];
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i][0] === path[p]) {
+                    stack.push(arr[i]);
+                }
+            }
+            if (stack.length !== 0) {
+                let min = stack[0][2],
+                    index = stack[0][1];
+                for (let i = 1; i < stack.length; i++) {
+                    if (stack[i][2] <= min) {
+                        min = stack[i][2];
+                        index = stack[i][1]
+                    }
+                }
+                path.push(index);
+                res = res + min;
+            }
+            p++;
+        }
+        if(res < 16){
+            time[2] = Number(time[2]) + res - 1;
+        }
+        return time[0] + '.' + time[1] + '/' + time[2];
+    }
+    console.log(solution1(1, 4, [
+        [1, 2, 5],
+        [1, 3, 6],
+        [2, 4, 8],
+        [3, 4, 6]
+    ],'7.9/8'))
+
+
+    function solution2(n,m){
+        n = 3 * n;
+        return (m + m*n)*n/2;
+    }
+    console.log(solution2(2,9))
+
+</script>
+
+</html>

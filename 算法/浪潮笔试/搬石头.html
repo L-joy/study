@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // 沙滩摆放着一排大小不一的球形石头，已知第i个石头的半径为ri，不存在两个石头半径相等。现要求通过移动石头使摆放的石头从左往右半径递增。每次可选择一块石头，并把它放在剩下n-1块石头的最左边或最右边。求最少操作次数。
+    // 思路：保持原序列中最大递增1的子序列不变，移动其他石头，只需求出最大递增1的子序列长度，用总长度减去子序列长度
+    function solution(arr){
+        if(arr.length <= 1){
+            return 0;
+        }
+        let temp = [];
+        let num = 1,maxNum = 1;
+        for(let i=0; i<arr.length;i++){
+            temp[i] = arr[i];
+            for(let j=i+1; j<arr.length;j++){
+                temp[j] = arr[j];
+                if(temp[i] + 1 === temp[j]){
+                    num = num + 1;
+                    temp[i] = temp[j];
+                }
+            }
+            if(num > maxNum){
+                maxNum = num;
+            }
+            num = 1;
+        }
+        return arr.length - maxNum;
+    }
+    let arr = [3,7,4,6,1,2,5,8];
+    // let arr = [3,2,1,4,6,5];
+    console.log(solution(arr));
+</script>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+
+let grid = [
+['1','1','0','0','0'],
+['1','1','0','0','0'],
+['0','0','1','0','0'],
+['0','0','0','1','1']
+];
+/**
+ * @param {character[][]} grid
+ * @return {number}
+ */
+var numIslands = function(grid) {
+    if(grid.length === 0){
+        return 0;
+    }
+    let row = grid.length;
+    let col = grid[0].length;
+    let count = 0;
+    for(let i = 0;i<row;i++){
+        for(let j = 0;j<col;j++){
+            if(grid[i][j] === '1'){
+                search(grid,i,j);
+                count ++;
+            }
+        }
+    }
+    return count;
+};
+var search = function (grids,n,m) {
+    if( n<0 || m<0 || n>=grids.length || m>=grids[0].length || grids[n][m] === '0'){
+        return;
+    }
+    grids[n][m] = '0';
+    search(grids,n-1,m);
+    search(grids,n+1,m);
+    search(grids,n,m-1);
+    search(grids,n,m+1);
+}
+console.log(numIslands(grid));
+
+
+</script>
+</html>

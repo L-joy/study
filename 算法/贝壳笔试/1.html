@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    function solution1(arr) {
+        for (const key in arr) {
+            console.log(key);
+            if(arr[key] === 'S'){
+                arr[key] = 0;
+            }else if(arr[key] === 'J'){
+                arr[key] = 1;
+            }else if(arr[key] === 'B'){
+                arr[key] = 2;
+            }
+        }
+        console.log(arr);
+        let niuMei = [arr[0],arr[1]];
+        let niuNiu = [arr[2],arr[3]];
+        let left = winNum(arr[0],niuNiu);
+        let right = winNum(arr[1],niuNiu);
+        if(left > right){
+            return 'left'
+        }else if(left < right){
+            return 'right';
+        }else{
+            return 'same';
+        }
+    }
+    function winNum(current, arr){
+        let sum = 0;
+        for(let i = 0; i< arr.length;i++){
+            var differ=current-arr[i];
+            if(differ==-1||differ==2){ 
+                sum ++;
+            }
+        }
+        return sum;
+    }
+    console.log(solution1(['B','S','J','J']));
+
+    function solution2(str) {
+        let arr = str.split('');
+        for (const key in str) {
+            console.log(str[key]);
+            
+        }
+    }
+    console.log(solution2('ababababc'));
+
+    function solution3(n, m, arr) {
+        for (const key in arr) {
+            arr[key] = parseInt(arr[key]);
+        }
+        let newArr = arr.sort((a,b)=>a-b);
+        let res = 0;
+        let sum = 0;
+        for(let i = 0;i < n; i++){
+            if(sum + newArr[i] <= m){
+                sum = sum + newArr[i];
+                res ++;
+            }
+        }
+        return res;
+    }
+    // console.log(solution3(6,10,[1,2,4,5,20,10]));
+
+    function solution4(arr) {
+        let res = [];
+        let newArr = arr;
+        for(let i = 0; i < arr.length; i++){
+            if(i === 0){
+                res.push(newArr[i]);
+            }else{
+                let left = searchIndex(res, newArr[i]);
+                let right = searchIndex(arr.slice(i, newArr.length), newArr[i]);
+                if(left.length !== 0 && right.length !== 0){
+                    if(left.length > right.length){
+                        for(let i = 0;i<right.length;i++){
+                            newArr[right[i]] = newArr[i];
+                        }
+                    }else{
+                        for(let i = 0;i < left.length;i++){
+                            res[left[i]] = newArr[i];
+                        }
+                    }
+                }
+                res.push(newArr[i]);
+            }
+        }
+        return res;
+    }
+    function searchIndex(arr,target){
+        let res = [];
+        arr.filter((item,index) => {
+            if(item > target){
+                res.push(index);
+            }
+        });
+        return res;
+    }
+    // console.log(solution4([1,2,3,2,1]));
+</script>
+
+</html>

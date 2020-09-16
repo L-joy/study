@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // function Tree(val) {
+    //     this.val = val;
+    //     this.left = null;
+    //     this.right = null;
+
+    // }
+
+    // function solution(arr) {
+    //     let father = [];
+    //     let children = [];
+    //     for (let i = 0; i < arr.length; i++) {
+    //         if (father.indexOf(arr[i][0]) === -1) {
+    //             father.push(arr[i][0]);
+    //         }
+    //         if (children.indexOf(arr[i][2]) === -1) {
+    //             children.push(arr[i][2]);
+    //         }
+    //     }
+    //     let node = [];
+    //     for (let i = 0; i < children.length; i++) {
+    //         if (father.indexOf(children[i]) === -1) {
+    //             node.push(children[i]);
+    //         }
+    //     }
+    //     let res = [];
+    //     for (let i = 0; i < node.length; i++) {
+    //         let temp = arr.find((item) => item[2] === node[i]);
+    //         res.push(temp[0]);
+    //     }
+    //     console.log(father, children, node, res);
+    //     return parseInt(res.length / 2);
+    // }
+    // console.log(solution([
+    //     ['1', 'left', '2'],
+    //     ['1', 'right', '3'],
+    //     ['2', 'left', '4'],
+    //     ['2', 'right', '5'],
+    //     ['3', 'right', '6'],
+    //     ['6', 'left', '7'],
+    //     ['6', 'right', '8'],
+    //     ['7', 'left', '9'],
+    //     ['7', 'right', '10'],
+    // ]))
+
+    // var countSubstrings = function (s) {
+    //     const n = s.length;
+    //     let ans = 0;
+    //     for (let i = 0; i < 2 * n - 1; ++i) {
+    //         let l = i / 2,
+    //             r = i / 2 + i % 2;
+    //         while (l >= 0 && r < n && s.slice(l, l + 1) == s.slice(r, r + 1)) {
+    //             --l;
+    //             ++r;
+    //             ++ans;
+    //         }
+    //     }
+    //     return ans;
+    // };
+    // console.log(countSubstrings('abbcbb'));
+
+    function solution1(A) {
+        let map = {
+            0: 1
+        };
+        let preSum = 0;
+        let count = 0;
+        let sum = [];
+        for (let i = 0; i < A.length; i++) {
+            preSum = (preSum + A[i]) % 7;
+            console.log(preSum);
+            if (preSum < 0) {
+                preSum = 7 + preSum;
+            }
+            if (map[preSum]) {
+                sum.push(A[i]);
+                count += map[preSum];
+            }
+            if (map[preSum]) {
+                map[preSum]++;
+            } else {
+                sum.push(A[i]);
+                map[preSum] = 1;
+            }
+
+        }
+        console.log(map, sum);
+
+        return count;
+    }
+
+
+    console.log(solution1([10, 20, 2, 29]))
+</script>
+
+</html>

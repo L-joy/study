@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    function BigInt(a) {
+        this.bigint = a;
+        this.plus = function (bigInt) {
+            let bigint2 = bigInt.bigint;
+            var res = '',
+                temp = 0;
+            this.bigint = this.bigint.split('');
+            bigint2 = bigint2.split('');
+            while (this.bigint.length || bigint2.length || temp) {
+                temp += ~~this.bigint.pop() + ~~bigint2.pop();
+                res = (temp % 10) + res;
+                temp = temp > 9;
+            }
+            return res.replace(/^0+/, '');
+        }
+    }
+    const bigint1 = new BigInt('1231230');
+    const bigint2 = new BigInt('12323123999999999999999999999999999999999999999999999991');
+    console.log(bigint1.plus(bigint2));
+
+    function createRearFunc(func, indexes) {
+        return function () {
+            let argus = Array.from(arguments);
+            let arr = [];
+            for (let i = 0; i < argus.length; i++) {
+                arr[indexes[i]] = argus[i]
+            }
+            return func(...arr);
+        }
+    }
+    const originalFunc = function (a, b, c) {
+        return [a, b, c];
+    };
+    const f = createRearFunc(originalFunc, [2, 0, 1]);
+    console.log(f('foo', 'bar', 'fiz'))
+
+
+
+    var longestCommonPrefix = function (strs) {
+        console.log(strs);
+        if (!strs.length) {
+            return null
+        };
+        let cc = '';
+        for (let i = 0; i < strs[0].length; i++) {
+            for (let j = 1; j < strs.length; j++) {
+                if (strs[j].charAt(i) !== strs[0][i]) {
+                    if (cc.charAt(cc.length - 1) === '/') {
+                        cc = cc.slice(0, cc.length - 1);
+                    }
+                    return cc && cc !== '/' ? cc : null;
+                }
+            }
+            cc += strs[0][i];
+        }
+        console.log(cc);
+        return cc && cc !== '/' ? cc.slice(0, cc.length - 1) : null;
+    };
+    console.log(longestCommonPrefix([
+        '/home/admin/react/src',
+        '/home/admin/react',
+        '/home/admin/react/src/index.js',
+    ]));
+
+
+    Array.prototype.method = function () {};
+    let arr = [0, 1, 2, 4, 5, 7, 3, 8];
+    arr.name = "111";
+    for (let key in arr) {
+        console.log(key, arr[key]);
+    }
+    for (let value of arr) {
+        console.log(value);
+    }
+    Object.prototype.method = function () {
+        console.log(this);
+    }
+    var myObject = {
+        a: 1,
+        b: 2,
+        c: 3
+    }
+    for (let key of Object.keys(myObject)) {
+        console.log(key);
+    }
+    // for(let [key,value] of Object.entries(student)){
+    //     console.log(key,value)
+    // }
+</script>
+
+</html>
