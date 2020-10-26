@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        /* .father{
+            position: relative;
+            width: 400px;
+            height: 400px;
+            background-color: red;
+        } */
+        /* .root{
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            left: 50%;
+            top: 50%;
+            margin-top: -50px;
+            margin-left: -50px;
+            background-color:gold;
+        } */
+
+        /* .root{
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            background-color:gold;
+        } */
+        /* .father{
+            display: table-cell;
+            width: 400px;
+            height: 400px;
+            vertical-align: middle;
+            background-color: red;
+        }
+        .root{
+            width: 100px;
+            height: 100px;
+            background-color:gold;
+            margin: 0 auto;
+        } */
+        /* .father{
+            display: flex;
+            width: 400px;
+            height: 400px;
+            align-items: center;
+            justify-content: center;
+            background-color: red;
+        }
+        .root{
+            width: 100px;
+            height: 100px;
+            background-color:gold;
+        } */
+        .father{
+            width: 400px;
+            height: 400px;
+            position: relative;
+            background-color: red;
+        }
+        .root{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100px;
+            height: 100px;
+            background-color:gold;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+    <div class="father">
+        <div class="root"></div>
+    </div>
+    <!-- <div class="root"></div> -->
+</body>
+<script>
+    // 用promise封装ajax请求
+    function fetch(data){
+        return new Promise((resolve,reject) => {
+            var xhr = new XMLHttpRequest();
+            var method = data.method || 'get';
+            let args = data.data || null;
+            xhr.open(method, data.url,true);
+            xhr.onreadystatechange = function(){
+                if(xhr.status === 200 && xhr.readyState === 4){
+                    resolve(xhr.responseText);
+                }else{
+                    reject(xhr.responseText);
+                }
+            }
+            xhr.send(args);
+        })
+    }
+    // fetch({method: 'POST', url: '', data: null}).then(res => {
+    //     console.log(res);
+    // })
+
+    // promise封装微信小程序request请求
+    function request(data){
+        return new Promise((resolve,reject) => {
+            wx.request({
+                url: data.url,
+                method: data.method,
+                data: data.params,
+                header: {
+                    "content-type": data.method === 'GET' ? 'application/json' : 'application/x-www-form-urlencoded'
+                },
+                success: (res) => {
+                    resolve(res.data)
+                },
+                fail: (err) => {
+                    reject(err)
+                }
+            })
+        })
+    }
+
+    // 二叉树层次遍历
+    function Node(val){
+        this.val = val;
+        this.left = null;
+        this.right = null;
+    }
+
+    function levelOrder(root){
+        let res = [];
+        let queue = []; // 存每一层的节点
+        let temp = 0; // 存每一层节点的值
+        let count = 1, nextCount = 0;
+        queue.push(root);
+        while(queue.length){
+            let node = queue.shift();
+            // temp.push(node.val);
+            temp += Number(node.val);
+            count --;
+            if(node.left){
+                queue.push(node.left);
+                nextCount ++;
+            }
+            if(node.right){
+                queue.push(node.right);
+                nextCount ++;
+            }
+            if(count === 0){
+                res.push(temp);
+                temp = 0;
+                count = nextCount;
+                nextCount = 0;
+            }
+        }
+        return res;
+    }
+
+    let root = new Node(3);
+    let root1 = new Node(9);
+    let root2 = new Node(20);
+    let root3 = new Node(15);
+    let root4 = new Node(7);
+    root.left = root1;
+    root.right = root2;
+    root2.left = root3;
+    root2.right = root4;
+    console.log(levelOrder(root));
+
+    // n叉树层次遍历
+    function Nnode(val,children){
+        this.val = val;
+        this.children = children;
+    }
+    function NLevelOrder(root){
+        console.log(root);
+        let res = [];
+        let queue = [];
+        let temp = [];
+        let count = 1, nextCount = 0;
+        queue.push(root);
+        while(queue.length){
+            let node = queue.shift();
+            temp.push(node.val);
+            count--;
+            for(let i = 0; i < node.children.length; i++){
+                queue.push(node.children[i]);
+                nextCount++;
+            }
+            if(count === 0){
+                res.push(temp);
+                temp = [];
+                count = nextCount;
+                nextCount = 0;
+            }
+        }
+        return res;
+
+    }
+    let nroot4 = new Nnode(4,[]);
+    let nroot2 = new Nnode(2,[]);
+    let nroot5 = new Nnode(5,[]);
+    let nroot6 = new Nnode(6,[]);
+    let nroot3 = new Nnode(3,[nroot5,nroot6]);
+    let nroot = new Nnode(1,[nroot3,nroot2,nroot4]);
+    console.log(NLevelOrder(nroot));
+
+</script>
+</html>

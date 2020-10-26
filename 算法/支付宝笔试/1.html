@@ -6,10 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+        .main {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .item {
+            width: 33%;
+            padding-top: 30%;
+            border: 1px solid #000;
+        }
+    </style>
 </head>
 
 <body>
-
+    <div class="main">
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+    </div>
 </body>
 <script>
     function BigInt(a) {
@@ -77,29 +101,45 @@
     ]));
 
 
-    Array.prototype.method = function () {};
-    let arr = [0, 1, 2, 4, 5, 7, 3, 8];
-    arr.name = "111";
-    for (let key in arr) {
-        console.log(key, arr[key]);
-    }
-    for (let value of arr) {
-        console.log(value);
-    }
-    Object.prototype.method = function () {
-        console.log(this);
-    }
-    var myObject = {
-        a: 1,
-        b: 2,
-        c: 3
-    }
-    for (let key of Object.keys(myObject)) {
-        console.log(key);
-    }
-    // for(let [key,value] of Object.entries(student)){
-    //     console.log(key,value)
+    // Array.prototype.method = function () {};
+    // let arr = [0, 1, 2, 4, 5, 7, 3, 8];
+    // arr.name = "111";
+    // for (let key in arr) {
+    //     console.log(key, arr[key]);
     // }
+    // for (let value of arr) {
+    //     console.log(value);
+    // }
+    // Object.prototype.method = function () {
+    //     console.log(this);
+    // }
+    // var myObject = {
+    //     a: 1,
+    //     b: 2,
+    //     c: 3
+    // }
+    // for (let key of Object.keys(myObject)) {
+    //     console.log(key);
+    // }
+    // // for(let [key,value] of Object.entries(student)){
+    // //     console.log(key,value)
+    // // }
+    // console.log(72 & 192)
+
+    for (var i = 0; i <= 5; i++) {
+        (function (j) {
+            setTimeout(() => {
+                console.log(j)
+            }, 0)
+        })(i);
+    }
+    function f1(a){
+        return function(){
+            consol.log(a);
+        }
+    }
+    let func = f1(1);
+    setTimeout(func, 1000);
 </script>
 
 </html>
