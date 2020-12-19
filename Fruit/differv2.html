@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" placeholder="0" id='obj' value="0">
+    <button onclick="f()">点击</button>
+
+</body>
+<script>
+    function f() {
+        let obj = document.getElementById('obj');
+        console.log(obj.value);
+        round(obj.value);
+        // reverseRound(obj.value);
+    }
+
+    function round(r) {
+        let h = [
+            ['l6', 'l15'],
+            ['l1', 'l22'],
+            ['n35', 'l27'],
+            ['l11', 'l33'],
+            ['n1', 'n33', 'l42']
+        ];
+        let b = ['n0', 'n7', 'n13', 'n19', 'n24', 'n29', 'n36', 'l38'];
+        for (let l = 0; l < r; l++) {
+            for (let i = 0; i < b.length; i++) {
+                let x = b[i].slice(0, 1);
+                let n = parseInt(b[i].slice(1));
+                if (x === 'l' && n === 42) {
+                    // b[i] = 'l0';
+                    b.splice(i,1);
+                    b.push(...['l0','l7', 'l17', 'l22', 'l27', 'l36'])
+                } else if (x === 'n' && n === 36) {
+                    b[i] = 'l0';
+                } else {
+                    n = n + 1;
+                    b[i] = x + n;
+                }
+            }
+            let clockH = h;
+            for (let i = 0; i < h.length; i++) {
+                for (let j = 0; j < h[i].length; j++) {
+                    let x = h[i][j].slice(0, 1);
+                    let n = parseInt(h[i][j].slice(1));
+                    if (x === 'l' && n === 42) {
+                        h[i].splice(j,1);
+                        h[i].push(...['l0','l7', 'l17', 'l22', 'l27', 'l36'])
+                    } else if (x === 'n' && n === 36) {
+                        h[i][j] = 'l0';
+                    } else {
+                        n = n + 1;
+                        h[i][j] = x + n;
+                    }
+                }
+            }
+        }
+        console.log(`第t+${Number(r)}轮`);
+        console.log(b);
+        console.log(h);
+        let bsum = 0;
+        for(let i = 0; i < b.length; i++){
+            if(b[i] === 'l28'){
+                bsum ++;
+            }
+        }
+        console.log(bsum);
+        let h3sum = 0, h4sum = 0;
+        for(let i = 0; i < h[3].length; i++){
+            if(h[3][i] === 'l28'){
+                h3sum ++;
+            }
+        }
+        for(let i = 0; i < h[4].length; i++){
+            if(h[4][i] === 'l28'){
+                h4sum ++;
+            }
+        }
+        console.log('b=',bsum);
+        console.log('h3=',h3sum);
+        console.log('h4=',h4sum);
+    }
+    function reverseRound(r){
+        let h = [
+            ['l6', 'l15'],
+            ['l1', 'l22'],
+            ['n35', 'l27'],
+            ['l11', 'l33'],
+            ['n1', 'n33', 'l42']
+        ];
+        let b = ['n0', 'n7', 'n13', 'n19', 'n24', 'n29', 'n36', 'l38'];
+        for(let l = 0; l < r; l++){
+            for (let i = 0; i < b.length; i++) {
+                let x = b[i].slice(0, 1);
+                let n = parseInt(b[i].slice(1));
+                if (x === 'l' && n === 0 || x==='n' && n===0) {
+                    b.splice(i,1);
+                    b.push(...['l8', 'l18', 'l23', 'l28', 'l37','l43'])
+                }  else {
+                    n = n - 1;
+                    b[i] = x + n;
+                }
+            }
+            for (let i = 0; i < h.length; i++) {
+                for (let j = 0; j < h[i].length; j++) {
+                    let x = h[i][j].slice(0, 1);
+                    let n = parseInt(h[i][j].slice(1));
+                    if (x === 'l' && n === 0|| x==='n' && n===0) {
+                        h[i].splice(j,1);
+                        h[i].push(...['l8', 'l18', 'l23', 'l28', 'l37','l43'])
+                    } else {
+                        n = n - 1;
+                        h[i][j] = x + n;
+                    }
+                }
+            }
+        }
+        console.log(`第t-${r}轮`)
+        console.log(b)
+        console.log(h)
+    }
+    // reverseRound(1);
+</script>
+
+</html>

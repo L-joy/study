@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // 执行顺序：
+    // 将两个宏任务（两个script代码）初始化进宏任务队列，宏任务队列为：[script1,script2]
+    // 先执行宏任务script1，此时宏任务队列为：[script2]
+    // 输出：1，0s后timeout1放入宏任务队列中，此时宏任务队列：[script2,timeout1]
+    // promise1入队，此时微任务队列为：[promise1]
+    // 输出：9，script1执行完毕；检查微任务队列是否为空，不为空，执行promise1
+    // 输出：3，0s后将timeout2放入宏任务队列中，此时宏任务队列为：[script2,timeout1,timeout2]
+    // promise3入队，此时微任务队列为：[promise3]
+    // promise1执行完毕继续检查微任务队列是否为空，不为空，执行promise3
+    // 输出：6，promise4入队，此时微任务队列为：[promise4]
+    // promise3执行完毕promise5入队，此时微任务队列：[promise4,promise5]
+    // 判断微任务队列是否为空，不为空，执行promise4，输出：7，执行promise5，输出：8
+    // 此时微任务队列为空，继续执行宏任务script2，此时宏任务队列：[timeout1,timeout2],
+    // 输出：10，0s后timeout3入队，宏任务队列为：[tiomout1,tiomout2,tiomout3]
+    // promise6入队，此时微任务队列：[promise6]
+    // script2执行完毕，判断微任务队列是否为空，不为空，执行promise6，输出：12
+    // 此时微任务队列为空，继续执行宏任务，输出2，4，遇到promise2，入队，此时微任务队列：[promise2],宏任务[tiomout3]
+    // 执行promise2，输出5，继续执行宏任务timeout3,输出11
+    console.log(1);
+    setTimeout(function timeout1() {
+        console.log(2);
+    }, 0);
+    Promise.resolve().then(function promise1() {
+        console.log(3);
+        setTimeout(function timeout2() {
+            console.log(4);
+            Promise.resolve().then(function promise2() {
+                console.log(5);
+            });
+        }, 0);
+        return Promise.resolve()
+            .then(function promise3() {
+                console.log(6);
+                return Promise.resolve().then(function promise4() {
+                    console.log(7);
+                });
+            })
+            .then(function promise5() {
+                console.log(8);
+            })
+    })
+    console.log(9);
+</script>
+<script>
+    console.log(10);
+    setTimeout(function timeout3() {
+        console.log(11);
+    }, 0);
+    Promise.resolve().then(function promise6() {
+        console.log(12);
+    })
+</script>
+
+</html>

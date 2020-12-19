@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    let LFSR = new Array(50);
+    let NFSR = new Array(50);
+    let key = "0000000100100011010001010110011110001" +
+        "0011010101111001101111011110001001000110100";
+    let IV = "1000000000" +
+        "0000000100100011010001010110011110001001101010111100110111101111010111" +
+        "0000000000" +
+        "0000000000" +
+        "0000000000" +
+        "0000000000" +
+        "0000000000";
+    // 密钥装载阶段
+    function frvitV2() {
+        if (key.length !== 80) {
+            console.log("error");
+        }
+        for (let i = 0; i < NFSR.length; i++) {
+            NFSR[i] = key.charAt(i) === '1' ? 1 : 0;
+        }
+        let j = 0;
+        for (let i = NFSR.length; i < NFSR.length + LFSR.length; i++) {
+            LFSR[j] = key.charAt(i) === '1' ? 1 : 0;
+            j++;
+        }
+        for (let i = 0; i < Cr.length; i++) {
+            Cr[i] = 0;
+        }
+        for (let i = 0; i < Cc.length; i++) {
+            Cc[i] = 0;
+        }
+    }
+    // 初始化阶段
+    function init() {
+        frvitV2();
+        // 第一轮初始化
+        let fb = 0;
+        for(let i = 0; i < 130; i++){
+            clockOneTime(fb);
+            let z = output();
+            let iv = IV.charAt(i) === '1' ? 1 : 0;
+            fb = z ^ iv
+            console.log(z,iv,fb);
+        }
+        // 第二轮初始化
+        LFSR[0] = 1;
+        Cr[6] = LFSR[0];
+        for(let i = 0; i < 6; i++){
+            Cr[i] = NFSR[i];
+        }
+        console.log('第二轮————————————————————————————',Cr);
+        for(let i = 0; i < 80; i++){
+            clockOneTime(0);
+        }
+
+    }
+    // 轮密钥函数
+    function keyRound() {
+        let r = (NFSR[44]) * Math.pow(2, 0) + 
+                (NFSR[0]) * Math.pow(2, 1) + 
+                (LFSR[33]) * Math.pow(2, 2) + 
+                (LFSR[49]) * Math.pow(2, 3);
+        let p = (NFSR[20]) * Math.pow(2, 0) + 
+                (NFSR[5]) * Math.pow(2, 1) + 
+                (NFSR[49]) * Math.pow(2, 2) + 
+                (LFSR[15]) * Math.pow(2, 3) + 
+                (LFSR[41]) * Math.pow(2, 4) + 16;
+        let q = (NFSR[26]) * Math.pow(2, 0) + 
+                (NFSR[13]) * Math.pow(2, 1) + 
+                (NFSR[37]) * Math.pow(2, 2) + 
+                (LFSR[5]) * Math.pow(2, 3) + 
+                (LFSR[25]) * Math.pow(2, 3) + 48;
+
+        let k = (parseInt(key.charAt(p)) & parseInt(key.charAt(q))) ^
+                parseInt(key.charAt(r)) ^ parseInt(key.charAt(p)) ^ parseInt(key.charAt(q));
+        return k;
+    }
+    // NFSR反馈函数
+    function feedbackNFSR() {
+        let g;
+        g = keyRound() ^ LFSR[0] ^ NFSR[0] ^ NFSR[11] ^ NFSR[30] ^ (NFSR[16] & NFSR[32]) ^ 
+            (NFSR[25] & NFSR[42]) ^ (NFSR[7] & NFSR[20] & NFSR[35]) ^ (NFSR[4] & NFSR[45]) ^
+            (NFSR[40] & NFSR[44] & NFSR[47] & NFSR[48]);
+        return g;
+    }
+
+    // LFSR反馈函数
+    function feedbackLFSR() {
+        return LFSR[43] ^ LFSR[34] ^ LFSR[24] ^ LFSR[16] ^ LFSR[8] ^ LFSR[0];
+    }
+
+    function output() {
+        let z;
+        let h;
+        h = (LFSR[11] & LFSR[37]) ^ (LFSR[1] & LFSR[19]) ^ (NFSR[24] & LFSR[28]) ^ (NFSR[9] & NFSR[49]) ^
+            (NFSR[1] & NFSR[33] & LFSR[49]);
+
+        z = h ^ NFSR[0] ^ NFSR[17] ^ NFSR[28] ^ NFSR[41] ^ NFSR[48] ^ LFSR[45];
+        return z;
+    }
+
+    function clockOneTime(fb) {
+        let fbLFSR = feedbackLFSR();
+        let fbNFSR = feedbackNFSR();
+
+        for (let i = 0; i < LFSR.length - 1; i++) {
+            LFSR[i] = LFSR[i + 1];
+        }
+        for (let i = 0; i < NFSR.length - 1; i++) {
+            NFSR[i] = NFSR[i + 1];
+        }
+
+        NFSR[49] = fbNFSR ^ fb;
+        LFSR[49] = fbLFSR ^ fb;
+    }
+    
+    init();
+</script>
+
+</html>

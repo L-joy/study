@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    /**
+     * @param {number} m
+     * @param {number} n
+     * @param {number} k
+     * @return {number}
+     */
+    var movingCount = function (m, n, k) {
+        let directionArr = [
+            [0, 1],// 右
+            [1, 0],// 下
+        ];
+        let s = new Set(['0,0']);
+        dfs(0,0,k);
+        function dfs(x, y, k) {
+            for(let i = 0; i < 2; i++){
+                let offsetX = x + directionArr[i][0];
+                let offsetY = y + directionArr[i][1];
+
+                if(offsetX < 0 || offsetX > m - 1 || offsetY < 0 || offsetY > n - 1 ||
+                    getSum(offsetX) + getSum(offsetY) > k || s.has(`${offsetX},${offsetY}`)){
+                        continue;
+                }
+                s.add(`${offsetX},${offsetY}`);
+                dfs(offsetX, offsetY, k)
+            }
+        }
+        return s.size;
+
+    };
+
+    // 位数和的计算
+    function getSum(num) {
+        let stringArr = num.toString().split("");
+        return stringArr.reduce((a,b) => Number(a) + Number(b), 0)
+    }
+
+    console.log(movingCount(3, 4, 2))
+</script>
+
+</html>

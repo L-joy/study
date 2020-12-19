@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    /**
+     * @param {number} n
+     * @return {number}
+     */
+    var fib = function (n) {
+        const cache = [1n,1n];
+        console.log(cache);
+        return Fibonacci(cache, n) % 1000000007n;
+    };
+    function Fibonacci(cache, n) {
+        console.log(cache);
+        if(cache[n] !== undefined){
+            return cache[n];
+        }
+        cache[n] = Fibonacci(cache, n - 1) + Fibonacci(cache, n - 2);
+        return cache[n];
+    }
+
+    console.log(fib(0));
+</script>
+
+</html>

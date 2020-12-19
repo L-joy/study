@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    let max = Number.MAX_SAFE_INTEGER;
+    let max1 = max + 1;
+    let max2 = max + 2;
+    console.log(max1 === max2) // true
+    console.log(9999999999999999); // 10000000000000000
+
+    console.log(9007199254740995n); // → 9007199254740995n
+    console.log(9007199254740995); // → 9007199254740996
+
+    let val = BigInt("9007199254740995"); // → 9007199254740995n
+    console.log(val);
+</script>
+
+</html>

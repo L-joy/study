@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    /**
+     * Definition for singly-linked list.
+     * 
+     */
+    function ListNode(val) {
+        this.val = val;
+        this.next = null;
+    }
+    /**
+     * @param {ListNode} head
+     * @return {number[]}
+     */
+    var reversePrint = function (head) {
+        let res = [];
+        while(head !== null){
+            res.unshift(head.val);
+            head = head.next;
+        }
+        return res;
+
+    };
+
+    let head = new ListNode(1);
+    let headNext = new ListNode(3);
+    let headNext1 = new ListNode(2);
+    head.next = headNext;
+    headNext.next = headNext1;
+    console.log(reversePrint(head));
+
+</script>
+
+</html>

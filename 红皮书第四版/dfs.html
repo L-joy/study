@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // DFS(Depth First Search),深度优先搜索算法，是一种用于遍历或搜索树或图的算法。 沿着树的深度遍历树的节点，尽可能深的搜索树的分支。
+    // DFS解题有两个重点，一是确定截止条件，二是筛选候选集
+    // 排列组合
+    function dfs(p, pb, level, res) {
+        // 1.截至条件
+        if (level === p.length + 1) {
+            console.log(res.join(' '));
+            return;
+        }
+        // 2.遍历候选节点
+        for (let i = 0; i < p.length; i++) {
+            const c = p[i];
+            // 2.1 筛选
+            if (!pb[i]) {
+                res.push(c);
+                pb[i] = true;
+                dfs(p, pb, level + 1, res);
+                res.pop();
+                pb[i] = false;
+            }
+
+        }
+    }
+    // 进一步改进
+    var res = [];
+
+    function dfsEnhance(p) {
+        if (p.length === res.length) {
+            console.log(res.join(" "));
+            return;
+        }
+        for (let i = 0; i < p.length; i++) {
+            const c = p[i];
+            if (c) {
+                res.push(c);
+                p[i] = null;
+                dfsEnhance(p);
+                res.pop();
+                p[i] = c;
+            }
+
+        }
+
+    }
+    var p = ['A', 'B', 'C', 'D', 'E'];
+    var pb = [false, false, false, false, false];
+    // dfs(p, pb, 1, []);
+    // dfsEnhance(p);
+
+    // 合法ip地址
+    function ipDfs(str, index, level, res) {
+        // 截止条件：res的长度为4，包含所有str，res每一位不大于256
+        if (level === 5 || index === str.length - 1) {
+            if (level === 5 && index === str.length - 1) {
+                console.log(res.join('.'));
+            }
+            return;
+        }
+        // 候选集
+        for (let i = 1; i < 4; i++) {
+            const x = str.substr(index + 1, i);
+            // 筛选 x的大小不得大于256，x不能以0开头
+            if (parseInt(x) < 256 && (x === '0' || !x.startsWith('0'))) {
+                res.push(x);
+                ipDfs(str, index + i, level + 1, res);
+                res.pop();
+            }
+        }
+    }
+    var ipRes = [];
+
+    function ipDfsEnhance(str, index) {
+        if (ipRes.length === 4 || index === str.length - 1) {
+            if (ipRes.length === 4 && index === str.length - 1) {
+                console.log(ipRes.join('.'));
+            }
+            return;
+        }
+        for (let i = 1; i < 4; i++) {
+            const x = str.substr(index + 1, i);
+            // 筛选 x的大小不得大于256，x不能以0开头
+            if (parseInt(x) < 256 && (x === '0' || !x.startsWith('0'))) {
+                ipRes.push(x);
+                ipDfsEnhance(str, index + i);
+                ipRes.pop();
+            }
+        }
+    }
+    // ipDfsEnhance('19216801',-1);
+
+    // 电话号码的组合
+    /**
+     * @param {string} digits
+     * @return {string[]}
+     */
+    let digitsToAlph = [
+        [],
+        [],
+        ['a', 'b', 'c'],
+        ['d', 'e', 'f'],
+        ['g', 'h', 'i'],
+        ['j', 'k', 'l'],
+        ['m', 'n', 'o'],
+        ['p', 'q', 'r', 's'],
+        ['t', 'u', 'v'],
+        ['w', 'x', 'y', 'z']
+    ]
+    var letterCombinations = function (digits) {
+        let res = [];
+        if (digits === '') return res;
+        letterDfs(digits, 0, [], res);
+
+        function letterDfs(str, index, temp, res) {
+            //1.截至条件
+            if (temp.length === str.length) {
+                res.push(temp.join(''));
+                return;
+            }
+            //2.候选节点
+            let m = digitsToAlph[parseInt(str.charAt(index))];
+            for (let i = 0; i < m.length; i++) {
+                let c = m[i];
+                temp.push(c);
+                letterDfs(str, index + 1, temp, res);
+                temp.pop();
+            }
+        }
+        return res;
+    };
+
+    console.log(letterCombinations('23'));
+
+    // 组合总和 39
+    /**
+     * @param {number[]} candidates
+     * @param {number} target
+     * @return {number[][]}
+     */
+    var combinationSum = function (candidates, target) {
+        let res = [];
+        combinationDfs(candidates, [], target, res);
+
+        function combinationDfs(arr, temp, t, res) {
+            // 1.截至条件
+            let s = sum(temp)
+            if (s >= t) {
+                if (s === t) {
+                    let newRes = [];
+                    if (res.length !== 0) {
+                        for (let i = 0; i < res.length; i++) {
+                            newRes[i] = res[i].join('');
+                        }
+                    }
+                    let sortTemp = temp.slice();
+                    if (!newRes.includes(sortTemp.sort().join(''))) {
+                        res.push(sortTemp);
+                    }
+                }
+                return;
+            }
+            // 2.候选节点
+            for (let i = 0; i < arr.length; i++) {
+                let c = arr[i];
+                temp.push(c);
+                combinationDfs(arr, temp, t, res);
+                temp.pop();
+            }
+        }
+
+        function sum(arr) {
+            return arr.reduce((pre, cur) => {
+                return pre + cur;
+            }, 0)
+        }
+        return res;
+    };
+
+    console.log(combinationSum([1, 2], 4));
+
+    // 全排列 46
+
+    /**
+     * @param {number[]} nums
+     * @return {number[][]}
+     */
+    var permute = function (nums) {
+        let res = [];
+        dfsEnhance(nums, [], res);
+
+        function dfsEnhance(p, temp, res) {
+            if (p.length === temp.length) {
+                res.push(temp.slice());
+                return;
+            }
+            for (let i = 0; i < p.length; i++) {
+                const c = p[i];
+                if (c !== null) {
+                    temp.push(c);
+                    p[i] = null;
+                    dfsEnhance(p, temp, res);
+                    temp.pop();
+                    p[i] = c;
+                }
+
+            }
+
+        }
+        return res;
+    };
+
+    console.log(permute([0, 1]));
+
+    // 全排列2 47
+    /**
+     * @param {number[]} nums
+     * @return {number[][]}
+     */
+    var permuteUnique = function (nums) {
+        let n = [],
+            count = [];
+        for (const i in nums) {
+            if (n.indexOf(nums[i]) !== -1) {
+                count[n.indexOf(nums[i])] += 1;
+            } else {
+                n.push(nums[i]);
+                count[n.length - 1] = 1;
+            }
+        }
+        let res = [];
+        preDfs(nums, n, count, [], res);
+
+        function preDfs(nums, n, count, temp, res) {
+            if (temp.length === nums.length) {
+                res.push(temp.slice());
+            }
+            for (let i = 0; i < n.length; i++) {
+                const c = n[i];
+                if (count[i] > 0) {
+                    temp.push(n[i]);
+                    count[i]--;
+                    preDfs(nums, n, count, temp, res);
+                    count[i]++;
+                    temp.pop()
+                }
+            }
+        }
+        return res;
+    };
+
+    console.log(permuteUnique([1, 3, 2]));
+
+    // 括号生成22：关键点——左右括号个数相同时不能选择右括号
+    /**
+     * @param {number} n
+     * @return {string[]}
+     */
+    var generateParenthesis = function (n) {
+        let p = ['(', ')'];
+        let pd = [n, n];
+        let res = [];
+        bracketsDfs(n, p, pd, [], res);
+
+        function bracketsDfs(n, p, pb, temp, res) {
+            if (temp.length === 2 * n) {
+                res.push(temp.slice().join(''));
+                return;
+            }
+            if (pb[0] > 0) {
+                pb[0]--;
+                temp.push(p[0]);
+                bracketsDfs(n, p, pb, temp, res);
+                temp.pop();
+                pb[0]++;
+            }
+            if (pb[1] > 0 && pb[0] !== pb[1]) {
+                pb[1]--;
+                temp.push(p[1]);
+                bracketsDfs(n, p, pb, temp, res);
+                temp.pop();
+                pb[1]++;
+            }
+        }
+        return res;
+    };
+
+    console.log(generateParenthesis(4));
+
+    // 相同的树 100
+    /**
+     * @param {TreeNode} p
+     * @param {TreeNode} q
+     * @return {boolean}
+     */
+    var isSameTree = function (p, q) {
+        if (p === null && q === null) {
+            return true;
+        }
+        if (p === null || q === null) {
+            return false;
+        }
+        return p.val === q.val && isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+
+    };
+
+    // 路径总和 113
+    /**
+     * @param {TreeNode} root
+     * @param {number} sum
+     * @return {number[][]}
+     */
+    var pathSum = function (root, sum) {
+        let res = [],
+            temp = [];
+        if (root === null) {
+            return res;
+        }
+        temp.push(root.val);
+        sum = sum - root.val;
+        pathDfs(root, sum, temp, res);
+
+        function pathDfs(node, sum, temp, res) {
+            if (node.left === null && node.right === null) {
+                if (sum === 0) {
+                    res.push(temp.slice());
+                }
+            }
+            if (node.left !== null) {
+                temp.push(node.left.val);
+                pathDfs(node.left, sum - node.left.val, temp, res);
+                temp.pop();
+            }
+            if (node.right !== null) {
+                temp.push(node.right.val);
+                pathDfs(node.right, sum - node.right.val, temp, res);
+                temp.pop();
+            }
+        }
+        return res;
+    };
+
+    // 求根到叶子节点数字之和 129
+    /**
+     * @param {TreeNode} root
+     * @return {number}
+     */
+    var sumNumbers = function (root) {
+        let res = [0];
+        if(root === null){
+            return res[0];
+        }
+        sumNumberDfs(root, root.val, res);
+        function sumNumberDfs(node, temp, res) {
+            if(node.left === null && node.right === null){
+                res[0] += temp;
+                return;
+            }
+            if(node.left !== null){
+                sumNumberDfs(node.left, temp*10+node.left.val, res);
+            }
+            if(node.right !== null){
+                sumNumberDfs(node.right, temp*10+node.right.val, res);
+            }
+          }
+        return res;
+    };
+
+    // 岛屿数量 200
+</script>
+
+</html>

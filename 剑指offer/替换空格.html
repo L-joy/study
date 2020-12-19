@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    /**
+     * @param {string} s
+     * @return {string}
+     */
+    var replaceSpace = function (s) {
+        // while(s.indexOf(" ") !== -1){
+        //     s = s.replace(" ", "%20");
+        // }
+        // return s;
+        return s.replaceAll(" ", "%20");
+    };
+
+    let s = "We are happy";
+    console.log(replaceSpace(s));
+</script>
+
+</html>

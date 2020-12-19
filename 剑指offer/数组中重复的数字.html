@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    /**
+     * @param {number[]} nums
+     * @return {number}
+     */
+    var findRepeatNumber = function (nums) {
+        let map = new Map();
+        for(let i = 0; i < nums.length; i++){
+            if(!map.has(nums[i])){
+                map.set(nums[i], 1);
+            }else{
+                return nums[i];
+            }
+        }
+    };
+
+    var arr = [2,3,1,0,2,5,3];
+
+    console.log(findRepeatNumber(arr));
+</script>
+
+</html>

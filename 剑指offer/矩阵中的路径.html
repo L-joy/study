@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    /**
+     * @param {character[][]} board
+     * @param {string} word
+     * @return {boolean}
+     */
+    var exist = function (board, word) {
+        let row = board.length,
+            col = board[0].length;
+        if(row <= 0 || col <=0 || !word) return false;
+        let index = 0;
+        let visitedArr = new Array();
+        // 初始化标记数组
+        for(let i = 0; i < row; i++){
+            visitedArr[i] = new Array();
+            for(let j = 0; j < col; j++){
+                visitedArr[i][j] = false;
+            }
+        }
+        for(let i = 0; i < row; i++){
+            for(let j = 0; j < col; j++){
+                if(hasPath(board, row, col, word, index, i, j, visitedArr)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    };
+
+    function hasPath(board, row, col, word, index, i, j, visitedArr) {
+        if(word[index] == undefined) return true;
+        var flag = false;
+        if(i >= 0 && i < row && j >=0 && j < col && board[i][j] === word[index] && !visitedArr[i][j]){
+            visitedArr[i][j] = true;
+            ++index;
+            flag = hasPath(board, row, col, word, index, i + 1, j, visitedArr) || 
+            hasPath(board, row, col, word, index, i - 1, j, visitedArr) ||
+            hasPath(board, row, col, word, index, i, j + 1, visitedArr) ||
+            hasPath(board, row, col, word, index, i, j - 1, visitedArr)
+            if(!flag){
+                --index;
+                visitedArr[i][j] = false;
+            }
+        }
+        return flag;
+    }
+
+    // let arr = [
+    //     ['A', 'B', 'C', 'E'],
+    //     ['S', 'F', 'C', 'S'],
+    //     ['A', 'D', 'E', 'E']
+    // ];
+    let arr = [['a','a']]
+    // let arr = [["C","A","A"],["A","A","A"],["B","C","D"]]
+    let word = 'aaa';
+    console.log(exist(arr, word));
+</script>
+
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    let LFSR = new Array(43);
+    let NFSR = new Array(37);
+    let Cr = new Array(7);
+    let Cc = new Array(8);
+    let key = "0000000100100011010001010110011110001" +
+        "0011010101111001101111011110001001000110100";
+    let IV = "1000000000" +
+        "0000000100100011010001010110011110001001101010111100110111101111010111" +
+        "0000000000" +
+        "0000000000" +
+        "0000000000" +
+        "0000000000" +
+        "0000000000";
+    // 密钥装载阶段
+    function frvitV2() {
+        if (key.length !== 80) {
+            console.log("error");
+        }
+        for (let i = 0; i < NFSR.length; i++) {
+            NFSR[i] = key.charAt(i) === '1' ? 1 : 0;
+        }
+        let j = 0;
+        for (let i = NFSR.length; i < NFSR.length + LFSR.length; i++) {
+            LFSR[j] = key.charAt(i) === '1' ? 1 : 0;
+            j++;
+        }
+        for (let i = 0; i < Cr.length; i++) {
+            Cr[i] = 0;
+        }
+        for (let i = 0; i < Cc.length; i++) {
+            Cc[i] = 0;
+        }
+    }
+    // 初始化阶段
+    function init() {
+        frvitV2();
+        // 第一轮初始化
+        let fb = 0;
+        for (let i = 0; i < 130; i++) {
+            clockOneTime(fb, LFSR, NFSR);
+            let z = output(LFSR, NFSR);
+            let iv = IV.charAt(i) === '1' ? 1 : 0;
+            fb = z ^ iv
+        }
+        // 第二轮初始化
+        LFSR[0] = 1;
+        Cr[6] = LFSR[0];
+        for (let i = 0; i < 6; i++) {
+            Cr[i] = NFSR[i];
+        }
+        // console.log('第二轮————————————————————————————',Cr);
+        for (let i = 0; i < 80; i++) {
+            clockOneTime(0, LFSR, NFSR);
+        }
+
+    }
+    // 轮密钥函数
+    function keyRound() {
+        let s = parseInt((Cr[4]) * Math.pow(2, 0)) +
+            parseInt((Cr[3]) * Math.pow(2, 1)) +
+            parseInt((Cr[2]) * Math.pow(2, 2)) +
+            parseInt((Cr[1]) * Math.pow(2, 3)) +
+            parseInt((Cr[0]) * Math.pow(2, 4));
+        let y = parseInt((Cr[2]) * Math.pow(2, 0)) +
+            parseInt((Cr[1]) * Math.pow(2, 1)) +
+            parseInt((Cr[0]) * Math.pow(2, 2)) +
+            parseInt((Cr[6]) * Math.pow(2, 3)) +
+            parseInt((Cr[5]) * Math.pow(2, 4)) + 32;
+        let u = parseInt((Cr[6]) * Math.pow(2, 0)) +
+            parseInt((Cr[5]) * Math.pow(2, 1)) +
+            parseInt((Cr[4]) * Math.pow(2, 2)) +
+            parseInt((Cr[3]) * Math.pow(2, 3)) + 64;
+        let p = parseInt((Cr[3]) * Math.pow(2, 0)) +
+            parseInt((Cr[2]) * Math.pow(2, 1)) +
+            parseInt((Cr[1]) * Math.pow(2, 2)) +
+            parseInt((Cr[0]) * Math.pow(2, 3));
+        let q = parseInt((Cr[1]) * Math.pow(2, 0)) +
+            parseInt((Cr[0]) * Math.pow(2, 1)) +
+            parseInt((Cr[6]) * Math.pow(2, 2)) +
+            parseInt((Cr[5]) * Math.pow(2, 3)) +
+            parseInt((Cr[4]) * Math.pow(2, 4)) + 16;
+        let r = parseInt((Cr[6]) * Math.pow(2, 0)) +
+            parseInt((Cr[5]) * Math.pow(2, 1)) +
+            parseInt((Cr[4]) * Math.pow(2, 2)) +
+            parseInt((Cr[3]) * Math.pow(2, 3)) +
+            parseInt((Cr[2]) * Math.pow(2, 4)) + 48;
+        let k = (parseInt(key.charAt(s)) & parseInt(key.charAt(y))) ^
+            (parseInt(key.charAt(u)) & parseInt(key.charAt(p))) ^
+            parseInt(key.charAt(q)) ^ parseInt(key.charAt(r));
+        return k;
+    }
+    // NFSR反馈函数
+    function feedbackNFSR(lfsr, nfsr) {
+        let g;
+        g = keyRound() ^ lfsr[0] ^ Cr[3] ^ nfsr[0] ^ nfsr[10] ^ nfsr[20] ^ (nfsr[12] & nfsr[3]) ^ 
+            (nfsr[14] & nfsr[25]) ^ (nfsr[5] & nfsr[23] & nfsr[31]) ^ (nfsr[8] & nfsr[18]) ^
+            (nfsr[28] & nfsr[30] & nfsr[32] & nfsr[34]);
+        return g;
+    }
+
+    // LFSR反馈函数
+    function feedbackLFSR(lfsr) {
+        return lfsr[37] ^ lfsr[28] ^ lfsr[23] ^ lfsr[8] ^ lfsr[0];
+    }
+
+    function output(lfsr, nfsr) {
+        let z;
+        let h;
+        h = (lfsr[6] & lfsr[15]) ^ (lfsr[1] & lfsr[22]) ^ (nfsr[35] & lfsr[27]) ^ (lfsr[11] & lfsr[33]) ^
+            (nfsr[1] & nfsr[33] & lfsr[42]);
+
+        z = h ^ nfsr[0] ^ nfsr[7] ^ nfsr[13] ^ nfsr[19] ^ nfsr[24] ^ nfsr[29] ^ nfsr[36] ^ lfsr[38];
+        return z;
+    }
+
+    function clockOneTime(fb, lfsr, nfsr) {
+        let fbLFSR = feedbackLFSR(lfsr);
+        let fbNFSR = feedbackNFSR(lfsr, nfsr);
+
+        for (let i = 0; i < lfsr.length - 1; i++) {
+            lfsr[i] = lfsr[i + 1];
+        }
+        for (let i = 0; i < nfsr.length - 1; i++) {
+            nfsr[i] = nfsr[i + 1];
+        }
+
+        nfsr[36] = fbNFSR ^ fb;
+        lfsr[42] = fbLFSR ^ fb;
+
+        let temp = 0,
+            j = 0;
+        for (let i = Cr.length - 1; i >= 0; i--) {
+            temp += Cr[i] * Math.pow(2, j);
+            j++;
+        }
+        temp = temp + 1;
+        count(temp);
+    }
+
+    function count(temp) {
+        for (let i = Cr.length - 1; i >= 0; i--) {
+            Cr[i] = (temp % 2 == 1) ? 1 : 0;
+            temp = parseInt(temp / 2);
+        }
+    }
+
+    function stream(){
+        init();
+        let Stream = '';
+        for (let i = 0; i < 128; i++) {
+            Stream += output(LFSR, NFSR);
+            clockOneTime(0, LFSR, NFSR);
+        }
+        console.log('无错误密钥流',Stream);
+
+    }
+    function faultStream(){
+        init();
+        if (LFSR[28] === 1) {
+                LFSR[28] = 0;
+            } else {
+                LFSR[28] = 1;
+            }
+        let Stream = '';
+        for (let i = 0; i < 128; i++) {
+            Stream += output(LFSR, NFSR);
+            clockOneTime(0, LFSR, NFSR);
+        }
+        console.log('有错误密钥流',Stream);
+    }
+    stream();
+    faultStream();
+
+
+    function LFSRState() {
+        init();
+        console.log('初始化结束后的 内部状态：', LFSR.reduce((a, b) => a + b, ''), NFSR.reduce((a, b) => a + b, ''));
+        let noFaultStream = '';
+        let faultStream = '';
+        let LFSR22 = '';
+        for (let i = 0; i < 43; i++) {
+            let faultLFSR = new Array(), faultNFSR = new Array();
+            for(let i  = 0; i < LFSR.length; i++){
+                faultLFSR[i] = LFSR[i];
+            }
+            for(let i  = 0; i < NFSR.length; i++){
+                faultNFSR[i] = NFSR[i];
+            }
+            if (faultLFSR[1] === 1) {
+                faultLFSR[1] = 0;
+            } else {
+                faultLFSR[1] = 1;
+            }
+            console.log(`第${i}轮`+'错误注入后内部状态：', faultLFSR.reduce((a, b) => a + b, ''), faultNFSR.reduce((a, b) => a + b, ''));
+            console.log(`第${i}轮`+'无错误注入内部状态：', LFSR.reduce((a, b) => a + b, ''), NFSR.reduce((a, b) => a + b, ''));
+            noFaultStream += output(LFSR, NFSR);
+            faultStream += output(faultLFSR, faultNFSR);
+            LFSR22 += LFSR[22];
+            clockOneTime(0, LFSR, NFSR);
+        }
+        console.log("输出密钥流产生阶段前43轮的无错误密钥：", noFaultStream);
+        console.log("输出密钥流产生阶段前43轮的  错误密钥：", faultStream);
+        console.log('LFSR的第22位置在这43轮中的     状态：', LFSR22);
+    }
+    // LFSRState();
+
+    function NFSRState() {
+        init();
+        console.log('初始化结束后的 内部状态：', LFSR.reduce((a, b) => a + b, ''), NFSR.reduce((a, b) => a + b, ''));
+        let noFaultStream = '';
+        let faultStream = '';
+        let NFSR1 = '';
+        for (let i = 0; i < 37; i++) {
+            let faultLFSR = new Array(), faultNFSR = new Array();
+            for(let i  = 0; i < LFSR.length; i++){
+                faultLFSR[i] = LFSR[i];
+            }
+            for(let i  = 0; i < NFSR.length; i++){
+                faultNFSR[i] = NFSR[i];
+            }
+            if (faultNFSR[33] === 1) {
+                faultNFSR[33] = 0;
+            } else {
+                faultNFSR[33] = 1;
+            }
+            console.log(`第${i}轮`+'错误注入后内部状态：', faultLFSR.reduce((a, b) => a + b, ''), faultNFSR.reduce((a, b) => a + b, ''));
+            console.log(`第${i}轮`+'无错误注入内部状态：', LFSR.reduce((a, b) => a + b, ''), NFSR.reduce((a, b) => a + b, ''));
+            noFaultStream += output(LFSR, NFSR);
+            faultStream += output(faultLFSR, faultNFSR);
+            NFSR1 += NFSR[1];
+            clockOneTime(0, LFSR, NFSR);
+        }
+        console.log("输出密钥流产生阶段前37轮的无错误密钥：", noFaultStream);
+        console.log("输出密钥流产生阶段前37轮的  错误密钥：", faultStream);
+        console.log('NFSR的第1位置在这37轮中的      状态：', NFSR1);
+        console.log('NFSR的第1位置在这37轮中的      状态：', NFSR.reduce((a, b) => a + b, ''));
+    }
+    // NFSRState();
+</script>
+
+</html>
