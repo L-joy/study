@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    let LFSR = new Array(80);
+    let NFSR = new Array(80);
+    let key = "0000000100100011010001010110011110001" +
+        "0011010101111001101111011110001001000110100";
+    let IV = "1000000000" +
+        "0000000100100011010001010110011110001001101010111100110111101111010111" +
+        "0000000000" +
+        "0000000000" +
+        "0000000000" +
+        "0000001111" +
+        "1111111111";
+    // 密钥装载阶段
+    function grain() {
+        if (key.length !== 80) {
+            console.log("error");
+        }
+        for (let i = 0; i < NFSR.length; i++) {
+            NFSR[i] = key.charAt(i) === '1' ? 1 : 0;
+        }
+        for (let i = 0; i < LFSR.length; i++) {
+            LFSR[i] = IV.charAt(i) === '1' ? 1 : 0;
+        }
+    }
+    
+    // NFSR反馈函数
+    function feedbackNFSR(lfsr,nfsr) {
+        let g;
+        g = lfsr[0] ^ nfsr[9] ^ nfsr[14] ^ nfsr[21] ^ nfsr[28] ^ nfsr[33] ^ nfsr[37] ^ nfsr[45] ^ nfsr[52] ^ nfsr[60] ^ nfsr[62]
+            ^ (nfsr[9] & nfsr[15]) ^ (nfsr[33] & nfsr[37]) ^ (nfsr[60] & nfsr[63]) 
+            ^ (nfsr[60] & nfsr[52] & nfsr[45]) ^ (nfsr[33] & nfsr[28] & nfsr[21]) 
+            ^ (nfsr[9] & nfsr[28] & nfsr[45] & nfsr[63]) ^ (nfsr[33] & nfsr[37] & nfsr[52] & nfsr[60])
+            ^ (nfsr[15] & nfsr[21] & nfsr[60] & nfsr[63]) 
+            ^ (nfsr[63] & nfsr[60] & nfsr[52] & nfsr[45] & nfsr[37])
+            ^ (nfsr[33] & nfsr[28] & nfsr[21] & nfsr[15] & nfsr[9])
+            ^ (nfsr[52] & nfsr[45] & nfsr[37] & nfsr[33] & nfsr[28] & nfsr[21]);
+        return g;
+    }
+
+    // LFSR反馈函数
+    function feedbackLFSR(lfsr) {
+        return lfsr[62] ^ lfsr[51] ^ lfsr[38] ^ lfsr[23] ^ lfsr[13] ^ lfsr[0];
+    }
+
+    function output(lfsr,nfsr) {
+        let z;
+        let h;
+        h = lfsr[25] ^ nfsr[63] ^ (lfsr[3] & lfsr[64]) ^ (lfsr[46] & lfsr[64]) ^ (nfsr[63] & lfsr[64]) 
+            ^ (lfsr[3] & lfsr[25] & lfsr[46]) ^ (lfsr[3] & lfsr[46] & lfsr[64]) ^ (lfsr[3] & lfsr[46] & nfsr[63])
+            ^ (nfsr[63] & lfsr[64] & lfsr[46]);
+
+        z = h ^ nfsr[1] ^ nfsr[2] ^ nfsr[4] ^ nfsr[10] ^ nfsr[31] ^ nfsr[43] ^ nfsr[56];
+        return z;
+    }
+
+    function clockOneTime(lfsr,nfsr) {
+        let fbLFSR = feedbackLFSR(lfsr);
+        let fbNFSR = feedbackNFSR(lfsr,nfsr);
+
+        for (let i = 0; i < lfsr.length - 1; i++) {
+            lfsr[i] = lfsr[i + 1];
+        }
+        for (let i = 0; i < nfsr.length - 1; i++) {
+            nfsr[i] = nfsr[i + 1];
+        }
+
+        nfsr[79] = fbNFSR;
+        lfsr[79] = fbLFSR;
+    }
+
+
+    function stream(){
+        grain();
+        let Stream = '';
+        for (let i = 0; i < 80; i++) {
+            Stream += output(LFSR, NFSR);
+            clockOneTime(LFSR, NFSR);
+        }
+        console.log('无错误密钥流',Stream);
+        return Stream;
+
+    }
+    function faultStream(){
+        grain();
+        if (LFSR[79] === 1) {
+                LFSR[0] = 0;
+            } else {
+                LFSR[0] = 1;
+            }
+        let Stream = '';
+        for (let i = 0; i < 80; i++) {
+            Stream += output(LFSR, NFSR);
+            clockOneTime(LFSR, NFSR);
+        }
+        console.log('有错误密钥流',Stream);
+        return Stream;
+        
+    }
+
+    function bin_to_hex(str) {
+        let hex_array = [{
+                key: 0,
+                val: "0000"
+            }, {
+                key: 1,
+                val: "0001"
+            }, {
+                key: 2,
+                val: "0010"
+            }, {
+                key: 3,
+                val: "0011"
+            }, {
+                key: 4,
+                val: "0100"
+            }, {
+                key: 5,
+                val: "0101"
+            }, {
+                key: 6,
+                val: "0110"
+            }, {
+                key: 7,
+                val: "0111"
+            },
+            {
+                key: 8,
+                val: "1000"
+            }, {
+                key: 9,
+                val: "1001"
+            }, {
+                key: 'a',
+                val: "1010"
+            }, {
+                key: 'b',
+                val: "1011"
+            }, {
+                key: 'c',
+                val: "1100"
+            }, {
+                key: 'd',
+                val: "1101"
+            }, {
+                key: 'e',
+                val: "1110"
+            }, {
+                key: 'f',
+                val: "1111"
+            }
+        ]
+        let value = ''
+        let list = []
+        console.log(str)
+        if (str.length % 4 !== 0) {
+            let a = "0000"
+            let b = a.substring(0, 4 - str.length % 4)
+            str = b.concat(str)
+        }
+        console.log(str)
+        while (str.length > 4) {
+            list.push(str.substring(0, 4))
+            str = str.substring(4);
+        }
+        list.push(str)
+        console.log(list)
+        for (let i = 0; i < list.length; i++) {
+            for (let j = 0; j < hex_array.length; j++) {
+                if (list[i] == hex_array[j].val) {
+                    value = value.concat(hex_array[j].key)
+                    break
+                }
+            }
+        }
+        console.log(value)
+        return value
+    }
+
+    function f(){
+        
+        let s = stream();
+        let sf = faultStream();
+        let res = [];
+        for (let i = 0; i < s.length; i++) {
+            if(s.charAt(i) === sf.charAt(i)){
+                res.push(1);
+            }else{
+                res.push(0);
+            }
+        }
+        return bin_to_hex(res.join(""))
+    }
+
+    console.log(f());
+
+    
+
+</script>
+
+</html>

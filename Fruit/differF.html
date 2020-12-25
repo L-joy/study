@@ -22,25 +22,35 @@
 
     function round(r) {
         let h = [
-            ['n62'],
-            ['n1'],
-            ['l1', 'l45'],
-            ['l9','l57'],
-            ['n37', 'l25'],
-            ['n11', 'l64'],
-            ['l29', 'l17'],
-            ['n61', 'n62'],
-            ['n2', 'n1', 'l49']
+            ['l11', 'l37'],
+            ['l1', 'l19'],
+            ['n24', 'l28'],
+            ['n9', 'n49'],
+            ['n1', 'n33', 'l49']
         ];
-        let b = ['n3', 'n27', 'n47', 'n43', 'n19', 'n53', 'n60', 'l37'];
+        let k = ['n44','n0','l33','l49','n20','n5','n49','l15','l41','n26','n13','n37','l5','l25'];
+        let b = ['n0', 'n17', 'n28', 'n41', 'n48', 'l45'];
         for (let l = 0; l < r; l++) {
+            for (let i = 0; i < k.length; i++) {
+                let x = k[i].slice(0, 1);
+                let n = parseInt(k[i].slice(1));
+                if (x === 'l' && n === 49) {
+                    k[i] = 'l0';
+                    k.push(...['l7', 'l15', 'l23', 'l33', 'l42'])
+                } else if (x === 'n' && n === 49) {
+                    k[i] = 'l0';
+                } else {
+                    n = n + 1;
+                    k[i] = x + n;
+                }
+            }
             for (let i = 0; i < b.length; i++) {
                 let x = b[i].slice(0, 1);
                 let n = parseInt(b[i].slice(1));
-                if (x === 'l' && n === 64) {
+                if (x === 'l' && n === 49) {
                     b[i] = 'l0';
-                    b.push(...['l6', 'l32', 'l52', 'l60', 'l62'])
-                } else if (x === 'n' && n === 62) {
+                    b.push(...['l7', 'l15', 'l23', 'l33', 'l42'])
+                } else if (x === 'n' && n === 49) {
                     b[i] = 'l0';
                 } else {
                     n = n + 1;
@@ -52,10 +62,10 @@
                 for (let j = 0; j < h[i].length; j++) {
                     let x = h[i][j].slice(0, 1);
                     let n = parseInt(h[i][j].slice(1));
-                    if (x === 'l' && n === 64) {
+                    if (x === 'l' && n === 49) {
                         h[i][j] = 'l0';
-                        h[i].push(...['l6', 'l32', 'l52', 'l60', 'l62'])
-                    } else if (x === 'n' && n === 62) {
+                        h[i].push(...['l7', 'l15', 'l23', 'l33', 'l42'])
+                    } else if (x === 'n' && n === 49) {
                         h[i][j] = 'l0';
                     } else {
                         n = n + 1;
@@ -64,33 +74,32 @@
                 }
             }
         }
-        // console.log(`第t+${Number(r)}轮`);
-        // console.log(b);
-        // console.log(h);
-        return [h,b];
-        
+        return [h, b, k];
+        console.log(`第t+${Number(r)}轮`);
+        console.log(b);
+        console.log(k);
+        console.log(h);
     }
-    function reverseRound(r){
+
+    function reverseRound(r) {
         let h = [
-            ['n62'],
-            ['n1'],
-            ['l1', 'l45'],
-            ['l9','l57'],
-            ['n37', 'l25'],
-            ['n11', 'l64'],
-            ['l29', 'l17'],
-            ['n61', 'n62'],
-            ['n2', 'n1', 'l49']
+            ['l11', 'l37'],
+            ['l1', 'l19'],
+            ['n24', 'l28'],
+            ['n9', 'n49'],
+            ['n1', 'n33', 'l49']
         ];
-        let b = ['n3', 'n27', 'n47', 'n43', 'n19', 'n53', 'n60', 'l37'];
-        for(let l = 0; l < r; l++){
+        let b = ['n0', 'n17', 'n28', 'n41', 'n48', 'l45'];
+        for (let l = 0; l < r; l++) {
             for (let i = 0; i < b.length; i++) {
                 let x = b[i].slice(0, 1);
                 let n = parseInt(b[i].slice(1));
-                if (x === 'l' && n === 0 || x==='n' && n===0) {
-                    b[i] = 'l64';
-                    b.push(...['l8', 'l34', 'l54', 'l62', 'l64'])
-                }  else {
+                if (x === 'l' && n === 0) {
+                    b[i] = 'l49';
+                    b.push(...['l9', 'l17', 'l25', 'l35', 'l44'])
+                } else if (x === 'n' && n === 0) {
+                    b[i] = 'n36';
+                } else {
                     n = n - 1;
                     b[i] = x + n;
                 }
@@ -99,9 +108,12 @@
                 for (let j = 0; j < h[i].length; j++) {
                     let x = h[i][j].slice(0, 1);
                     let n = parseInt(h[i][j].slice(1));
-                    if (x === 'l' && n === 0|| x==='n' && n===0) {
-                        h[i][j] = 'l64';
-                        h[i].push(...['l8', 'l34', 'l54', 'l62', 'l64'])
+                    if (x === 'l' && n === 0) {
+                        h[i][j] = 'l49';
+                        h[i].push(...['l9', 'l17', 'l25', 'l35', 'l44'])
+                    } else if (x === 'n' && n === 0) {
+                        h[i][j] = 'l42';
+                        h[i].push(...['l9', 'l17', 'l25', 'l35', 'l44'])
                     } else {
                         n = n - 1;
                         h[i][j] = x + n;
@@ -109,53 +121,64 @@
                 }
             }
         }
-        return[h,b]
+        return [h,b];
         console.log(`第t-${r}轮`)
         console.log(b)
         console.log(h)
     }
-    // reverseRound(1);
 
-    function PRGA() {
+    function PRGASgn1() {
         let resAll = [];
         let resAllCount = [];
-        for (let l = 0; l < 65; l++) {
+        for (let l = 0; l < 1; l++) {
             let res = [];
             let resCount = 0;
-            for (let i = 1; i < 32; i++) {
-                let temp = reverseRound(i);
-                let count = 0;
-                for (let bi = 0; bi < temp[1].length; bi++) {
-                    const element = temp[1][bi];
-                    if (element === 'l' + l) {
-                        count++;
-                    }
-                }
-                for (let hi = 0; hi < temp[0].length; hi++) {
-                    for (let hj = 0; hj < temp[0][hi].length; hj++) {
-                        const element = temp[0][hi][hj];
-                        if (element === 'l' + l) {
-                            count++;
-                        }
-                    }
-                }
-                if (count !== 0) {
-                    res.unshift(0);
-                } else {
-                    res.unshift(1);
-                    resCount++;
-                }
-            }
-            for (let i = 0; i < 32; i++) {
+            // for (let i = 1; i < 32; i++) {
+            //     let temp = reverseRound(i);
+            //     let count = 0;
+            //     for (let ki = 0; ki < temp[2].length; ki++) {
+            //         const element = temp[2][ki];
+            //         if (element === 'l' + l) {
+            //             count++;
+            //         }
+            //     }
+            //     for (let bi = 0; bi < temp[1].length; bi++) {
+            //         const element = temp[1][bi];
+            //         if (element === 'l' + l) {
+            //             count++;
+            //         }
+            //     }
+            //     for (let hi = 0; hi < temp[0].length; hi++) {
+            //         for (let hj = 0; hj < temp[0][hi].length; hj++) {
+            //             const element = temp[0][hi][hj];
+            //             if (element === 'l' + l) {
+            //                 count++;
+            //             }
+            //         }
+            //     }
+            //     if (count !== 0) {
+            //         res.unshift(0);
+            //     } else {
+            //         res.unshift(1);
+            //         resCount++;
+            //     }
+            // }
+            for (let i = 0; i < 1; i++) {
                 let temp = round(i);
                 let count = 0;
+                console.log(temp);
+                for (let ki = 0; ki < temp[2].length; ki++) {
+                    const element = temp[2][ki];
+                    if (element === 'l' + l) {
+                        count++;
+                    }
+                }
                 for (let bi = 0; bi < temp[1].length; bi++) {
                     const element = temp[1][bi];
                     if (element === 'l' + l) {
                         count++;
                     }
                 }
-
                 for (let hi = 0; hi < temp[0].length; hi++) {
                     for (let hj = 0; hj < temp[0][hi].length; hj++) {
                         const element = temp[0][hi][hj];
@@ -164,25 +187,27 @@
                         }
                     }
                 }
+                console.log(count);
                 if (count !== 0) {
                     res.push(0);
                 } else {
                     res.push(1);
-                    resCount++;
+                    resCount++
                 }
             }
-            resAll.push(bin_to_hex(res.join('')));
-            resAllCount.push(resCount);
+            console.log(res);
+            resAll.push(bin_to_hex(res.join("")));
+            // resAllCount.push(resCount);
         }
 
-        console.log(resAllCount);
+        // console.log(resAllCount);
         return resAll;
     }
 
     function PRGASgn2() {
         let resAll = [];
         let resAllCount = [];
-        for (let l = 0; l < 65; l++) {
+        for (let l = 0; l < 50; l++) {
             let res = [];
             let resCount = 0;
 
@@ -217,6 +242,40 @@
 
         console.log(resAllCount);
         return resAll;
+    }
+
+    function PRGASgn3() {
+        let resAll = [];
+        let resAllCount = [];
+        for (let l = 0; l < 1; l++) {
+            let res = [];
+            let resCount = 0;
+            let loc = [];
+            for (let i = 0; i < 32; i++) {
+                let temp = round(i);
+                let loci = [];
+                let count = 0;
+                for (let bi = 0; bi < temp[1].length; bi++) {
+                    const element = temp[1][bi];
+                    if (element === 'l' + l) {
+                        loci.push('b' + i);
+                    }
+                }
+                for (let hi = 0; hi < temp[0].length; hi++) {
+                    for (let hj = 0; hj < temp[0][hi].length; hj++) {
+                        const element = temp[0][hi][hj];
+                        if (element === 'l' + l) {
+                            loci.push(['h' + hi, 'h' + hj]);
+                        }
+                    }
+                }
+                loc.push(loci);
+
+            }
+            console.log(loc);
+            // resAll.push(bin_to_hex(res.join("")));
+            // resAllCount.push(resCount);
+        }
     }
 
     function bin_to_hex(str) {
@@ -292,14 +351,14 @@
                     value = value.concat(hex_array[j].key)
                     break
                 }
-
             }
         }
         return value;
     }
 
-    console.log(PRGA());
+    console.log(PRGASgn1());
     // console.log(PRGASgn2());
+    // console.log(PRGASgn3());
 </script>
 
 </html>

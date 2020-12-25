@@ -34,11 +34,10 @@
                 let x = b[i].slice(0, 1);
                 let n = parseInt(b[i].slice(1));
                 if (x === 'l' && n === 42) {
-                    // b[i] = 'l0';
-                    b.splice(i,1);
-                    b.push(...['l0','l7', 'l17', 'l22', 'l27', 'l36'])
-                } else if (x === 'n' && n === 36) {
                     b[i] = 'l0';
+                    b.push(...['l7', 'l17', 'l22', 'l27', 'l36'])
+                } else if (x === 'n' && n === 36) {
+                    b[i] = 'n0';
                 } else {
                     n = n + 1;
                     b[i] = x + n;
@@ -50,8 +49,8 @@
                     let x = h[i][j].slice(0, 1);
                     let n = parseInt(h[i][j].slice(1));
                     if (x === 'l' && n === 42) {
-                        h[i].splice(j,1);
-                        h[i].push(...['l0','l7', 'l17', 'l22', 'l27', 'l36'])
+                        h[i][j] = 'l0';
+                        h[i].push(...['l7', 'l17', 'l22', 'l27', 'l36'])
                     } else if (x === 'n' && n === 36) {
                         h[i][j] = 'l0';
                     } else {
@@ -61,32 +60,13 @@
                 }
             }
         }
+        // return [h, b];
         console.log(`第t+${Number(r)}轮`);
         console.log(b);
         console.log(h);
-        let bsum = 0;
-        for(let i = 0; i < b.length; i++){
-            if(b[i] === 'l28'){
-                bsum ++;
-            }
-        }
-        console.log(bsum);
-        let h3sum = 0, h4sum = 0;
-        for(let i = 0; i < h[3].length; i++){
-            if(h[3][i] === 'l28'){
-                h3sum ++;
-            }
-        }
-        for(let i = 0; i < h[4].length; i++){
-            if(h[4][i] === 'l28'){
-                h4sum ++;
-            }
-        }
-        console.log('b=',bsum);
-        console.log('h3=',h3sum);
-        console.log('h4=',h4sum);
     }
-    function reverseRound(r){
+
+    function reverseRound(r) {
         let h = [
             ['l6', 'l15'],
             ['l1', 'l22'],
@@ -95,14 +75,16 @@
             ['n1', 'n33', 'l42']
         ];
         let b = ['n0', 'n7', 'n13', 'n19', 'n24', 'n29', 'n36', 'l38'];
-        for(let l = 0; l < r; l++){
+        for (let l = 0; l < r; l++) {
             for (let i = 0; i < b.length; i++) {
                 let x = b[i].slice(0, 1);
                 let n = parseInt(b[i].slice(1));
-                if (x === 'l' && n === 0 || x==='n' && n===0) {
-                    b.splice(i,1);
-                    b.push(...['l8', 'l18', 'l23', 'l28', 'l37','l43'])
-                }  else {
+                if (x === 'l' && n === 0) {
+                    b[i] = 'l42';
+                    b.push(...['l9', 'l19', 'l24', 'l29', 'l38'])
+                } else if (x === 'n' && n === 0) {
+                    b[i] = 'n36';
+                } else {
                     n = n - 1;
                     b[i] = x + n;
                 }
@@ -111,9 +93,12 @@
                 for (let j = 0; j < h[i].length; j++) {
                     let x = h[i][j].slice(0, 1);
                     let n = parseInt(h[i][j].slice(1));
-                    if (x === 'l' && n === 0|| x==='n' && n===0) {
-                        h[i].splice(j,1);
-                        h[i].push(...['l8', 'l18', 'l23', 'l28', 'l37','l43'])
+                    if (x === 'l' && n === 0) {
+                        h[i][j] = 'l42';
+                        h[i].push(...['l9', 'l19', 'l24', 'l29', 'l38'])
+                    } else if (x === 'n' && n === 0) {
+                        h[i][j] = 'l42';
+                        h[i].push(...['l9', 'l19', 'l24', 'l29', 'l38'])
                     } else {
                         n = n - 1;
                         h[i][j] = x + n;
@@ -121,11 +106,229 @@
                 }
             }
         }
+        // return [h,b];
         console.log(`第t-${r}轮`)
         console.log(b)
         console.log(h)
     }
-    // reverseRound(1);
+
+    function PRGASgn1() {
+        let resAll = [];
+        let resAllCount = [];
+        for (let l = 0; l < 43; l++) {
+            let res = [];
+            let resCount = 0;
+            for (let i = 1; i < 32; i++) {
+                let temp = reverseRound(i);
+                let count = 0;
+                for (let bi = 0; bi < temp[1].length; bi++) {
+                    const element = temp[1][bi];
+                    if (element === 'l' + l) {
+                        count++;
+                    }
+                }
+                for (let hi = 0; hi < temp[0].length; hi++) {
+                    for (let hj = 0; hj < temp[0][hi].length; hj++) {
+                        const element = temp[0][hi][hj];
+                        if (element === 'l' + l) {
+                            count++;
+                        }
+                    }
+                }
+                if (count !== 0) {
+                    res.unshift(0);
+                } else {
+                    res.unshift(1);
+                    resCount++;
+                }
+            }
+            for (let i = 0; i < 32; i++) {
+                let temp = round(i);
+                let count = 0;
+                for (let bi = 0; bi < temp[1].length; bi++) {
+                    const element = temp[1][bi];
+                    if (element === 'l' + l) {
+                        count++;
+                    }
+                }
+                for (let hi = 0; hi < temp[0].length; hi++) {
+                    for (let hj = 0; hj < temp[0][hi].length; hj++) {
+                        const element = temp[0][hi][hj];
+                        if (element === 'l' + l) {
+                            count++;
+                        }
+                    }
+                }
+                if (count !== 0) {
+                    res.push(0);
+                } else {
+                    res.push(1);
+                    resCount++
+                }
+            }
+            resAll.push(bin_to_hex(res.join("")));
+            resAllCount.push(resCount);
+        }
+
+        console.log(resAllCount);
+        return resAll;
+    }
+
+    function PRGASgn2() {
+        let resAll = [];
+        let resAllCount = [];
+        for (let l = 0; l < 43; l++) {
+            let res = [];
+            let resCount = 0;
+
+            for (let i = 0; i < 32; i++) {
+                let flag = true;
+                let temp = round(i);
+                let count = 0;
+                for (let bi = 0; bi < temp[1].length; bi++) {
+                    const element = temp[1][bi];
+                    if (element === 'l' + l) {
+                        count++;
+                    }
+                }
+                for (let hi = 0; hi < temp[0].length; hi++) {
+                    for (let hj = 0; hj < temp[0][hi].length; hj++) {
+                        const element = temp[0][hi][hj];
+                        if (element === 'l' + l) {
+                            flag = false;
+                        }
+                    }
+                }
+                if (flag && count !== 0 && count % 2 !== 0) {
+                    res.push(1);
+                    resCount++;
+                } else {
+                    res.push(0);
+                }
+            }
+            resAll.push(bin_to_hex(res.join("")));
+            resAllCount.push(resCount);
+        }
+
+        console.log(resAllCount);
+        return resAll;
+    }
+
+    function PRGASgn3() {
+        let resAll = [];
+        let resAllCount = [];
+        for (let l = 0; l < 1; l++) {
+            let res = [];
+            let resCount = 0;
+            let loc = [];
+            for (let i = 0; i < 32; i++) {
+                let temp = round(i);
+                let loci = [];
+                let count = 0;
+                for (let bi = 0; bi < temp[1].length; bi++) {
+                    const element = temp[1][bi];
+                    if (element === 'l' + l) {
+                        loci.push('b' + i);
+                    }
+                }
+                for (let hi = 0; hi < temp[0].length; hi++) {
+                    for (let hj = 0; hj < temp[0][hi].length; hj++) {
+                        const element = temp[0][hi][hj];
+                        if (element === 'l' + l) {
+                            loci.push(['h' + hi, 'h' + hj]);
+                        }
+                    }
+                }
+                loc.push(loci);
+
+            }
+            console.log(loc);
+            // resAll.push(bin_to_hex(res.join("")));
+            // resAllCount.push(resCount);
+        }
+    }
+
+    function bin_to_hex(str) {
+        let hex_array = [{
+                key: 0,
+                val: "0000"
+            }, {
+                key: 1,
+                val: "0001"
+            }, {
+                key: 2,
+                val: "0010"
+            }, {
+                key: 3,
+                val: "0011"
+            }, {
+                key: 4,
+                val: "0100"
+            }, {
+                key: 5,
+                val: "0101"
+            }, {
+                key: 6,
+                val: "0110"
+            }, {
+                key: 7,
+                val: "0111"
+            },
+            {
+                key: 8,
+                val: "1000"
+            }, {
+                key: 9,
+                val: "1001"
+            }, {
+                key: 'a',
+                val: "1010"
+            }, {
+                key: 'b',
+                val: "1011"
+            }, {
+                key: 'c',
+                val: "1100"
+            }, {
+                key: 'd',
+                val: "1101"
+            }, {
+                key: 'e',
+                val: "1110"
+            }, {
+                key: 'f',
+                val: "1111"
+            }
+        ]
+        let value = ''
+        let list = []
+        if (str.length % 4 !== 0) {
+            let a = "0000"
+            let b = a.substring(0, 4 - str.length % 4)
+            str = b.concat(str)
+        }
+        while (str.length > 4) {
+            list.push(str.substring(0, 4))
+            str = str.substring(4);
+        }
+        list.push(str)
+        for (let i = 0; i < list.length; i++) {
+            for (let j = 0; j < hex_array.length; j++) {
+                if (value.length % 5 === 0) {
+                    value += " "
+                }
+                if (list[i] == hex_array[j].val) {
+                    value = value.concat(hex_array[j].key)
+                    break
+                }
+            }
+        }
+        return value;
+    }
+
+    // console.log(PRGASgn1());
+    // console.log(PRGASgn2());
+    // console.log(PRGASgn3());
 </script>
 
 </html>

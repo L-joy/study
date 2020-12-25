@@ -15,6 +15,7 @@
     let NFSR = new Array(37);
     let Cr = new Array(7);
     let Cc = new Array(8);
+    // 00000001001000110100010101100111100011000011010101111101101111011110000110100000
     let key = '';
     let IV = "1000000000" +
         "0000000100100011010001010110011110001001101010111100110111101111010111" +
@@ -23,42 +24,7 @@
         "0000000000" +
         "0000000000" +
         "0000000000";
-    function currentKey() {
-        let allP = 0;
-        for (let i = 0; i < Math.pow(2,10); i++) {
-            key = "0000000100"+
-                  "1000110100"+
-                  "0101011001"+
-                  "1110001100"+
-                  "0011010101"+
-                  "1111011011"+
-                  "1101111000";
-            let temp = i.toString(2);
-            let res = temp;
-            if(temp.length < 10){
-                for (let i = 0; i < 10 - temp.length; i++) {
-                    res = '0' + res
-                }
-            }
-            key = key + res;
-            let f1 = f();
-            let count = 0;
-            for (let i = 0; i < f1.length; i++) {
-                const element = f1[i];
-                if(f1[i] && f1[i].indexOf(i) !== -1){
-                    count++;
-                }
-            }
-            if(parseFloat(count/f1.length) === 1){
-                console.log(key);
-                return;
-            }
-            allP = allP + parseFloat(count/f1.length);
-            console.log("单个准确率",parseFloat(count/f1.length));
-        }
-        console.log("整体准确率",parseFloat(allP/Math.pow(2,10)));
-    }
-    currentKey();
+
     // 密钥装载阶段
     function frvitV2() {
         if (key.length !== 80) {
@@ -188,7 +154,7 @@
 
         NFSR[36] = fbNFSR ^ fb;
         LFSR[42] = fbLFSR ^ fb;
-        
+
         let temp = 0,
             j = 0;
         for (let i = Cr.length - 1; i >= 0; i--) {
@@ -199,48 +165,11 @@
         count(temp);
     }
 
-
-    function clockReverseOneTime() {
-        let fbLFSR = feedbackReverseLFSR(LFSR);
-        let fbNFSR = feedbackReverseNFSR(LFSR, NFSR);
-        LFSR[0] = LFSR[42] ^ fbLFSR;
-        NFSR[0] = NFSR[36] ^ fbNFSR;
-
-        for (let i = LFSR.length - 1; i > 0; i--) {
-            LFSR[i] = LFSR[i - 1];
-        }
-        for (let i = NFSR.length - 1; i > 0; i--) {
-            NFSR[i] = NFSR[i - 1];
-        }
-
-
-
-        let temp = 0,
-            j = 0;
-        for (let i = Cr.length - 1; i >= 0; i--) {
-            temp += Cr[i] * Math.pow(2, j);
-            j++;
-        }
-        temp = temp - 1;
-        count(temp);
-    }
-
     function count(temp) {
         for (let i = Cr.length - 1; i >= 0; i--) {
             Cr[i] = (temp % 2 == 1) ? 1 : 0;
             temp = parseInt(temp / 2);
         }
-    }
-
-    function reverseStream() {
-        init();
-        let Stream = [];
-        for (let i = -1; i > -33; i--) {
-            clockReverseOneTime(LFSR, NFSR);
-            Stream.unshift(output(LFSR, NFSR));
-        }
-        console.log('无错误反向密钥流', Stream.join(""));
-        return Stream;
     }
 
     function stream() {
@@ -251,24 +180,6 @@
             clockOneTime(0, LFSR, NFSR);
         }
         // console.log('无错误密钥流', Stream.join(""));
-        return Stream;
-    }
-
-    function reverseFaultStream() {
-        init();
-        if (LFSR[36] === 1) {
-            LFSR[36] = 0;
-        } else {
-            LFSR[36] = 1;
-        }
-        let Stream = [];
-        for (let i = -1; i > -33; i--) {
-
-            clockReverseOneTime(LFSR, NFSR);
-            Stream.unshift(output(LFSR, NFSR));
-
-        }
-        console.log('有错误反向密钥流', Stream.join(""));
         return Stream;
     }
 
@@ -364,10 +275,6 @@
     }
 
     function f() {
-        // console.log(reverseStream());
-        // console.log(reverseFaultStream());
-        // let s = reverseStream().concat(stream());
-        // let sf = reverseFaultStream().concat(faultStream());
         let f1All = [];
         for (let i = 0; i < 43; i++) {
             let s = stream(),
@@ -382,6 +289,7 @@
             }
 
             let sgn = PRGA();
+
             let f1 = [];
             // console.log(res);
             // console.log(sgn[0]);
@@ -396,6 +304,76 @@
         return f1All;
     }
 
+    function sgn2() {
+        let sgn2 = PRGASgn2();
+        let f1 = f();
+        let f2All = [];
+        for (let i = 0; i < f1.length; i++) {
+            let element = f1[i];
+            let f2 = [];
+            for (let j = 0; j < element.length; j++) {
+                let faultLocation = element[j];
+                // console.log("错误位置：",faultLocation);
+                let s = stream(),
+                    sf = faultStream(faultLocation);
+                let res = [];
+                for (let i = 0; i < s.length; i++) {
+                    if (s[i] !== sf[i]) {
+                        res.push(1);
+                    } else {
+                        res.push(0);
+                    }
+                }
+                // console.log(res);
+                // console.log(sgn2[i]);
+                if(element.length === 0){
+                    f2.push();
+                }else if(element.length === 1){
+                    f2.push(faultLocation);
+                }else if (isSubset(res,sgn2[i])){
+                    f2.push(faultLocation);
+                }
+            }
+            f2All.push(f2);
+        }
+        return f2All;
+    }
+
+    function currentKey() {
+        let allP = 0;
+        for (let i = 0; i < Math.pow(2,10); i++) {
+            key = "0000000100"+
+                  "1000110100"+
+                  "0101011001"+
+                  "1110001100"+
+                  "0011010101"+
+                  "1111011011"+
+                  "1111011011";
+            let temp = i.toString(2);
+            let res = temp;
+            if(temp.length < 10){
+                for (let i = 0; i < 10 - temp.length; i++) {
+                    res = '0' + res
+                }
+            }
+            key = key + res;
+            let f2 = sgn2();
+            let count = 0;
+            for (let i = 0; i < f2.length; i++) {
+                const element = f2[i];
+                if(f2[i] && f2[i].indexOf(i) !== -1){
+                    count++;
+                }
+            }
+            
+            allP = allP + parseFloat(count/f2.length);
+            console.log("单个准确率",parseFloat(count/f2.length));
+        }
+        console.log("整体准确率",parseFloat(allP/Math.pow(2,10)));
+    }
+    currentKey();
+
+
     function isSubset(res, sgn) {
         for (let i = 0; i < sgn.length; i++) {
             if (sgn[i] === 1 && res[i] !== 1) {
@@ -405,7 +383,7 @@
         return true;
     }
 
-    function round(r) {
+    function round(r,bi) {
         let h = [
             ['l6', 'l15'],
             ['l1', 'l22'],
@@ -422,7 +400,7 @@
                     b[i] = 'l0';
                     b.push(...['l7', 'l17', 'l22', 'l27', 'l36'])
                 } else if (x === 'n' && n === 36) {
-                    b[i] = 'l0';
+                    b[i] = bi;
                 } else {
                     n = n + 1;
                     b[i] = x + n;
@@ -495,32 +473,8 @@
         for (let l = 0; l < 43; l++) {
             let res = [];
             let resCount = 0;
-            // for (let i = 1; i < 32; i++) {
-            //     let temp = reverseRound(i);
-            //     let count = 0;
-            //     for (let bi = 0; bi < temp[1].length; bi++) {
-            //         const element = temp[1][bi];
-            //         if (element === 'l' + l) {
-            //             count++;
-            //         }
-            //     }
-            //     for (let hi = 0; hi < temp[0].length; hi++) {
-            //         for (let hj = 0; hj < temp[0][hi].length; hj++) {
-            //             const element = temp[0][hi][hj];
-            //             if (element === 'l' + l) {
-            //                 count++;
-            //             }
-            //         }
-            //     }
-            //     if (count !== 0) {
-            //         res.unshift(0);
-            //     } else {
-            //         res.unshift(1);
-            //         resCount++;
-            //     }
-            // }
             for (let i = 0; i < 32; i++) {
-                let temp = round(i);
+                let temp = round(i,'l0');
                 let count = 0;
                 for (let bi = 0; bi < temp[1].length; bi++) {
                     const element = temp[1][bi];
@@ -549,77 +503,46 @@
         return resAll;
     }
 
-    // console.log(f());
-
-
-    function LFSRState() {
-        init();
-        console.log('初始化结束后的 内部状态：', LFSR.reduce((a, b) => a + b, ''), NFSR.reduce((a, b) => a + b, ''));
-        let noFaultStream = '';
-        let faultStream = '';
-        let LFSR22 = '';
-        for (let i = 0; i < 43; i++) {
-            let faultLFSR = new Array(),
-                faultNFSR = new Array();
-            for (let i = 0; i < LFSR.length; i++) {
-                faultLFSR[i] = LFSR[i];
+    function PRGASgn2() {
+        let resAll = [];
+        let resAllCount = [];
+        for (let l = 0; l < 43; l++) {
+            let res = [];
+            let resCount = 0;
+            for (let i = 0; i < 32; i++) {
+                let flag = true;
+                let temp = round(i,'n0');
+                let count = 0;
+                for (let bi = 0; bi < temp[1].length; bi++) {
+                    const element = temp[1][bi];
+                    if (element === 'l' + l) {
+                        count++;
+                    }
+                }
+                for (let hi = 0; hi < temp[0].length; hi++) {
+                    for (let hj = 0; hj < temp[0][hi].length; hj++) {
+                        const element = temp[0][hi][hj];
+                        if (element === 'l' + l) {
+                            flag = false;
+                        }
+                    }
+                }
+                if (flag && count !== 0 && count%2 !== 0) {
+                    res.push(1);
+                    resCount++;
+                } else {
+                    res.push(0);
+                }
             }
-            for (let i = 0; i < NFSR.length; i++) {
-                faultNFSR[i] = NFSR[i];
-            }
-            if (faultLFSR[1] === 1) {
-                faultLFSR[1] = 0;
-            } else {
-                faultLFSR[1] = 1;
-            }
-            console.log(`第${i}轮` + '错误注入后内部状态：', faultLFSR.reduce((a, b) => a + b, ''), faultNFSR.reduce((a, b) => a +
-                b, ''));
-            console.log(`第${i}轮` + '无错误注入内部状态：', LFSR.reduce((a, b) => a + b, ''), NFSR.reduce((a, b) => a + b, ''));
-            noFaultStream += output(LFSR, NFSR);
-            faultStream += output(faultLFSR, faultNFSR);
-            LFSR22 += LFSR[22];
-            clockOneTime(0, LFSR, NFSR);
+            // resAll.push(bin_to_hex(res.join("")));
+            resAll.push(res);
+            resAllCount.push(resCount);
         }
-        console.log("输出密钥流产生阶段前43轮的无错误密钥：", noFaultStream);
-        console.log("输出密钥流产生阶段前43轮的  错误密钥：", faultStream);
-        console.log('LFSR的第22位置在这43轮中的     状态：', LFSR22);
-    }
-    // LFSRState();
 
-    function NFSRState() {
-        init();
-        console.log('初始化结束后的 内部状态：', LFSR.reduce((a, b) => a + b, ''), NFSR.reduce((a, b) => a + b, ''));
-        let noFaultStream = '';
-        let faultStream = '';
-        let NFSR1 = '';
-        for (let i = 0; i < 37; i++) {
-            let faultLFSR = new Array(),
-                faultNFSR = new Array();
-            for (let i = 0; i < LFSR.length; i++) {
-                faultLFSR[i] = LFSR[i];
-            }
-            for (let i = 0; i < NFSR.length; i++) {
-                faultNFSR[i] = NFSR[i];
-            }
-            if (faultNFSR[33] === 1) {
-                faultNFSR[33] = 0;
-            } else {
-                faultNFSR[33] = 1;
-            }
-            console.log(`第${i}轮` + '错误注入后内部状态：', faultLFSR.reduce((a, b) => a + b, ''), faultNFSR.reduce((a, b) => a +
-                b, ''));
-            console.log(`第${i}轮` + '无错误注入内部状态：', LFSR.reduce((a, b) => a + b, ''), NFSR.reduce((a, b) => a + b, ''));
-            noFaultStream += output(LFSR, NFSR);
-            faultStream += output(faultLFSR, faultNFSR);
-            NFSR1 += NFSR[1];
-            clockOneTime(0, LFSR, NFSR);
-        }
-        console.log("输出密钥流产生阶段前37轮的无错误密钥：", noFaultStream);
-        console.log("输出密钥流产生阶段前37轮的  错误密钥：", faultStream);
-        console.log('NFSR的第1位置在这37轮中的      状态：', NFSR1);
-        console.log('NFSR的第1位置在这37轮中的      状态：', NFSR.reduce((a, b) => a + b, ''));
+        // console.log(resAllCount);
+        return resAll;
     }
-    // NFSRState();
+    
 </script>
 
 </html>

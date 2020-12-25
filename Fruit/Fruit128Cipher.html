@@ -11,83 +11,153 @@
 
 </body>
 <script>
-    let LFSR = new Array(50);
-    let NFSR = new Array(50);
-    let key = "00000001001000110100010101100111100011000011010101111101101111011110001011010010";
+    let LFSR = new Array(65);
+    let NFSR = new Array(63);
+    let Cr = new Array(10);
+    let Cc = new Array(7);
+    // 00000001001000110100010101100111100011000011010101111101101111011110001011010010
+    let key = "00000001001000110100010101100111100011000011010101111101101111011110001011010010" +
+                "1111011011" +
+                "1111011011" +
+                "1111011011" +
+                "1111011011" +
+                "11110110";
     let IV = "1000000000" +
-        "0000000100100011010001010110011110001001101010111100110111101111010111";
+        "0000000100100011010001010110011110001001101010111100110111101111010111" +
+        "0000010000" +
+        "0000000100" +
+        "0001000000" +
+        "0010000000" +
+        "00100010" +
+        "0000000000" +
+        "0000000000" + "01";
     // 密钥装载阶段
-    function frvitF() {
-        if (key.length !== 80) {
+    function frvit128() {
+        if (key.length !== 128) {
             console.log("error");
         }
         for (let i = 0; i < NFSR.length; i++) {
-            NFSR[i] = IV.charAt(i) === '1' ? 1 : 0;
+            NFSR[i] = key.charAt(i) === '1' ? 1 : 0;
         }
         let j = 0;
-        for (let i = NFSR.length; i < NFSR.length + 30; i++) {
-            LFSR[j] = IV.charAt(i) === '1' ? 1 : 0;
+        for (let i = NFSR.length; i < NFSR.length + LFSR.length; i++) {
+            LFSR[j] = key.charAt(i) === '1' ? 1 : 0;
             j++;
         }
-        for (let i = 30; i < LFSR.length - 1; i++) {
-            LFSR[i] = 1
+        for (let i = 0; i < Cr.length; i++) {
+            Cr[i] = 0;
         }
-        LFSR[49] = 0;
+        for (let i = 0; i < Cc.length; i++) {
+            Cc[i] = 0;
+        }
     }
     // 初始化阶段
     function init() {
-        frvitF();
+        frvit128();
         // 第一轮初始化
         let fb = 0;
-        for(let i = 0; i < 128; i++){
+        for (let i = 0; i < 150; i++) {
             clockOneTime(fb);
             let z = output();
-            fb = z;
+            let iv = IV.charAt(i) === '1' ? 1 : 0;
+            fb = z ^ iv
         }
+        // 第二轮初始化
+        LFSR[0] = 1;
+        for (let i = 0; i < Cr.length; i++) {
+            Cr[i] = NFSR[i];
+        }
+        for (let i = 0; i < Cc.length; i++) {
+            Cc[i] = LFSR[i];
+        }
+        // console.log('第二轮————————————————————————————', Cr);
+
+        // let flag = true;
+        // for (let i = 0; i < Cc.length; i++) {
+        //     if (Cc[i] !== 1) {
+        //         flag = false;
+        //     }
+
+        // }
+        // while (!flag) {
+        //     clockOneTime(0);
+        // }
+
     }
     // 轮密钥函数
-    function keyRound() {
-        let r = (NFSR[44]) * Math.pow(2, 0) + 
-                (NFSR[0]) * Math.pow(2, 1) + 
-                (LFSR[33]) * Math.pow(2, 2) + 
-                (LFSR[49]) * Math.pow(2, 3);
-        let p = (NFSR[20]) * Math.pow(2, 0) + 
-                (NFSR[5]) * Math.pow(2, 1) + 
-                (NFSR[49]) * Math.pow(2, 2) + 
-                (LFSR[15]) * Math.pow(2, 3) + 
-                (LFSR[41]) * Math.pow(2, 4) + 16;
-        let q = (NFSR[26]) * Math.pow(2, 0) + 
-                (NFSR[13]) * Math.pow(2, 1) + 
-                (NFSR[37]) * Math.pow(2, 2) + 
-                (LFSR[5]) * Math.pow(2, 3) + 
-                (LFSR[25]) * Math.pow(2, 4) + 48;
-
-        let k = (parseInt(key.charAt(p)) & parseInt(key.charAt(q))) ^
-                parseInt(key.charAt(r)) ^ parseInt(key.charAt(p)) ^ parseInt(key.charAt(q));
-        return k;
+    function keyRound(flag) {
+        let r = parseInt((Cr[4]) * Math.pow(2, 0)) +
+            parseInt((Cr[3]) * Math.pow(2, 1)) +
+            parseInt((Cr[2]) * Math.pow(2, 2)) +
+            parseInt((Cr[1]) * Math.pow(2, 3)) +
+            parseInt((Cr[0]) * Math.pow(2, 4));
+        let s = parseInt((Cr[9]) * Math.pow(2, 0)) +
+            parseInt((Cr[8]) * Math.pow(2, 1)) +
+            parseInt((Cr[7]) * Math.pow(2, 2)) +
+            parseInt((Cr[6]) * Math.pow(2, 3)) +
+            parseInt((Cr[5]) * Math.pow(2, 4)) + 32;
+        let p = parseInt((Cr[6]) * Math.pow(2, 0)) +
+            parseInt((Cr[5]) * Math.pow(2, 1)) +
+            parseInt((Cr[4]) * Math.pow(2, 2)) +
+            parseInt((Cr[3]) * Math.pow(2, 3)) +
+            parseInt((Cr[2]) * Math.pow(2, 4)) + 64;
+        let q = parseInt((Cr[1]) * Math.pow(2, 0)) +
+            parseInt((Cr[0]) * Math.pow(2, 1)) +
+            parseInt((Cr[9]) * Math.pow(2, 2)) +
+            parseInt((Cr[8]) * Math.pow(2, 3)) +
+            parseInt((Cr[7]) * Math.pow(2, 4)) + 96;
+        let gk = (parseInt(key.charAt(r)) & parseInt(key.charAt(s)) & parseInt(key.charAt(p))) ^
+            (parseInt(key.charAt(r)) & parseInt(key.charAt(p))) ^
+            (parseInt(key.charAt(s)) & parseInt(key.charAt(q))) ^
+            parseInt(key.charAt(s)) ^ parseInt(key.charAt(q)) ^
+            parseInt(key.charAt(p));
+        let hk = (parseInt(key.charAt(r)) & parseInt(key.charAt(s)) & parseInt(key.charAt(q))) ^
+            (parseInt(key.charAt(r)) & parseInt(key.charAt(s))) ^
+            (parseInt(key.charAt(p)) & parseInt(key.charAt(q))) ^
+            parseInt(key.charAt(r)) ^ parseInt(key.charAt(s)) ^ parseInt(key.charAt(p));
+        if (flag) {
+            return gk;
+        } else {
+            return hk;
+        }
     }
     // NFSR反馈函数
     function feedbackNFSR() {
+        let y = parseInt((Cr[9]) * Math.pow(2, 0)) +
+            parseInt((Cr[8]) * Math.pow(2, 1)) +
+            parseInt((Cr[7]) * Math.pow(2, 2)) +
+            parseInt((Cr[6]) * Math.pow(2, 3)) +
+            parseInt((Cr[5]) * Math.pow(2, 4)) +
+            parseInt((Cr[4]) * Math.pow(2, 5)) +
+            parseInt((Cr[3]) * Math.pow(2, 6));
+        let vt = IV.charAt(y) === '1' ? 1 : 0;
         let g;
-        console.log(keyRound());
-        g = keyRound() ^ LFSR[0] ^ NFSR[0] ^ NFSR[11] ^ NFSR[30] ^ (NFSR[16] & NFSR[32]) ^ 
-            (NFSR[25] & NFSR[42]) ^ (NFSR[7] & NFSR[20] & NFSR[35]) ^ (NFSR[4] & NFSR[45]) ^
-            (NFSR[40] & NFSR[44] & NFSR[47] & NFSR[48]);
+        g = keyRound(1) ^ LFSR[0] ^ vt ^ Cr[6] ^ NFSR[0] ^ NFSR[10] ^ NFSR[29] ^ NFSR[50] ^
+            (NFSR[62] & NFSR[60]) ^ (NFSR[15] & NFSR[40]) ^ (NFSR[25] & NFSR[46]) ^
+            (NFSR[1] & NFSR[3]) ^ (NFSR[38] & NFSR[35]) ^
+            (NFSR[8] & NFSR[19] & NFSR[28]) ^
+            (NFSR[48] & NFSR[55] & NFSR[57] & NFSR[59]);
         return g;
     }
 
     // LFSR反馈函数
     function feedbackLFSR() {
-        return LFSR[43] ^ LFSR[34] ^ LFSR[24] ^ LFSR[16] ^ LFSR[8] ^ LFSR[0];
+        return LFSR[63] ^ LFSR[61] ^ LFSR[53] ^ LFSR[33] ^ LFSR[7] ^ LFSR[0];
     }
 
     function output() {
         let z;
         let h;
-        h = (LFSR[11] & LFSR[37]) ^ (LFSR[1] & LFSR[19]) ^ (NFSR[24] & LFSR[28]) ^ (NFSR[9] & NFSR[49]) ^
-            (NFSR[1] & NFSR[33] & LFSR[49]);
+        h = (keyRound(0) & NFSR[62]) ^ (keyRound(0) & NFSR[1]) ^
+            (LFSR[1] & LFSR[45]) ^
+            (LFSR[9] & LFSR[57]) ^
+            (NFSR[37] & LFSR[25]) ^
+            (NFSR[11] & LFSR[64]) ^
+            (LFSR[29] & LFSR[17]) ^
+            (NFSR[61] & NFSR[62]) ^
+            (NFSR[1] & NFSR[2] & LFSR[49]);
 
-        z = h ^ NFSR[0] ^ NFSR[17] ^ NFSR[28] ^ NFSR[41] ^ NFSR[48] ^ LFSR[45];
+        z = h ^ NFSR[3] ^ NFSR[27] ^ NFSR[47] ^ NFSR[43] ^ NFSR[19] ^ NFSR[53] ^ NFSR[60] ^ LFSR[37];
         return z;
     }
 
@@ -102,16 +172,33 @@
             NFSR[i] = NFSR[i + 1];
         }
 
-        NFSR[49] = fbNFSR ^ fb;
-        LFSR[49] = fbLFSR ^ fb;
+        NFSR[62] = fbNFSR ^ fb;
+        LFSR[64] = fbLFSR ^ fb;
+
+        let temp = 0,
+            j = 0;
+        for (let i = Cr.length - 1; i >= 0; i--) {
+            temp += Cr[i] * Math.pow(2, j);
+            j++;
+        }
+        temp = temp + 1;
+        count(temp);
     }
-    
+
+    function count(temp) {
+        for (let i = Cr.length - 1; i >= 0; i--) {
+            Cr[i] = (temp % 2 == 1) ? 1 : 0;
+            temp = parseInt(temp / 2);
+        }
+        // console.log(Cr);
+    }
+
     function stream() {
         init();
         let Stream = [];
-        for (let i = 0; i < 12; i++) {
-            Stream.push(output());
-            clockOneTime(0);
+        for (let i = 0; i <32; i++) {
+            Stream.push(output(LFSR, NFSR));
+            clockOneTime(0, LFSR, NFSR);
         }
         // console.log('无错误密钥流', Stream.join(""));
         return Stream;
@@ -125,15 +212,16 @@
             LFSR[n] = 1;
         }
         let Stream = [];
-        for (let i = 0; i < 12; i++) {
-            Stream.push(output());
-            clockOneTime(0);
+        for (let i = 0; i <32; i++) {
+            Stream.push(output(LFSR, NFSR));
+            clockOneTime(0, LFSR, NFSR);
         }
         // console.log('有错误密钥流', Stream.join(""));
         return Stream;
     }
     // stream();
-    // faultStream(0);
+    // faultStream(8);
+
 
     function bin_to_hex(str) {
         let hex_array = [{
@@ -209,38 +297,28 @@
         }
         return value
     }
-    
+
     function round(r) {
         let h = [
-            ['l11', 'l37'],
-            ['l1', 'l19'],
-            ['n24', 'l28'],
-            ['n9', 'n49'],
-            ['n1', 'n33', 'l49']
+            ['n62'],
+            ['n1'],
+            ['l1', 'l45'],
+            ['l9', 'l57'],
+            ['n37', 'l25'],
+            ['n11', 'l64'],
+            ['l29', 'l17'],
+            ['n61', 'n62'],
+            ['n2', 'n1', 'l49']
         ];
-        let k = ['n44','n0','l33','l49','n20','n5','n49','l15','l41','n26','n13','n37','l5','l25'];
-        let b = ['n0', 'n17', 'n28', 'n41', 'n48', 'l45'];
+        let b = ['n3', 'n27', 'n47', 'n43', 'n19', 'n53', 'n60', 'l37'];
         for (let l = 0; l < r; l++) {
-            for (let i = 0; i < k.length; i++) {
-                let x = k[i].slice(0, 1);
-                let n = parseInt(k[i].slice(1));
-                if (x === 'l' && n === 49) {
-                    k[i] = 'l0';
-                    k.push(...['l7', 'l15', 'l23', 'l33', 'l42'])
-                } else if (x === 'n' && n === 49) {
-                    k[i] = 'l0';
-                } else {
-                    n = n + 1;
-                    k[i] = x + n;
-                }
-            }
             for (let i = 0; i < b.length; i++) {
                 let x = b[i].slice(0, 1);
                 let n = parseInt(b[i].slice(1));
-                if (x === 'l' && n === 49) {
+                if (x === 'l' && n === 64) {
                     b[i] = 'l0';
-                    b.push(...['l7', 'l15', 'l23', 'l33', 'l42'])
-                } else if (x === 'n' && n === 49) {
+                    b.push(...['l6', 'l32', 'l52', 'l60', 'l62'])
+                } else if (x === 'n' && n === 62) {
                     b[i] = 'l0';
                 } else {
                     n = n + 1;
@@ -252,10 +330,10 @@
                 for (let j = 0; j < h[i].length; j++) {
                     let x = h[i][j].slice(0, 1);
                     let n = parseInt(h[i][j].slice(1));
-                    if (x === 'l' && n === 49) {
+                    if (x === 'l' && n === 64) {
                         h[i][j] = 'l0';
-                        h[i].push(...['l7', 'l15', 'l23', 'l33', 'l42'])
-                    } else if (x === 'n' && n === 49) {
+                        h[i].push(...['l6', 'l32', 'l52', 'l60', 'l62'])
+                    } else if (x === 'n' && n === 62) {
                         h[i][j] = 'l0';
                     } else {
                         n = n + 1;
@@ -264,25 +342,20 @@
                 }
             }
         }
-        return [h, b, k];
+        return [h, b];
+
     }
-    
+
     function PRGA() {
         let resAll = [];
         let resAllCount = [];
-        for (let l = 0; l < 50; l++) {
+        for (let l = 0; l < 65; l++) {
             let res = [];
             let resCount = 0;
-            
-            for (let i = 0; i < 32; i++) {
+
+            for (let i = 0; i <32; i++) {
                 let temp = round(i);
                 let count = 0;
-                for (let ki = 0; ki < temp[2].length; ki++) {
-                    const element = temp[2][ki];
-                    if (element === 'l' + l) {
-                        count++;
-                    }
-                }
                 for (let bi = 0; bi < temp[1].length; bi++) {
                     const element = temp[1][bi];
                     if (element === 'l' + l) {
@@ -316,7 +389,7 @@
     function PRGASgn2() {
         let resAll = [];
         let resAllCount = [];
-        for (let l = 0; l < 50; l++) {
+        for (let l = 0; l < 65; l++) {
             let res = [];
             let resCount = 0;
 
@@ -355,10 +428,9 @@
 
     function f() {
         let f1All = [];
-        for (let i = 0; i < 1; i++) {
-            let s = stream();
-            console.log('111111111111111')
-            let sf = faultStream(i);
+        for (let i = 0; i < 65; i++) {
+            let s = stream(),
+                sf = faultStream(i);
             let res = [];
             for (let i = 0; i < s.length; i++) {
                 if (s[i] === sf[i]) {
@@ -367,13 +439,9 @@
                     res.push(0);
                 }
             }
-            console.log(res);
 
             let sgn = PRGA();
-
             let f1 = [];
-            // console.log(res);
-            console.log(sgn[0]);
             for (let i = 0; i < sgn.length; i++) {
                 if (isSubset(res, sgn[i])) {
                     f1.push(i);
@@ -384,7 +452,8 @@
 
         return f1All;
     }
-    console.log(f());
+
+    // console.log(f());
 
     function isSubset(res, sgn) {
         for (let i = 0; i < sgn.length; i++) {
@@ -397,18 +466,16 @@
 
     function currentKeySgn1() {
         let allP = 0;
-        for (let i = 0; i < Math.pow(2,3); i++) {
-            key = "0000000100"+
-                  "1000110100"+
-                  "0101011001"+
-                  "1110001100"+
-                  "0011010101"+
-                  "1111011011"+
-                  "1111011011"+
-                  "1101111";
+        for (let i = 0; i < Math.pow(2, 3); i++) {
+            key = "00000001001000110100010101100111100011000011010101111101101111011110001011010010" +
+                "1111011011" +
+                "1111011011" +
+                "1111011011" +
+                "1111011011" +
+                "11110";
             let temp = i.toString(2);
             let res = temp;
-            if(temp.length < 3){
+            if (temp.length < 3) {
                 for (let i = 0; i < 3 - temp.length; i++) {
                     res = '0' + res
                 }
@@ -418,23 +485,24 @@
             let count = 0;
             for (let i = 0; i < f1.length; i++) {
                 const element = f1[i];
-                if(f1[i] && f1[i].indexOf(i) !== -1){
+                if (f1[i] && f1[i].indexOf(i) !== -1) {
                     count++;
                 }
             }
-            if(parseFloat(count/f1.length) === 1){
+            if (parseFloat(count / f1.length) === 1) {
                 console.log(key);
             }
-            allP = allP + parseFloat(count/f1.length);
-            console.log("单个准确率",parseFloat(count/f1.length));
+            allP = allP + parseFloat(count / f1.length);
+            console.log("单个准确率", parseFloat(count / f1.length));
         }
-        console.log("整体准确率",parseFloat(allP/Math.pow(2,3)));
+        console.log("整体准确率", parseFloat(allP / Math.pow(2, 3)));
     }
     // currentKeySgn1();
 
     function sgn2() {
         let sgn2 = PRGASgn2();
         let f1 = f();
+        console.log(f1);
         let f2All = [];
         for (let i = 0; i < f1.length; i++) {
             let element = f1[i];
@@ -454,11 +522,11 @@
                 }
                 // console.log(res);
                 // console.log(sgn2[i]);
-                if(element.length === 0){
+                if (element.length === 0) {
                     f2.push();
-                }else if(element.length === 1){
+                } else if (element.length === 1) {
                     f2.push(faultLocation);
-                }else if (isSubset(res,sgn2[i])){
+                } else if (isSubset(res, sgn2[i])) {
                     f2.push(faultLocation);
                 }
             }
@@ -467,20 +535,21 @@
         return f2All;
     }
 
+    console.log(sgn2())
+
     function currentKeySgn2() {
         let allP = 0;
-        for (let i = 0; i < Math.pow(2,10); i++) {
-            key = "0000000100"+
-                  "1000110100"+
-                  "0101011001"+
-                  "1110001100"+
-                  "0011010101"+
-                  "1111011011"+
-                  "1111011011";
+        for (let i = 0; i < Math.pow(2, 5); i++) {
+            key = "00000001001000110100010101100111100011000011010101111101101111011110001011010010" +
+                "1111011011" +
+                "1111011011" +
+                "1111011011" +
+                "1111011011" +
+                "11110110";
             let temp = i.toString(2);
             let res = temp;
-            if(temp.length < 10){
-                for (let i = 0; i < 10 - temp.length; i++) {
+            if (temp.length < 5) {
+                for (let i = 0; i < 5 - temp.length; i++) {
                     res = '0' + res
                 }
             }
@@ -489,17 +558,17 @@
             let count = 0;
             for (let i = 0; i < f1.length; i++) {
                 const element = f1[i];
-                if(f1[i] && f1[i].indexOf(i) !== -1){
+                if (f1[i] && f1[i].indexOf(i) !== -1) {
                     count++;
                 }
             }
-            if(parseFloat(count/f1.length) === 1){
+            if (parseFloat(count / f1.length) === 1) {
                 console.log(key);
             }
-            allP = allP + parseFloat(count/f1.length);
-            console.log("单个准确率",parseFloat(count/f1.length));
+            allP = allP + parseFloat(count / f1.length);
+            console.log("单个准确率", parseFloat(count / f1.length));
         }
-        console.log("整体准确率",parseFloat(allP/Math.pow(2,10)));
+        console.log("整体准确率", parseFloat(allP / Math.pow(2, 5)));
     }
     // currentKeySgn2();
 </script>

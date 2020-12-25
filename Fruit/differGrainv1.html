@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" placeholder="0" id='obj' value="0">
+    <button onclick="f()">点击</button>
+
+</body>
+<script>
+    function f() {
+        let obj = document.getElementById('obj');
+        console.log(obj.value);
+        round(obj.value);
+    }
+
+
+    function PRGA() {
+        let res = [];
+        for (let i = 0; i < 80; i++) {
+            let temp = round(i);
+            let count = 0;
+            // for (let bi = 0; bi < temp[1].length; bi++) {
+            //     const element = temp[1][bi];
+            //     if (element === 'l79') {
+            //         count++;
+            //     }
+            // }
+            for (let hi = 0; hi < temp[0].length; hi++) {
+                const element = temp[0][hi];
+                if (element === 'l72') {
+                    count++;
+                }
+            }
+            // for (let hi = 0; hi < temp[0].length; hi++) {
+            //     for (let hj = 0; hj < temp[0][hi].length; hj++) {
+            //         const element = temp[0][hi][hj];
+            //         if (element === 'l67') {
+            //             count++;
+            //         }
+            //     }
+            // }
+            if (count !== 0) {
+                res.push(0);
+            } else {
+                res.push(1);
+            }
+        }
+        for (let i = 0; i < res.length; i++) {
+            const element = res[i];
+            if (element === 0) {
+                console.log(i);
+            }
+
+        }
+        console.log(bin_to_hex(res.join('')));
+        return res.join("");
+    }
+
+    function bin_to_hex(str) {
+        let hex_array = [{
+                key: 0,
+                val: "0000"
+            }, {
+                key: 1,
+                val: "0001"
+            }, {
+                key: 2,
+                val: "0010"
+            }, {
+                key: 3,
+                val: "0011"
+            }, {
+                key: 4,
+                val: "0100"
+            }, {
+                key: 5,
+                val: "0101"
+            }, {
+                key: 6,
+                val: "0110"
+            }, {
+                key: 7,
+                val: "0111"
+            },
+            {
+                key: 8,
+                val: "1000"
+            }, {
+                key: 9,
+                val: "1001"
+            }, {
+                key: 'a',
+                val: "1010"
+            }, {
+                key: 'b',
+                val: "1011"
+            }, {
+                key: 'c',
+                val: "1100"
+            }, {
+                key: 'd',
+                val: "1101"
+            }, {
+                key: 'e',
+                val: "1110"
+            }, {
+                key: 'f',
+                val: "1111"
+            }
+        ]
+        let value = ''
+        let list = []
+        console.log(str)
+        if (str.length % 4 !== 0) {
+            let a = "0000"
+            let b = a.substring(0, 4 - str.length % 4)
+            str = b.concat(str)
+        }
+        console.log(str)
+        while (str.length > 4) {
+            list.push(str.substring(0, 4))
+            str = str.substring(4);
+        }
+        list.push(str)
+        console.log(list)
+        for (let i = 0; i < list.length; i++) {
+            for (let j = 0; j < hex_array.length; j++) {
+                if (list[i] == hex_array[j].val) {
+                    value = value.concat(hex_array[j].key)
+                    break
+                }
+            }
+        }
+        console.log(value)
+        return value
+    }
+
+    function round(r) {
+        let h = [
+            ['l25'],
+            ['n63'],
+            ['l3', 'l64'],
+            ['l46', 'l64'],
+            ['l64', 'n63'],
+            ['l3', 'l25', 'l46'],
+            ['l3', 'l46', 'l64'],
+            ['l3', 'l46', 'n63'],
+            ['l25', 'l46', 'n63'],
+            ['l46', 'l64', 'n63'],
+        ];
+        // let h = ['l3','l25','l46','l64'];
+        let b = ['n1', 'n2', 'n4', 'n10', 'n31', 'n43', 'n56'];
+        for (let l = 0; l < r; l++) {
+            for (let i = 0; i < b.length; i++) {
+                let x = b[i].slice(0, 1);
+                let n = parseInt(b[i].slice(1));
+                if (x === 'l' && n === 79) {
+                    b[i] = 'l0';
+                    // b.splice(i, 1);
+                    b.push(...['l12', 'l22', 'l37', 'l50', 'l61'])
+                } else if (x === 'n' && n === 79) {
+                    b[i] = 'l0';
+                } else {
+                    n = n + 1;
+                    b[i] = x + n;
+                }
+            }
+            // for (let i = 0; i < h.length; i++) {
+            //     let x = h[i].slice(0, 1);
+            //     let n = parseInt(h[i].slice(1));
+            //     if (x === 'l' && n === 79) {
+            //         h[i] = 'l0';
+            //         // b.splice(i, 1);
+            //         h.push(...['l12', 'l22', 'l37', 'l50', 'l61'])
+            //     } else if (x === 'n' && n === 79) {
+            //         h[i] = 'l0';
+            //     } else {
+            //         n = n + 1;
+            //         h[i] = x + n;
+            //     }
+            // }
+            let clockH = h;
+            for (let i = 0; i < h.length; i++) {
+                for (let j = 0; j < h[i].length; j++) {
+                    let x = h[i][j].slice(0, 1);
+                    let n = parseInt(h[i][j].slice(1));
+                    if (x === 'l' && n === 79) {
+                        // h[i].splice(j, 1);
+                        h[i][j] = 'l0';
+                        h[i].push(...['l12', 'l22', 'l37', 'l50', 'l61'])
+                    } else if (x === 'n' && n === 79) {
+                        h[i][j] = 'l0';
+                    } else {
+                        n = n + 1;
+                        h[i][j] = x + n;
+                    }
+                }
+            }
+        }
+        
+        console.log(`第t+${Number(r)}轮`);
+        console.log(b);
+        console.log(h);
+        // return [h,b];
+    }
+    // console.log(PRGA());
+</script>
+
+</html>
