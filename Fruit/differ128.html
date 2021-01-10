@@ -41,7 +41,7 @@
                     b[i] = 'l0';
                     b.push(...['l6', 'l32', 'l52', 'l60', 'l62'])
                 } else if (x === 'n' && n === 62) {
-                    b[i] = 'l0';
+                    b[i] = 'n0';
                 } else {
                     n = n + 1;
                     b[i] = x + n;
@@ -189,6 +189,7 @@
             for (let i = 0; i < 32; i++) {
                 let flag = true;
                 let temp = round(i);
+                // console.log(temp);
                 let count = 0;
                 for (let bi = 0; bi < temp[1].length; bi++) {
                     const element = temp[1][bi];
@@ -204,6 +205,7 @@
                         }
                     }
                 }
+                // console.log(false);
                 if (flag && count !== 0 && count % 2 !== 0) {
                     res.push(1);
                     resCount++;
@@ -211,6 +213,7 @@
                     res.push(0);
                 }
             }
+            // console.log(res.join(""));
             resAll.push(bin_to_hex(res.join("")));
             resAllCount.push(resCount);
         }
@@ -297,9 +300,9 @@
         }
         return value;
     }
-
-    console.log(PRGA());
-    // console.log(PRGASgn2());
+// console.log(111)
+    // console.log(PRGA());
+    console.log(PRGASgn2());
 </script>
 
 </html>

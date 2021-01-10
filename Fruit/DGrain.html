@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    function DGrain(f, r) {
+        let DZ = [];
+        let X = new Array(r);
+        let Y = new Array(r);
+        let DL = new Array(80); // LFSR
+        let DN = new Array(80); // NFSR
+        let t = 0;
+        for (let i = 0; i < DL.length; i++) {
+            if (i !== f) {
+                DL[i] = 0;
+            } else {
+                DL[i] = 1;
+            }
+        }
+        for (let i = 0; i < DN.length; i++) {
+            DN[i] = 0;
+        }
+        while (t < r) {
+            X[t] = [DN[1], DN[2],DN[4], DN[10], DN[31], DN[43], DN[56]];
+            Y[t] = [DL[3], DL[25], DL[46], DL[64], DN[63]];
+            let YFlag = true,
+                XFlag = true;
+            for (let i = 0; i < Y[t].length; i++) {
+                const element = Y[t][i];
+                if (element === 1) {
+                    YFlag = false;
+                }
+            }
+            let count = 0;
+            for (let i = 0; i < X[t].length; i++) {
+                const element = X[t][i];
+                if(element > 1){
+                    XFlag = false;
+                }
+                if (element !== 0) {
+                    count++;
+                }
+            }
+            if (YFlag && XFlag) {
+                if (count % 2 === 0) {
+                    DZ.push(0)
+                } else {
+                    DZ.push(1);
+                }
+            } else {
+                DZ.push(2);
+            }
+            let t1 = mod2(DL[0] + DL[13] + DL[23] + DL[38] + DL[51] + DL[62]);
+            let g = [DN[0],DN[9],DN[14],DN[15],DN[21],DN[28],DN[33],DN[37],DN[45],DN[52],DN[60],DN[62],DN[63]];
+            let t2 = DL[0] + 2 * OR(g);
+            for (let i = 0; i < DL.length; i++) {
+                DL[i] = DL[i + 1];
+            }
+            DL[DL.length - 1] = t1;
+            for (let i = 0; i < DN.length; i++) {
+                DN[i] = DN[i + 1];
+            }
+            DN[DN.length - 1] = t2;
+            t = t + 1;
+        }
+        return [X, Y, DZ];
+    }
+
+    function mod2(x) {
+        while (x >= 2) {
+            x = x % 2;
+        }
+        return x;
+    }
+    function OR(k) {
+        let flag = false;
+        for (let i = 0; i < k.length; i++) {
+            const element = k[i];
+            if(element !== 0){
+                flag = true;
+            }
+        }
+        if(flag){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+    console.log(DGrain(0, 64));
+</script>
+
+</html>

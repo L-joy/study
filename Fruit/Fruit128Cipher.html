@@ -16,12 +16,7 @@
     let Cr = new Array(10);
     let Cc = new Array(7);
     // 00000001001000110100010101100111100011000011010101111101101111011110001011010010
-    let key = "00000001001000110100010101100111100011000011010101111101101111011110001011010010" +
-                "1111011011" +
-                "1111011011" +
-                "1111011011" +
-                "1111011011" +
-                "11110110";
+    let key = "";
     let IV = "1000000000" +
         "0000000100100011010001010110011110001001101010111100110111101111010111" +
         "0000010000" +
@@ -466,17 +461,16 @@
 
     function currentKeySgn1() {
         let allP = 0;
-        for (let i = 0; i < Math.pow(2, 3); i++) {
+        for (let i = 0; i < Math.pow(2, 10); i++) {
             key = "00000001001000110100010101100111100011000011010101111101101111011110001011010010" +
                 "1111011011" +
                 "1111011011" +
                 "1111011011" +
-                "1111011011" +
-                "11110";
+                "11110110";
             let temp = i.toString(2);
             let res = temp;
-            if (temp.length < 3) {
-                for (let i = 0; i < 3 - temp.length; i++) {
+            if (temp.length < 10) {
+                for (let i = 0; i < 10 - temp.length; i++) {
                     res = '0' + res
                 }
             }
@@ -495,9 +489,10 @@
             allP = allP + parseFloat(count / f1.length);
             console.log("单个准确率", parseFloat(count / f1.length));
         }
-        console.log("整体准确率", parseFloat(allP / Math.pow(2, 3)));
+        console.log("整体准确率", parseFloat(allP / Math.pow(2, 10)));
     }
-    // currentKeySgn1();
+    currentKeySgn1();
+    // console.log(111);
 
     function sgn2() {
         let sgn2 = PRGASgn2();
@@ -535,7 +530,7 @@
         return f2All;
     }
 
-    console.log(sgn2())
+    // console.log(sgn2())
 
     function currentKeySgn2() {
         let allP = 0;
