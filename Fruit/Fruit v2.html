@@ -1,56 +1,92 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-	</head>
-	<body>
-	</body>
-	<script>
-	    let Cr = new Array();
-	    let r0 = new Array();
-	    let p0 = new Array();
-	    let q0 = new Array();
-	    let c4 = new Array();
-	
-	    for (let i = 127; i < Math.pow(2,8); i++) {
-	        let temp = new Array();
-	        let r = new Array();
-	        let p = new Array();
-	        let q = new Array();
-	        for (let j = 0; j < 7; j++) {
-	            temp[7-j-1] = (i >> j) & 1;
-	        }
-	        c4.push(temp[4]);
-	        r.push(temp[6]);
-	        r.push(temp[5]);
-	        r.push(temp[4]);
-	        r.push(temp[3]);
-	
-	        p.push(temp[5]);
-	        p.push(temp[4]);
-	        p.push(temp[3]);
-	        p.push(temp[2]);
-	        p.push(temp[1]);
-	
-	        q.push(temp[4]);
-	        q.push(temp[3]);
-	        q.push(temp[2]);
-	        q.push(temp[1]);
-	        q.push(temp[0]);
-	
-	        Cr[i] = temp.join("");
-	        r0[i] = temp[3]*Math.pow(2,0) + temp[4]*Math.pow(2,1) + temp[5]*Math.pow(2,2) + temp[6]*Math.pow(2,3);
-	        p0[i]+16 = temp[1]*Math.pow(2,0) + temp[2]*Math.pow(2,1) + temp[3]*Math.pow(2,2) + temp[4]*Math.pow(2,3) + temp[5]*Math.pow(2,4);
-	        q0[i]+48 = temp[0]*Math.pow(2,0) + temp[1]*Math.pow(2,1) + temp[2]*Math.pow(2,2) + temp[3]*Math.pow(2,3) + temp[4]*Math.pow(2,4);
-	    }
-	
-	    console.log(c4);
-	    console.log(Cr);
-	    console.log(r0);
-	    console.log(p0);
-	    console.log(q0);
-	
-	</script>
-	
+
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+
+<body>
+</body>
+<script>
+	let Cr = new Array();
+	let s0 = new Array();
+	let y0 = new Array();
+	let u0 = new Array();
+	let r0 = new Array();
+	let p0 = new Array();
+	let q0 = new Array();
+	let c4 = new Array();
+	let j = 0;
+	let output = "0000000100" +
+        "1000110100" +
+        "0101011001" +
+        "1110001100" +
+        "0011010101" +
+        "1111011011" +
+        "1101111000" +
+        "1011010010" +
+        "1111011011" +
+        "1111011011" +
+        "1111011011" +
+        "1110001101" +
+        "11100011";
+	let key = '0000000100100011010001010110011110001001101010111100110111101111010111';
+
+	for (let i = 127; i < Math.pow(2, 8); i++) {
+		let newTemp = new Array();
+
+		for (let j = 0; j < 7; j++) {
+			newTemp[7 - j - 1] = (i >> j) & 1;
+		}
+
+		let temp = newTemp.reverse()
+
+
+		s0[i] = temp[4] * Math.pow(2, 0) +
+			temp[3] * Math.pow(2, 1) +
+			temp[2] * Math.pow(2, 2) +
+			temp[1] * Math.pow(2, 3) +
+			temp[0] * Math.pow(2, 4);
+		y0[i] = temp[2] * Math.pow(2, 0) +
+			temp[1] * Math.pow(2, 1) +
+			temp[0] * Math.pow(2, 2) +
+			temp[6] * Math.pow(2, 3) +
+			temp[5] * Math.pow(2, 4) + 32;
+		u0[i] = temp[6] * Math.pow(2, 0) +
+			temp[5] * Math.pow(2, 1) +
+			temp[4] * Math.pow(2, 2) +
+			temp[3] * Math.pow(2, 3) + 64;
+		r0[i] = temp[6] * Math.pow(2, 0) +
+			temp[5] * Math.pow(2, 1) +
+			temp[4] * Math.pow(2, 2) +
+			temp[3] * Math.pow(2, 3) +
+			temp[2] * Math.pow(2, 4) + 48;
+		p0[i] = temp[3] * Math.pow(2, 0) +
+			temp[2] * Math.pow(2, 1) +
+			temp[1] * Math.pow(2, 2) +
+			temp[0] * Math.pow(2, 3);
+		q0[i] = temp[1] * Math.pow(2, 0) +
+			temp[0] * Math.pow(2, 1) +
+			temp[6] * Math.pow(2, 2) +
+			temp[5] * Math.pow(2, 3) +
+			temp[4] * Math.pow(2, 4) + 16;
+		
+
+		let z = (parseInt(key[s0[i]]) & parseInt(key[y0[i]]))^(parseInt(key[u0[i]]) & parseInt(key[p0[i]]))^parseInt(key[q0[i]])^parseInt(key[r0[i]]);
+		// console.log(z);
+		let flag = z === 0 ? false : true;
+		j++;
+		// console.log(j);
+		console.log('(assert (= (xor (and k'+s0[i]+' k'+y0[i]+') (and k'+u0[i]+' k'+p0[i]+') k'+q0[i]+' k'+r0[i]+') '+ flag +')))')
+	}
+
+	console.log(s0);
+	console.log(y0);
+	console.log(u0);
+	console.log(p0);
+	console.log(q0);
+	console.log(r0);
+</script>
+
 </html>

@@ -38,17 +38,21 @@
         }
         while (t < r) {
             // Fruit v2
-            X[t] = [DN[0], DN[7], DN[13], DN[19], DN[24], DN[29], DN[36], DL[38]];
-            Y[t] = [DL[6], DL[15], DL[1], DL[22], DN[35], DL[27], DL[11], DL[33], DN[1], DN[33], DL[42]];
+            // X[t] = [DN[0], DN[7], DN[13], DN[19], DN[24], DN[29], DN[36], DL[38]];
+            // Y[t] = [DL[6], DL[15], DL[1], DL[22], DN[35], DL[27], DL[11], DL[33], DN[1], DN[33], DL[42]];
 
             // Fruit-80
             // X[t] = [DN[0], DN[7], DN[13], DN[19], DN[29], DN[36], DL[38]];
             // Y[t] = [DN[36], DL[19], DL[6], DL[15], DL[1], DL[22], DN[35], DL[27], DL[24], DN[1], DN[33], DL[42]];
-            
+
             // Fruit-128
-            // X[t] = [DN[3], DN[27], DN[47], DN[43], DN[19], DN[53], DN[60], DL[37]];
-            // Y[t] = [DN[62], DN[1], DL[1], DL[45], DL[9], DL[57], DN[37], DL[25], DN[11], DL[64], DL[29], DL[17], DN[61], DN[62], DN[2], DL[49]];
-            
+            X[t] = [DN[3], DN[27], DN[47], DN[43], DN[19], DN[53], DN[60], DL[37]];
+            Y[t] = [DN[62], DN[1], DL[1], DL[45], DL[9], DL[57], DN[37], DL[25], DN[11], DL[64], DL[29], DL[17], DN[61], DN[62], DN[2], DL[49]];
+
+            // Fruit-F
+            // X[t] = [DN[0], DN[17], DN[28], DN[41], DN[48], DL[45]];
+            // Y[t] = [DL[11], DL[37], DL[1], DL[19], DN[24], DL[28], DN[9], DN[49], DN[33], DN[1], DL[49]];
+
             let YFlag = true,
                 XFlag = true;
             for (let i = 0; i < Y[t].length; i++) {
@@ -77,25 +81,25 @@
                 DZ.push(2);
             }
             // Fruit v2
-            let t1 = mod2(DL[0] + DL[8] + DL[18] + DL[23] + DL[28] + DL[37]);
-            let g = [
-                DN[0],
-                DN[3],
-                DN[5],
-                DN[8],
-                DN[10],
-                DN[12],
-                DN[14],
-                DN[18],
-                DN[20],
-                DN[23],
-                DN[25],
-                DN[28],
-                DN[30],
-                DN[31],
-                DN[32],
-                DN[34]
-            ];
+            // let t1 = mod2(DL[0] + DL[8] + DL[18] + DL[23] + DL[28] + DL[37]);
+            // let g = [
+            //     DN[0],
+            //     DN[3],
+            //     DN[5],
+            //     DN[8],
+            //     DN[10],
+            //     DN[12],
+            //     DN[14],
+            //     DN[18],
+            //     DN[20],
+            //     DN[23],
+            //     DN[25],
+            //     DN[28],
+            //     DN[30],
+            //     DN[31],
+            //     DN[32],
+            //     DN[34]
+            // ];
 
             // Fruit-80
             // let t1 = mod2(DL[0] + DL[8] + DL[18] + DL[23] + DL[28] + DL[37]);
@@ -119,29 +123,50 @@
             // ];
 
             // Fruit-128
-            // let t1 = mod2(DL[0] + DL[7] + DL[33] + DL[53] + DL[61] + DL[63]);
+            let t1 = mod2(DL[0] + DL[7] + DL[33] + DL[53] + DL[61] + DL[63]);
+            let g = [
+                DN[0],
+                DN[1],
+                DN[3],
+                DN[8],
+                DN[10],
+                DN[15],
+                DN[19],
+                DN[25],
+                DN[28],
+                DN[29],
+                DN[35],
+                DN[38],
+                DN[40],
+                DN[46],
+                DN[48],
+                DN[50],
+                DN[55],
+                DN[57],
+                DN[59],
+                DN[60],
+                DN[62],
+            ];
+
+            // Fruit-F
+            // let t1 = mod2(DL[0] + DL[8] + DL[16] + DL[24] + DL[34] + DL[43]);
             // let g = [
             //     DN[0],
-            //     DN[1],
-            //     DN[3],
-            //     DN[8],
-            //     DN[10],
-            //     DN[15],
-            //     DN[19],
+            //     DN[11],
+            //     DN[30],
+            //     DN[16],
+            //     DN[32],
             //     DN[25],
-            //     DN[28],
-            //     DN[29],
+            //     DN[42],
+            //     DN[7],
+            //     DN[20],
             //     DN[35],
-            //     DN[38],
+            //     DN[4],
+            //     DN[45],
             //     DN[40],
-            //     DN[46],
-            //     DN[48],
-            //     DN[50],
-            //     DN[55],
-            //     DN[57],
-            //     DN[59],
-            //     DN[60],
-            //     DN[62],
+            //     DN[44],
+            //     DN[47],
+            //     DN[48]
             // ];
 
             let t2 = DL[0] + 2 * OR(g);
@@ -177,9 +202,9 @@
             let DGres = [];
             for (let j = 0; j < allF[i].length; j++) {
                 const element = allF[i][j];
-                DGres.push(DGrain(element, 64, l, n));
+                DGres.push(DGrain(element, 80, l, n));
             }
-            for (let t = 0; t < 64; t++) {
+            for (let t = 0; t < 80; t++) {
                 let flag = true;
                 for (let k = 0; k < DGres.length; k++) {
                     if (DGres[k].X[t].filter(v => v <= 1).length !== DGres[k].X[t].length) {
@@ -205,11 +230,16 @@
                     }
                     // LFSR的状态
                     // res.forEach(item => {
-                    //     if (item.indexOf('n') !== -1 || item.lastIndexOf('l') !== 0) {
+                    //     if (item.indexOf('n') !== -1 || item.lastIndexOf('l') !== 0 ) {
                     //         outFlag = false;
                     //     }
                     // });
-                    // if (outFlag && res.length > 2 && res.join("+") === 'l22+l33+l27+l11+l15') {
+                    // // && res.join("+") === 'l22+l15+l27+l1'
+                    // // && res.join("+") === 'l22+l15+l27+l19'
+                    // // && res.join("+") === 'l6+l19+l15+l22'
+                    // // && res.join("+") === 'l6+l15+l22+l19'
+                    // // && res.join("+") === 'l15+l22+l27+l1'
+                    // if (outFlag && res.join('+') === 'l37') {
                     //     console.log(res.join("+"), allF[i], t);
                     //     for (let k = 0; k < DGres.length; k++) {
                     //         console.log(DGres[k].Y[t]);
@@ -218,15 +248,29 @@
 
                     // NFSR的状态
 
-                    // if(res.join('+').split("n").length - 1 !== 0){
+                    // if(res.join('+').split("n").length - 1 !== 0 && res.join('+').indexOf('k') === -1 && res.join('+').indexOf('n1') === -1){
                     //     console.log(res.join("+"));
                     // }
-
-                    if(outFlag && res.join("+") === 'n35'&& t>33 ){
-                        console.log(res.join("+"), allF[i], t);
-                        for (let k = 0; k < DGres.length; k++) {
-                            console.log(DGres[k].Y[t]);
+                    // && res.join("+") === 'n35'
+                    // let temp = [
+                    //     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    //     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+                    //     [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0]
+                    // ];
+                    if (res.join("+") === 'n37') {                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+                    // if (res.join("+") === 'n61+n2l49+l29') {
+                        // for (let k = 0; k < DGres.length; k++) {
+                        //     if (temp[k].join() !== DGres[k].Y[t].join()) {
+                        //         outFlag = false;
+                        //     }
+                        // }
+                        if (outFlag) {
+                            console.log(res.join("+"), allF[i], t);
+                            for (let k = 0; k < DGres.length; k++) {
+                                console.log(DGres[k].Y[t]);
+                            }
                         }
+
                     }
 
                 }
@@ -253,29 +297,29 @@
 
     // Fruit v2
 
-    let v = ['l6', 'l15', 'l1', 'l22', 'n35', 'l27', 'l11', 'l33', 'n1', 'n33', 'l42'];
-    let h = [
-        ['l6', 'l15'],
-        ['l1', 'l22'],
-        ['n35', 'l27'],
-        ['l11', 'l33'],
-        ['n1', 'n33', 'l42']
-    ];
+    // let v = ['l6', 'l15', 'l1', 'l22', 'n35', 'l27', 'l11', 'l33', 'n1', 'n33', 'l42'];
+    // let h = [
+    //     ['l6', 'l15'],
+    //     ['l1', 'l22'],
+    //     ['n35', 'l27'],
+    //     ['l11', 'l33'],
+    //     ['n1', 'n33', 'l42']
+    // ];
 
-    let l = 43,
-        n = 37;
+    // let l = 43,
+    //     n = 37;
 
-    FLEL(2, v, h, l, n);
+    // FLEL(2, v, h, l, n);
 
     // let N = 'l27n33l24n88n23l23n24l25n34'
     // let res = N.split("n").length - 1;
     // console.log(res);
 
     // Fruit-80
-    // let v = ['n36', 'l19', 'l6', 'l15', 'l1', 'l22', 'n35', 'l27', 'n24', 'n1', 'n33', 'l42'];
+    // let v = ['k', 'n36', 'l19', 'l6', 'l15', 'l1', 'l22', 'n35', 'l27', 'n24', 'n1', 'n33', 'l42'];
     // let h = [
-    //     ['n36'],
-    //     ['l19'],
+    //     ['k', 'n36'],
+    //     ['k', 'l19'],
     //     ['l6', 'l15'],
     //     ['l1', 'l22'],
     //     ['n35', 'l27'],
@@ -286,23 +330,38 @@
     // let l = 43,
     //     n = 37;
 
-    // Fruit-128
-    // let v = ['n62', 'n1', 'l1', 'l45', 'l9', 'l57', 'n37', 'l25', 'n11', 'l64', 'l29', 'l17', 'n61', 'n62', 'n2',
-    // 'l49'];
-    // let h = [
-    //     ['n62'],
-    //     ['n1'],
-    //     ['l1', 'l45'],
-    //     ['l9', 'l57'],
-    //     ['n37', 'l25'],
-    //     ['n11', 'l64'],
-    //     ['l29', 'l17'],
-    //     ['n61', 'n62'],
-    //     ['n2', 'n1', 'l49']
-    // ];
-    // let l = 65,
-    //     n = 63;
+    
 
+    // Fruit-128
+    let v = ['n62', 'n1', 'l1', 'l45', 'l9', 'l57', 'n37', 'l25', 'n11', 'l64', 'l29', 'l17', 'n61', 'n62', 'n2','l49'];
+    let h = [
+        ['k','n62'],
+        ['k','n1'],
+        ['l1', 'l45'],
+        ['l9', 'l57'],
+        ['n37', 'l25'],
+        ['n11', 'l64'],
+        ['l29', 'l17'],
+        ['n61', 'n62'],
+        ['n2', 'n1', 'l49']
+    ];
+    let l = 65,
+        n = 63;
+
+    
+
+    // Fruit-F
+    // let v = ['l11', 'l37', 'l1', 'l19', 'n24', 'l28', 'n9', 'n49', 'n33', 'n1', 'l49'];
+    // let h = [
+    //     ['l11', 'l37'],
+    //     ['l1', 'l19'],
+    //     ['n24', 'l28'],
+    //     ['n9', 'n49'],
+    //     ['n33', 'n1', 'l49']
+    // ];
+    // let l = 50,
+    //     n = 50;
+    FLEL(2, v, h, l, n);
 
     function combination(contexts, x) {
         let res = [];

@@ -1,65 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+        <meta charset="UTF-8">
+        <title>Title</title>
 </head>
+
 <body>
 
 </body>
 <script>
-    let Cr = new Array();
-    let r0 = new Array();//32
-    let s0 = new Array();//1024
-    let p0 = new Array();//128
-    let q0 = new Array();//1024
-    let v0 = new Array();
+        let Cr = new Array();
+        let r0 = new Array(); //32
+        let s0 = new Array(); //1024
+        let p0 = new Array(); //128
+        let q0 = new Array(); //1024
+        let v0 = new Array();
+        let j = 0;
+        let key = "0000000100" +
+                "1000110100" +
+                "0101011001" +
+                "1110001100" +
+                "0011010101" +
+                "1111011011" +
+                "1101111000" +
+                "1011010010" +
+                "1111011011" +
+                "1111011011" +
+                "1111011011" +
+                "1110001101" +
+                "11100011";
 
-    for (let i = 127; i < 2176; i++) {
-        let temp = new Array();
-        let r = new Array();
-        let s = new Array();
-        let p = new Array();
-        let q = new Array();
-        let v = new Array();
-        for (let j = 0; j < 10; j++) {
-            temp[10-j-1] = (i >> j) & 1;
+        for (let i = 127; i < 2176; i++) {
+                let temp = new Array();
+                let r = new Array();
+                let s = new Array();
+                let p = new Array();
+                let q = new Array();
+                let v = new Array();
+                for (let j = 0; j < 10; j++) {
+                        temp[10 - j - 1] = (i >> j) & 1;
+                }
+
+                Cr[i] = temp.join("");
+                r0[i] = temp[5] * Math.pow(2, 0) +
+                        temp[6] * Math.pow(2, 1) +
+                        temp[7] * Math.pow(2, 2) +
+                        temp[8] * Math.pow(2, 3) +
+                        temp[9] * Math.pow(2, 4);
+                s0[i] = temp[0] * Math.pow(2, 0) +
+                        temp[1] * Math.pow(2, 1) +
+                        temp[2] * Math.pow(2, 2) +
+                        temp[3] * Math.pow(2, 3) +
+                        temp[4] * Math.pow(2, 4) + 32;
+                p0[i] = temp[3] * Math.pow(2, 0) +
+                        temp[4] * Math.pow(2, 1) +
+                        temp[5] * Math.pow(2, 2) +
+                        temp[6] * Math.pow(2, 3) +
+                        temp[7] * Math.pow(2, 4) + 64;
+                q0[i] = temp[8] * Math.pow(2, 0) +
+                        temp[9] * Math.pow(2, 1) +
+                        temp[0] * Math.pow(2, 2) +
+                        temp[1] * Math.pow(2, 3) +
+                        temp[2] * Math.pow(2, 4) + 96;
+                v0[i] = temp[0] * Math.pow(2, 0) +
+                        temp[1] * Math.pow(2, 1) +
+                        temp[2] * Math.pow(2, 2) +
+                        temp[3] * Math.pow(2, 3) +
+                        temp[4] * Math.pow(2, 4) +
+                        temp[5] * Math.pow(2, 5) +
+                        temp[6] * Math.pow(2, 6);
+                let z = (parseInt(key[r0[i]]) & parseInt(key[s0[i]]) & parseInt(key[q0[i]])) ^
+                        (parseInt(key[r0[i]]) & parseInt(key[s0[i]])) ^
+                        (parseInt(key[p0[i]]) & parseInt(key[q0[i]])) ^
+                        parseInt(key[r0[i]]) ^ parseInt(key[s0[i]]) ^ parseInt(key[p0[i]]);
+                // console.log(z);
+                let flag = z === 0 ? false : true;
+                j++;
+                // console.log(j);
+                console.log('(assert (= (xor (and k' + r0[i] + ' k' + s0[i] + ' k' + q0[i] + ') (and k' + r0[i] + ' k' + s0[i] +
+                        ') (and k' + p0[i] + ' k' + q0[i] + ') k' + r0[i] + ' k' + s0[i] + ' k' + p0[i] + ') ' + flag + '))')
+
         }
-
-        Cr[i] = temp.join("");
-        r0[i] = temp[5]*Math.pow(2,0) + 
-                temp[6]*Math.pow(2,1) + 
-                temp[7]*Math.pow(2,2) + 
-                temp[8]*Math.pow(2,3) + 
-                temp[9]*Math.pow(2,4);
-        s0[i] = temp[0]*Math.pow(2,0) + 
-                temp[1]*Math.pow(2,1) + 
-                temp[2]*Math.pow(2,2) + 
-                temp[3]*Math.pow(2,3) + 
-                temp[4]*Math.pow(2,4) + 32;
-        p0[i] = temp[3]*Math.pow(2,0) + 
-                temp[4]*Math.pow(2,1) + 
-                temp[5]*Math.pow(2,2) + 
-                temp[6]*Math.pow(2,3) + 
-                temp[7]*Math.pow(2,4) + 64;
-        q0[i] = temp[8]*Math.pow(2,0) + 
-                temp[9]*Math.pow(2,1) + 
-                temp[0]*Math.pow(2,2) + 
-                temp[1]*Math.pow(2,3) + 
-                temp[2]*Math.pow(2,4) + 96;
-        v0[i] = temp[0]*Math.pow(2,0) + 
-                temp[1]*Math.pow(2,1) + 
-                temp[2]*Math.pow(2,2) + 
-                temp[3]*Math.pow(2,3) + 
-                temp[4]*Math.pow(2,4) +
-                temp[5]*Math.pow(2,5) +
-                temp[6]*Math.pow(2,6) ;
-    }
-    console.log(r0);
-    console.log(s0);
-    console.log(p0);
-    console.log(q0);
-    console.log(v0);
-
+        console.log(r0);
+        console.log(s0);
+        console.log(p0);
+        console.log(q0);
+        // console.log(v0[0],v0[1024]);
 </script>
+
 </html>

@@ -16,7 +16,7 @@
     function f() {
         let obj = document.getElementById('obj');
         console.log(obj.value);
-        round(obj.value);
+        // round(obj.value);
         // reverseRound(obj.value);
     }
 
@@ -37,7 +37,7 @@
                     b[i] = 'l0';
                     b.push(...['l7', 'l17', 'l22', 'l27', 'l36'])
                 } else if (x === 'n' && n === 36) {
-                    b[i] = 'n0';
+                    b[i] = 'l0';
                 } else {
                     n = n + 1;
                     b[i] = x + n;
@@ -60,11 +60,12 @@
                 }
             }
         }
-        // return [h, b];
-        console.log(`第t+${Number(r)}轮`);
-        console.log(b);
-        console.log(h);
+        return [h, b];
+        // console.log(`第t+${Number(r)}轮`);
+        // console.log(b);
+        // console.log(h);
     }
+
 
     function reverseRound(r) {
         let h = [
@@ -106,16 +107,16 @@
                 }
             }
         }
-        // return [h,b];
-        console.log(`第t-${r}轮`)
-        console.log(b)
-        console.log(h)
+        return [h,b];
+        // console.log(`第t-${r}轮`)
+        // console.log(b)
+        // console.log(h)
     }
 
     function PRGASgn1() {
         let resAll = [];
         let resAllCount = [];
-        for (let l = 0; l < 43; l++) {
+        for (let l = 0; l < 1; l++) {
             let res = [];
             let resCount = 0;
             for (let i = 1; i < 32; i++) {
@@ -123,14 +124,14 @@
                 let count = 0;
                 for (let bi = 0; bi < temp[1].length; bi++) {
                     const element = temp[1][bi];
-                    if (element === 'l' + l) {
+                    if (element === 'l' + 42) {
                         count++;
                     }
                 }
                 for (let hi = 0; hi < temp[0].length; hi++) {
                     for (let hj = 0; hj < temp[0][hi].length; hj++) {
                         const element = temp[0][hi][hj];
-                        if (element === 'l' + l) {
+                        if (element === 'l' + 42) {
                             count++;
                         }
                     }
@@ -147,14 +148,14 @@
                 let count = 0;
                 for (let bi = 0; bi < temp[1].length; bi++) {
                     const element = temp[1][bi];
-                    if (element === 'l' + l) {
+                    if (element === 'l' + 42) {
                         count++;
                     }
                 }
                 for (let hi = 0; hi < temp[0].length; hi++) {
                     for (let hj = 0; hj < temp[0][hi].length; hj++) {
                         const element = temp[0][hi][hj];
-                        if (element === 'l' + l) {
+                        if (element === 'l' + 42) {
                             count++;
                         }
                     }
@@ -242,9 +243,9 @@
                 loc.push(loci);
 
             }
-            console.log(loc);
-            // resAll.push(bin_to_hex(res.join("")));
-            // resAllCount.push(resCount);
+            // console.log(loc);
+            resAll.push(bin_to_hex(res.join("")));
+            resAllCount.push(resCount);
         }
     }
 
@@ -326,7 +327,7 @@
         return value;
     }
 
-    // console.log(PRGASgn1());
+    console.log(PRGASgn1());
     // console.log(PRGASgn2());
     // console.log(PRGASgn3());
 </script>

@@ -116,3 +116,4 @@ function output(fault,h,v) {
 }
 
 console.log(output([0,0,1,0,0],h,v));
+console.log(11111111);
